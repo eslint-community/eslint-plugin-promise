@@ -2,8 +2,8 @@
 
 Enforce standard parameter names for Promise constructors
 
- [![travis-ci](https://travis-ci.org/jden/eslint-plugin-promiseparams.svg)](https://travis-ci.org/jden/eslint-plugin-promiseparams)
  [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+ [![travis-ci](https://travis-ci.org/jden/eslint-plugin-promiseparams.svg)](https://travis-ci.org/jden/eslint-plugin-promiseparams)
 [![npm version](https://badge.fury.io/js/eslint-plugin-promiseparams.svg)](https://www.npmjs.com/package/eslint-plugin-promiseparams)
 
 ## Installation
