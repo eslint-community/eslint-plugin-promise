@@ -19,7 +19,7 @@ new Promise(function (resolve, reject) { ... })
 #### Invalid
 ```js
 // incorrect order:
-new Promise(function (resolve, reject) { ... })
+new Promise(function (reject, resolve) { ... })
 // non-standard parameter names:
 new Promise(function (ok, fail) { ... })
 ```
