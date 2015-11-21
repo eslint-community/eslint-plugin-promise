@@ -1,4 +1,4 @@
-module.exports = function(context) {
+module.exports = function (context) {
   return {
     NewExpression: function (node) {
       if (node.callee.name === 'Promise' && node.arguments.length === 1) {

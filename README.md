@@ -2,6 +2,9 @@
 
 Enforce standard parameter names for Promise constructors
 
+ [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
+
 ## Installation
 
 You'll first need to install [ESLint](http://eslint.org):

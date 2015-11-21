@@ -7,12 +7,14 @@
     "eslintplugin",
     "eslint-plugin"
   ],
-  "author": "jden",
+  "author": "jden <jason@denizac.org>",
   "scripts": {
-    "test": "node test/"
+    "pretest": "standard",
+    "test": "node test/promiseparams.test && echo ok"
   },
   "devDependencies": {
-    "eslint": "~1.2.0"
+    "eslint": "~1.2.0",
+    "standard": "^5.4.1"
   },
   "engines": {
     "node": ">=0.10.0"
