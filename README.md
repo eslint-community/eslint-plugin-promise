@@ -6,6 +6,27 @@ Enforce standard parameter names for Promise constructors
  [![travis-ci](https://travis-ci.org/jden/eslint-plugin-promiseparams.svg)](https://travis-ci.org/jden/eslint-plugin-promiseparams)
 [![npm version](https://badge.fury.io/js/eslint-plugin-promiseparams.svg)](https://www.npmjs.com/package/eslint-plugin-promiseparams)
 
+## Rule
+
+### `promiseparams`
+
+#### Valid
+```js
+new Promise(function (resolve) { ... })
+new Promise(function (resolve, reject) { ... })
+```
+
+#### Invalid
+```js
+// incorrect order:
+new Promise(function (resolve, reject) { ... })
+// non-standard parameter names:
+new Promise(function (ok, fail) { ... })
+```
+
+Ensures that `new Promise()` is instantiated with the parameter names `resolve, reject` to avoid confusion with order such as `reject, resolve`. The Promise constructor uses the [RevealingConstructor pattern](https://blog.domenic.me/the-revealing-constructor-pattern/). Using the same parameter names as the language specification makes code more uniform and easier to understand.
+
+
 ## Installation
 
 You'll first need to install [ESLint](http://eslint.org):
@@ -45,14 +66,5 @@ Then configure the rules you want to use under the rules section.
 }
 ```
 
-## Supported Rules
-
-### `promiseparams`
-Ensures that `new Promise()` is instantiated with the parameter names `resolve, reject` to avoid confusion with order such as `reject, resolve`. The Promise constructor uses the [RevealingConstructor pattern](https://blog.domenic.me/the-revealing-constructor-pattern/). Using the same parameter names as the language specification makes code more uniform and easier to understand.
-
 ## Etc
 (c) MMXV jden <jason@denizac.org> - ISC license.
-
-
-
-
