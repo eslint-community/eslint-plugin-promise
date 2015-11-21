@@ -1,0 +1,21 @@
+{
+  "name": "eslint-plugin-promiseparams",
+  "version": "1.0.0",
+  "description": "Enforce standard parameter names for Promise constructors",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
+  "author": "jden",
+  "scripts": {
+    "test": "node test/"
+  },
+  "devDependencies": {
+    "eslint": "~1.2.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "ISC"
+}
