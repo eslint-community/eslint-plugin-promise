@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-promiseparams",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Enforce standard parameter names for Promise constructors",
   "keywords": [
     "eslint",
