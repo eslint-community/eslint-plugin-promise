@@ -5,9 +5,12 @@
   "keywords": [
     "eslint",
     "eslintplugin",
-    "eslint-plugin"
+    "eslint-plugin",
+    "promise",
+    "promises"
   ],
   "author": "jden <jason@denizac.org>",
+  "respository": "git@github.com:jden/eslint-plugin-promiseparams.git",
   "scripts": {
     "pretest": "standard",
     "test": "node test/promiseparams.test && echo ok"
