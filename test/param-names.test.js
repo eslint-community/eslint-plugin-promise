@@ -1,10 +1,10 @@
 'use strict'
 
-var rule = require('../promiseparams')
+var rule = require('../rules/param-names')
 var RuleTester = require('eslint').RuleTester
 
 var ruleTester = new RuleTester()
-ruleTester.run('promiseparams', rule, {
+ruleTester.run('param-names', rule, {
   valid: [
     'new Promise(function(resolve, reject) { })',
     'new Promise(function(resolve) { })'

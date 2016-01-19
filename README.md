@@ -1,14 +1,56 @@
-# eslint-plugin-promiseparams
+# eslint-plugin-promise
 
-Enforce standard parameter names for Promise constructors
+A set of ESLint rules for JavaScript Promises.
 
  [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
- [![travis-ci](https://travis-ci.org/jden/eslint-plugin-promiseparams.svg)](https://travis-ci.org/jden/eslint-plugin-promiseparams)
-[![npm version](https://badge.fury.io/js/eslint-plugin-promiseparams.svg)](https://www.npmjs.com/package/eslint-plugin-promiseparams)
+ [![travis-ci](https://travis-ci.org/jden/eslint-plugin-promise.svg)](https://travis-ci.org/jden/eslint-plugin-promise)
+[![npm version](https://badge.fury.io/js/eslint-plugin-promise.svg)](https://www.npmjs.com/package/eslint-plugin-promise)
 
 ## Rule
 
-### `promiseparams`
+### `always-catch`
+
+Ensure that each time a `then()` is applied to a promise, a
+`catch()` is applied as well.
+
+#### Valid
+
+```js
+myPromise.then(doSomething).catch(errors);
+myPromise.then(doSomething).then(doSomethingElse).catch(errors);
+```
+
+#### Invalid
+
+```js
+myPromise.then(doSomething);
+myPromise.then(doSomething, catchErrors); // catch() may be a little better
+```
+
+### `always-return`
+
+Ensure that inside a `then()` you make sure to `return` a new promise or value.
+See http://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html (rule #5)
+for more info on why that's a good idea.
+
+#### Valid
+
+```js
+myPromise.then((val) => val * 2));
+myPromise.then(function(val) { return val * 2; });
+myPromise.then(doSomething); // not sure
+```
+
+#### Invalid
+
+```js
+myPromise.then(function(val) {});
+myPromise.then(() => { doSomething(); });
+```
+
+### `param-names`
+
+Enforce standard parameter names for Promise constructors
 
 #### Valid
 ```js
@@ -35,22 +77,22 @@ You'll first need to install [ESLint](http://eslint.org):
 $ npm i eslint --save-dev
 ```
 
-Next, install `eslint-plugin-promiseparams`:
+Next, install `eslint-plugin-promise`:
 
 ```
-$ npm install eslint-plugin-promiseparams --save-dev
+$ npm install eslint-plugin-promise --save-dev
 ```
 
-**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-promiseparams` globally.
+**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-promise` globally.
 
 ## Usage
 
-Add `promiseparams` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `promise` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
     "plugins": [
-        "promiseparams"
+        "promise"
     ]
 }
 ```
@@ -61,10 +103,13 @@ Then configure the rules you want to use under the rules section.
 ```json
 {
     "rules": {
-        "promiseparams/promiseparams": 2
+        "promise/param-names": 2,
+        "promise/always-return": 2,
+        "promise/always-catch": 2
     }
 }
 ```
 
 ## Etc
 (c) MMXV jden <jason@denizac.org> - ISC license.
+(c) 2016 Jamund Ferguson <jamund@gmail.com> - ISC license.

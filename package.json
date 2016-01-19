@@ -1,7 +1,7 @@
 {
-  "name": "eslint-plugin-promiseparams",
-  "version": "1.0.7",
-  "description": "Enforce standard parameter names for Promise constructors",
+  "name": "eslint-plugin-promise",
+  "version": "1.0.0",
+  "description": "Enforce best practices for JavaScript promises",
   "keywords": [
     "eslint",
     "eslintplugin",
@@ -10,13 +10,14 @@
     "promises"
   ],
   "author": "jden <jason@denizac.org>",
-  "repository": "git@github.com:jden/eslint-plugin-promiseparams.git",
+  "repository": "git@github.com:xjamundx/eslint-plugin-promise.git",
   "scripts": {
     "pretest": "standard",
-    "test": "node test/promiseparams.test && echo ok"
+    "test": "mocha test"
   },
   "devDependencies": {
     "eslint": "~1.2.0",
+    "mocha": "^2.3.4",
     "standard": "^5.4.1"
   },
   "engines": {
