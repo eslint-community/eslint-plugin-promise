@@ -111,5 +111,5 @@ Then configure the rules you want to use under the rules section.
 ```
 
 ## Etc
-(c) MMXV jden <jason@denizac.org> - ISC license.
-(c) 2016 Jamund Ferguson <jamund@gmail.com> - ISC license.
+- (c) MMXV jden <jason@denizac.org> - ISC license.
+- (c) 2016 Jamund Ferguson <jamund@gmail.com> - ISC license.
