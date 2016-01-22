@@ -3,7 +3,7 @@
 Enforce best practices for JavaScript promises.
 
  [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
- [![travis-ci](https://travis-ci.org/xjamundx/eslint-plugin-promise.svg)](https://travis-ci.org/jden/eslint-plugin-promise)
+ [![travis-ci](https://travis-ci.org/xjamundx/eslint-plugin-promise.svg)](https://travis-ci.org/xjamundx/eslint-plugin-promise)
 [![npm version](https://badge.fury.io/js/eslint-plugin-promise.svg)](https://www.npmjs.com/package/eslint-plugin-promise)
 
 ## Rule
