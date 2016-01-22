@@ -1,6 +1,6 @@
 # eslint-plugin-promise
 
-A set of ESLint rules for JavaScript Promises.
+Enforce best practices for JavaScript promises.
 
  [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
  [![travis-ci](https://travis-ci.org/jden/eslint-plugin-promise.svg)](https://travis-ci.org/jden/eslint-plugin-promise)
