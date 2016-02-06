@@ -14,6 +14,7 @@ module.exports = function (context) {
       if (node.expression.type === 'CallExpression' &&
         node.expression.callee.type === 'MemberExpression' &&
         node.expression.callee.object.type === 'CallExpression' &&
+        node.expression.callee.object.callee.type === 'MemberExpression' &&
         node.expression.callee.object.callee.property.name === 'then'
       ) {
         if (node.expression.callee.property.name !== 'catch') {

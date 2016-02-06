@@ -4,7 +4,7 @@ module.exports = function (context) {
       if (node.callee.name === 'Promise' && node.arguments.length === 1) {
         var params = node.arguments[0].params
 
-        if (!params.length) { return }
+        if (!params || !params.length) { return }
 
         if (params[0].name !== 'resolve') {
           return context.report(node, 'Promise constructor parameters must be named resolve, reject')
