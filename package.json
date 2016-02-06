@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-promise",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Enforce best practices for JavaScript promises",
   "keywords": [
     "eslint",
