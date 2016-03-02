@@ -1,4 +1,7 @@
 module.exports = function (context) {
+  var options = context.options[0] || {}
+  var allowThen = options.allowThen
+
   return {
     ExpressionStatement: function (node) {
       // hello.then()
@@ -6,7 +9,11 @@ module.exports = function (context) {
         node.expression.callee.type === 'MemberExpression' &&
         node.expression.callee.property.name === 'then'
       ) {
-        context.report(node, 'You should always catch() a then()')
+        // hello.then().then(a, b)
+        if (allowThen && node.expression.arguments.length === 2) {
+          return
+        }
+        context.report(node, 'Expected catch() or return')
         return
       }
 
@@ -17,8 +24,9 @@ module.exports = function (context) {
         node.expression.callee.object.callee.type === 'MemberExpression' &&
         node.expression.callee.object.callee.property.name === 'then'
       ) {
-        if (node.expression.callee.property.name !== 'catch') {
-          context.report(node, 'You should always catch() a then()')
+        var propName = node.expression.callee.property.name
+        if (propName !== 'catch') {
+          context.report(node, 'Expected catch() or return')
         }
       }
     }

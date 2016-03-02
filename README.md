@@ -8,16 +8,21 @@ Enforce best practices for JavaScript promises.
 
 ## Rule
 
-### `always-catch`
+
+### `catch-or-return`
 
 Ensure that each time a `then()` is applied to a promise, a
-`catch()` is applied as well.
+`catch()` is applied as well. Exceptions are made if you are
+returning that promise.
+
+Formerly called `always-catch`.
 
 #### Valid
 
 ```js
 myPromise.then(doSomething).catch(errors);
 myPromise.then(doSomething).then(doSomethingElse).catch(errors);
+function doSomethingElse() { return myPromise.then(doSomething) }
 ```
 
 #### Invalid
@@ -25,7 +30,16 @@ myPromise.then(doSomething).then(doSomethingElse).catch(errors);
 ```js
 myPromise.then(doSomething);
 myPromise.then(doSomething, catchErrors); // catch() may be a little better
+function doSomethingElse() { myPromise.then(doSomething) }
 ```
+
+#### Options
+
+#### `allowThen`
+
+You can pass an `{ allowThen: true }` as an option to this rule
+ to allow for `.then(null, fn)` to be used instead of `catch()` at
+ the end of the promise chain.
 
 ### `always-return`
 
@@ -103,7 +117,8 @@ Then configure the rules you want to use under the rules section.
     "rules": {
         "promise/param-names": 2,
         "promise/always-return": 2,
-        "promise/always-catch": 2
+        "promise/always-catch": 2, // deprecated
+        "promise/catch-or-return": 2,
     }
 }
 ```
