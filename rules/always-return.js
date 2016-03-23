@@ -1,35 +1,35 @@
+function isFunctionWithBlockStatement (node) {
+  if (node.type === 'FunctionExpression') {
+    return true
+  }
+  if (node.type === 'ArrowFunctionExpression') {
+    return node.body.type === 'BlockStatement'
+  }
+  return false
+}
+
+function isReturnOrThrowStatement (node) {
+  return node.type === 'ReturnStatement' || node.type === 'ThrowStatement'
+}
+
 module.exports = function (context) {
   return {
     MemberExpression: function (node) {
-      var body, lastItem
+      var firstArg, body, lastStatement
 
-      // hello.then(function() { })
-      if (node.property.name === 'then' &&
-        node.parent.type === 'CallExpression' &&
-        node.parent.arguments[0] &&
-        node.parent.arguments[0].type === 'FunctionExpression'
-      ) {
-        body = node.parent.arguments[0].body.body
-        lastItem = body[body.length - 1]
-        if (!lastItem || lastItem.type !== 'ReturnStatement') {
-          context.report(node, 'Each then() should return a value')
-        }
+      if (node.property.name !== 'then' || node.parent.type !== 'CallExpression') {
         return
       }
 
-      // hello.then(() => {})
-      if (node.property.name === 'then' &&
-        node.parent.type === 'CallExpression' &&
-        node.parent.arguments[0] &&
-        node.parent.arguments[0].type === 'ArrowFunctionExpression' &&
-        node.parent.arguments[0].body.type === 'BlockStatement'
-      ) {
-        body = node.parent.arguments[0].body.body
-        lastItem = body[body.length - 1]
-        if (!lastItem || lastItem.type !== 'ReturnStatement') {
-          context.report(node, 'Each then() should return a value')
-        }
+      firstArg = node.parent.arguments[0]
+      if (!firstArg || !isFunctionWithBlockStatement(firstArg)) {
         return
+      }
+
+      body = firstArg.body.body
+      lastStatement = body[body.length - 1]
+      if (!lastStatement || !isReturnOrThrowStatement(lastStatement)) {
+        context.report(node, 'Each then() should return a value or throw')
       }
     }
   }
