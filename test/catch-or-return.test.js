@@ -12,6 +12,8 @@ ruleTester.run('catch-or-return', rule, {
     'frank().then(go).then().then().then().catch(doIt)',
     'frank().then(go).then().catch(function() { /* why bother */ })',
     'frank.then(go).then(to).catch(jail)',
+    'Promise.resolve(frank).catch(jail)',
+    'frank.then(to).finally(fn).catch(jail)',
 
     // return
     'function a() { return frank().then(go) }',
@@ -58,6 +60,14 @@ ruleTester.run('catch-or-return', rule, {
     },
     {
       code: 'a.then(function() { return "x"; }).then(function(y) { throw y; })',
+      errors: [ { message: message } ]
+    },
+    {
+      code: 'Promise.resolve(frank)',
+      errors: [ { message: message } ]
+    },
+    {
+      code: 'frank.then(to).finally(fn)',
       errors: [ { message: message } ]
     },
 
