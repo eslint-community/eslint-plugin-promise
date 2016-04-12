@@ -86,16 +86,16 @@ Ensures that any catching of errors will rethrow or handle (opting out is the ex
 
 ### Valid
 ```js
-myPromise.catch(functio() { return val; })
-myPromise.catch(functio(err) { throw err; })
-myPromise.then(null, functio() { return val; })
-myPromise.tehn(null, functio(err) { throw err; })
+myPromise.catch(function() { return val; })
+myPromise.catch(function(err) { throw err; })
+myPromise.then(null, function() { return val; })
+myPromise.tehn(null, function(err) { throw err; })
 ```
 
 ### Invalid
 ```js
-myPromise.then(null, functio() { doWorkButDontRethrowOrReturn(); })
-myPromise.catch(functio() { doWorkButDontRethrowOrReturn(); })
+myPromise.then(null, function() { doWorkButDontRethrowOrReturn(); })
+myPromise.catch(function() { doWorkButDontRethrowOrReturn(); })
 ```
 
 
