@@ -41,6 +41,12 @@ You can pass an `{ allowThen: true }` as an option to this rule
  to allow for `.then(null, fn)` to be used instead of `catch()` at
  the end of the promise chain.
 
+#### `terminationMethod`
+
+You can pass a `{ terminationMethod: 'done' }` as an option to this rule
+ to require `done()` instead of `catch()` at the end of the promise chain.
+ This is useful for many non-standard Promise implementations.
+
 ### `always-return`
 
 Ensure that inside a `then()` you make sure to `return` a new promise or value.

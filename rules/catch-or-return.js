@@ -1,6 +1,7 @@
 module.exports = function (context) {
   var options = context.options[0] || {}
   var allowThen = options.allowThen
+  var terminationMethod = options.terminationMethod || 'catch'
   var STATIC_METHODS = [
     'all',
     'race',
@@ -19,9 +20,7 @@ module.exports = function (context) {
     ) || ( // somePromise.ANYTHING()
       expression.type === 'CallExpression' &&
       expression.callee.type === 'MemberExpression' &&
-      isPromise(expression.callee.object) &&
-      // non-standard method `.done` does not return a Promise
-      expression.callee.property.name !== 'done'
+      isPromise(expression.callee.object)
     ) || ( // Promise.STATIC_METHOD()
       expression.type === 'CallExpression' &&
       expression.callee.type === 'MemberExpression' &&
@@ -49,11 +48,11 @@ module.exports = function (context) {
       // somePromise.catch()
       if (node.expression.type === 'CallExpression' &&
         node.expression.callee.type === 'MemberExpression' &&
-        node.expression.callee.property.name === 'catch'
+        node.expression.callee.property.name === terminationMethod
       ) {
         return
       }
-      context.report(node, 'Expected catch() or return')
+      context.report(node, 'Expected ' + terminationMethod + '() or return')
     }
   }
 }
