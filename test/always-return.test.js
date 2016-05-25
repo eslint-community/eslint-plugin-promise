@@ -2,7 +2,7 @@
 
 var rule = require('../rules/always-return')
 var RuleTester = require('eslint').RuleTester
-var message = 'Each then() should return a value'
+var message = 'Each then() should return a value or throw'
 var ecmaFeatures = { arrowFunctions: true }
 var ruleTester = new RuleTester()
 ruleTester.run('always-return', rule, {
@@ -13,7 +13,13 @@ ruleTester.run('always-return', rule, {
     { code: 'hey.then(function() { return 42; })', ecmaFeatures: ecmaFeatures },
     { code: 'hey.then(function() { return new Promise(); })', ecmaFeatures: ecmaFeatures },
     { code: 'hey.then(function() { return "x"; }).then(doSomethingWicked)' },
-    { code: 'hey.then(x => x).then(function() { return "3" })', ecmaFeatures: ecmaFeatures }
+    { code: 'hey.then(x => x).then(function() { return "3" })', ecmaFeatures: ecmaFeatures },
+    { code: 'hey.then(function() { throw new Error("msg"); })', ecmaFeatures: ecmaFeatures },
+    { code: 'hey.then(function(x) { if (!x) { throw new Error("no x"); } return x; })', ecmaFeatures: ecmaFeatures },
+    { code: 'hey.then(function(x) { if (x) { return x; } throw new Error("no x"); })', ecmaFeatures: ecmaFeatures },
+    { code: 'hey.then(x => { throw new Error("msg"); })', ecmaFeatures: ecmaFeatures },
+    { code: 'hey.then(x => { if (!x) { throw new Error("no x"); } return x; })', ecmaFeatures: ecmaFeatures },
+    { code: 'hey.then(x => { if (x) { return x; } throw new Error("no x"); })', ecmaFeatures: ecmaFeatures }
   ],
 
   invalid: [
