@@ -88,6 +88,23 @@ new Promise(function (ok, fail) { ... }) // non-standard parameter names
 
 Ensures that `new Promise()` is instantiated with the parameter names `resolve, reject` to avoid confusion with order such as `reject, resolve`. The Promise constructor uses the [RevealingConstructor pattern](https://blog.domenic.me/the-revealing-constructor-pattern/). Using the same parameter names as the language specification makes code more uniform and easier to understand.
 
+### `no-native`
+
+Ensure that `Promise` is included fresh in each file instead of relying
+ on the existence of a native promise implementation. Helpful if you want
+ to use `bluebird` or if you don't intend to use an ES6 Promise shim.
+
+
+#### Valid
+```js
+var Promise = require("blubird");
+var x = Promise.resolve("good");
+```
+
+#### Invalid
+```js
+var x = Promise.resolve("bad");
+```
 
 ## Installation
 
@@ -127,6 +144,7 @@ Then configure the rules you want to use under the rules section.
         "promise/always-return": 2,
         "promise/always-catch": 2, // deprecated
         "promise/catch-or-return": 2,
+        "promise/no-native": 0,
     }
 }
 ```

@@ -9,6 +9,7 @@ module.exports = {
     'param-names': 1,
     'always-return': 1,
     'always-catch': 1,
+    'no-native': 0,
     'catch-or-return': 1
   }
 }
