@@ -31,7 +31,7 @@ module.exports = function (context) {
     'Program:exit': function () {
       var scope = context.getScope()
 
-      scope.through.forEach(function (ref) {
+      scope.implicit.left.forEach(function (ref) {
         if (ref.identifier.name !== 'Promise') {
           return
         }
