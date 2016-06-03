@@ -3,29 +3,29 @@
 var rule = require('../rules/always-return')
 var RuleTester = require('eslint').RuleTester
 var message = 'Each then() should return a value or throw'
-var ecmaFeatures = { arrowFunctions: true }
+var parserOptions = { ecmaVersion: 6 }
 var ruleTester = new RuleTester()
 ruleTester.run('always-return', rule, {
   valid: [
-    { code: 'hey.then(x => x)', ecmaFeatures: ecmaFeatures },
-    { code: 'hey.then(x => ({}))', ecmaFeatures: ecmaFeatures },
-    { code: 'hey.then(x => { return x * 10 })', ecmaFeatures: ecmaFeatures },
-    { code: 'hey.then(function() { return 42; })', ecmaFeatures: ecmaFeatures },
-    { code: 'hey.then(function() { return new Promise(); })', ecmaFeatures: ecmaFeatures },
+    { code: 'hey.then(x => x)', parserOptions: parserOptions },
+    { code: 'hey.then(x => ({}))', parserOptions: parserOptions },
+    { code: 'hey.then(x => { return x * 10 })', parserOptions: parserOptions },
+    { code: 'hey.then(function() { return 42; })', parserOptions: parserOptions },
+    { code: 'hey.then(function() { return new Promise(); })', parserOptions: parserOptions },
     { code: 'hey.then(function() { return "x"; }).then(doSomethingWicked)' },
-    { code: 'hey.then(x => x).then(function() { return "3" })', ecmaFeatures: ecmaFeatures },
-    { code: 'hey.then(function() { throw new Error("msg"); })', ecmaFeatures: ecmaFeatures },
-    { code: 'hey.then(function(x) { if (!x) { throw new Error("no x"); } return x; })', ecmaFeatures: ecmaFeatures },
-    { code: 'hey.then(function(x) { if (x) { return x; } throw new Error("no x"); })', ecmaFeatures: ecmaFeatures },
-    { code: 'hey.then(x => { throw new Error("msg"); })', ecmaFeatures: ecmaFeatures },
-    { code: 'hey.then(x => { if (!x) { throw new Error("no x"); } return x; })', ecmaFeatures: ecmaFeatures },
-    { code: 'hey.then(x => { if (x) { return x; } throw new Error("no x"); })', ecmaFeatures: ecmaFeatures }
+    { code: 'hey.then(x => x).then(function() { return "3" })', parserOptions: parserOptions },
+    { code: 'hey.then(function() { throw new Error("msg"); })', parserOptions: parserOptions },
+    { code: 'hey.then(function(x) { if (!x) { throw new Error("no x"); } return x; })', parserOptions: parserOptions },
+    { code: 'hey.then(function(x) { if (x) { return x; } throw new Error("no x"); })', parserOptions: parserOptions },
+    { code: 'hey.then(x => { throw new Error("msg"); })', parserOptions: parserOptions },
+    { code: 'hey.then(x => { if (!x) { throw new Error("no x"); } return x; })', parserOptions: parserOptions },
+    { code: 'hey.then(x => { if (x) { return x; } throw new Error("no x"); })', parserOptions: parserOptions }
   ],
 
   invalid: [
     {
       code: 'hey.then(x => {})',
-      ecmaFeatures: ecmaFeatures,
+      parserOptions: parserOptions,
       errors: [ { message: message } ]
     },
     {
