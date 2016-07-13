@@ -1,3 +1,8 @@
+## 1.3.2
+
+- Updated tests to run on eslint 2.0
+- Fixed some issues with `no-native` rule
+
 ## 1.3.1
 
 - Actually added `no-native` rule
