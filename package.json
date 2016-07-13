@@ -16,9 +16,12 @@
     "test": "mocha test"
   },
   "devDependencies": {
-    "eslint": "^2.11.1",
+    "eslint": "^2.10 || ^3.0",
     "mocha": "^2.3.4",
-    "standard": "^5.4.1"
+    "standard": "^7.1.2"
+  },
+  "peerDependencies": {
+    "eslint": "^2.10 || ^3.0"
   },
   "engines": {
     "node": ">=0.10.0"
