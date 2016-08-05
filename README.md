@@ -97,7 +97,7 @@ Ensure that `Promise` is included fresh in each file instead of relying
 
 #### Valid
 ```js
-var Promise = require("blubird");
+var Promise = require("bluebird");
 var x = Promise.resolve("good");
 ```
 
