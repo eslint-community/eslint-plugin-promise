@@ -1,3 +1,7 @@
+## 2.0.0
+
+- ESLint 3.0 Support
+
 ## 1.3.2
 
 - Updated tests to run on eslint 2.0
