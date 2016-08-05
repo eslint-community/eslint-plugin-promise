@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Fixed type in docs
+
 ## 2.0.0
 
 - ESLint 3.0 Support
