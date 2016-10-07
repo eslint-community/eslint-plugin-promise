@@ -8,7 +8,7 @@ function isFunctionWithBlockStatement (node) {
   return false
 }
 
-function isThenExpression (node) {
+function isThenCallExpression (node) {
   return (
     node.type === 'CallExpression' &&
     node.callee.type === 'MemberExpression' &&
@@ -16,10 +16,19 @@ function isThenExpression (node) {
   )
 }
 
+function isFirstArgument (node) {
+  return (
+    node.parent &&
+    node.parent.arguments &&
+    node.parent.arguments[0] === node
+  )
+}
+
 function isInlineThenFunctionExpression (node) {
   return (
     isFunctionWithBlockStatement(node) &&
-    isThenExpression(node.parent)
+    isThenCallExpression(node.parent) &&
+    isFirstArgument(node)
   )
 }
 
