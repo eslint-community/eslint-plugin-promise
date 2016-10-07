@@ -23,73 +23,89 @@ function isInlineThenFunctionExpression (node) {
   )
 }
 
-function includes (arr, val) {
-  return arr.indexOf(val) !== -1
-}
-
-function last (arr) {
+function peek (arr) {
   return arr[arr.length - 1]
 }
 
 module.exports = {
   create: function (context) {
+    // funcInfoStack is a stack representing the stack of currently executing
+    //   functions
+    // funcInfoStack[i].branchIDStack is a stack representing the currently
+    //   executing branches ("codePathSegment"s) within the given function
+    // funcInfoStack[i].branchInfoMap is an object representing information
+    //   about all branches within the given function
+    // funcInfoStack[i].branchInfoMap[j].good is a boolean representing whether
+    //   the given branch explictly `return`s or `throw`s. It starts as `false`
+    //   for every branch and is updated to `true` if a `return` or `throw`
+    //   statement is found
+    // funcInfoStack[i].branchInfoMap[j].loc is a eslint SourceLocation object
+    //   for the given branch
+    // example:
+    //   funcInfoStack = [ { branchIDStack: [ 's1_1' ],
+    //       branchInfoMap:
+    //        { s1_1:
+    //           { good: false,
+    //             loc: <loc> } } },
+    //     { branchIDStack: ['s2_1', 's2_4'],
+    //       branchInfoMap:
+    //        { s2_1:
+    //           { good: false,
+    //             loc: <loc> },
+    //          s2_2:
+    //           { good: true,
+    //             loc: <loc> },
+    //          s2_4:
+    //           { good: false,
+    //             loc: <loc> } } } ]
     var funcInfoStack = []
-    var CPSIDStack = []
 
-    function isEveryBranchReturning (funcInfo) {
-      // We need to check noCurrentCPSIsOnTheCPSStack because of what
-      // seems like a bug in eslint where 'FunctionExpression:exit' events occur
-      // before all of their constituent codePathSegments have fired their
-      // 'onCodePathSegmentEnd' events
-      var currentIDs = funcInfo.codePath.currentSegments.map(x => x.id)
-      var noCurrentCPSIsOnTheCPSStack = !currentIDs.some((id) => includes(CPSIDStack, id))
-
-      var finalIDs = funcInfo.codePath.finalSegments.map(x => x.id)
-      var everyFinalCPSIsReturning = finalIDs.every((id) => includes(funcInfo.explicitlyReturningCPSIDs, id))
-
-      return noCurrentCPSIsOnTheCPSStack && everyFinalCPSIsReturning
-    }
-
-    function onFunctionExpressionExit (node) {
-      if (!isInlineThenFunctionExpression(node)) {
-        return
-      }
-
-      var funcInfo = last(funcInfoStack)
-      if (!isEveryBranchReturning(funcInfo)) {
-        context.report(node, 'Each then() should return a value or throw')
-      }
-    }
-
-    function markCurrentCodePathSegmentAsReturning () {
-      var funcInfo = last(funcInfoStack)
-      var currentCPSID = last(CPSIDStack)
-      funcInfo.explicitlyReturningCPSIDs.push(currentCPSID)
+    function markCurrentBranchAsGood () {
+      var funcInfo = peek(funcInfoStack)
+      var currentBranchID = peek(funcInfo.branchIDStack)
+      funcInfo.branchInfoMap[currentBranchID].good = true
     }
 
     return {
-      onCodePathStart: function (codePath, node) {
-        funcInfoStack.push({
-          codePath: codePath,
-          explicitlyReturningCPSIDs: []
-        })
-      },
+      ReturnStatement: markCurrentBranchAsGood,
+      ThrowStatement: markCurrentBranchAsGood,
 
-      onCodePathEnd: function (codePath, node) {
-        funcInfoStack.pop()
+      onCodePathSegmentStart: function (segment, node) {
+        var funcInfo = peek(funcInfoStack)
+        funcInfo.branchIDStack.push(segment.id)
+        funcInfo.branchInfoMap[segment.id] = {good: false, loc: node.loc}
       },
 
       onCodePathSegmentEnd: function (segment, node) {
-        CPSIDStack.pop()
-      },
-      onCodePathSegmentStart: function (segment, node) {
-        CPSIDStack.push(segment.id)
+        var funcInfo = peek(funcInfoStack)
+        funcInfo.branchIDStack.pop()
       },
 
-      ReturnStatement: markCurrentCodePathSegmentAsReturning,
-      ThrowStatement: markCurrentCodePathSegmentAsReturning,
-      'FunctionExpression:exit': onFunctionExpressionExit,
-      'ArrowFunctionExpression:exit': onFunctionExpressionExit
+      onCodePathStart: function (path, node) {
+        funcInfoStack.push({
+          branchIDStack: [],
+          branchInfoMap: {}
+        })
+      },
+
+      onCodePathEnd: function (path, node) {
+        var funcInfo = funcInfoStack.pop()
+
+        if (!isInlineThenFunctionExpression(node)) {
+          return
+        }
+
+        var finalBranchIDs = path.finalSegments.map(x => x.id)
+        finalBranchIDs.forEach((id) => {
+          var branch = funcInfo.branchInfoMap[id]
+          if (!branch.good) {
+            context.report({
+              message: 'Each then() should return a value or throw',
+              loc: branch.loc
+            })
+          }
+        })
+      }
     }
   }
 }
