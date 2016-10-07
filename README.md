@@ -61,6 +61,7 @@ We also allow someone to `throw` inside a `then()` which is essentially the same
 myPromise.then((val) => val * 2));
 myPromise.then(function(val) { return val * 2; });
 myPromise.then(doSomething); // could be either
+myPromise.then((b) => { if (b) { return "yes" } else { return "no" } });
 ```
 
 #### Invalid
@@ -68,6 +69,7 @@ myPromise.then(doSomething); // could be either
 ```js
 myPromise.then(function(val) {});
 myPromise.then(() => { doSomething(); });
+myPromise.then((b) => { if (b) { return "yes" } else { forgotToReturn(); } });
 ```
 
 ### `param-names`
