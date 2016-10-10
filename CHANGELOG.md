@@ -1,3 +1,8 @@
+## 3.0.0
+
+- Updated column and line numbers
+- Added flow analysis for better handling of if statements
+
 ## 2.0.1
 
 - Fixed type in docs
