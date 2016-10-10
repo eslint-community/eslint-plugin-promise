@@ -104,10 +104,17 @@ module.exports = {
           return
         }
 
-        var finalBranchIDs = path.finalSegments.map(x => x.id)
-        finalBranchIDs.forEach((id) => {
+        path.finalSegments.forEach((segment) => {
+          var id = segment.id
           var branch = funcInfo.branchInfoMap[id]
           if (!branch.good) {
+            // check shortcircuit syntax like `x && x()` and `y || x()``
+            var prevSegments = segment.prevSegments
+            for (var ii = prevSegments.length - 1; ii >= 0; --ii) {
+              var prevSegment = prevSegments[ii]
+              if (funcInfo.branchInfoMap[prevSegment.id].good) return
+            }
+
             context.report({
               message: 'Each then() should return a value or throw',
               loc: branch.loc
