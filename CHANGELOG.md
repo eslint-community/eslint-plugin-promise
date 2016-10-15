@@ -1,6 +1,7 @@
 ## 3.0.1
 
 - Removed deprecated `always-catch` rule
+- FIX: always-return error with "fn && fn()"
 
 ## 3.0.0
 
