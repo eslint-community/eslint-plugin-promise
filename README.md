@@ -106,6 +106,31 @@ var x = Promise.resolve("good");
 var x = Promise.resolve("bad");
 ```
 
+### `no-return-wrap`
+
+Ensure that inside a `then()` or a `catch()` we always `return`
+ or `throw` a raw value instead of wrapping in `Promise.resolve`
+ or `Promise.reject`
+
+#### Valid
+```js
+myPromise.then(function(val) {
+  return val * 2;
+});
+myPromise.then(function(val) {
+  throw "bad thing";
+});
+```
+
+#### Invalid
+```js
+myPromise.then(function(val) {
+  return Promise.resolve(val * 2);
+});
+myPromise.then(function(val) {
+  return Promise.reject("bad thing");
+})
+```
 ## Installation
 
 You'll first need to install [ESLint](http://eslint.org):
