@@ -1,3 +1,7 @@
+## 3.0.1
+
+- Removed deprecated `always-catch` rule
+
 ## 3.0.0
 
 - Updated column and line numbers

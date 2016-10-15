@@ -15,8 +15,6 @@ Ensure that each time a `then()` is applied to a promise, a
 `catch()` is applied as well. Exceptions are made if you are
 returning that promise.
 
-Formerly called `always-catch`.
-
 #### Valid
 
 ```js
@@ -144,7 +142,6 @@ Then configure the rules you want to use under the rules section.
     "rules": {
         "promise/param-names": 2,
         "promise/always-return": 2,
-        "promise/always-catch": 2, // deprecated
         "promise/catch-or-return": 2,
         "promise/no-native": 0,
     }
