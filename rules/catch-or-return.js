@@ -33,6 +33,10 @@ module.exports = {
     var allowThen = options.allowThen
     var terminationMethod = options.terminationMethod || 'catch'
 
+    if (typeof terminationMethod === 'string') {
+      terminationMethod = [terminationMethod]
+    }
+
     return {
       ExpressionStatement: function (node) {
         if (!isPromise(node.expression)) {
@@ -52,7 +56,7 @@ module.exports = {
         // somePromise.catch()
         if (node.expression.type === 'CallExpression' &&
           node.expression.callee.type === 'MemberExpression' &&
-          node.expression.callee.property.name === terminationMethod
+          terminationMethod.indexOf(node.expression.callee.property.name) !== -1
         ) {
           return
         }

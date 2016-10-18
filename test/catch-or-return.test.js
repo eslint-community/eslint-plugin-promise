@@ -45,8 +45,11 @@ ruleTester.run('catch-or-return', rule, {
     { code: 'frank.then(go).then(to).then(pewPew, jail)', options: [{ 'allowThen': true }] },
 
     // terminationMethod=done - .done(null, fn)
-    { code: 'frank().then(go).done()', options: [{ 'terminationMethod': 'done' }] }
+    { code: 'frank().then(go).done()', options: [{ 'terminationMethod': 'done' }] },
 
+    // terminationMethod=[catch, done] - .done(null, fn)
+    { code: 'frank().then(go).catch()', options: [{ 'terminationMethod': ['catch', 'done'] }] },
+    { code: 'frank().then(go).done()', options: [{ 'terminationMethod': ['catch', 'done'] }] }
   ],
 
   invalid: [

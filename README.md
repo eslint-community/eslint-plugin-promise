@@ -44,6 +44,9 @@ You can pass an `{ allowThen: true }` as an option to this rule
 You can pass a `{ terminationMethod: 'done' }` as an option to this rule
  to require `done()` instead of `catch()` at the end of the promise chain.
  This is useful for many non-standard Promise implementations.
+ 
+You can also pass an array of methods such as
+ `{ terminationMethod: ['catch',  'asCallback'] }`
 
 ### `always-return`
 
