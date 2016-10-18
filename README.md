@@ -46,7 +46,14 @@ You can pass a `{ terminationMethod: 'done' }` as an option to this rule
  This is useful for many non-standard Promise implementations.
  
 You can also pass an array of methods such as
- `{ terminationMethod: ['catch',  'asCallback'] }`
+ `{ terminationMethod: ['catch',  'asCallback', 'finally'] }`.
+ 
+ This will allow any of
+```js
+Promise.resolve(1).then(() => { throw new Error('oops') }).catch(logerror)
+Promise.resolve(1).then(() => { throw new Error('oops') }).asCallback(cb)
+Promise.resolve(1).then(() => { throw new Error('oops') }).finally(cleanUp)
+```
 
 ### `always-return`
 
