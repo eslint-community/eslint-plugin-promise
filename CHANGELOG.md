@@ -1,3 +1,8 @@
+## 3.3.0
+
+- Rule: `prefer-async-to-callbacks` added
+- Rule: `prefer-async-to-then` added
+
 ## 3.2.1
 
 - Fix: `no-return-wrap` rule missing from index.js
