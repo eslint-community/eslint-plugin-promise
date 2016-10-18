@@ -6,10 +6,60 @@ Enforce best practices for JavaScript promises.
  [![travis-ci](https://travis-ci.org/xjamundx/eslint-plugin-promise.svg)](https://travis-ci.org/xjamundx/eslint-plugin-promise)
 [![npm version](https://badge.fury.io/js/eslint-plugin-promise.svg)](https://www.npmjs.com/package/eslint-plugin-promise)
 
-## Rule
+
+## Installation
+
+You'll first need to install [ESLint](http://eslint.org):
+
+```
+$ npm i eslint --save-dev
+```
+
+Next, install `eslint-plugin-promise`:
+
+```
+$ npm install eslint-plugin-promise --save-dev
+```
+
+**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-promise` globally.
+
+## Usage
+
+Add `promise` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+
+```json
+{
+    "plugins": [
+        "promise"
+    ]
+}
+```
 
 
-### `catch-or-return`
+Then configure the rules you want to use under the rules section.
+
+```json
+{
+    "rules": {
+        "promise/always-return": 2,
+        "promise/no-return-wrap": 2,
+        "promise/param-names": 2,
+        "promise/catch-or-return": 2,
+        "promise/no-native": 0,
+    }
+}
+```
+
+## Rules
+
+- `catch-or-return` Enforces the use of `catch` on un-returned promises.
+- `no-return-wrap` Avoid wrapping values in `Promise.resolve` or `Promise.reject` when not needed.
+- `param-names` Enforce consistent param names when creating new promises.
+- `always-return` Return inside each `then` to create readable and reusable Promise chains.
+- `no-native` In an ES5 environment, make sure to create a `Promise` constructor before using.
+
+
+### Rule: `catch-or-return`
 
 Ensure that each time a `then()` is applied to a promise, a
 `catch()` is applied as well. Exceptions are made if you are
@@ -55,7 +105,7 @@ Promise.resolve(1).then(() => { throw new Error('oops') }).asCallback(cb)
 Promise.resolve(1).then(() => { throw new Error('oops') }).finally(cleanUp)
 ```
 
-### `always-return`
+### Rule: `always-return`
 
 Ensure that inside a `then()` you make sure to `return` a new promise or value.
 See http://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html (rule #5)
@@ -116,7 +166,7 @@ var x = Promise.resolve("good");
 var x = Promise.resolve("bad");
 ```
 
-### `no-return-wrap`
+### Rule: `no-return-wrap`
 
 Ensure that inside a `then()` or a `catch()` we always `return`
  or `throw` a raw value instead of wrapping in `Promise.resolve`
@@ -140,47 +190,6 @@ myPromise.then(function(val) {
 myPromise.then(function(val) {
   return Promise.reject("bad thing");
 })
-```
-## Installation
-
-You'll first need to install [ESLint](http://eslint.org):
-
-```
-$ npm i eslint --save-dev
-```
-
-Next, install `eslint-plugin-promise`:
-
-```
-$ npm install eslint-plugin-promise --save-dev
-```
-
-**Note:** If you installed ESLint globally (using the `-g` flag) then you must also install `eslint-plugin-promise` globally.
-
-## Usage
-
-Add `promise` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
-
-```json
-{
-    "plugins": [
-        "promise"
-    ]
-}
-```
-
-
-Then configure the rules you want to use under the rules section.
-
-```json
-{
-    "rules": {
-        "promise/param-names": 2,
-        "promise/always-return": 2,
-        "promise/catch-or-return": 2,
-        "promise/no-native": 0,
-    }
-}
 ```
 
 ## Etc

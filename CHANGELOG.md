@@ -1,3 +1,7 @@
+## 3.2.1
+
+- Fix: `no-return-wrap` rule missing from index.js
+
 ## 3.2.0
 
 - Added `no-return-wrap` rule 
