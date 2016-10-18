@@ -1,3 +1,6 @@
+## 3.2.0
+
+- Added `no-return-wrap` rule 
 
 ## 3.1.0
 
