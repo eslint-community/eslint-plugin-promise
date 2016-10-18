@@ -1,3 +1,8 @@
+
+## 3.1.0
+
+- Added multiple terminationMethods
+
 ## 3.0.1
 
 - Removed deprecated `always-catch` rule
