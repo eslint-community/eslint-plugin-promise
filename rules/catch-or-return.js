@@ -1,31 +1,10 @@
-var STATIC_METHODS = [
-  'all',
-  'race',
-  'reject',
-  'resolve'
-]
+/**
+ * Rule: catch-or-return
+ * Ensures that promises either include a catch() handler
+ * or are returned (to be handled upstream)
+ */
 
-function isPromise (expression) {
-  return ( // hello.then()
-    expression.type === 'CallExpression' &&
-    expression.callee.type === 'MemberExpression' &&
-    expression.callee.property.name === 'then'
-  ) || ( // hello.catch()
-    expression.type === 'CallExpression' &&
-    expression.callee.type === 'MemberExpression' &&
-    expression.callee.property.name === 'catch'
-  ) || ( // somePromise.ANYTHING()
-    expression.type === 'CallExpression' &&
-    expression.callee.type === 'MemberExpression' &&
-    isPromise(expression.callee.object)
-  ) || ( // Promise.STATIC_METHOD()
-    expression.type === 'CallExpression' &&
-    expression.callee.type === 'MemberExpression' &&
-    expression.callee.object.type === 'Identifier' &&
-    expression.callee.object.name === 'Promise' &&
-    STATIC_METHODS.indexOf(expression.callee.property.name) !== -1
-  )
-}
+var isPromise = require('./lib/is-promise')
 
 module.exports = {
   create: function (context) {
