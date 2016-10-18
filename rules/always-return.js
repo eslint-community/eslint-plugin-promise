@@ -10,25 +10,25 @@ function isFunctionWithBlockStatement (node) {
 
 function isThenCallExpression (node) {
   return (
-    node.type === 'CallExpression' &&
-    node.callee.type === 'MemberExpression' &&
-    node.callee.property.name === 'then'
+  node.type === 'CallExpression' &&
+  node.callee.type === 'MemberExpression' &&
+  node.callee.property.name === 'then'
   )
 }
 
 function isFirstArgument (node) {
   return (
-    node.parent &&
-    node.parent.arguments &&
-    node.parent.arguments[0] === node
+  node.parent &&
+  node.parent.arguments &&
+  node.parent.arguments[0] === node
   )
 }
 
 function isInlineThenFunctionExpression (node) {
   return (
-    isFunctionWithBlockStatement(node) &&
-    isThenCallExpression(node.parent) &&
-    isFirstArgument(node)
+  isFunctionWithBlockStatement(node) &&
+  isThenCallExpression(node.parent) &&
+  isFirstArgument(node)
   )
 }
 

@@ -52,12 +52,18 @@ Then configure the rules you want to use under the rules section.
 
 ## Rules
 
+### Promise Rules
+
 - `catch-or-return` Enforces the use of `catch` on un-returned promises.
 - `no-return-wrap` Avoid wrapping values in `Promise.resolve` or `Promise.reject` when not needed.
 - `param-names` Enforce consistent param names when creating new promises.
 - `always-return` Return inside each `then` to create readable and reusable Promise chains.
 - `no-native` In an ES5 environment, make sure to create a `Promise` constructor before using.
 
+### Async/Await Rules
+
+- `prefer-await-to-then` Prefer `await` to `then()` for reading Promise values
+- `prefer-await-to-callbacks` Prefer async/await to the callback pattern
 
 ### Rule: `catch-or-return`
 
