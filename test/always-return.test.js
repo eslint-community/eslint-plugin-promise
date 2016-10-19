@@ -26,7 +26,8 @@ ruleTester.run('always-return', rule, {
     { code: 'hey.then(x => { return x; var y = "unreachable"; })', parserOptions: parserOptions },
     { code: 'hey.then(x => { return; }, err=>{ log(err); })', parserOptions: parserOptions },
     { code: 'hey.then(x => { return x && x(); }, err=>{ log(err); })', parserOptions: parserOptions },
-    { code: 'hey.then(x => { return x.y || x(); }, err=>{ log(err); })', parserOptions: parserOptions }
+    { code: 'hey.then(x => { return x.y || x(); }, err=>{ log(err); })', parserOptions: parserOptions },
+    { code: 'hey.then(x => { return x ? true : false; }, err=>{ log(err); })', parserOptions: parserOptions }
   ],
 
   invalid: [
