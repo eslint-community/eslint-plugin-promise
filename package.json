@@ -24,7 +24,7 @@
     "eslint": "^2.10 || ^3.0"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "license": "ISC"
 }
