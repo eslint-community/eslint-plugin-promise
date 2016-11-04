@@ -1,3 +1,8 @@
+## 3.3.1
+
+- Updated engines with proper stuff
+- Fixed bug for unreachable code
+
 ## 3.3.0
 
 - Rule: `prefer-async-to-callbacks` added
