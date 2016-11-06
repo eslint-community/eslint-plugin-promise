@@ -20,9 +20,6 @@
     "mocha": "^2.3.4",
     "standard": "^7.1.2"
   },
-  "peerDependencies": {
-    "eslint": "^2.10 || ^3.0"
-  },
   "engines": {
     "node": ">=4"
   },
