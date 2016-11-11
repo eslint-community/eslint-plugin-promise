@@ -1,3 +1,7 @@
+## 3.3.2
+
+- Removed eslint from peerDeps
+
 ## 3.3.1
 
 - Updated engines with proper stuff
