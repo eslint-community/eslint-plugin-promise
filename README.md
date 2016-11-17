@@ -59,6 +59,9 @@ Then configure the rules you want to use under the rules section.
 - `param-names` Enforce consistent param names when creating new promises.
 - `always-return` Return inside each `then` to create readable and reusable Promise chains.
 - `no-native` In an ES5 environment, make sure to create a `Promise` constructor before using.
+- `no-nesting` Avoid nested .then() or .catch() statements
+- `no-promise-in-callback` Avoid using promises inside of callbacks
+- `no-callback-in-promise` Avoid calling `cb()` inside of a `then()`
 
 ### Async/Await Rules
 
