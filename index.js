@@ -9,7 +9,8 @@ module.exports = {
     'no-native': require('./rules/no-native'),
     'no-callback-in-promise': require('./rules/no-callback-in-promise'),
     'no-promise-in-callback': require('./rules/no-promise-in-callback'),
-    'no-nesting': require('./rules/no-nesting')
+    'no-nesting': require('./rules/no-nesting'),
+    'avoid-new': require('./rules/avoid-new')
   },
   rulesConfig: {
     'param-names': 1,

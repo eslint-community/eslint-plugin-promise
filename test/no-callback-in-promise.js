@@ -20,16 +20,16 @@ ruleTester.run('no-callback-in-promise', rule, {
   ],
 
   invalid: [
-    {code: 'a.then(cb)', errors: [{message: errorMessage}], parserOptions: {ecmaVersion: 6}},
+    {code: 'a.then(cb)', errors: [{message: errorMessage, column: 8}], parserOptions: {ecmaVersion: 6}},
     {code: 'a.then(() => cb())', errors: [{message: errorMessage}], parserOptions: {ecmaVersion: 6}},
-    {code: 'a.then(function(err) { cb(err) })', errors: [{message: errorMessage}], parserOptions: {ecmaVersion: 6}},
+    {code: 'a.then(function(err) { cb(err) })', errors: [{message: errorMessage, column: 24}], parserOptions: {ecmaVersion: 6}},
     {code: 'a.then(function(data) { cb(data) }, function(err) { cb(err) })', errors: [{column: 25, message: errorMessage}, {column: 53, message: errorMessage}], parserOptions: {ecmaVersion: 6}},
     {code: 'a.catch(function(err) { cb(err) })', errors: [{message: errorMessage}], parserOptions: {ecmaVersion: 6}},
 
     // callback should also complain
-    {code: 'a.then(callback)', errors: [{message: errorMessage}], parserOptions: {ecmaVersion: 6}},
+    {code: 'a.then(callback)', errors: [{message: errorMessage, column: 8}], parserOptions: {ecmaVersion: 6}},
     {code: 'a.then(() => callback())', errors: [{message: errorMessage}], parserOptions: {ecmaVersion: 6}},
-    {code: 'a.then(function(err) { callback(err) })', errors: [{message: errorMessage}], parserOptions: {ecmaVersion: 6}},
+    {code: 'a.then(function(err) { callback(err) })', errors: [{message: errorMessage, column: 24}], parserOptions: {ecmaVersion: 6}},
     {code: 'a.then(function(data) { callback(data) }, function(err) { callback(err) })', errors: [{message: errorMessage}, {column: 59, message: errorMessage}], parserOptions: {ecmaVersion: 6}},
     {code: 'a.catch(function(err) { callback(err) })', errors: [{message: errorMessage}], parserOptions: {ecmaVersion: 6}}
   ]

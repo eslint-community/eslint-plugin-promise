@@ -32,7 +32,11 @@ ruleTester.run('no-promise-in-callback', rule, {
     {code: 'doThing().then(function() { return Promise.all([a,b,c]) })', parserOptions: {ecmaVersion: 6}},
     {code: 'doThing().then(function() { return Promise.resolve(4) })', parserOptions: {ecmaVersion: 6}},
     {code: 'doThing().then(() => Promise.resolve(4))', parserOptions: {ecmaVersion: 6}},
-    {code: 'doThing().then(() => Promise.all([a]))', parserOptions: {ecmaVersion: 6}}
+    {code: 'doThing().then(() => Promise.all([a]))', parserOptions: {ecmaVersion: 6}},
+
+    // weird case, we assume it's not a big deal if you return (even though you may be cheating)
+    {code: 'a(function(err) { return doThing().then(a) })', parserOptions: {ecmaVersion: 6}}
+
   ],
 
   invalid: [
