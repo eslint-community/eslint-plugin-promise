@@ -1,3 +1,10 @@
+## 3.4.0
+
+- new rule: avoid-new
+- new rule: no-promise-in-callback
+- new rule: no-callback-in-promise
+- new rule: no-nesting
+
 ## 3.3.2
 
 - Removed eslint from peerDeps
