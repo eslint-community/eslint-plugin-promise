@@ -48,7 +48,7 @@ Then configure the rules you want to use under the rules section.
         "promise/no-native": "off",
         "promise/no-nesting": "warn",
         "promise/no-promise-in-callback": "warn",
-        "promise/no-callback-in-promise: "warn",
+        "promise/no-callback-in-promise": "warn",
         "promise/avoid-new": "warn"
     }
 }
@@ -108,10 +108,10 @@ You can pass an `{ allowThen: true }` as an option to this rule
 You can pass a `{ terminationMethod: 'done' }` as an option to this rule
  to require `done()` instead of `catch()` at the end of the promise chain.
  This is useful for many non-standard Promise implementations.
- 
+
 You can also pass an array of methods such as
  `{ terminationMethod: ['catch',  'asCallback', 'finally'] }`.
- 
+
  This will allow any of
 ```js
 Promise.resolve(1).then(() => { throw new Error('oops') }).catch(logerror)
