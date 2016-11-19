@@ -85,7 +85,7 @@ module.exports = {
       onCodePathSegmentStart: function (segment, node) {
         var funcInfo = peek(funcInfoStack)
         funcInfo.branchIDStack.push(segment.id)
-        funcInfo.branchInfoMap[segment.id] = {good: false, loc: node.loc}
+        funcInfo.branchInfoMap[segment.id] = {good: false, node: node}
       },
 
       onCodePathSegmentEnd: function (segment, node) {
@@ -120,7 +120,7 @@ module.exports = {
 
             context.report({
               message: 'Each then() should return a value or throw',
-              loc: branch.loc
+              node: branch.node
             })
           }
         })
