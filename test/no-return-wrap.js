@@ -40,7 +40,10 @@ ruleTester.run('no-return-wrap', rule, {
     'var x = function() { return Promise.resolve(4) }',
     'function y() { return Promise.resolve(4) }',
     'function then() { return Promise.reject() }',
-    'doThing(function(x) { return Promise.reject(x) })'
+    'doThing(function(x) { return Promise.reject(x) })',
+
+    // should work with empty return statement
+    'doThing().then(function() { return })'
   ],
 
   invalid: [
