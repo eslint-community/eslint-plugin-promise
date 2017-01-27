@@ -10,6 +10,7 @@ ruleTester.run('always-return', rule, {
     { code: 'hey.then(x => x)', parserOptions: parserOptions },
     { code: 'hey.then(x => ({}))', parserOptions: parserOptions },
     { code: 'hey.then(x => { return; })', parserOptions: parserOptions },
+    { code: 'hey.then(x => { return x ? x.id : null })', parserOptions: parserOptions },
     { code: 'hey.then(x => { return x * 10 })', parserOptions: parserOptions },
     { code: 'hey.then(function() { return 42; })', parserOptions: parserOptions },
     { code: 'hey.then(function() { return new Promise(); })', parserOptions: parserOptions },
@@ -27,7 +28,18 @@ ruleTester.run('always-return', rule, {
     { code: 'hey.then(x => { return x; return "unreachable"; })', parserOptions: parserOptions },
     { code: 'hey.then(x => { return; }, err=>{ log(err); })', parserOptions: parserOptions },
     { code: 'hey.then(x => { return x && x(); }, err=>{ log(err); })', parserOptions: parserOptions },
-    { code: 'hey.then(x => { return x.y || x(); }, err=>{ log(err); })', parserOptions: parserOptions }
+    { code: 'hey.then(x => { return x.y || x(); }, err=>{ log(err); })', parserOptions: parserOptions },
+    {
+      code: `hey.then(x => { 
+        return anotherFunc({
+          nested: {
+            one: x === 1 ? 1 : 0,
+            two: x === 2 ? 1 : 0
+          }
+        })
+      })`,
+      parserOptions: parserOptions
+    }
   ],
 
   invalid: [
@@ -70,6 +82,27 @@ ruleTester.run('always-return', rule, {
     },
     {
       code: 'hey.then(function() { if (x) { return you.then(function() { return x; }); } })',
+      errors: [ { message: message } ]
+    },
+    {
+      code: 'hey.then( x => { x ? x.id : null })',
+      parserOptions: parserOptions,
+      errors: [ { message: message } ]
+    },
+    {
+      code: 'hey.then(function(x) { x ? x.id : null })',
+      errors: [ { message: message } ]
+    },
+    {
+      code: `hey.then(x => { 
+        anotherFunc({
+          nested: {
+            one: x === 1 ? 1 : 0,
+            two: x === 2 ? 1 : 0
+          }
+        })
+      })`,
+      parserOptions: parserOptions,
       errors: [ { message: message } ]
     }
   ]

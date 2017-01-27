@@ -32,6 +32,17 @@ function isInlineThenFunctionExpression (node) {
   )
 }
 
+function hasParentReturnStatement (node) {
+  if (node && node.parent && node.parent.type) {
+    if (node.parent.type === 'ReturnStatement') {
+      return true
+    }
+    return hasParentReturnStatement(node.parent)
+  }
+
+  return false
+}
+
 function peek (arr) {
   return arr[arr.length - 1]
 }
@@ -111,6 +122,10 @@ module.exports = {
           var id = segment.id
           var branch = funcInfo.branchInfoMap[id]
           if (!branch.good) {
+            if (hasParentReturnStatement(branch.node)) {
+              return
+            }
+
             // check shortcircuit syntax like `x && x()` and `y || x()``
             var prevSegments = segment.prevSegments
             for (var ii = prevSegments.length - 1; ii >= 0; --ii) {
