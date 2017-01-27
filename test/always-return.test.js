@@ -94,14 +94,16 @@ ruleTester.run('always-return', rule, {
       errors: [ { message: message } ]
     },
     {
-      code: `hey.then(x => { 
-        anotherFunc({
-          nested: {
-            one: x === 1 ? 1 : 0,
-            two: x === 2 ? 1 : 0
-          }
+      code: `(function() {
+        return hey.then(x => { 
+          anotherFunc({
+            nested: {
+              one: x === 1 ? 1 : 0,
+              two: x === 2 ? 1 : 0
+            }
+          })
         })
-      })`,
+      })()`,
       parserOptions: parserOptions,
       errors: [ { message: message } ]
     }

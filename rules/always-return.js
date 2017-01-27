@@ -34,6 +34,11 @@ function isInlineThenFunctionExpression (node) {
 
 function hasParentReturnStatement (node) {
   if (node && node.parent && node.parent.type) {
+    // if the parent is a then, and we haven't returned anything, fail
+    if (isThenCallExpression(node.parent)) {
+      return false
+    }
+
     if (node.parent.type === 'ReturnStatement') {
       return true
     }
