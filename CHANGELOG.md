@@ -1,3 +1,6 @@
+## 3.4.1
+- fixed #49 
+
 ## 3.4.0
 
 - new rule: avoid-new
