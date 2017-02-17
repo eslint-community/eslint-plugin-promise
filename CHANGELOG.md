@@ -1,3 +1,7 @@
+## 3.4.2
+
+- Fixed always return false positive with ternary (#31)
+
 ## 3.4.1
 - fixed #49 
 
