@@ -1,3 +1,7 @@
+## 3.5.0
+
+- Addded support for recommended settings using `extends: plugin:promise/recommended`
+
 ## 3.4.2
 
 - Fixed always return false positive with ternary (#31)
