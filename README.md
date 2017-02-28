@@ -54,24 +54,44 @@ Then configure the rules you want to use under the rules section.
 }
 ```
 
+or start with the recommended rule set
+
+```json
+{
+    "extends": [
+        "plugin:promise/recommended"
+    ]
+}
+```
+
 ## Rules
 
 ### Promise Rules
 
-- `catch-or-return` Enforces the use of `catch` on un-returned promises.
-- `no-return-wrap` Avoid wrapping values in `Promise.resolve` or `Promise.reject` when not needed.
-- `param-names` Enforce consistent param names when creating new promises.
-- `always-return` Return inside each `then` to create readable and reusable Promise chains.
-- `no-native` In an ES5 environment, make sure to create a `Promise` constructor before using.
-- `no-nesting` Avoid nested .then() or .catch() statements
-- `no-promise-in-callback` Avoid using promises inside of callbacks
-- `no-callback-in-promise` Avoid calling `cb()` inside of a `then()` (use [nodeify](https://www.npmjs.com/package/nodeify)] instead)
-- `avoid-new` Avoid creating `new` promises outside of utility libs (use [pify](https://www.npmjs.com/package/pify) instead)
+| recommended | rule                        | description                                                                      |
+| ----------- | --------------------------- | -------------------------------------------------------------------------------- |
+| :bangbang:  | `catch-or-return`           | Enforces the use of `catch` on un-returned promises.                             |
+| :bangbang:  | `no-return-wrap`            | Avoid wrapping values in `Promise.resolve` or `Promise.reject` when not needed.  |
+| :bangbang:  | `param-names`               | Enforce consistent param names when creating new promises.                       |
+| :bangbang:  | `always-return`             | Return inside each `then` to create readable and reusable Promise chains.        |
+|             | `no-native`                 | In an ES5 environment, make sure to create a `Promise` constructor before using. |
+| :warning:   | `no-nesting`                | Avoid nested .then() or .catch() statements                                      |
+| :warning:   | `no-promise-in-callback`    | Avoid using promises inside of callbacks                                         |
+| :warning:   | `no-callback-in-promise`    | Avoid calling `cb()` inside of a `then()` (use [nodeify][]] instead)             |
+| :warning:   | `avoid-new`                 | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     |
+| :seven:     | `prefer-await-to-then`      | Prefer `await` to `then()` for reading Promise values                            |
+| :seven:     | `prefer-await-to-callbacks` | Prefer async/await to the callback pattern                                       |
 
-### Async/Await Rules
+**Key**
 
-- `prefer-await-to-then` Prefer `await` to `then()` for reading Promise values
-- `prefer-await-to-callbacks` Prefer async/await to the callback pattern
+| icon       | description                                     |
+| ---------- | ----------------------------------------------- |
+| :bangbang: | Reports as error in recommended configuration   |
+| :warning:  | Reports as warning in recommended configuration |
+| :seven:    | ES2017 Async Await rules                        |
+
+[nodeify]: https://www.npmjs.com/package/nodeify
+[pify]: https://www.npmjs.com/package/pify
 
 ### Rule: `catch-or-return`
 
