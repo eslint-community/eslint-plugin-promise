@@ -77,7 +77,7 @@ or start with the recommended rule set
 |             | `no-native`                 | In an ES5 environment, make sure to create a `Promise` constructor before using. |
 | :warning:   | `no-nesting`                | Avoid nested .then() or .catch() statements                                      |
 | :warning:   | `no-promise-in-callback`    | Avoid using promises inside of callbacks                                         |
-| :warning:   | `no-callback-in-promise`    | Avoid calling `cb()` inside of a `then()` (use [nodeify][]] instead)             |
+| :warning:   | `no-callback-in-promise`    | Avoid calling `cb()` inside of a `then()` (use [nodeify][] instead)             |
 | :warning:   | `avoid-new`                 | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     |
 | :seven:     | `prefer-await-to-then`      | Prefer `await` to `then()` for reading Promise values                            |
 | :seven:     | `prefer-await-to-callbacks` | Prefer async/await to the callback pattern                                       |
