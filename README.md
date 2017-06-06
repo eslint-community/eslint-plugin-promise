@@ -70,12 +70,12 @@ or start with the recommended rule set
 
 | recommended | rule                        | description                                                                      |
 | ----------- | --------------------------- | -------------------------------------------------------------------------------- |
-| :bangbang:  | `catch-or-return`           | Enforces the use of `catch` on un-returned promises.                             |
+| :bangbang:  | `catch-or-return`           | Enforces the use of `catch()` on un-returned promises.                             |
 | :bangbang:  | `no-return-wrap`            | Avoid wrapping values in `Promise.resolve` or `Promise.reject` when not needed.  |
 | :bangbang:  | `param-names`               | Enforce consistent param names when creating new promises.                       |
-| :bangbang:  | `always-return`             | Return inside each `then` to create readable and reusable Promise chains.        |
+| :bangbang:  | `always-return`             | Return inside each `then()` to create readable and reusable Promise chains.        |
 |             | `no-native`                 | In an ES5 environment, make sure to create a `Promise` constructor before using. |
-| :warning:   | `no-nesting`                | Avoid nested .then() or .catch() statements                                      |
+| :warning:   | `no-nesting`                | Avoid nested `then()` or `catch()` statements                                      |
 | :warning:   | `no-promise-in-callback`    | Avoid using promises inside of callbacks                                         |
 | :warning:   | `no-callback-in-promise`    | Avoid calling `cb()` inside of a `then()` (use [nodeify][] instead)             |
 | :warning:   | `avoid-new`                 | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     |
