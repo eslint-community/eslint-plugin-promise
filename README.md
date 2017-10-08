@@ -49,7 +49,8 @@ Then configure the rules you want to use under the rules section.
         "promise/no-nesting": "warn",
         "promise/no-promise-in-callback": "warn",
         "promise/no-callback-in-promise": "warn",
-        "promise/avoid-new": "warn"
+        "promise/avoid-new": "warn",
+        "promise/no-return-in-finally": "warn"
     }
 }
 ```
@@ -79,6 +80,7 @@ or start with the recommended rule set
 | :warning:   | `no-promise-in-callback`    | Avoid using promises inside of callbacks                                         |
 | :warning:   | `no-callback-in-promise`    | Avoid calling `cb()` inside of a `then()` (use [nodeify][] instead)             |
 | :warning:   | `avoid-new`                 | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     |
+| :warning:   | `no-return-in-finally`      | Disallow return statements in `finally()`                                        |
 | :seven:     | `prefer-await-to-then`      | Prefer `await` to `then()` for reading Promise values                            |
 | :seven:     | `prefer-await-to-callbacks` | Prefer async/await to the callback pattern                                       |
 
@@ -223,6 +225,24 @@ myPromise.then(function(val) {
 });
 myPromise.then(function(val) {
   return Promise.reject("bad thing");
+})
+```
+
+### Rule: `no-return-in-finally`
+
+Disallow return statements inside a callback passed to `finally()`, since nothing would consume what's returned.
+
+#### Valid
+```js
+myPromise.finally(function(val) {
+  console.log('value:', val);
+});
+```
+
+#### Invalid
+```js
+myPromise.finally(function(val) {
+  return val;
 })
 ```
 

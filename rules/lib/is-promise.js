@@ -18,6 +18,10 @@ function isPromise (expression) {
   expression.type === 'CallExpression' &&
   expression.callee.type === 'MemberExpression' &&
   expression.callee.property.name === 'catch'
+  ) || ( // hello.finally()
+  expression.type === 'CallExpression' &&
+  expression.callee.type === 'MemberExpression' &&
+  expression.callee.property.name === 'finally'
   ) || ( // somePromise.ANYTHING()
   expression.type === 'CallExpression' &&
   expression.callee.type === 'MemberExpression' &&
