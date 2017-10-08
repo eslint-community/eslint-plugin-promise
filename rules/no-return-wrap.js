@@ -19,6 +19,9 @@ function isInPromise (context) {
 
 module.exports = {
   create: function (context) {
+    var options = context.options[0] || {}
+    var allowReject = options.allowReject
+
     return {
       ReturnStatement: function (node) {
         if (isInPromise(context)) {
@@ -28,7 +31,7 @@ module.exports = {
                 if (node.argument.callee.object.name === 'Promise') {
                   if (node.argument.callee.property.name === 'resolve') {
                     context.report(node, resolveMessage)
-                  } else if (node.argument.callee.property.name === 'reject') {
+                  } else if (!allowReject && node.argument.callee.property.name === 'reject') {
                     context.report(node, rejectMessage)
                   }
                 }

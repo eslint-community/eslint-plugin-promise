@@ -43,7 +43,10 @@ ruleTester.run('no-return-wrap', rule, {
     'doThing(function(x) { return Promise.reject(x) })',
 
     // should work with empty return statement
-    'doThing().then(function() { return })'
+    'doThing().then(function() { return })',
+
+    // allow reject if specified
+    {code: 'doThing().then(function() { return Promise.reject(4) })', options: [{allowReject: true}]}
   ],
 
   invalid: [

@@ -226,6 +226,13 @@ myPromise.then(function(val) {
 })
 ```
 
+#### Options
+
+#### `allowReject`
+
+Pass `{ allowReject: true }` as an option to this rule to permit wrapping returned values with `Promise.reject`, such as when you would use it as another way to reject the promise.
+
 ## Etc
+
 - (c) MMXV jden <jason@denizac.org> - ISC license.
 - (c) 2016 Jamund Ferguson <jamund@gmail.com> - ISC license.
