@@ -16,7 +16,10 @@ ruleTester.run('no-callback-in-promise', rule, {
 
     // arrow functions and other things
     {code: 'let thing = (cb) => cb()', parserOptions: {ecmaVersion: 6}},
-    {code: 'doSomething(err => cb(err))', parserOptions: {ecmaVersion: 6}}
+    {code: 'doSomething(err => cb(err))', parserOptions: {ecmaVersion: 6}},
+
+    // exceptions test
+    {code: 'a.then(() => next())', parserOptions: {ecmaVersion: 6}, options: [{ 'exceptions': ['next'] }]}
   ],
 
   invalid: [
