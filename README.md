@@ -49,7 +49,8 @@ Then configure the rules you want to use under the rules section.
         "promise/no-nesting": "warn",
         "promise/no-promise-in-callback": "warn",
         "promise/no-callback-in-promise": "warn",
-        "promise/avoid-new": "warn"
+        "promise/avoid-new": "warn",
+        "promise/no-return-in-finally": "warn"
     }
 }
 ```
@@ -70,15 +71,16 @@ or start with the recommended rule set
 
 | recommended | rule                        | description                                                                      |
 | ----------- | --------------------------- | -------------------------------------------------------------------------------- |
-| :bangbang:  | `catch-or-return`           | Enforces the use of `catch()` on un-returned promises.                             |
+| :bangbang:  | `catch-or-return`           | Enforces the use of `catch()` on un-returned promises.                           |
 | :bangbang:  | `no-return-wrap`            | Avoid wrapping values in `Promise.resolve` or `Promise.reject` when not needed.  |
 | :bangbang:  | `param-names`               | Enforce consistent param names when creating new promises.                       |
-| :bangbang:  | `always-return`             | Return inside each `then()` to create readable and reusable Promise chains.        |
+| :bangbang:  | `always-return`             | Return inside each `then()` to create readable and reusable Promise chains.      |
 |             | `no-native`                 | In an ES5 environment, make sure to create a `Promise` constructor before using. |
-| :warning:   | `no-nesting`                | Avoid nested `then()` or `catch()` statements                                      |
+| :warning:   | `no-nesting`                | Avoid nested `then()` or `catch()` statements                                    |
 | :warning:   | `no-promise-in-callback`    | Avoid using promises inside of callbacks                                         |
-| :warning:   | `no-callback-in-promise`    | Avoid calling `cb()` inside of a `then()` (use [nodeify][] instead)             |
+| :warning:   | `no-callback-in-promise`    | Avoid calling `cb()` inside of a `then()` (use [nodeify][] instead)              |
 | :warning:   | `avoid-new`                 | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     |
+| :warning:   | `no-return-in-finally`      | Disallow return statements in `finally()`                                        |
 | :seven:     | `prefer-await-to-then`      | Prefer `await` to `then()` for reading Promise values                            |
 | :seven:     | `prefer-await-to-callbacks` | Prefer async/await to the callback pattern                                       |
 
@@ -231,6 +233,24 @@ myPromise.then(function(val) {
 #### `allowReject`
 
 Pass `{ allowReject: true }` as an option to this rule to permit wrapping returned values with `Promise.reject`, such as when you would use it as another way to reject the promise.
+
+### Rule: `no-return-in-finally`
+
+Disallow return statements inside a callback passed to `finally()`, since nothing would consume what's returned.
+
+#### Valid
+```js
+myPromise.finally(function(val) {
+  console.log('value:', val);
+});
+```
+
+#### Invalid
+```js
+myPromise.finally(function(val) {
+  return val;
+})
+```
 
 ## Etc
 

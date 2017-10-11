@@ -10,7 +10,9 @@ var isCallback = require('./lib/is-callback')
 module.exports = function (context) {
   return {
     CallExpression: function (node) {
-      if (!isCallback(node)) {
+      var options = context.options[0] || {}
+      var exceptions = options.exceptions || []
+      if (!isCallback(node, exceptions)) {
         // in general we send you packing if you're not a callback
         // but we also need to watch out for whatever.then(cb)
         if (hasPromiseCallback(node)) {
