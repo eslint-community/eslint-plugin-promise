@@ -13,6 +13,7 @@ ruleTester.run('catch-or-return', rule, {
     'frank().then(go).then().catch(function() { /* why bother */ })',
     'frank.then(go).then(to).catch(jail)',
     'Promise.resolve(frank).catch(jail)',
+    'Promise.resolve(frank)["catch"](jail)',
     'frank.then(to).finally(fn).catch(jail)',
 
     // arrow function use case

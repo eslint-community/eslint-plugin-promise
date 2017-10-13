@@ -39,6 +39,16 @@ module.exports = {
         ) {
           return
         }
+
+        // somePromise['catch']()
+        if (node.expression.type === 'CallExpression' &&
+          node.expression.callee.type === 'MemberExpression' &&
+          node.expression.callee.property.type === 'Literal' &&
+          node.expression.callee.property.value === 'catch'
+        ) {
+          return
+        }
+
         context.report(node, 'Expected ' + terminationMethod + '() or return')
       }
     }

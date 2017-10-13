@@ -30,7 +30,7 @@ ruleTester.run('always-return', rule, {
     { code: 'hey.then(x => { return x && x(); }, err=>{ log(err); })', parserOptions: parserOptions },
     { code: 'hey.then(x => { return x.y || x(); }, err=>{ log(err); })', parserOptions: parserOptions },
     {
-      code: `hey.then(x => { 
+      code: `hey.then(x => {
         return anotherFunc({
           nested: {
             one: x === 1 ? 1 : 0,
@@ -95,7 +95,7 @@ ruleTester.run('always-return', rule, {
     },
     {
       code: `(function() {
-        return hey.then(x => { 
+        return hey.then(x => {
           anotherFunc({
             nested: {
               one: x === 1 ? 1 : 0,
