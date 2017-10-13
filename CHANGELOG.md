@@ -1,3 +1,11 @@
+## 3.6.0
+
+- Added `['catch']` support in `catch-or-return`
+- Added `no-return-in-finally` rule
+- Fixed some formatting in the docs
+- Added `allowReject` option to `no-return-wrap`
+- Added exceptions for `no-callback-in-promise`
+
 ## 3.5.0
 
 - Addded support for recommended settings using `extends: plugin:promise/recommended`
