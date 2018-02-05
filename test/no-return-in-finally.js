@@ -1,3 +1,5 @@
+'use strict'
+
 var RuleTester = require('eslint').RuleTester
 var rule = require('../rules/no-return-in-finally')
 var ruleTester = new RuleTester()

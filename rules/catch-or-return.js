@@ -4,6 +4,8 @@
  * or are returned (to be handled upstream)
  */
 
+'use strict'
+
 var isPromise = require('./lib/is-promise')
 
 module.exports = {

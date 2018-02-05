@@ -3,6 +3,8 @@
  * Discourage using then() and instead use async/await.
  */
 
+'use strict'
+
 var errorMessage = 'Avoid callbacks. Prefer Async/Await.'
 
 module.exports = function (context) {

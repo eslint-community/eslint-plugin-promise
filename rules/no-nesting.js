@@ -3,6 +3,8 @@
  * Avoid nesting your promises.
  */
 
+'use strict'
+
 var hasPromiseCallback = require('./lib/has-promise-callback')
 var isInsidePromise = require('./lib/is-inside-promise')
 

@@ -1,3 +1,5 @@
+'use strict'
+
 var isInsidePromise = require('./is-inside-promise')
 
 function isInsideCallback (node) {

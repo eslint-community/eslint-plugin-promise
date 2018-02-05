@@ -3,6 +3,8 @@
  * Avoid creating new promises outside of utility libraries.
  */
 
+'use strict'
+
 module.exports = function (context) {
   return {
     NewExpression: function (node) {

@@ -1,3 +1,5 @@
+'use strict'
+
 var isNamedCallback = require('./is-named-callback')
 
 function isCallingBack (node, exceptions) {
