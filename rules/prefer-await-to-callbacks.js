@@ -30,7 +30,7 @@ module.exports = function (context) {
       var args = node.arguments
       var num = args.length - 1
       var arg = num > -1 && node.arguments && node.arguments[num]
-      if (arg && arg.type === 'FunctionExpression' || arg.type === 'ArrowFunctionExpression') {
+      if (arg && (arg.type === 'FunctionExpression' || arg.type === 'ArrowFunctionExpression')) {
         if (arg.params && arg.params[0] && arg.params[0].name === 'err') {
           if (!isInsideYieldOrAwait()) {
             context.report(arg, errorMessage)
