@@ -61,6 +61,7 @@ Then configure the rules you want to use under the rules section.
     "promise/no-promise-in-callback": "warn",
     "promise/no-callback-in-promise": "warn",
     "promise/avoid-new": "warn",
+    "promise/no-new-statics": "warn",
     "promise/no-return-in-finally": "warn"
   }
 }
@@ -87,6 +88,7 @@ or start with the recommended rule set
 | [`no-promise-in-callback`][no-promise-in-callback]       | Avoid using promises inside of callbacks                                         | :warning:   |          |
 | [`no-callback-in-promise`][no-callback-in-promise]       | Avoid calling `cb()` inside of a `then()` (use [nodeify][] instead)              | :warning:   |          |
 | [`avoid-new` ][avoid-new]                                | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     | :warning:   |          |
+| [`no-new-statics`][no-new-statics]                       | Avoid calling `new` on a Promise static method (e.g. `new Promise.resolve()`)    | :bangbang:  |          |
 | [`no-return-in-finally`][no-return-in-finally]           | Disallow return statements in `finally()`                                        | :warning:   |          |
 | [`prefer-await-to-then`][prefer-await-to-then]           | Prefer `await` to `then()` for reading Promise values                            | :seven:     |          |
 | [`prefer-await-to-callbacks`][prefer-await-to-callbacks] | Prefer async/await to the callback pattern                                       | :seven:     |          |
@@ -119,6 +121,7 @@ or start with the recommended rule set
 [no-promise-in-callback]: docs/rules/no-promise-in-callback.md
 [no-callback-in-promise]: docs/rules/no-callback-in-promise.md
 [avoid-new]: docs/rules/avoid-new.md
+[no-new-statics]: docs/rules/no-new-statics.md
 [no-return-in-finally]: docs/rules/no-return-in-finally.md
 [prefer-await-to-then]: docs/rules/prefer-await-to-then.md
 [prefer-await-to-callbacks]: docs/rules/prefer-await-to-callbacks.md
