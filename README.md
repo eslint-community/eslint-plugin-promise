@@ -25,6 +25,7 @@ Enforce best practices for JavaScript promises.
   - [`no-return-in-finally`](#no-return-in-finally)
   - [`prefer-await-to-then`](#prefer-await-to-then)
   - [`prefer-await-to-callbacks`](#prefer-await-to-callbacks)
+- [Maintainers](#maintainers)
 - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -293,6 +294,11 @@ Prefer `await` to `then()` for reading Promise values
 
 Prefer async/await to the callback pattern
 
+## Maintainers
+
+* Jamund Ferguson - [@xjamundx][]
+* Macklin Underdown - [@macklinu][]
+
 ## License
 
 - (c) MMXV jden <jason@denizac.org> - ISC license.
@@ -300,3 +306,5 @@ Prefer async/await to the callback pattern
 
 [nodeify]: https://www.npmjs.com/package/nodeify
 [pify]: https://www.npmjs.com/package/pify
+[@macklinu]: https://github.com/macklinu
+[@xjamundx]: https://github.com/xjamundx
