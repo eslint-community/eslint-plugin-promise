@@ -3,6 +3,8 @@
  * Discourage using then() and instead use async/await.
  */
 
+'use strict'
+
 module.exports = function (context) {
   return {
     MemberExpression: function (node) {

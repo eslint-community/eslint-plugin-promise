@@ -3,6 +3,8 @@
  * Avoid calling back inside of a promise
  */
 
+'use strict'
+
 var hasPromiseCallback = require('./lib/has-promise-callback')
 var isInsidePromise = require('./lib/is-inside-promise')
 var isCallback = require('./lib/is-callback')

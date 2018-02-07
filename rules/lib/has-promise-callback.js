@@ -4,6 +4,8 @@
  * with callback functions (like then() or catch())
  */
 
+'use strict'
+
 function hasPromiseCallback (node) {
   if (node.type !== 'CallExpression') return
   if (node.callee.type !== 'MemberExpression') return

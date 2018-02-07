@@ -1,3 +1,5 @@
+'use strict'
+
 function isFunctionWithBlockStatement (node) {
   if (node.type === 'FunctionExpression') {
     return true

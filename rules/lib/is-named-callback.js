@@ -1,3 +1,5 @@
+'use strict'
+
 var callbacks = ['done', 'cb', 'callback', 'next']
 
 module.exports = function isNamedCallback (potentialCallbackName, exceptions) {

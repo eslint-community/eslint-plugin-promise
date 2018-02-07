@@ -1,3 +1,5 @@
+'use strict'
+
 function isInsidePromise (node) {
   var isFunctionExpression = node.type === 'FunctionExpression' ||
       node.type === 'ArrowFunctionExpression'

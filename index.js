@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = {
   rules: {
     'param-names': require('./rules/param-names'),

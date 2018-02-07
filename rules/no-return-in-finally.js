@@ -1,3 +1,5 @@
+'use strict'
+
 var isPromise = require('./lib/is-promise')
 
 module.exports = {

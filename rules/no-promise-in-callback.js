@@ -3,6 +3,8 @@
  * Discourage using promises inside of callbacks.
  */
 
+'use strict'
+
 var isPromise = require('./lib/is-promise')
 var isInsideCallback = require('./lib/is-inside-callback')
 

@@ -2,6 +2,8 @@
  * Library: isPromise
  * Makes sure that an Expression node is part of a promise.
  */
+'use strict'
+
 var STATIC_METHODS = [
   'all',
   'race',
