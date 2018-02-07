@@ -1,0 +1,5 @@
+{
+  "rules": {
+    "eslint-plugin/require-meta-docs-url": "off"
+  }
+}

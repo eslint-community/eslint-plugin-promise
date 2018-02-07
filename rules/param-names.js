@@ -1,6 +1,11 @@
 'use strict'
 
 module.exports = {
+  meta: {
+    docs: {
+      url: 'https://github.com/xjamundx/eslint-plugin-promise#param-names'
+    }
+  },
   create: function (context) {
     return {
       NewExpression: function (node) {

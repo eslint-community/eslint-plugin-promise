@@ -3,6 +3,11 @@
 var isPromise = require('./lib/is-promise')
 
 module.exports = {
+  meta: {
+    docs: {
+      url: 'https://github.com/xjamundx/eslint-plugin-promise#no-return-in-finally'
+    }
+  },
   create: function (context) {
     return {
       CallExpression: function (node) {

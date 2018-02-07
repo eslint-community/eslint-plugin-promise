@@ -3,3 +3,6 @@ node_js:
   - 4
   - 6
   - 8
+script:
+  - npm run test
+  - npm run lint
