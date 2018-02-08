@@ -18,6 +18,11 @@ function isInPromise (context) {
 }
 
 module.exports = {
+  meta: {
+    docs: {
+      url: 'https://github.com/xjamundx/eslint-plugin-promise#no-return-wrap'
+    }
+  },
   create: function (context) {
     var options = context.options[0] || {}
     var allowReject = options.allowReject

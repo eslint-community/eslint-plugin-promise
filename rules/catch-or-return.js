@@ -9,6 +9,11 @@
 var isPromise = require('./lib/is-promise')
 
 module.exports = {
+  meta: {
+    docs: {
+      url: 'https://github.com/xjamundx/eslint-plugin-promise#catch-or-return'
+    }
+  },
   create: function (context) {
     var options = context.options[0] || {}
     var allowThen = options.allowThen

@@ -18,6 +18,11 @@ function isDeclared (scope, ref) {
 }
 
 module.exports = {
+  meta: {
+    docs: {
+      url: 'https://github.com/xjamundx/eslint-plugin-promise#no-native'
+    }
+  },
   create: function (context) {
     var MESSAGE = '"{{name}}" is not defined.'
 

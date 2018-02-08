@@ -8,12 +8,19 @@
 var hasPromiseCallback = require('./lib/has-promise-callback')
 var isInsidePromise = require('./lib/is-inside-promise')
 
-module.exports = function (context) {
-  return {
-    CallExpression: function (node) {
-      if (!hasPromiseCallback(node)) return
-      if (context.getAncestors().some(isInsidePromise)) {
-        context.report(node, 'Avoid nesting promises.')
+module.exports = {
+  meta: {
+    docs: {
+      url: 'https://github.com/xjamundx/eslint-plugin-promise#no-nesting'
+    }
+  },
+  create: function (context) {
+    return {
+      CallExpression: function (node) {
+        if (!hasPromiseCallback(node)) return
+        if (context.getAncestors().some(isInsidePromise)) {
+          context.report(node, 'Avoid nesting promises.')
+        }
       }
     }
   }

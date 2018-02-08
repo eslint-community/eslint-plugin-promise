@@ -55,6 +55,11 @@ function peek (arr) {
 }
 
 module.exports = {
+  meta: {
+    docs: {
+      url: 'https://github.com/xjamundx/eslint-plugin-promise#always-return'
+    }
+  },
   create: function (context) {
     // funcInfoStack is a stack representing the stack of currently executing
     //   functions

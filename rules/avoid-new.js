@@ -5,11 +5,18 @@
 
 'use strict'
 
-module.exports = function (context) {
-  return {
-    NewExpression: function (node) {
-      if (node.callee.name === 'Promise') {
-        context.report(node, 'Avoid creating new promises.')
+module.exports = {
+  meta: {
+    docs: {
+      url: 'https://github.com/xjamundx/eslint-plugin-promise#avoid-new'
+    }
+  },
+  create: function (context) {
+    return {
+      NewExpression: function (node) {
+        if (node.callee.name === 'Promise') {
+          context.report(node, 'Avoid creating new promises.')
+        }
       }
     }
   }

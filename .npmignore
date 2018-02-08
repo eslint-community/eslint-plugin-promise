@@ -3,3 +3,4 @@ node_modules
 test
 .npmignore
 .travis.yml
+.eslintrc.json

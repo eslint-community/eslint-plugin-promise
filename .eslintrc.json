@@ -1,0 +1,19 @@
+{
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "plugins": [
+    "eslint-plugin"
+  ],
+  "rules": {
+    "eslint-plugin/require-meta-docs-url": [
+      "error",
+      {
+        "pattern": "https://github.com/xjamundx/eslint-plugin-promise#{{name}}"
+      }
+    ]
+  }
+}
