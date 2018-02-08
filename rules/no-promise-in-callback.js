@@ -27,7 +27,7 @@ module.exports = {
         // would that imply an implicit return?
 
         if (context.getAncestors().some(isInsideCallback)) {
-          context.report(node.callee, 'Avoid using promises inside of callbacks.')
+          context.report({ node: node.callee, message: 'Avoid using promises inside of callbacks.' })
         }
       }
     }

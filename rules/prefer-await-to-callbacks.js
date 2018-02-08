@@ -18,7 +18,7 @@ module.exports = {
       var len = node.params.length - 1
       var lastParam = node.params[len]
       if (lastParam && (lastParam.name === 'callback' || lastParam.name === 'cb')) {
-        context.report(lastParam, errorMessage)
+        context.report({ node: lastParam, message: errorMessage })
       }
     }
     function isInsideYieldOrAwait () {
@@ -30,7 +30,7 @@ module.exports = {
       CallExpression: function (node) {
         // callbacks aren't allowed
         if (node.callee.name === 'cb' || node.callee.name === 'callback') {
-          context.report(node, errorMessage)
+          context.report({ node, message: errorMessage })
           return
         }
 
@@ -41,7 +41,7 @@ module.exports = {
         if (arg && arg.type === 'FunctionExpression' || arg.type === 'ArrowFunctionExpression') {
           if (arg.params && arg.params[0] && arg.params[0].name === 'err') {
             if (!isInsideYieldOrAwait()) {
-              context.report(arg, errorMessage)
+              context.report({ node: arg, message: errorMessage })
             }
           }
         }

@@ -37,7 +37,6 @@ ruleTester.run('catch-or-return', rule, {
     { code: 'frank().then(a).then(b).then(c, d)', options: [{ 'allowThen': true }] },
     { code: 'frank().then(a).then(b).then().then().then(null, doIt)', options: [{ 'allowThen': true }] },
     { code: 'frank().then(a).then(b).then(null, function() { /* why bother */ })', options: [{ 'allowThen': true }] },
-    { code: 'frank.then(go).then(to).then(null, jail)', options: [{ 'allowThen': true }] },
 
     // allowThen - .then(fn, fn)
     { code: 'frank().then(go).then(zam, doIt)', options: [{ 'allowThen': true }] },
@@ -59,27 +58,23 @@ ruleTester.run('catch-or-return', rule, {
     // catch failures
     {
       code: 'function callPromise(promise, cb) { promise.then(cb) }',
-      errors: [ { message: message } ]
+      errors: [{ message: message }]
     },
     {
       code: 'fetch("http://www.yahoo.com").then(console.log.bind(console))',
-      errors: [ { message: message } ]
+      errors: [{ message: message }]
     },
     {
       code: 'a.then(function() { return "x"; }).then(function(y) { throw y; })',
-      errors: [ { message: message } ]
-    },
-    {
-      code: 'a.then(function() { return "x"; }).then(function(y) { throw y; })',
-      errors: [ { message: message } ]
+      errors: [{ message: message }]
     },
     {
       code: 'Promise.resolve(frank)',
-      errors: [ { message: message } ]
+      errors: [{ message: message }]
     },
     {
       code: 'frank.then(to).finally(fn)',
-      errors: [ { message: message } ]
+      errors: [{ message: message }]
     },
 
     // return failures

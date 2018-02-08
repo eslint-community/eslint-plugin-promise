@@ -23,7 +23,7 @@ module.exports = {
 
         // if you're a then expression then you're probably a promise
         if (node.property && node.property.name === 'then') {
-          context.report(node.property, 'Prefer await to then().')
+          context.report({ node: node.property, message: 'Prefer await to then().' })
         }
       }
     }

@@ -15,7 +15,7 @@ module.exports = {
     return {
       NewExpression: function (node) {
         if (node.callee.name === 'Promise') {
-          context.report(node, 'Avoid creating new promises.')
+          context.report({ node, message: 'Avoid creating new promises.' })
         }
       }
     }

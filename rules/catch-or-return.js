@@ -56,7 +56,7 @@ module.exports = {
           return
         }
 
-        context.report(node, 'Expected ' + terminationMethod + '() or return')
+        context.report({ node, message: 'Expected ' + terminationMethod + '() or return' })
       }
     }
   }
