@@ -8,6 +8,9 @@
   "plugins": [
     "eslint-plugin"
   ],
+  "extends": [
+    "plugin:eslint-plugin/recommended"
+  ],
   "rules": {
     "eslint-plugin/require-meta-docs-url": [
       "error",

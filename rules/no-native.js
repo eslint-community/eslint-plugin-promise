@@ -43,7 +43,7 @@ module.exports = {
           }
 
           if (!isDeclared(scope, ref)) {
-            context.report(ref.identifier, MESSAGE, { name: ref.identifier.name })
+            context.report({ node: ref.identifier, message: MESSAGE, data: { name: ref.identifier.name } })
           }
         })
       }

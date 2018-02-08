@@ -19,7 +19,7 @@ module.exports = {
       CallExpression: function (node) {
         if (!hasPromiseCallback(node)) return
         if (context.getAncestors().some(isInsidePromise)) {
-          context.report(node, 'Avoid nesting promises.')
+          context.report({ node, message: 'Avoid nesting promises.' })
         }
       }
     }
