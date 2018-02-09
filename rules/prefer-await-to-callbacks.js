@@ -10,24 +10,30 @@ var errorMessage = 'Avoid callbacks. Prefer Async/Await.'
 module.exports = {
   meta: {
     docs: {
-      url: 'https://github.com/xjamundx/eslint-plugin-promise#prefer-await-to-callbacks'
+      url:
+        'https://github.com/xjamundx/eslint-plugin-promise#prefer-await-to-callbacks'
     }
   },
-  create: function (context) {
-    function checkLastParamsForCallback (node) {
+  create: function(context) {
+    function checkLastParamsForCallback(node) {
       var len = node.params.length - 1
       var lastParam = node.params[len]
-      if (lastParam && (lastParam.name === 'callback' || lastParam.name === 'cb')) {
+      if (
+        lastParam &&
+        (lastParam.name === 'callback' || lastParam.name === 'cb')
+      ) {
         context.report({ node: lastParam, message: errorMessage })
       }
     }
-    function isInsideYieldOrAwait () {
-      return context.getAncestors().some(function (parent) {
-        return parent.type === 'AwaitExpression' || parent.type === 'YieldExpression'
+    function isInsideYieldOrAwait() {
+      return context.getAncestors().some(function(parent) {
+        return (
+          parent.type === 'AwaitExpression' || parent.type === 'YieldExpression'
+        )
       })
     }
     return {
-      CallExpression: function (node) {
+      CallExpression: function(node) {
         // callbacks aren't allowed
         if (node.callee.name === 'cb' || node.callee.name === 'callback') {
           context.report({ node, message: errorMessage })
@@ -38,7 +44,10 @@ module.exports = {
         var args = node.arguments
         var num = args.length - 1
         var arg = num > -1 && node.arguments && node.arguments[num]
-        if (arg && arg.type === 'FunctionExpression' || arg.type === 'ArrowFunctionExpression') {
+        if (
+          (arg && arg.type === 'FunctionExpression') ||
+          arg.type === 'ArrowFunctionExpression'
+        ) {
           if (arg.params && arg.params[0] && arg.params[0].name === 'err') {
             if (!isInsideYieldOrAwait()) {
               context.report({ node: arg, message: errorMessage })

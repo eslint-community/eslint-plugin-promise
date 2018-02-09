@@ -18,8 +18,20 @@ ruleTester.run('avoid-new', rule, {
   ],
 
   invalid: [
-    {code: 'var x = new Promise(function (x, y) {})', errors: [{message: errorMessage}], parserOptions: {ecmaVersion: 6}},
-    {code: 'new Promise()', errors: [{message: errorMessage}], parserOptions: {ecmaVersion: 6}},
-    {code: 'Thing(new Promise(() => {}))', errors: [{message: errorMessage}], parserOptions: {ecmaVersion: 6}}
+    {
+      code: 'var x = new Promise(function (x, y) {})',
+      errors: [{ message: errorMessage }],
+      parserOptions: { ecmaVersion: 6 }
+    },
+    {
+      code: 'new Promise()',
+      errors: [{ message: errorMessage }],
+      parserOptions: { ecmaVersion: 6 }
+    },
+    {
+      code: 'Thing(new Promise(() => {}))',
+      errors: [{ message: errorMessage }],
+      parserOptions: { ecmaVersion: 6 }
+    }
   ]
 })

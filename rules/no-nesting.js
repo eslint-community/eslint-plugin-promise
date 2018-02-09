@@ -14,9 +14,9 @@ module.exports = {
       url: 'https://github.com/xjamundx/eslint-plugin-promise#no-nesting'
     }
   },
-  create: function (context) {
+  create: function(context) {
     return {
-      CallExpression: function (node) {
+      CallExpression: function(node) {
         if (!hasPromiseCallback(node)) return
         if (context.getAncestors().some(isInsidePromise)) {
           context.report({ node, message: 'Avoid nesting promises.' })

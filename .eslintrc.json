@@ -5,11 +5,11 @@
   "parserOptions": {
     "ecmaVersion": 6
   },
-  "plugins": [
-    "eslint-plugin"
-  ],
+  "plugins": ["eslint-plugin", "prettier"],
   "extends": [
-    "plugin:eslint-plugin/recommended"
+    "standard",
+    "plugin:eslint-plugin/recommended",
+    "plugin:prettier/recommended"
   ],
   "rules": {
     "eslint-plugin/require-meta-docs-url": [
@@ -17,6 +17,7 @@
       {
         "pattern": "https://github.com/xjamundx/eslint-plugin-promise#{{name}}"
       }
-    ]
+    ],
+    "prettier/prettier": "error"
   }
 }

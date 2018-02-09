@@ -6,7 +6,7 @@
 
 'use strict'
 
-function hasPromiseCallback (node) {
+function hasPromiseCallback(node) {
   if (node.type !== 'CallExpression') return
   if (node.callee.type !== 'MemberExpression') return
   var propertyName = node.callee.property.name

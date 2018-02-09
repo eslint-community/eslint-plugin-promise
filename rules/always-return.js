@@ -1,6 +1,6 @@
 'use strict'
 
-function isFunctionWithBlockStatement (node) {
+function isFunctionWithBlockStatement(node) {
   if (node.type === 'FunctionExpression') {
     return true
   }
@@ -10,31 +10,29 @@ function isFunctionWithBlockStatement (node) {
   return false
 }
 
-function isThenCallExpression (node) {
+function isThenCallExpression(node) {
   return (
-  node.type === 'CallExpression' &&
-  node.callee.type === 'MemberExpression' &&
-  node.callee.property.name === 'then'
+    node.type === 'CallExpression' &&
+    node.callee.type === 'MemberExpression' &&
+    node.callee.property.name === 'then'
   )
 }
 
-function isFirstArgument (node) {
+function isFirstArgument(node) {
   return (
-  node.parent &&
-  node.parent.arguments &&
-  node.parent.arguments[0] === node
+    node.parent && node.parent.arguments && node.parent.arguments[0] === node
   )
 }
 
-function isInlineThenFunctionExpression (node) {
+function isInlineThenFunctionExpression(node) {
   return (
-  isFunctionWithBlockStatement(node) &&
-  isThenCallExpression(node.parent) &&
-  isFirstArgument(node)
+    isFunctionWithBlockStatement(node) &&
+    isThenCallExpression(node.parent) &&
+    isFirstArgument(node)
   )
 }
 
-function hasParentReturnStatement (node) {
+function hasParentReturnStatement(node) {
   if (node && node.parent && node.parent.type) {
     // if the parent is a then, and we haven't returned anything, fail
     if (isThenCallExpression(node.parent)) {
@@ -50,7 +48,7 @@ function hasParentReturnStatement (node) {
   return false
 }
 
-function peek (arr) {
+function peek(arr) {
   return arr[arr.length - 1]
 }
 
@@ -60,7 +58,7 @@ module.exports = {
       url: 'https://github.com/xjamundx/eslint-plugin-promise#always-return'
     }
   },
-  create: function (context) {
+  create: function(context) {
     // funcInfoStack is a stack representing the stack of currently executing
     //   functions
     // funcInfoStack[i].branchIDStack is a stack representing the currently
@@ -92,7 +90,7 @@ module.exports = {
     //             loc: <loc> } } } ]
     var funcInfoStack = []
 
-    function markCurrentBranchAsGood () {
+    function markCurrentBranchAsGood() {
       var funcInfo = peek(funcInfoStack)
       var currentBranchID = peek(funcInfo.branchIDStack)
       if (funcInfo.branchInfoMap[currentBranchID]) {
@@ -105,32 +103,32 @@ module.exports = {
       ReturnStatement: markCurrentBranchAsGood,
       ThrowStatement: markCurrentBranchAsGood,
 
-      onCodePathSegmentStart: function (segment, node) {
+      onCodePathSegmentStart: function(segment, node) {
         var funcInfo = peek(funcInfoStack)
         funcInfo.branchIDStack.push(segment.id)
-        funcInfo.branchInfoMap[segment.id] = {good: false, node: node}
+        funcInfo.branchInfoMap[segment.id] = { good: false, node: node }
       },
 
-      onCodePathSegmentEnd: function (segment, node) {
+      onCodePathSegmentEnd: function(segment, node) {
         var funcInfo = peek(funcInfoStack)
         funcInfo.branchIDStack.pop()
       },
 
-      onCodePathStart: function (path, node) {
+      onCodePathStart: function(path, node) {
         funcInfoStack.push({
           branchIDStack: [],
           branchInfoMap: {}
         })
       },
 
-      onCodePathEnd: function (path, node) {
+      onCodePathEnd: function(path, node) {
         var funcInfo = funcInfoStack.pop()
 
         if (!isInlineThenFunctionExpression(node)) {
           return
         }
 
-        path.finalSegments.forEach((segment) => {
+        path.finalSegments.forEach(segment => {
           var id = segment.id
           var branch = funcInfo.branchInfoMap[id]
           if (!branch.good) {

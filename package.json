@@ -12,18 +12,40 @@
   "author": "jden <jason@denizac.org>",
   "repository": "git@github.com:xjamundx/eslint-plugin-promise.git",
   "scripts": {
-    "pretest": "standard",
+    "precommit": "lint-staged",
     "test": "mocha test",
-    "lint": "eslint index.js rules test"
+    "lint": "eslint index.js rules test --ignore-pattern '**/*.json'"
   },
   "devDependencies": {
+    "doctoc": "^1.3.0",
     "eslint": "^4.17.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-plugin-eslint-plugin": "^1.4.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-promise": "./",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.1.0",
     "mocha": "^5.0.0",
-    "standard": "^7.1.2"
+    "prettier": "^1.10.2"
   },
   "engines": {
     "node": ">=4"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "lint-staged": {
+    "concurrent": false,
+    "linters": {
+      "README.md": ["doctoc --maxlevel 3 --notitle", "git add"],
+      "*.js": ["prettier --write", "eslint --fix", "git add"],
+      "*.json": ["prettier --write", "git add"]
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  }
 }

@@ -10,8 +10,8 @@ var isPromise = require('./lib/is-promise')
 var rejectMessage = 'Expected throw instead of Promise.reject'
 var resolveMessage = 'Avoid wrapping return values in Promise.resolve'
 
-function isInPromise (context) {
-  var expression = context.getAncestors().filter(function (node) {
+function isInPromise(context) {
+  var expression = context.getAncestors().filter(function(node) {
     return node.type === 'ExpressionStatement'
   })[0]
   return expression && expression.expression && isPromise(expression.expression)
@@ -23,12 +23,12 @@ module.exports = {
       url: 'https://github.com/xjamundx/eslint-plugin-promise#no-return-wrap'
     }
   },
-  create: function (context) {
+  create: function(context) {
     var options = context.options[0] || {}
     var allowReject = options.allowReject
 
     return {
-      ReturnStatement: function (node) {
+      ReturnStatement: function(node) {
         if (isInPromise(context)) {
           if (node.argument) {
             if (node.argument.type === 'CallExpression') {
@@ -36,7 +36,10 @@ module.exports = {
                 if (node.argument.callee.object.name === 'Promise') {
                   if (node.argument.callee.property.name === 'resolve') {
                     context.report({ node, message: resolveMessage })
-                  } else if (!allowReject && node.argument.callee.property.name === 'reject') {
+                  } else if (
+                    !allowReject &&
+                    node.argument.callee.property.name === 'reject'
+                  ) {
                     context.report({ node, message: rejectMessage })
                   }
                 }

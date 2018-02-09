@@ -2,8 +2,9 @@
 
 var isInsidePromise = require('./is-inside-promise')
 
-function isInsideCallback (node) {
-  var isCallExpression = node.type === 'FunctionExpression' ||
+function isInsideCallback(node) {
+  var isCallExpression =
+    node.type === 'FunctionExpression' ||
     node.type === 'ArrowFunctionExpression' ||
     node.type === 'FunctionDeclaration' // this may be controversial
 

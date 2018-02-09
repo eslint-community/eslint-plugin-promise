@@ -6,7 +6,6 @@ var message = 'Expected catch() or return'
 var ruleTester = new RuleTester()
 ruleTester.run('catch-or-return', rule, {
   valid: [
-
     // catch
     'frank().then(go).catch(doIt)',
     'frank().then(go).then().then().then().catch(doIt)',
@@ -17,7 +16,11 @@ ruleTester.run('catch-or-return', rule, {
     'frank.then(to).finally(fn).catch(jail)',
 
     // arrow function use case
-    { code: 'postJSON("/smajobber/api/reportJob.json")\n\t.then(()=>this.setState())\n\t.catch(()=>this.setState())', parserOptions: { ecmaVersion: 6 } },
+    {
+      code:
+        'postJSON("/smajobber/api/reportJob.json")\n\t.then(()=>this.setState())\n\t.catch(()=>this.setState())',
+      parserOptions: { ecmaVersion: 6 }
+    },
 
     // return
     'function a() { return frank().then(go) }',
@@ -26,35 +29,85 @@ ruleTester.run('catch-or-return', rule, {
     'function a() { return frank.then(go).then(to) }',
 
     // allowThen - .then(null, fn)
-    { code: 'frank().then(go).then(null, doIt)', options: [{ 'allowThen': true }] },
-    { code: 'frank().then(go).then().then().then().then(null, doIt)', options: [{ 'allowThen': true }] },
-    { code: 'frank().then(go).then().then(null, function() { /* why bother */ })', options: [{ 'allowThen': true }] },
-    { code: 'frank.then(go).then(to).then(null, jail)', options: [{ 'allowThen': true }] },
+    {
+      code: 'frank().then(go).then(null, doIt)',
+      options: [{ allowThen: true }]
+    },
+    {
+      code: 'frank().then(go).then().then().then().then(null, doIt)',
+      options: [{ allowThen: true }]
+    },
+    {
+      code:
+        'frank().then(go).then().then(null, function() { /* why bother */ })',
+      options: [{ allowThen: true }]
+    },
+    {
+      code: 'frank.then(go).then(to).then(null, jail)',
+      options: [{ allowThen: true }]
+    },
 
     // allowThen - .then(null, fn)
-    { code: 'frank().then(a, b)', options: [{ 'allowThen': true }] },
-    { code: 'frank().then(a).then(b).then(null, c)', options: [{ 'allowThen': true }] },
-    { code: 'frank().then(a).then(b).then(c, d)', options: [{ 'allowThen': true }] },
-    { code: 'frank().then(a).then(b).then().then().then(null, doIt)', options: [{ 'allowThen': true }] },
-    { code: 'frank().then(a).then(b).then(null, function() { /* why bother */ })', options: [{ 'allowThen': true }] },
+    { code: 'frank().then(a, b)', options: [{ allowThen: true }] },
+    {
+      code: 'frank().then(a).then(b).then(null, c)',
+      options: [{ allowThen: true }]
+    },
+    {
+      code: 'frank().then(a).then(b).then(c, d)',
+      options: [{ allowThen: true }]
+    },
+    {
+      code: 'frank().then(a).then(b).then().then().then(null, doIt)',
+      options: [{ allowThen: true }]
+    },
+    {
+      code:
+        'frank().then(a).then(b).then(null, function() { /* why bother */ })',
+      options: [{ allowThen: true }]
+    },
 
     // allowThen - .then(fn, fn)
-    { code: 'frank().then(go).then(zam, doIt)', options: [{ 'allowThen': true }] },
-    { code: 'frank().then(go).then().then().then().then(wham, doIt)', options: [{ 'allowThen': true }] },
-    { code: 'frank().then(go).then().then(function() {}, function() { /* why bother */ })', options: [{ 'allowThen': true }] },
-    { code: 'frank.then(go).then(to).then(pewPew, jail)', options: [{ 'allowThen': true }] },
+    {
+      code: 'frank().then(go).then(zam, doIt)',
+      options: [{ allowThen: true }]
+    },
+    {
+      code: 'frank().then(go).then().then().then().then(wham, doIt)',
+      options: [{ allowThen: true }]
+    },
+    {
+      code:
+        'frank().then(go).then().then(function() {}, function() { /* why bother */ })',
+      options: [{ allowThen: true }]
+    },
+    {
+      code: 'frank.then(go).then(to).then(pewPew, jail)',
+      options: [{ allowThen: true }]
+    },
 
     // terminationMethod=done - .done(null, fn)
-    { code: 'frank().then(go).done()', options: [{ 'terminationMethod': 'done' }] },
+    {
+      code: 'frank().then(go).done()',
+      options: [{ terminationMethod: 'done' }]
+    },
 
     // terminationMethod=[catch, done] - .done(null, fn)
-    { code: 'frank().then(go).catch()', options: [{ 'terminationMethod': ['catch', 'done'] }] },
-    { code: 'frank().then(go).done()', options: [{ 'terminationMethod': ['catch', 'done'] }] },
-    { code: 'frank().then(go).finally()', options: [{ 'terminationMethod': ['catch', 'finally'] }] }
+    {
+      code: 'frank().then(go).catch()',
+      options: [{ terminationMethod: ['catch', 'done'] }]
+    },
+    {
+      code: 'frank().then(go).done()',
+      options: [{ terminationMethod: ['catch', 'done'] }]
+    },
+    {
+      code: 'frank().then(go).finally()',
+      options: [{ terminationMethod: ['catch', 'finally'] }]
+    }
   ],
 
   invalid: [
-
     // catch failures
     {
       code: 'function callPromise(promise, cb) { promise.then(cb) }',
@@ -78,13 +131,33 @@ ruleTester.run('catch-or-return', rule, {
     },
 
     // return failures
-    { code: 'function a() { frank().then(go) }', errors: [{ message: message }] },
-    { code: 'function a() { frank().then(go).then().then().then() }', errors: [{ message: message }] },
-    { code: 'function a() { frank().then(go).then()}', errors: [{ message: message }] },
-    { code: 'function a() { frank.then(go).then(to) }', errors: [{ message: message }] },
+    {
+      code: 'function a() { frank().then(go) }',
+      errors: [{ message: message }]
+    },
+    {
+      code: 'function a() { frank().then(go).then().then().then() }',
+      errors: [{ message: message }]
+    },
+    {
+      code: 'function a() { frank().then(go).then()}',
+      errors: [{ message: message }]
+    },
+    {
+      code: 'function a() { frank.then(go).then(to) }',
+      errors: [{ message: message }]
+    },
 
     // terminationMethod=done - .done(null, fn)
-    { code: 'frank().then(go)', options: [{ 'terminationMethod': 'done' }], errors: [{ message: 'Expected done() or return' }] },
-    { code: 'frank().catch(go)', options: [{ 'terminationMethod': 'done' }], errors: [{ message: 'Expected done() or return' }] }
+    {
+      code: 'frank().then(go)',
+      options: [{ terminationMethod: 'done' }],
+      errors: [{ message: 'Expected done() or return' }]
+    },
+    {
+      code: 'frank().catch(go)',
+      options: [{ terminationMethod: 'done' }],
+      errors: [{ message: 'Expected done() or return' }]
+    }
   ]
 })
