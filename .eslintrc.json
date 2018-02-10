@@ -13,6 +13,8 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
+    "no-var": "error",
+    "prefer-const": "error",
     "strict": ["error", "global"],
     "eslint-plugin/require-meta-docs-url": [
       "error",

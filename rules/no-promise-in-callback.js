@@ -5,8 +5,8 @@
 
 'use strict'
 
-var isPromise = require('./lib/is-promise')
-var isInsideCallback = require('./lib/is-inside-callback')
+const isPromise = require('./lib/is-promise')
+const isInsideCallback = require('./lib/is-inside-callback')
 
 module.exports = {
   meta: {

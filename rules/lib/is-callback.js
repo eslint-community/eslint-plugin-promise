@@ -1,12 +1,12 @@
 'use strict'
 
-var isNamedCallback = require('./is-named-callback')
+const isNamedCallback = require('./is-named-callback')
 
 function isCallingBack(node, exceptions) {
-  var isCallExpression = node.type === 'CallExpression'
-  var callee = node.callee || {}
-  var nameIsCallback = isNamedCallback(callee.name, exceptions)
-  var isCB = isCallExpression && nameIsCallback
+  const isCallExpression = node.type === 'CallExpression'
+  const callee = node.callee || {}
+  const nameIsCallback = isNamedCallback(callee.name, exceptions)
+  const isCB = isCallExpression && nameIsCallback
   return isCB
 }
 

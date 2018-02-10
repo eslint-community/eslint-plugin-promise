@@ -6,12 +6,12 @@
 
 'use strict'
 
-var isPromise = require('./lib/is-promise')
-var rejectMessage = 'Expected throw instead of Promise.reject'
-var resolveMessage = 'Avoid wrapping return values in Promise.resolve'
+const isPromise = require('./lib/is-promise')
+const rejectMessage = 'Expected throw instead of Promise.reject'
+const resolveMessage = 'Avoid wrapping return values in Promise.resolve'
 
 function isInPromise(context) {
-  var expression = context.getAncestors().filter(function(node) {
+  const expression = context.getAncestors().filter(function(node) {
     return node.type === 'ExpressionStatement'
   })[0]
   return expression && expression.expression && isPromise(expression.expression)
@@ -24,8 +24,8 @@ module.exports = {
     }
   },
   create: function(context) {
-    var options = context.options[0] || {}
-    var allowReject = options.allowReject
+    const options = context.options[0] || {}
+    const allowReject = options.allowReject
 
     return {
       ReturnStatement: function(node) {

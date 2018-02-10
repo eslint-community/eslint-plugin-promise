@@ -5,9 +5,9 @@
 
 'use strict'
 
-var hasPromiseCallback = require('./lib/has-promise-callback')
-var isInsidePromise = require('./lib/is-inside-promise')
-var isCallback = require('./lib/is-callback')
+const hasPromiseCallback = require('./lib/has-promise-callback')
+const isInsidePromise = require('./lib/is-inside-promise')
+const isCallback = require('./lib/is-callback')
 
 module.exports = {
   meta: {
@@ -19,13 +19,13 @@ module.exports = {
   create: function(context) {
     return {
       CallExpression: function(node) {
-        var options = context.options[0] || {}
-        var exceptions = options.exceptions || []
+        const options = context.options[0] || {}
+        const exceptions = options.exceptions || []
         if (!isCallback(node, exceptions)) {
           // in general we send you packing if you're not a callback
           // but we also need to watch out for whatever.then(cb)
           if (hasPromiseCallback(node)) {
-            var name =
+            const name =
               node.arguments && node.arguments[0] && node.arguments[0].name
             if (
               name === 'callback' ||

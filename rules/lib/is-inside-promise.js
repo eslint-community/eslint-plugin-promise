@@ -1,14 +1,14 @@
 'use strict'
 
 function isInsidePromise(node) {
-  var isFunctionExpression =
+  const isFunctionExpression =
     node.type === 'FunctionExpression' ||
     node.type === 'ArrowFunctionExpression'
-  var parent = node.parent || {}
-  var callee = parent.callee || {}
-  var name = (callee.property && callee.property.name) || ''
-  var parentIsPromise = name === 'then' || name === 'catch'
-  var isInCB = isFunctionExpression && parentIsPromise
+  const parent = node.parent || {}
+  const callee = parent.callee || {}
+  const name = (callee.property && callee.property.name) || ''
+  const parentIsPromise = name === 'then' || name === 'catch'
+  const isInCB = isFunctionExpression && parentIsPromise
   return isInCB
 }
 

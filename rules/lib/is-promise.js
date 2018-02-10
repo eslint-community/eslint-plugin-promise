@@ -4,7 +4,7 @@
  */
 'use strict'
 
-var STATIC_METHODS = ['all', 'race', 'reject', 'resolve']
+const STATIC_METHODS = ['all', 'race', 'reject', 'resolve']
 
 function isPromise(expression) {
   return (

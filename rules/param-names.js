@@ -10,7 +10,7 @@ module.exports = {
     return {
       NewExpression: function(node) {
         if (node.callee.name === 'Promise' && node.arguments.length === 1) {
-          var params = node.arguments[0].params
+          const params = node.arguments[0].params
 
           if (!params || !params.length) {
             return
