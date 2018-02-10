@@ -1,11 +1,14 @@
 'use strict'
 
-var rule = require('../rules/no-nesting')
-var RuleTester = require('eslint').RuleTester
-var ruleTester = new RuleTester()
+const rule = require('../rules/no-nesting')
+const RuleTester = require('eslint').RuleTester
+const ruleTester = new RuleTester({
+  parserOptions: {
+    ecmaVersion: 6
+  }
+})
 
-// messages
-var errorMessage = 'Avoid nesting promises.'
+const errorMessage = 'Avoid nesting promises.'
 
 ruleTester.run('no-nesting', rule, {
   valid: [
@@ -24,24 +27,12 @@ ruleTester.run('no-nesting', rule, {
     'doThing().catch(null, function() { throw 4 })',
 
     // arrow functions and other things
-    { code: 'doThing().then(() => 4)', parserOptions: { ecmaVersion: 6 } },
-    {
-      code: 'doThing().then(() => { throw 4 })',
-      parserOptions: { ecmaVersion: 6 }
-    },
-    {
-      code: 'doThing().then(()=>{}, () => 4)',
-      parserOptions: { ecmaVersion: 6 }
-    },
-    {
-      code: 'doThing().then(()=>{}, () => { throw 4 })',
-      parserOptions: { ecmaVersion: 6 }
-    },
-    { code: 'doThing().catch(() => 4)', parserOptions: { ecmaVersion: 6 } },
-    {
-      code: 'doThing().catch(() => { throw 4 })',
-      parserOptions: { ecmaVersion: 6 }
-    },
+    'doThing().then(() => 4)',
+    'doThing().then(() => { throw 4 })',
+    'doThing().then(()=>{}, () => 4)',
+    'doThing().then(()=>{}, () => { throw 4 })',
+    'doThing().catch(() => 4)',
+    'doThing().catch(() => { throw 4 })',
 
     // random functions and callback methods
     'var x = function() { return Promise.resolve(4) }',
@@ -50,64 +41,44 @@ ruleTester.run('no-nesting', rule, {
     'doThing(function(x) { return Promise.reject(x) })',
 
     // this should be allowed basically, we're mostly raging against using then()
-    {
-      code: 'doThing().then(function() { return Promise.all([a,b,c]) })',
-      parserOptions: { ecmaVersion: 6 }
-    },
-    {
-      code: 'doThing().then(function() { return Promise.resolve(4) })',
-      parserOptions: { ecmaVersion: 6 }
-    },
-    {
-      code: 'doThing().then(() => Promise.resolve(4))',
-      parserOptions: { ecmaVersion: 6 }
-    },
-    {
-      code: 'doThing().then(() => Promise.all([a]))',
-      parserOptions: { ecmaVersion: 6 }
-    }
+    'doThing().then(function() { return Promise.all([a,b,c]) })',
+    'doThing().then(function() { return Promise.resolve(4) })',
+    'doThing().then(() => Promise.resolve(4))',
+    'doThing().then(() => Promise.all([a]))'
   ],
 
   invalid: [
     {
       code: 'doThing().then(function() { a.then() })',
-      errors: [{ message: errorMessage }],
-      parserOptions: { ecmaVersion: 6 }
+      errors: [{ message: errorMessage }]
     },
     {
       code: 'doThing().then(function() { b.catch() })',
-      errors: [{ message: errorMessage }],
-      parserOptions: { ecmaVersion: 6 }
+      errors: [{ message: errorMessage }]
     },
     {
       code: 'doThing().then(function() { return a.then() })',
-      errors: [{ message: errorMessage }],
-      parserOptions: { ecmaVersion: 6 }
+      errors: [{ message: errorMessage }]
     },
     {
       code: 'doThing().then(function() { return b.catch() })',
-      errors: [{ message: errorMessage }],
-      parserOptions: { ecmaVersion: 6 }
+      errors: [{ message: errorMessage }]
     },
     {
       code: 'doThing().then(() => { a.then() })',
-      errors: [{ message: errorMessage }],
-      parserOptions: { ecmaVersion: 6 }
+      errors: [{ message: errorMessage }]
     },
     {
       code: 'doThing().then(() => { b.catch() })',
-      errors: [{ message: errorMessage }],
-      parserOptions: { ecmaVersion: 6 }
+      errors: [{ message: errorMessage }]
     },
     {
       code: 'doThing().then(() => a.then())',
-      errors: [{ message: errorMessage }],
-      parserOptions: { ecmaVersion: 6 }
+      errors: [{ message: errorMessage }]
     },
     {
       code: 'doThing().then(() => b.catch())',
-      errors: [{ message: errorMessage }],
-      parserOptions: { ecmaVersion: 6 }
+      errors: [{ message: errorMessage }]
     }
   ]
 })
