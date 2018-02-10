@@ -1,11 +1,14 @@
 'use strict'
 
-var rule = require('../rules/avoid-new')
-var RuleTester = require('eslint').RuleTester
-var ruleTester = new RuleTester()
+const rule = require('../rules/avoid-new')
+const RuleTester = require('eslint').RuleTester
+const ruleTester = new RuleTester({
+  parserOptions: {
+    ecmaVersion: 6
+  }
+})
 
-// messages
-var errorMessage = 'Avoid creating new promises.'
+const errorMessage = 'Avoid creating new promises.'
 
 ruleTester.run('avoid-new', rule, {
   valid: [
@@ -20,18 +23,15 @@ ruleTester.run('avoid-new', rule, {
   invalid: [
     {
       code: 'var x = new Promise(function (x, y) {})',
-      errors: [{ message: errorMessage }],
-      parserOptions: { ecmaVersion: 6 }
+      errors: [{ message: errorMessage }]
     },
     {
       code: 'new Promise()',
-      errors: [{ message: errorMessage }],
-      parserOptions: { ecmaVersion: 6 }
+      errors: [{ message: errorMessage }]
     },
     {
       code: 'Thing(new Promise(() => {}))',
-      errors: [{ message: errorMessage }],
-      parserOptions: { ecmaVersion: 6 }
+      errors: [{ message: errorMessage }]
     }
   ]
 })

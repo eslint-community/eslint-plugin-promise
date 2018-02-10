@@ -1,9 +1,12 @@
 'use strict'
 
-var rule = require('../rules/catch-or-return')
-var RuleTester = require('eslint').RuleTester
-var message = 'Expected catch() or return'
-var ruleTester = new RuleTester()
+const rule = require('../rules/catch-or-return')
+const RuleTester = require('eslint').RuleTester
+const ruleTester = new RuleTester()
+
+const catchMessage = 'Expected catch() or return'
+const doneMessage = 'Expected done() or return'
+
 ruleTester.run('catch-or-return', rule, {
   valid: [
     // catch
@@ -111,53 +114,53 @@ ruleTester.run('catch-or-return', rule, {
     // catch failures
     {
       code: 'function callPromise(promise, cb) { promise.then(cb) }',
-      errors: [{ message: message }]
+      errors: [{ message: catchMessage }]
     },
     {
       code: 'fetch("http://www.yahoo.com").then(console.log.bind(console))',
-      errors: [{ message: message }]
+      errors: [{ message: catchMessage }]
     },
     {
       code: 'a.then(function() { return "x"; }).then(function(y) { throw y; })',
-      errors: [{ message: message }]
+      errors: [{ message: catchMessage }]
     },
     {
       code: 'Promise.resolve(frank)',
-      errors: [{ message: message }]
+      errors: [{ message: catchMessage }]
     },
     {
       code: 'frank.then(to).finally(fn)',
-      errors: [{ message: message }]
+      errors: [{ message: catchMessage }]
     },
 
     // return failures
     {
       code: 'function a() { frank().then(go) }',
-      errors: [{ message: message }]
+      errors: [{ message: catchMessage }]
     },
     {
       code: 'function a() { frank().then(go).then().then().then() }',
-      errors: [{ message: message }]
+      errors: [{ message: catchMessage }]
     },
     {
       code: 'function a() { frank().then(go).then()}',
-      errors: [{ message: message }]
+      errors: [{ message: catchMessage }]
     },
     {
       code: 'function a() { frank.then(go).then(to) }',
-      errors: [{ message: message }]
+      errors: [{ message: catchMessage }]
     },
 
     // terminationMethod=done - .done(null, fn)
     {
       code: 'frank().then(go)',
       options: [{ terminationMethod: 'done' }],
-      errors: [{ message: 'Expected done() or return' }]
+      errors: [{ message: doneMessage }]
     },
     {
       code: 'frank().catch(go)',
       options: [{ terminationMethod: 'done' }],
-      errors: [{ message: 'Expected done() or return' }]
+      errors: [{ message: doneMessage }]
     }
   ]
 })

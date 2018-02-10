@@ -20,6 +20,7 @@
         "pattern": "https://github.com/xjamundx/eslint-plugin-promise#{{name}}"
       }
     ],
+    "eslint-plugin/test-case-shorthand-strings": "error",
     "prettier/prettier": "error"
   }
 }

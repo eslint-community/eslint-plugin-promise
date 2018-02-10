@@ -1,47 +1,39 @@
 'use strict'
 
-var rule = require('../rules/prefer-await-to-then')
-var RuleTester = require('eslint').RuleTester
-var message = 'Prefer await to then().'
-var parserOptions = { ecmaVersion: 8 }
-var ruleTester = new RuleTester()
+const rule = require('../rules/prefer-await-to-then')
+const RuleTester = require('eslint').RuleTester
+const ruleTester = new RuleTester({
+  parserOptions: {
+    ecmaVersion: 8
+  }
+})
+
+const message = 'Prefer await to then().'
+
 ruleTester.run('prefer-await-to-then', rule, {
   valid: [
-    {
-      code: 'async function hi() { await thing() }',
-      parserOptions: parserOptions
-    },
-    {
-      code: 'async function hi() { await thing().then() }',
-      parserOptions: parserOptions
-    },
-    {
-      code: 'async function hi() { await thing().catch() }',
-      parserOptions: parserOptions
-    }
+    'async function hi() { await thing() }',
+    'async function hi() { await thing().then() }',
+    'async function hi() { await thing().catch() }'
   ],
 
   invalid: [
     {
       code: 'hey.then(x => {})',
-      parserOptions: parserOptions,
-      errors: [{ message: message }]
+      errors: [{ message }]
     },
     {
       code: 'hey.then(function() { }).then()',
-      parserOptions: parserOptions,
-      errors: [{ message: message }, { message: message }]
+      errors: [{ message }, { message }]
     },
     {
       code: 'hey.then(function() { }).then(x).catch()',
-      parserOptions: parserOptions,
-      errors: [{ message: message }, { message: message }]
+      errors: [{ message }, { message }]
     },
     {
       code:
         'async function a() { hey.then(function() { }).then(function() { }) }',
-      parserOptions: parserOptions,
-      errors: [{ message: message }, { message: message }]
+      errors: [{ message }, { message }]
     }
   ]
 })

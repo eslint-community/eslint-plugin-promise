@@ -1,12 +1,15 @@
 'use strict'
 
-var rule = require('../rules/no-return-wrap')
-var RuleTester = require('eslint').RuleTester
-var ruleTester = new RuleTester()
+const rule = require('../rules/no-return-wrap')
+const RuleTester = require('eslint').RuleTester
+const ruleTester = new RuleTester({
+  parserOptions: {
+    ecmaVersion: 6
+  }
+})
 
-// messages
-var rejectMessage = 'Expected throw instead of Promise.reject'
-var resolveMessage = 'Avoid wrapping return values in Promise.resolve'
+const rejectMessage = 'Expected throw instead of Promise.reject'
+const resolveMessage = 'Avoid wrapping return values in Promise.resolve'
 
 ruleTester.run('no-return-wrap', rule, {
   valid: [
@@ -28,24 +31,12 @@ ruleTester.run('no-return-wrap', rule, {
     'doThing().then(function() { return Promise.all([a,b,c]) })',
 
     // arrow functions and other things
-    { code: 'doThing().then(() => 4)', parserOptions: { ecmaVersion: 6 } },
-    {
-      code: 'doThing().then(() => { throw 4 })',
-      parserOptions: { ecmaVersion: 6 }
-    },
-    {
-      code: 'doThing().then(()=>{}, () => 4)',
-      parserOptions: { ecmaVersion: 6 }
-    },
-    {
-      code: 'doThing().then(()=>{}, () => { throw 4 })',
-      parserOptions: { ecmaVersion: 6 }
-    },
-    { code: 'doThing().catch(() => 4)', parserOptions: { ecmaVersion: 6 } },
-    {
-      code: 'doThing().catch(() => { throw 4 })',
-      parserOptions: { ecmaVersion: 6 }
-    },
+    'doThing().then(() => 4)',
+    'doThing().then(() => { throw 4 })',
+    'doThing().then(()=>{}, () => 4)',
+    'doThing().then(()=>{}, () => { throw 4 })',
+    'doThing().catch(() => 4)',
+    'doThing().catch(() => { throw 4 })',
 
     // random functions and callback methods
     'var x = function() { return Promise.resolve(4) }',

@@ -1,9 +1,11 @@
 'use strict'
 
-var rule = require('../rules/param-names')
-var RuleTester = require('eslint').RuleTester
+const rule = require('../rules/param-names')
+const RuleTester = require('eslint').RuleTester
+const ruleTester = new RuleTester()
 
-var ruleTester = new RuleTester()
+const message = 'Promise constructor parameters must be named resolve, reject'
+
 ruleTester.run('param-names', rule, {
   valid: [
     'new Promise(function(resolve, reject) { })',
@@ -13,21 +15,11 @@ ruleTester.run('param-names', rule, {
   invalid: [
     {
       code: 'new Promise(function(reject, resolve) { })',
-      errors: [
-        {
-          message:
-            'Promise constructor parameters must be named resolve, reject'
-        }
-      ]
+      errors: [{ message }]
     },
     {
       code: 'new Promise(function(resolve, rej) { })',
-      errors: [
-        {
-          message:
-            'Promise constructor parameters must be named resolve, reject'
-        }
-      ]
+      errors: [{ message }]
     }
   ]
 })
