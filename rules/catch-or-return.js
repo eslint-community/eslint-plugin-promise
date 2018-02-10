@@ -61,7 +61,8 @@ module.exports = {
 
         context.report({
           node,
-          message: 'Expected ' + terminationMethod + '() or return'
+          message: 'Expected {{ terminationMethod }}() or return',
+          data: { terminationMethod }
         })
       }
     }
