@@ -11,9 +11,9 @@ module.exports = {
       url: 'https://github.com/xjamundx/eslint-plugin-promise#avoid-new'
     }
   },
-  create: function (context) {
+  create: function(context) {
     return {
-      NewExpression: function (node) {
+      NewExpression: function(node) {
         if (node.callee.name === 'Promise') {
           context.report({ node, message: 'Avoid creating new promises.' })
         }

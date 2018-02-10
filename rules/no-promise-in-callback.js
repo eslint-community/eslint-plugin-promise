@@ -11,12 +11,13 @@ var isInsideCallback = require('./lib/is-inside-callback')
 module.exports = {
   meta: {
     docs: {
-      url: 'https://github.com/xjamundx/eslint-plugin-promise#no-promise-in-callback'
+      url:
+        'https://github.com/xjamundx/eslint-plugin-promise#no-promise-in-callback'
     }
   },
-  create: function (context) {
+  create: function(context) {
     return {
-      CallExpression: function (node) {
+      CallExpression: function(node) {
         if (!isPromise(node)) return
 
         // if i'm returning the promise, it's probably not really a callback
@@ -27,7 +28,10 @@ module.exports = {
         // would that imply an implicit return?
 
         if (context.getAncestors().some(isInsideCallback)) {
-          context.report({ node: node.callee, message: 'Avoid using promises inside of callbacks.' })
+          context.report({
+            node: node.callee,
+            message: 'Avoid using promises inside of callbacks.'
+          })
         }
       }
     }

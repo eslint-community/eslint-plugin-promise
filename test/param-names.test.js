@@ -13,11 +13,21 @@ ruleTester.run('param-names', rule, {
   invalid: [
     {
       code: 'new Promise(function(reject, resolve) { })',
-      errors: [ { message: 'Promise constructor parameters must be named resolve, reject' } ]
+      errors: [
+        {
+          message:
+            'Promise constructor parameters must be named resolve, reject'
+        }
+      ]
     },
     {
       code: 'new Promise(function(resolve, rej) { })',
-      errors: [ { message: 'Promise constructor parameters must be named resolve, reject' } ]
+      errors: [
+        {
+          message:
+            'Promise constructor parameters must be named resolve, reject'
+        }
+      ]
     }
   ]
 })

@@ -14,7 +14,7 @@ module.exports = {
       url: 'https://github.com/xjamundx/eslint-plugin-promise#catch-or-return'
     }
   },
-  create: function (context) {
+  create: function(context) {
     var options = context.options[0] || {}
     var allowThen = options.allowThen
     var terminationMethod = options.terminationMethod || 'catch'
@@ -24,13 +24,14 @@ module.exports = {
     }
 
     return {
-      ExpressionStatement: function (node) {
+      ExpressionStatement: function(node) {
         if (!isPromise(node.expression)) {
           return
         }
 
         // somePromise.then(a, b)
-        if (allowThen &&
+        if (
+          allowThen &&
           node.expression.type === 'CallExpression' &&
           node.expression.callee.type === 'MemberExpression' &&
           node.expression.callee.property.name === 'then' &&
@@ -40,7 +41,8 @@ module.exports = {
         }
 
         // somePromise.catch()
-        if (node.expression.type === 'CallExpression' &&
+        if (
+          node.expression.type === 'CallExpression' &&
           node.expression.callee.type === 'MemberExpression' &&
           terminationMethod.indexOf(node.expression.callee.property.name) !== -1
         ) {
@@ -48,7 +50,8 @@ module.exports = {
         }
 
         // somePromise['catch']()
-        if (node.expression.type === 'CallExpression' &&
+        if (
+          node.expression.type === 'CallExpression' &&
           node.expression.callee.type === 'MemberExpression' &&
           node.expression.callee.property.type === 'Literal' &&
           node.expression.callee.property.value === 'catch'
@@ -56,7 +59,10 @@ module.exports = {
           return
         }
 
-        context.report({ node, message: 'Expected ' + terminationMethod + '() or return' })
+        context.report({
+          node,
+          message: 'Expected ' + terminationMethod + '() or return'
+        })
       }
     }
   }

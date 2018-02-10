@@ -8,40 +8,50 @@ ruleTester.run('no-native', rule, {
   valid: [
     'var Promise = null; function x() { return Promise.resolve("hi"); }',
     'var Promise = window.Promise || require("bluebird"); var x = Promise.reject();',
-    { code: 'var Promise = null; function x() { return Promise.resolve("hi"); }', parserOptions: parserOptions },
-    { code: 'var Promise = window.Promise || require("bluebird"); var x = Promise.reject();', parserOptions: parserOptions },
-    { code: 'import Promise from "bluebird"; var x = Promise.reject();', parserOptions: parserOptions }
+    {
+      code:
+        'var Promise = null; function x() { return Promise.resolve("hi"); }',
+      parserOptions: parserOptions
+    },
+    {
+      code:
+        'var Promise = window.Promise || require("bluebird"); var x = Promise.reject();',
+      parserOptions: parserOptions
+    },
+    {
+      code: 'import Promise from "bluebird"; var x = Promise.reject();',
+      parserOptions: parserOptions
+    }
   ],
 
   invalid: [
     {
       code: 'new Promise(function(reject, resolve) { })',
-      errors: [ { message: '"Promise" is not defined.' } ]
+      errors: [{ message: '"Promise" is not defined.' }]
     },
     {
       code: 'Promise.resolve()',
-      errors: [ { message: '"Promise" is not defined.' } ]
+      errors: [{ message: '"Promise" is not defined.' }]
     },
     {
       code: 'new Promise(function(reject, resolve) { })',
-      errors: [ { message: '"Promise" is not defined.' } ],
+      errors: [{ message: '"Promise" is not defined.' }],
       env: { browser: true }
     },
     {
       code: 'new Promise(function(reject, resolve) { })',
-      errors: [ { message: '"Promise" is not defined.' } ],
+      errors: [{ message: '"Promise" is not defined.' }],
       env: { node: true }
     },
     {
       code: 'Promise.resolve()',
-      errors: [ { message: '"Promise" is not defined.' } ],
+      errors: [{ message: '"Promise" is not defined.' }],
       env: { es6: true }
     },
     {
       code: 'Promise.resolve()',
-      errors: [ { message: '"Promise" is not defined.' } ],
+      errors: [{ message: '"Promise" is not defined.' }],
       globals: { Promise: true }
     }
-
   ]
 })

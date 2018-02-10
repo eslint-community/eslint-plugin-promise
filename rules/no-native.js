@@ -3,8 +3,8 @@
 
 'use strict'
 
-function isDeclared (scope, ref) {
-  return scope.variables.some(function (variable) {
+function isDeclared(scope, ref) {
+  return scope.variables.some(function(variable) {
     if (variable.name !== ref.identifier.name) {
       return false
     }
@@ -23,7 +23,7 @@ module.exports = {
       url: 'https://github.com/xjamundx/eslint-plugin-promise#no-native'
     }
   },
-  create: function (context) {
+  create: function(context) {
     var MESSAGE = '"{{name}}" is not defined.'
 
     /**
@@ -34,16 +34,20 @@ module.exports = {
      * @private
      */
     return {
-      'Program:exit': function () {
+      'Program:exit': function() {
         var scope = context.getScope()
 
-        scope.implicit.left.forEach(function (ref) {
+        scope.implicit.left.forEach(function(ref) {
           if (ref.identifier.name !== 'Promise') {
             return
           }
 
           if (!isDeclared(scope, ref)) {
-            context.report({ node: ref.identifier, message: MESSAGE, data: { name: ref.identifier.name } })
+            context.report({
+              node: ref.identifier,
+              message: MESSAGE,
+              data: { name: ref.identifier.name }
+            })
           }
         })
       }
