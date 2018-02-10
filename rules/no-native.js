@@ -24,7 +24,7 @@ module.exports = {
     }
   },
   create: function(context) {
-    var MESSAGE = '"{{name}}" is not defined.'
+    const MESSAGE = '"{{name}}" is not defined.'
 
     /**
      * Checks for and reports reassigned constants
@@ -35,7 +35,7 @@ module.exports = {
      */
     return {
       'Program:exit': function() {
-        var scope = context.getScope()
+        const scope = context.getScope()
 
         scope.implicit.left.forEach(function(ref) {
           if (ref.identifier.name !== 'Promise') {

@@ -5,7 +5,7 @@
 
 'use strict'
 
-var errorMessage = 'Avoid callbacks. Prefer Async/Await.'
+const errorMessage = 'Avoid callbacks. Prefer Async/Await.'
 
 module.exports = {
   meta: {
@@ -16,8 +16,8 @@ module.exports = {
   },
   create: function(context) {
     function checkLastParamsForCallback(node) {
-      var len = node.params.length - 1
-      var lastParam = node.params[len]
+      const len = node.params.length - 1
+      const lastParam = node.params[len]
       if (
         lastParam &&
         (lastParam.name === 'callback' || lastParam.name === 'cb')
@@ -41,9 +41,9 @@ module.exports = {
         }
 
         // thennables aren't allowed either
-        var args = node.arguments
-        var num = args.length - 1
-        var arg = num > -1 && node.arguments && node.arguments[num]
+        const args = node.arguments
+        const num = args.length - 1
+        const arg = num > -1 && node.arguments && node.arguments[num]
         if (
           (arg && arg.type === 'FunctionExpression') ||
           arg.type === 'ArrowFunctionExpression'

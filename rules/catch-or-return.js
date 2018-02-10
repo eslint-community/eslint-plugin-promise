@@ -6,7 +6,7 @@
 
 'use strict'
 
-var isPromise = require('./lib/is-promise')
+const isPromise = require('./lib/is-promise')
 
 module.exports = {
   meta: {
@@ -15,9 +15,9 @@ module.exports = {
     }
   },
   create: function(context) {
-    var options = context.options[0] || {}
-    var allowThen = options.allowThen
-    var terminationMethod = options.terminationMethod || 'catch'
+    const options = context.options[0] || {}
+    const allowThen = options.allowThen
+    let terminationMethod = options.terminationMethod || 'catch'
 
     if (typeof terminationMethod === 'string') {
       terminationMethod = [terminationMethod]

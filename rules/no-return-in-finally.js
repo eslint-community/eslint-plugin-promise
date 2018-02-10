@@ -1,6 +1,6 @@
 'use strict'
 
-var isPromise = require('./lib/is-promise')
+const isPromise = require('./lib/is-promise')
 
 module.exports = {
   meta: {

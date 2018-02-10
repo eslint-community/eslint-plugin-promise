@@ -88,11 +88,11 @@ module.exports = {
     //          s2_4:
     //           { good: false,
     //             loc: <loc> } } } ]
-    var funcInfoStack = []
+    const funcInfoStack = []
 
     function markCurrentBranchAsGood() {
-      var funcInfo = peek(funcInfoStack)
-      var currentBranchID = peek(funcInfo.branchIDStack)
+      const funcInfo = peek(funcInfoStack)
+      const currentBranchID = peek(funcInfo.branchIDStack)
       if (funcInfo.branchInfoMap[currentBranchID]) {
         funcInfo.branchInfoMap[currentBranchID].good = true
       }
@@ -104,13 +104,13 @@ module.exports = {
       ThrowStatement: markCurrentBranchAsGood,
 
       onCodePathSegmentStart: function(segment, node) {
-        var funcInfo = peek(funcInfoStack)
+        const funcInfo = peek(funcInfoStack)
         funcInfo.branchIDStack.push(segment.id)
         funcInfo.branchInfoMap[segment.id] = { good: false, node: node }
       },
 
       onCodePathSegmentEnd: function(segment, node) {
-        var funcInfo = peek(funcInfoStack)
+        const funcInfo = peek(funcInfoStack)
         funcInfo.branchIDStack.pop()
       },
 
@@ -122,24 +122,24 @@ module.exports = {
       },
 
       onCodePathEnd: function(path, node) {
-        var funcInfo = funcInfoStack.pop()
+        const funcInfo = funcInfoStack.pop()
 
         if (!isInlineThenFunctionExpression(node)) {
           return
         }
 
         path.finalSegments.forEach(segment => {
-          var id = segment.id
-          var branch = funcInfo.branchInfoMap[id]
+          const id = segment.id
+          const branch = funcInfo.branchInfoMap[id]
           if (!branch.good) {
             if (hasParentReturnStatement(branch.node)) {
               return
             }
 
             // check shortcircuit syntax like `x && x()` and `y || x()``
-            var prevSegments = segment.prevSegments
-            for (var ii = prevSegments.length - 1; ii >= 0; --ii) {
-              var prevSegment = prevSegments[ii]
+            const prevSegments = segment.prevSegments
+            for (let ii = prevSegments.length - 1; ii >= 0; --ii) {
+              const prevSegment = prevSegments[ii]
               if (funcInfo.branchInfoMap[prevSegment.id].good) return
             }
 
