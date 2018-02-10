@@ -18,6 +18,7 @@ project, you agree to abide by its terms.
   * [Give feedback on issues](#give-feedback-on-issues)
   * [Write code](#write-code)
 * [Setup](#setup)
+* [Submitting an issue](#submitting-an-issue)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -84,3 +85,12 @@ installing an [editor plugin](https://prettier.io/docs/en/editors.html) for the
 best experience, but code will also be formatted with a precommit script (using
 [lint-staged](https://github.com/okonet/lint-staged)) as well as by running
 `npm run lint -- --fix`.
+
+## Submitting an issue
+
+* Please search the issue tracker before opening an issue.
+* Use a clear and descriptive title.
+* Include as much information as possible by filling out the provided issue
+  template.
+* The more time you put into an issue, the more we will.
+* [The best issue report is a failing test proving it.](https://twitter.com/sindresorhus/status/579306280495357953)
