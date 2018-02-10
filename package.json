@@ -39,13 +39,17 @@
   "lint-staged": {
     "concurrent": false,
     "linters": {
-      "README.md": ["doctoc --maxlevel 3 --notitle", "git add"],
+      "{README.md,CONTRIBUTING.md}": [
+        "doctoc --maxlevel 3 --notitle",
+        "git add"
+      ],
       "*.js": ["prettier --write", "eslint --fix", "git add"],
-      "*.json": ["prettier --write", "git add"]
+      "*.+(json|md)": ["prettier --write", "git add"]
     }
   },
   "prettier": {
     "semi": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "proseWrap": "always"
   }
 }
