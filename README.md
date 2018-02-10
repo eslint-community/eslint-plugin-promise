@@ -88,20 +88,20 @@ or start with the recommended rule set
 
 ## Rules
 
-| recommended | rule                        | description                                                                      |
-| ----------- | --------------------------- | -------------------------------------------------------------------------------- |
-| :bangbang:  | `catch-or-return`           | Enforces the use of `catch()` on un-returned promises.                           |
-| :bangbang:  | `no-return-wrap`            | Avoid wrapping values in `Promise.resolve` or `Promise.reject` when not needed.  |
-| :bangbang:  | `param-names`               | Enforce consistent param names when creating new promises.                       |
-| :bangbang:  | `always-return`             | Return inside each `then()` to create readable and reusable Promise chains.      |
-|             | `no-native`                 | In an ES5 environment, make sure to create a `Promise` constructor before using. |
-| :warning:   | `no-nesting`                | Avoid nested `then()` or `catch()` statements                                    |
-| :warning:   | `no-promise-in-callback`    | Avoid using promises inside of callbacks                                         |
-| :warning:   | `no-callback-in-promise`    | Avoid calling `cb()` inside of a `then()` (use [nodeify][] instead)              |
-| :warning:   | `avoid-new`                 | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     |
-| :warning:   | `no-return-in-finally`      | Disallow return statements in `finally()`                                        |
-| :seven:     | `prefer-await-to-then`      | Prefer `await` to `then()` for reading Promise values                            |
-| :seven:     | `prefer-await-to-callbacks` | Prefer async/await to the callback pattern                                       |
+| rule                        | description                                                                      | recommended | fixable  |
+| --------------------------- | -------------------------------------------------------------------------------- | ----------- | -------- |
+| `catch-or-return`           | Enforces the use of `catch()` on un-returned promises.                           | :bangbang:  |          |
+| `no-return-wrap`            | Avoid wrapping values in `Promise.resolve` or `Promise.reject` when not needed.  | :bangbang:  |          |
+| `param-names`               | Enforce consistent param names when creating new promises.                       | :bangbang:  | :wrench: |
+| `always-return`             | Return inside each `then()` to create readable and reusable Promise chains.      | :bangbang:  |          |
+| `no-native`                 | In an ES5 environment, make sure to create a `Promise` constructor before using. |             |          |
+| `no-nesting`                | Avoid nested `then()` or `catch()` statements                                    | :warning:   |          |
+| `no-promise-in-callback`    | Avoid using promises inside of callbacks                                         | :warning:   |          |
+| `no-callback-in-promise`    | Avoid calling `cb()` inside of a `then()` (use [nodeify][] instead)              | :warning:   |          |
+| `avoid-new`                 | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     | :warning:   |          |
+| `no-return-in-finally`      | Disallow return statements in `finally()`                                        | :warning:   |          |
+| `prefer-await-to-then`      | Prefer `await` to `then()` for reading Promise values                            | :seven:     |          |
+| `prefer-await-to-callbacks` | Prefer async/await to the callback pattern                                       | :seven:     |          |
 
 **Key**
 
@@ -110,6 +110,7 @@ or start with the recommended rule set
 | :bangbang: | Reports as error in recommended configuration   |
 | :warning:  | Reports as warning in recommended configuration |
 | :seven:    | ES2017 Async Await rules                        |
+| :wrench:   | Rule is fixable with `eslint --fix`             |
 
 ### `catch-or-return`
 
@@ -214,6 +215,9 @@ way to reject the promise.
 ### `param-names`
 
 Enforce standard parameter names for Promise constructors
+
+:wrench: The `--fix` option on the command line can automatically fix some of
+the problems reported by this rule.
 
 #### Valid
 

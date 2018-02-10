@@ -4,11 +4,12 @@ module.exports = {
   meta: {
     docs: {
       url: 'https://github.com/xjamundx/eslint-plugin-promise#param-names'
-    }
+    },
+    fixable: 'code'
   },
-  create: function(context) {
+  create(context) {
     return {
-      NewExpression: function(node) {
+      NewExpression(node) {
         if (node.callee.name === 'Promise' && node.arguments.length === 1) {
           const params = node.arguments[0].params
 
@@ -16,19 +17,20 @@ module.exports = {
             return
           }
 
-          if (params[0].name !== 'resolve') {
-            return context.report({
+          if (
+            params[0].name !== 'resolve' ||
+            (params[1] && params[1].name !== 'reject')
+          ) {
+            context.report({
               node,
               message:
-                'Promise constructor parameters must be named resolve, reject'
-            })
-          }
-
-          if (params[1] && params[1].name !== 'reject') {
-            return context.report({
-              node,
-              message:
-                'Promise constructor parameters must be named resolve, reject'
+                'Promise constructor parameters must be named resolve, reject',
+              fix(fixer) {
+                return [
+                  fixer.replaceText(params[0], 'resolve'),
+                  params[1] && fixer.replaceText(params[1], 'reject')
+                ].filter(Boolean)
+              }
             })
           }
         }
