@@ -3,7 +3,8 @@
     "node": true
   },
   "parserOptions": {
-    "ecmaVersion": 6
+    "ecmaVersion": 6,
+    "sourceType": "script"
   },
   "plugins": ["eslint-plugin", "prettier"],
   "extends": [
@@ -12,6 +13,7 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
+    "strict": ["error", "global"],
     "eslint-plugin/require-meta-docs-url": [
       "error",
       {
