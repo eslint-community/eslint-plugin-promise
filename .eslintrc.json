@@ -6,10 +6,11 @@
     "ecmaVersion": 6,
     "sourceType": "script"
   },
-  "plugins": ["eslint-plugin", "prettier"],
+  "plugins": ["eslint-plugin", "node", "prettier"],
   "extends": [
     "standard",
     "plugin:eslint-plugin/recommended",
+    "plugin:node/recommended",
     "plugin:prettier/recommended"
   ],
   "rules": {
@@ -24,6 +25,7 @@
       }
     ],
     "eslint-plugin/test-case-shorthand-strings": "error",
+    "node/no-unsupported-features": ["error", { "version": 4 }],
     "prettier/prettier": "error"
   }
 }
