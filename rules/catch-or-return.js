@@ -6,12 +6,13 @@
 
 'use strict'
 
+const getDocsUrl = require('./lib/get-docs-url')
 const isPromise = require('./lib/is-promise')
 
 module.exports = {
   meta: {
     docs: {
-      url: 'https://github.com/xjamundx/eslint-plugin-promise#catch-or-return'
+      url: getDocsUrl('catch-or-return')
     }
   },
   create: function(context) {

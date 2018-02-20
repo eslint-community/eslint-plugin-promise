@@ -5,10 +5,12 @@
 
 'use strict'
 
+const getDocsUrl = require('./lib/get-docs-url')
+
 module.exports = {
   meta: {
     docs: {
-      url: 'https://github.com/xjamundx/eslint-plugin-promise#avoid-new'
+      url: getDocsUrl('avoid-new')
     }
   },
   create: function(context) {

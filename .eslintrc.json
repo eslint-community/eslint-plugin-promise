@@ -18,12 +18,6 @@
     "prefer-const": "error",
     "strict": ["error", "global"],
     "eslint-plugin/prefer-placeholders": "error",
-    "eslint-plugin/require-meta-docs-url": [
-      "error",
-      {
-        "pattern": "https://github.com/xjamundx/eslint-plugin-promise#{{name}}"
-      }
-    ],
     "eslint-plugin/test-case-shorthand-strings": "error",
     "node/no-unsupported-features": ["error", { "version": 4 }],
     "prettier/prettier": "error"
