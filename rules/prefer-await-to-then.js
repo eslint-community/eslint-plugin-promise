@@ -5,11 +5,12 @@
 
 'use strict'
 
+const getDocsUrl = require('./lib/get-docs-url')
+
 module.exports = {
   meta: {
     docs: {
-      url:
-        'https://github.com/xjamundx/eslint-plugin-promise#prefer-await-to-then'
+      url: getDocsUrl('prefer-await-to-then')
     }
   },
   create: function(context) {

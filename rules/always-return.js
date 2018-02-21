@@ -1,5 +1,7 @@
 'use strict'
 
+const getDocsUrl = require('./lib/get-docs-url')
+
 function isFunctionWithBlockStatement(node) {
   if (node.type === 'FunctionExpression') {
     return true
@@ -55,7 +57,7 @@ function peek(arr) {
 module.exports = {
   meta: {
     docs: {
-      url: 'https://github.com/xjamundx/eslint-plugin-promise#always-return'
+      url: getDocsUrl('always-return')
     }
   },
   create: function(context) {

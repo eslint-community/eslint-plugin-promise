@@ -5,13 +5,14 @@
 
 'use strict'
 
+const getDocsUrl = require('./lib/get-docs-url')
+
 const errorMessage = 'Avoid callbacks. Prefer Async/Await.'
 
 module.exports = {
   meta: {
     docs: {
-      url:
-        'https://github.com/xjamundx/eslint-plugin-promise#prefer-await-to-callbacks'
+      url: getDocsUrl('prefer-await-to-callbacks')
     }
   },
   create: function(context) {

@@ -3,6 +3,8 @@
 
 'use strict'
 
+const getDocsUrl = require('./lib/get-docs-url')
+
 function isDeclared(scope, ref) {
   return scope.variables.some(function(variable) {
     if (variable.name !== ref.identifier.name) {
@@ -20,7 +22,7 @@ function isDeclared(scope, ref) {
 module.exports = {
   meta: {
     docs: {
-      url: 'https://github.com/xjamundx/eslint-plugin-promise#no-native'
+      url: getDocsUrl('no-native')
     }
   },
   create: function(context) {

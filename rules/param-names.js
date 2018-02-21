@@ -1,9 +1,11 @@
 'use strict'
 
+const getDocsUrl = require('./lib/get-docs-url')
+
 module.exports = {
   meta: {
     docs: {
-      url: 'https://github.com/xjamundx/eslint-plugin-promise#param-names'
+      url: getDocsUrl('param-names')
     },
     fixable: 'code'
   },

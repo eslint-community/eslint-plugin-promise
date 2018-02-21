@@ -6,6 +6,7 @@
 
 'use strict'
 
+const getDocsUrl = require('./lib/get-docs-url')
 const isPromise = require('./lib/is-promise')
 const rejectMessage = 'Expected throw instead of Promise.reject'
 const resolveMessage = 'Avoid wrapping return values in Promise.resolve'
@@ -20,7 +21,7 @@ function isInPromise(context) {
 module.exports = {
   meta: {
     docs: {
-      url: 'https://github.com/xjamundx/eslint-plugin-promise#no-return-wrap'
+      url: getDocsUrl('no-return-wrap')
     }
   },
   create: function(context) {

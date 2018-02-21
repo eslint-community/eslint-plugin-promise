@@ -5,14 +5,14 @@
 
 'use strict'
 
+const getDocsUrl = require('./lib/get-docs-url')
 const isPromise = require('./lib/is-promise')
 const isInsideCallback = require('./lib/is-inside-callback')
 
 module.exports = {
   meta: {
     docs: {
-      url:
-        'https://github.com/xjamundx/eslint-plugin-promise#no-promise-in-callback'
+      url: getDocsUrl('no-promise-in-callback')
     }
   },
   create: function(context) {
