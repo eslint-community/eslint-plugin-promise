@@ -13,7 +13,7 @@ const REPO_URL = 'https://github.com/xjamundx/eslint-plugin-promise'
  * @returns {string} URL to the documentation for the given rule
  */
 function getDocsUrl(ruleName) {
-  return `${REPO_URL}/tree/v${pkg.version}#${ruleName}`
+  return `${REPO_URL}/tree/v${pkg.version}/docs/rules/${ruleName}.md`
 }
 
 module.exports = getDocsUrl
