@@ -24,7 +24,9 @@ ruleTester.run('no-identity-handlers', rule, {
     'somePromise().then(func, func)',
     'getObject().then(({ a, b, c }) => ({ a, b, c: c, d: calculate(a, b, c) }))',
     'getObject().then(({ a: rename, b, c }) => ({ rename, b, c }))',
+    'getObject().then(({ a, b, c }) => { return { a, b: c, c: b } })',
     'getArray().then(([a, b]) => [a, b, ...getSomeOtherArray()])',
+    'getArray().then(([a, b]) => [b, a])',
 
     // edge cases that aren't really valid but shouldn't throw or report
     'Promise.resolve(2).then()',
