@@ -1,5 +1,9 @@
 ## 3.7.0
 
+* Added `promise/valid-params` rule
+  ([#85](https://github.com/xjamundx/eslint-plugin-promise/pull/85))
+* Added `promise/no-new-statics` rule
+  ([#82](https://github.com/xjamundx/eslint-plugin-promise/pull/82))
 * Added fixer for `promise/param-names` rule
   ([#99](https://github.com/xjamundx/eslint-plugin-promise/pull/99))
 * Added rule documentation to each rule
