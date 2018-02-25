@@ -1,8 +1,24 @@
 # Ensures the proper number of arguments are passed to Promise functions (valid-params)
 
-Ensures the proper number of arguments are passed to Promise functions
+Calling a Promise function with the incorrect number of arguments can lead to
+unexpected behavior or hard to spot bugs.
 
-#### Valid
+## Rule Details
+
+This rule is aimed at flagging instances where a Promise function is called with
+the improper number of arguments.
+
+Examples of **incorrect** code for this rule:
+
+* `Promise.all()` is called with 0 or 2+ arguments
+* `Promise.race()` is called with 0 or 2+ arguments
+* `Promise.resolve()` is called with 2+ arguments
+* `Promise.reject()` is called with 2+ arguments
+* `Promise.then()` is called with 0 or 3+ arguments
+* `Promise.catch()` is called with 0 or 2+ arguments
+* `Promise.finally()` is called with 0 or 2+ arguments
+
+Examples of **correct** code for this rule:
 
 ```js
 // Promise.all() requires 1 argument
@@ -41,12 +57,8 @@ somePromise().finally(() => {
 somePromise().finally(console.log)
 ```
 
-#### Invalid
+## When Not To Use It
 
-* `Promise.all()` is called with 0 or 2+ arguments
-* `Promise.race()` is called with 0 or 2+ arguments
-* `Promise.resolve()` is called with 2+ arguments
-* `Promise.reject()` is called with 2+ arguments
-* `Promise.then()` is called with 0 or 3+ arguments
-* `Promise.catch()` is called with 0 or 2+ arguments
-* `Promise.finally()` is called with 0 or 2+ arguments
+If you do not want to be notified when passing an invalid number of arguments to
+a Promise function (for example, when using a typechecker like Flow), you can
+safely disable this rule.
