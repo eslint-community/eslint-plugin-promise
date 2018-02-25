@@ -19,7 +19,8 @@ module.exports = {
         ) {
           context.report({
             node,
-            message: 'Avoid calling new on a Promise static method'
+            message: "Avoid calling 'new' on 'Promise.{{ name }}()'",
+            data: { name: node.callee.property.name }
           })
         }
       }
