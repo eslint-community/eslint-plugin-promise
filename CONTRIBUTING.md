@@ -73,12 +73,15 @@ After
 [cloning the repository](https://help.github.com/articles/cloning-a-repository/),
 run `npm install` to install dependencies.
 
-Run `npm test` to run the test suite. Sometimes it can be helpful to run a
+Run `npm test` to run the test suite (powered by
+[Jest](https://facebook.github.io/jest/)). Sometimes it can be helpful to run a
 single test file and watch for changes, especially when working on a single
-rule. You can run `npx mocha path/to/test.js --watch` to achieve this.
+rule. You can run `npm test -- --watch` to achieve this.
 
 Run `npm run lint` to lint the codebase. If there are any errors reported, try
 running `npm run lint -- --fix` first to see if ESLint can fix them for you.
+`npm test` will also lint the codebase thanks to
+[jest-runner-eslint](https://github.com/jest-community/jest-runner-eslint).
 
 This codebase uses [Prettier](http://prettier.io/) for code formatting. Consider
 installing an [editor plugin](https://prettier.io/docs/en/editors.html) for the

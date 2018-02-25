@@ -1,6 +1,8 @@
 node_modules
 .idea
-test
+__tests__
 .npmignore
 .travis.yml
 .eslintrc.json
+docs
+coverage
