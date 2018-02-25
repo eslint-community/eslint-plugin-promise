@@ -13,6 +13,7 @@ module.exports = {
     'no-promise-in-callback': require('./rules/no-promise-in-callback'),
     'no-nesting': require('./rules/no-nesting'),
     'avoid-new': require('./rules/avoid-new'),
+    'no-new-statics': require('./rules/no-new-statics'),
     'no-return-in-finally': require('./rules/no-return-in-finally')
   },
   rulesConfig: {
@@ -34,6 +35,7 @@ module.exports = {
         'promise/no-promise-in-callback': 'warn',
         'promise/no-callback-in-promise': 'warn',
         'promise/avoid-new': 'warn',
+        'promise/no-new-statics': 'error',
         'promise/no-return-in-finally': 'warn'
       }
     }
