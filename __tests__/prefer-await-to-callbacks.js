@@ -14,7 +14,8 @@ ruleTester.run('prefer-await-to-callbacks', rule, {
   valid: [
     'async function hi() { await thing().catch(err => console.log(err)) }',
     'async function hi() { await thing().then() }',
-    'async function hi() { await thing().catch() }'
+    'async function hi() { await thing().catch() }',
+    'dbConn.on("error", err => { console.error(err) })'
   ],
 
   invalid: [
