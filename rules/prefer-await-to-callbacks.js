@@ -1,8 +1,3 @@
-/**
- * Rule: prefer-await-to-callbacks
- * Discourage using then() and instead use async/await.
- */
-
 'use strict'
 
 const getDocsUrl = require('./lib/get-docs-url')
@@ -15,40 +10,44 @@ module.exports = {
       url: getDocsUrl('prefer-await-to-callbacks')
     }
   },
-  create: function(context) {
+  create(context) {
     function checkLastParamsForCallback(node) {
-      const len = node.params.length - 1
-      const lastParam = node.params[len]
-      if (
-        lastParam &&
-        (lastParam.name === 'callback' || lastParam.name === 'cb')
-      ) {
+      const lastParam = node.params[node.params.length - 1] || {}
+      if (lastParam.name === 'callback' || lastParam.name === 'cb') {
         context.report({ node: lastParam, message: errorMessage })
       }
     }
     function isInsideYieldOrAwait() {
-      return context.getAncestors().some(function(parent) {
+      return context.getAncestors().some(parent => {
         return (
           parent.type === 'AwaitExpression' || parent.type === 'YieldExpression'
         )
       })
     }
     return {
-      CallExpression: function(node) {
-        // callbacks aren't allowed
+      CallExpression(node) {
+        // Callbacks aren't allowed.
         if (node.callee.name === 'cb' || node.callee.name === 'callback') {
           context.report({ node, message: errorMessage })
           return
         }
 
-        // thennables aren't allowed either
+        // Then-ables aren't allowed either.
         const args = node.arguments
-        const num = args.length - 1
-        const arg = num > -1 && node.arguments && node.arguments[num]
+        const lastArgIndex = args.length - 1
+        const arg = lastArgIndex > -1 && node.arguments[lastArgIndex]
         if (
           (arg && arg.type === 'FunctionExpression') ||
           arg.type === 'ArrowFunctionExpression'
         ) {
+          // Ignore event listener callbacks.
+          if (
+            node.callee.property &&
+            (node.callee.property.name === 'on' ||
+              node.callee.property.name === 'once')
+          ) {
+            return
+          }
           if (arg.params && arg.params[0] && arg.params[0].name === 'err') {
             if (!isInsideYieldOrAwait()) {
               context.report({ node: arg, message: errorMessage })
