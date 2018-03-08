@@ -62,7 +62,8 @@ Then configure the rules you want to use under the rules section.
     "promise/no-callback-in-promise": "warn",
     "promise/avoid-new": "warn",
     "promise/no-new-statics": "error",
-    "promise/no-return-in-finally": "warn"
+    "promise/no-return-in-finally": "warn",
+    "promise/valid-params": "warn"
   }
 }
 ```
@@ -90,6 +91,7 @@ or start with the recommended rule set
 | [`avoid-new` ][avoid-new]                                | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     | :warning:   |          |
 | [`no-new-statics`][no-new-statics]                       | Avoid calling `new` on a Promise static method                                   | :bangbang:  |          |
 | [`no-return-in-finally`][no-return-in-finally]           | Disallow return statements in `finally()`                                        | :warning:   |          |
+| [`valid-params`][valid-params]                           | Ensures the proper number of arguments are passed to Promise functions           | :warning:   |          |
 | [`prefer-await-to-then`][prefer-await-to-then]           | Prefer `await` to `then()` for reading Promise values                            | :seven:     |          |
 | [`prefer-await-to-callbacks`][prefer-await-to-callbacks] | Prefer async/await to the callback pattern                                       | :seven:     |          |
 
@@ -123,6 +125,7 @@ or start with the recommended rule set
 [avoid-new]: docs/rules/avoid-new.md
 [no-new-statics]: docs/rules/no-new-statics.md
 [no-return-in-finally]: docs/rules/no-return-in-finally.md
+[valid-params]: docs/rules/valid-params.md
 [prefer-await-to-then]: docs/rules/prefer-await-to-then.md
 [prefer-await-to-callbacks]: docs/rules/prefer-await-to-callbacks.md
 [nodeify]: https://www.npmjs.com/package/nodeify

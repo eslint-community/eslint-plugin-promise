@@ -14,7 +14,8 @@ module.exports = {
     'no-nesting': require('./rules/no-nesting'),
     'avoid-new': require('./rules/avoid-new'),
     'no-new-statics': require('./rules/no-new-statics'),
-    'no-return-in-finally': require('./rules/no-return-in-finally')
+    'no-return-in-finally': require('./rules/no-return-in-finally'),
+    'valid-params': require('./rules/valid-params')
   },
   rulesConfig: {
     'param-names': 1,
@@ -36,7 +37,8 @@ module.exports = {
         'promise/no-callback-in-promise': 'warn',
         'promise/avoid-new': 'warn',
         'promise/no-new-statics': 'error',
-        'promise/no-return-in-finally': 'warn'
+        'promise/no-return-in-finally': 'warn',
+        'promise/valid-params': 'warn'
       }
     }
   }
