@@ -1,3 +1,14 @@
+## 3.7.0
+
+* Added `promise/valid-params` rule
+  ([#85](https://github.com/xjamundx/eslint-plugin-promise/pull/85))
+* Added `promise/no-new-statics` rule
+  ([#82](https://github.com/xjamundx/eslint-plugin-promise/pull/82))
+* Added fixer for `promise/param-names` rule
+  ([#99](https://github.com/xjamundx/eslint-plugin-promise/pull/99))
+* Added rule documentation to each rule
+  ([#91](https://github.com/xjamundx/eslint-plugin-promise/pull/91))
+
 ## 3.6.0
 
 * Added `['catch']` support in `catch-or-return`
@@ -8,7 +19,7 @@
 
 ## 3.5.0
 
-* Addded support for recommended settings using
+* Added support for recommended settings using
   `extends: plugin:promise/recommended`
 
 ## 3.4.2
