@@ -6,3 +6,6 @@ __tests__
 .eslintrc.json
 docs
 coverage
+.github
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
