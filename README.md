@@ -88,7 +88,7 @@ or start with the recommended rule set
 | [`no-nesting`][no-nesting]                               | Avoid nested `then()` or `catch()` statements                                    | :warning:   |          |
 | [`no-promise-in-callback`][no-promise-in-callback]       | Avoid using promises inside of callbacks                                         | :warning:   |          |
 | [`no-callback-in-promise`][no-callback-in-promise]       | Avoid calling `cb()` inside of a `then()` (use [nodeify][] instead)              | :warning:   |          |
-| [`avoid-new` ][avoid-new]                                | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     | :warning:   |          |
+| [`avoid-new`][avoid-new]                                 | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     |             |          |
 | [`no-new-statics`][no-new-statics]                       | Avoid calling `new` on a Promise static method                                   | :bangbang:  |          |
 | [`no-return-in-finally`][no-return-in-finally]           | Disallow return statements in `finally()`                                        | :warning:   |          |
 | [`valid-params`][valid-params]                           | Ensures the proper number of arguments are passed to Promise functions           | :warning:   |          |
