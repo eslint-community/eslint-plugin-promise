@@ -14,20 +14,22 @@ ruleTester.run('prefer-await-to-then', rule, {
   valid: [
     'async function hi() { await thing() }',
     'async function hi() { await thing().then() }',
-    'async function hi() { await thing().catch() }'
+    'async function hi() { await thing().catch() }',
+    'a = async () => (await something())',
+    'something().then(async () => await somethingElse())'
   ],
 
   invalid: [
     {
-      code: 'hey.then(x => {})',
+      code: 'function foo() { hey.then(x => {}) }',
       errors: [{ message }]
     },
     {
-      code: 'hey.then(function() { }).then()',
+      code: 'function foo() { hey.then(function() { }).then() }',
       errors: [{ message }, { message }]
     },
     {
-      code: 'hey.then(function() { }).then(x).catch()',
+      code: 'function foo() { hey.then(function() { }).then(x).catch() }',
       errors: [{ message }, { message }]
     },
     {
