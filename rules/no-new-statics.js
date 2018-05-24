@@ -7,7 +7,8 @@ module.exports = {
   meta: {
     docs: {
       url: getDocsUrl('no-new-statics')
-    }
+    },
+    fixable: 'code'
   },
   create(context) {
     return {
@@ -20,7 +21,13 @@ module.exports = {
           context.report({
             node,
             message: "Avoid calling 'new' on 'Promise.{{ name }}()'",
-            data: { name: node.callee.property.name }
+            data: { name: node.callee.property.name },
+            fix(fixer) {
+              return fixer.replaceTextRange(
+                [node.start, node.start + 'new '.length],
+                ''
+              )
+            }
           })
         }
       }
