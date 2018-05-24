@@ -14,17 +14,27 @@ module.exports = {
     }
   },
   create: function(context) {
+    /** Returns true if node is inside yield or await expression. */
+    function isInsideYieldOrAwait() {
+      return context.getAncestors().some(parent => {
+        return (
+          parent.type === 'AwaitExpression' || parent.type === 'YieldExpression'
+        )
+      })
+    }
+
+    /**
+     * Returns true if node is created at the top-level scope.
+     * Await statements are not allowed at the top level,
+     * only within function declarations.
+     */
+    function isTopLevelScoped() {
+      return context.getScope().block.type === 'Program'
+    }
+
     return {
       MemberExpression: function(node) {
-        // you can then() if you are inside of a yield or await
-        if (
-          context.getAncestors().some(function(parent) {
-            return (
-              parent.type === 'AwaitExpression' ||
-              parent.type === 'YieldExpression'
-            )
-          })
-        ) {
+        if (isTopLevelScoped() || isInsideYieldOrAwait()) {
           return
         }
 
