@@ -1,3 +1,8 @@
 'use strict'
 
-module.exports = ['all', 'race', 'reject', 'resolve']
+module.exports = {
+  all: true,
+  race: true,
+  reject: true,
+  resolve: true
+}

@@ -15,7 +15,7 @@ module.exports = {
         if (
           node.callee.type === 'MemberExpression' &&
           node.callee.object.name === 'Promise' &&
-          PROMISE_STATICS.indexOf(node.callee.property.name) > -1
+          PROMISE_STATICS[node.callee.property.name]
         ) {
           context.report({
             node,
