@@ -1,3 +1,15 @@
+## 3.8.0
+
+* Removed `promise/avoid-new` from recommended configuration
+  ([#119](https://github.com/xjamundx/eslint-plugin-promise/pull/119))
+* Ignored event listener callbacks in `promise/prefer-await-to-callbacks`
+  ([#117](https://github.com/xjamundx/eslint-plugin-promise/pull/117))
+* Ignored top-level awaits in `promise/prefer-await-to-then`
+  ([#126](https://github.com/xjamundx/eslint-plugin-promise/pull/126))
+* Added docs for `promise/no-nesting` and `promise/prefer-await-to-then`
+  ([#120](https://github.com/xjamundx/eslint-plugin-promise/pull/120))
+  ([#121](https://github.com/xjamundx/eslint-plugin-promise/pull/121))
+
 ## 3.7.0
 
 * Added `promise/valid-params` rule
