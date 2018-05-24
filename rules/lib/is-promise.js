@@ -29,7 +29,7 @@ function isPromise(expression) {
       expression.callee.type === 'MemberExpression' &&
       expression.callee.object.type === 'Identifier' &&
       expression.callee.object.name === 'Promise' &&
-      PROMISE_STATICS.indexOf(expression.callee.property.name) !== -1)
+      PROMISE_STATICS[expression.callee.property.name])
   )
 }
 
