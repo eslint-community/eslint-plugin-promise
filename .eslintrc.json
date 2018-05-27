@@ -8,7 +8,7 @@
   },
   "plugins": ["eslint-plugin", "node", "prettier"],
   "extends": [
-    "standard",
+    "eslint:recommended",
     "plugin:eslint-plugin/recommended",
     "plugin:node/recommended",
     "plugin:prettier/recommended"

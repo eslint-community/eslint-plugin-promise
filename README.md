@@ -4,7 +4,6 @@ Enforce best practices for JavaScript promises.
 
 [![travis-ci](https://travis-ci.org/xjamundx/eslint-plugin-promise.svg)](https://travis-ci.org/xjamundx/eslint-plugin-promise)
 [![npm version](https://badge.fury.io/js/eslint-plugin-promise.svg)](https://www.npmjs.com/package/eslint-plugin-promise)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->

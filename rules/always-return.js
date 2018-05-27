@@ -111,12 +111,12 @@ module.exports = {
         funcInfo.branchInfoMap[segment.id] = { good: false, node: node }
       },
 
-      onCodePathSegmentEnd: function(segment, node) {
+      onCodePathSegmentEnd: function() {
         const funcInfo = peek(funcInfoStack)
         funcInfo.branchIDStack.pop()
       },
 
-      onCodePathStart: function(path, node) {
+      onCodePathStart: function() {
         funcInfoStack.push({
           branchIDStack: [],
           branchInfoMap: {}
