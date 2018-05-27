@@ -10,11 +10,11 @@ Enforce best practices for JavaScript promises.
 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-* [Installation](#installation)
-* [Usage](#usage)
-* [Rules](#rules)
-* [Maintainers](#maintainers)
-* [License](#license)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Rules](#rules)
+- [Maintainers](#maintainers)
+- [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -105,13 +105,13 @@ or start with the recommended rule set
 
 ## Maintainers
 
-* Jamund Ferguson - [@xjamundx][]
-* Macklin Underdown - [@macklinu][]
+- Jamund Ferguson - [@xjamundx][]
+- Macklin Underdown - [@macklinu][]
 
 ## License
 
-* (c) MMXV jden <mailto:jason@denizac.org> - ISC license.
-* (c) 2016 Jamund Ferguson <mailto:jamund@gmail.com> - ISC license.
+- (c) MMXV jden <mailto:jason@denizac.org> - ISC license.
+- (c) 2016 Jamund Ferguson <mailto:jamund@gmail.com> - ISC license.
 
 [catch-or-return]: docs/rules/catch-or-return.md
 [no-return-wrap]: docs/rules/no-return-wrap.md
