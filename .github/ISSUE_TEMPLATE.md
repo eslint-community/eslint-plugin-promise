@@ -4,9 +4,9 @@
 
 ### Steps to Reproduce
 
-1. [First Step]
-2. [Second Step]
-3. [and so on...]
+1.  [First Step]
+2.  [Second Step]
+3.  [and so on...]
 
 **Expected behavior:** [What you expect to happen]
 
@@ -16,9 +16,9 @@
 
 [Please fill this in if you are submitting a bug report]
 
-* Node version: [Replace this]
-* ESLint version: [Replace this]
-* eslint-plugin-promise version: [Replace this]
+- Node version: [Replace this]
+- ESLint version: [Replace this]
+- eslint-plugin-promise version: [Replace this]
 
 ### Additional Information
 

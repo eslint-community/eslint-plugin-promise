@@ -12,13 +12,13 @@ project, you agree to abide by its terms.
 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-* [How can I contribute?](#how-can-i-contribute)
-  * [Improve documentation](#improve-documentation)
-  * [Improve issues](#improve-issues)
-  * [Give feedback on issues](#give-feedback-on-issues)
-  * [Write code](#write-code)
-* [Setup](#setup)
-* [Submitting an issue](#submitting-an-issue)
+- [How can I contribute?](#how-can-i-contribute)
+  - [Improve documentation](#improve-documentation)
+  - [Improve issues](#improve-issues)
+  - [Give feedback on issues](#give-feedback-on-issues)
+  - [Write code](#write-code)
+- [Setup](#setup)
+- [Submitting an issue](#submitting-an-issue)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -49,9 +49,9 @@ is a good place to find ongoing discussions.
 
 You can use issue labels to discover issues you could help out with:
 
-* [`bug` issues](https://github.com/xjamundx/eslint-plugin-promise/labels/bug)
+- [`bug` issues](https://github.com/xjamundx/eslint-plugin-promise/labels/bug)
   are known bugs we'd like to fix
-* [`enhancement` issues](https://github.com/xjamundx/eslint-plugin-promise/labels/enhancement)
+- [`enhancement` issues](https://github.com/xjamundx/eslint-plugin-promise/labels/enhancement)
   are features we're open to including
 
 The
@@ -91,9 +91,9 @@ best experience, but code will also be formatted with a precommit script (using
 
 ## Submitting an issue
 
-* Please search the issue tracker before opening an issue.
-* Use a clear and descriptive title.
-* Include as much information as possible by filling out the provided issue
+- Please search the issue tracker before opening an issue.
+- Use a clear and descriptive title.
+- Include as much information as possible by filling out the provided issue
   template.
-* The more time you put into an issue, the more we will.
-* [The best issue report is a failing test proving it.](https://twitter.com/sindresorhus/status/579306280495357953)
+- The more time you put into an issue, the more we will.
+- [The best issue report is a failing test proving it.](https://twitter.com/sindresorhus/status/579306280495357953)

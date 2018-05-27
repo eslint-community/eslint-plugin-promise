@@ -10,13 +10,13 @@ the improper number of arguments.
 
 Examples of **incorrect** code for this rule:
 
-* `Promise.all()` is called with 0 or 2+ arguments
-* `Promise.race()` is called with 0 or 2+ arguments
-* `Promise.resolve()` is called with 2+ arguments
-* `Promise.reject()` is called with 2+ arguments
-* `Promise.then()` is called with 0 or 3+ arguments
-* `Promise.catch()` is called with 0 or 2+ arguments
-* `Promise.finally()` is called with 0 or 2+ arguments
+- `Promise.all()` is called with 0 or 2+ arguments
+- `Promise.race()` is called with 0 or 2+ arguments
+- `Promise.resolve()` is called with 2+ arguments
+- `Promise.reject()` is called with 2+ arguments
+- `Promise.then()` is called with 0 or 3+ arguments
+- `Promise.catch()` is called with 0 or 2+ arguments
+- `Promise.finally()` is called with 0 or 2+ arguments
 
 Examples of **correct** code for this rule:
 
