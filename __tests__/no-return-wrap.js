@@ -51,7 +51,10 @@ ruleTester.run('no-return-wrap', rule, {
     {
       code: 'doThing().then(function() { return Promise.reject(4) })',
       options: [{ allowReject: true }]
-    }
+    },
+
+    // not function bind
+    'doThing().then((function() { return Promise.resolve(4) }).toString())'
   ],
 
   invalid: [
@@ -105,11 +108,100 @@ ruleTester.run('no-return-wrap', rule, {
       code:
         'doThing().catch(function(x) {if (x) { return Promise.resolve(4) } else { return Promise.reject() } })',
       errors: [{ message: resolveMessage }, { message: rejectMessage }]
-    }
+    },
 
     // should work someday
     // {code: 'doThing().catch(function(x) { return x && Promise.resolve(4) })', errors: [{message: resolveMessage}]},
     // {code: 'doThing().catch(function(x) { return true ? Promise.resolve(4) : Promise.reject(5) })', errors: [{message: rejectMessage }, {message: resolveMessage}]},
     // {code: 'doThing().catch(function(x) { return x && Promise.reject(4) })', errors: [{message: rejectMessage}]}
+
+    // mltiple "ExpressionStatement"
+    {
+      code: `
+      fn(function() {
+        doThing().then(function() {
+          return Promise.resolve(4)
+        })
+        return
+      })`,
+      errors: [{ message: resolveMessage, line: 4 }]
+    },
+    {
+      code: `
+      fn(function() {
+        doThing().then(function nm() {
+          return Promise.resolve(4)
+        })
+        return
+      })`,
+      errors: [{ message: resolveMessage, line: 4 }]
+    },
+    {
+      code: `
+      fn(function() {
+        fn2(function() {
+          doThing().then(function() {
+            return Promise.resolve(4)
+          })
+        })
+      })`,
+      errors: [{ message: resolveMessage, line: 5 }]
+    },
+    {
+      code: `
+      fn(function() {
+        fn2(function() {
+          doThing().then(function() {
+            fn3(function() {
+              return Promise.resolve(4)
+            })
+            return Promise.resolve(4)
+          })
+        })
+      })`,
+      errors: [{ message: resolveMessage, line: 8 }]
+    },
+
+    // other than "ExpressionStatement"
+    {
+      code: `
+      const o = {
+        fn: function() {
+          return doThing().then(function() {
+            return Promise.resolve(5);
+          });
+        },
+      }
+      `,
+      errors: [{ message: resolveMessage, line: 5 }]
+    },
+    {
+      code: `
+      fn(
+        doThing().then(function() {
+          return Promise.resolve(5);
+        })
+      );
+      `,
+      errors: [{ message: resolveMessage, line: 4 }]
+    },
+
+    // function bind
+    {
+      code:
+        'doThing().then((function() { return Promise.resolve(4) }).bind(this))',
+      errors: [{ message: resolveMessage }]
+    },
+    {
+      code:
+        'doThing().then((function() { return Promise.resolve(4) }).bind(this).bind(this))',
+      errors: [{ message: resolveMessage }]
+    },
+
+    // arrow functions and other things
+    {
+      code: 'doThing().then(() => { return Promise.resolve(4) })',
+      errors: [{ message: resolveMessage }]
+    }
   ]
 })
