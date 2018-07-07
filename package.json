@@ -31,7 +31,7 @@
     "prettier": "^1.14.2"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "license": "ISC",
   "lint-staged": {
