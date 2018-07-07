@@ -21,14 +21,14 @@
     "eslint": "^4.17.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-eslint-plugin": "^1.4.0",
-    "eslint-plugin-jest": "^21.12.2",
+    "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-node": "^6.0.0",
-    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-prettier": "^2.6.2",
     "husky": "^0.14.3",
     "jest": "^22.4.2",
     "jest-runner-eslint": "^0.4.0",
     "lint-staged": "^6.1.0",
-    "prettier": "^1.13.0"
+    "prettier": "^1.13.7"
   },
   "engines": {
     "node": ">=4"
