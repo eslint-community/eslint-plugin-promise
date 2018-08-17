@@ -5,9 +5,9 @@ node_js:
   - 8
 cache:
   directories:
-    - "$HOME/.npm"
+    - '$HOME/.npm'
 install:
-  - npm i -g npm@5
+  - npm i -g npm@6
   - npm ci
 script:
   - npm run test -- --runInBand
