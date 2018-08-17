@@ -1,5 +1,7 @@
 ## 4.0.0
 
+- Added fixer for `promise/no-new-statics` rule
+  ([#133](https://github.com/xjamundx/eslint-plugin-promise/pull/133))
 - Support ESLint v5
   ([#144](https://github.com/xjamundx/eslint-plugin-promise/pull/144))
 
