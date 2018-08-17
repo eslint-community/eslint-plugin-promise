@@ -6,7 +6,7 @@
 const getDocsUrl = require('./lib/get-docs-url')
 
 function isDeclared(scope, ref) {
-  return scope.variables.some(function(variable) {
+  return scope.variables.some(variable => {
     if (variable.name !== ref.identifier.name) {
       return false
     }
@@ -23,11 +23,12 @@ module.exports = {
   meta: {
     docs: {
       url: getDocsUrl('no-native')
+    },
+    messages: {
+      name: '"{{name}}" is not defined.'
     }
   },
-  create: function(context) {
-    const MESSAGE = '"{{name}}" is not defined.'
-
+  create(context) {
     /**
      * Checks for and reports reassigned constants
      *
@@ -36,10 +37,10 @@ module.exports = {
      * @private
      */
     return {
-      'Program:exit': function() {
+      'Program:exit'() {
         const scope = context.getScope()
 
-        scope.implicit.left.forEach(function(ref) {
+        scope.implicit.left.forEach(ref => {
           if (ref.identifier.name !== 'Promise') {
             return
           }
@@ -47,7 +48,7 @@ module.exports = {
           if (!isDeclared(scope, ref)) {
             context.report({
               node: ref.identifier,
-              message: MESSAGE,
+              messageId: 'name',
               data: { name: ref.identifier.name }
             })
           }

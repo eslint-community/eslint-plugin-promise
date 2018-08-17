@@ -13,9 +13,12 @@ module.exports = {
   meta: {
     docs: {
       url: getDocsUrl('catch-or-return')
+    },
+    messages: {
+      terminationMethod: 'Expected {{ terminationMethod }}() or return'
     }
   },
-  create: function(context) {
+  create(context) {
     const options = context.options[0] || {}
     const allowThen = options.allowThen
     let terminationMethod = options.terminationMethod || 'catch'
@@ -25,7 +28,7 @@ module.exports = {
     }
 
     return {
-      ExpressionStatement: function(node) {
+      ExpressionStatement(node) {
         if (!isPromise(node.expression)) {
           return
         }
@@ -62,7 +65,7 @@ module.exports = {
 
         context.report({
           node,
-          message: 'Expected {{ terminationMethod }}() or return',
+          messageId: 'terminationMethod',
           data: { terminationMethod }
         })
       }

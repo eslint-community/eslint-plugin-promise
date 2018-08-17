@@ -7,7 +7,6 @@ Enforce best practices for JavaScript promises.
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Installation](#installation)
@@ -37,8 +36,8 @@ also install `eslint-plugin-promise` globally.
 
 ## Usage
 
-Add `promise` to the plugins section of your `.eslintrc` configuration file. You
-can omit the `eslint-plugin-` prefix:
+Add `promise` to the plugins section of your `.eslintrc.json` configuration
+file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
@@ -67,7 +66,7 @@ Then configure the rules you want to use under the rules section.
 }
 ```
 
-or start with the recommended rule set
+or start with the recommended rule set:
 
 ```json
 {

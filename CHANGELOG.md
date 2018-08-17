@@ -1,3 +1,13 @@
+## 4.0.0
+
+- Added fixer for `promise/no-new-statics` rule
+  ([#133](https://github.com/xjamundx/eslint-plugin-promise/pull/133))
+- Support ESLint v5
+  ([#144](https://github.com/xjamundx/eslint-plugin-promise/pull/144))
+
+This is a breaking change that drops support for Node v4. In order to use ESLint
+v5 and eslint-plugin-promise v4, you must use Node >=6.
+
 ## 3.8.0
 
 - Removed `promise/avoid-new` from recommended configuration

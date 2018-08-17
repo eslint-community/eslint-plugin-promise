@@ -15,11 +15,13 @@
   ],
   "rules": {
     "no-var": "error",
+    "object-shorthand": "error",
+    "prefer-arrow-callback": "error",
     "prefer-const": "error",
     "strict": ["error", "global"],
     "eslint-plugin/prefer-placeholders": "error",
     "eslint-plugin/test-case-shorthand-strings": "error",
-    "node/no-unsupported-features": ["error", { "version": 4 }],
+    "node/no-unsupported-features": ["error", { "version": 6 }],
     "prettier/prettier": "error"
   }
 }

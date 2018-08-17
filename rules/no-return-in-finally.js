@@ -9,9 +9,9 @@ module.exports = {
       url: getDocsUrl('no-return-in-finally')
     }
   },
-  create: function(context) {
+  create(context) {
     return {
-      CallExpression: function(node) {
+      CallExpression(node) {
         if (isPromise(node)) {
           if (
             node.callee &&
@@ -25,7 +25,7 @@ module.exports = {
               node.arguments[0].body.body
             ) {
               if (
-                node.arguments[0].body.body.some(function(statement) {
+                node.arguments[0].body.body.some(statement => {
                   return statement.type === 'ReturnStatement'
                 })
               ) {
