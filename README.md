@@ -56,6 +56,7 @@ Then configure the rules you want to use under the rules section.
     "promise/catch-or-return": "error",
     "promise/no-native": "off",
     "promise/no-nesting": "warn",
+    "promise/no-identity-handlers": "warn",
     "promise/no-promise-in-callback": "warn",
     "promise/no-callback-in-promise": "warn",
     "promise/avoid-new": "warn",
@@ -84,6 +85,7 @@ or start with the recommended rule set:
 | [`always-return`][always-return]                         | Return inside each `then()` to create readable and reusable Promise chains.      | :bangbang:  |          |
 | [`no-native`][no-native]                                 | In an ES5 environment, make sure to create a `Promise` constructor before using. |             |          |
 | [`no-nesting`][no-nesting]                               | Avoid nested `then()` or `catch()` statements                                    | :warning:   |          |
+| [`no-identity-handlers`][no-identity-handlers]           | Avoid unnecessary identity functions in `then()` or `catch()`                    | :warning:   |          |
 | [`no-promise-in-callback`][no-promise-in-callback]       | Avoid using promises inside of callbacks                                         | :warning:   |          |
 | [`no-callback-in-promise`][no-callback-in-promise]       | Avoid calling `cb()` inside of a `then()` (use [nodeify][] instead)              | :warning:   |          |
 | [`avoid-new`][avoid-new]                                 | Avoid creating `new` promises outside of utility libs (use [pify][] instead)     |             |          |
@@ -118,6 +120,7 @@ or start with the recommended rule set:
 [always-return]: docs/rules/always-return.md
 [no-native]: docs/rules/no-native.md
 [no-nesting]: docs/rules/no-nesting.md
+[no-identity-handlers]: docs/rules/no-identity-handlers.md
 [no-promise-in-callback]: docs/rules/no-promise-in-callback.md
 [no-callback-in-promise]: docs/rules/no-callback-in-promise.md
 [avoid-new]: docs/rules/avoid-new.md
