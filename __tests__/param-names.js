@@ -22,23 +22,19 @@ ruleTester.run('param-names', rule, {
   invalid: [
     {
       code: 'new Promise(function(reject, resolve) {})',
-      errors: [{ message }],
-      output: 'new Promise(function(resolve, reject) {})'
+      errors: [{ message }]
     },
     {
       code: 'new Promise(function(resolve, rej) {})',
-      errors: [{ message }],
-      output: 'new Promise(function(resolve, reject) {})'
+      errors: [{ message }]
     },
     {
       code: 'new Promise(yes => {})',
-      errors: [{ message }],
-      output: 'new Promise(resolve => {})'
+      errors: [{ message }]
     },
     {
       code: 'new Promise((yes, no) => {})',
-      errors: [{ message }],
-      output: 'new Promise((resolve, reject) => {})'
+      errors: [{ message }]
     }
   ]
 })

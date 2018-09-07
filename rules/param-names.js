@@ -26,13 +26,7 @@ module.exports = {
             context.report({
               node,
               message:
-                'Promise constructor parameters must be named resolve, reject',
-              fix(fixer) {
-                return [
-                  fixer.replaceText(params[0], 'resolve'),
-                  params[1] && fixer.replaceText(params[1], 'reject')
-                ].filter(Boolean)
-              }
+                'Promise constructor parameters must be named resolve, reject'
             })
           }
         }

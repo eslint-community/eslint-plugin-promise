@@ -80,7 +80,7 @@ or start with the recommended rule set:
 | -------------------------------------------------------- | -------------------------------------------------------------------------------- | ----------- | -------- |
 | [`catch-or-return`][catch-or-return]                     | Enforces the use of `catch()` on un-returned promises.                           | :bangbang:  |          |
 | [`no-return-wrap`][no-return-wrap]                       | Avoid wrapping values in `Promise.resolve` or `Promise.reject` when not needed.  | :bangbang:  |          |
-| [`param-names`][param-names]                             | Enforce consistent param names and ordering when creating new promises.          | :bangbang:  | :wrench: |
+| [`param-names`][param-names]                             | Enforce consistent param names and ordering when creating new promises.          | :bangbang:  |          |
 | [`always-return`][always-return]                         | Return inside each `then()` to create readable and reusable Promise chains.      | :bangbang:  |          |
 | [`no-native`][no-native]                                 | In an ES5 environment, make sure to create a `Promise` constructor before using. |             |          |
 | [`no-nesting`][no-nesting]                               | Avoid nested `then()` or `catch()` statements                                    | :warning:   |          |
