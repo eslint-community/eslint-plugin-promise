@@ -1,3 +1,8 @@
+## 4.0.1
+
+- Remove `promise/param-names` fixer
+  ([#146](https://github.com/xjamundx/eslint-plugin-promise/pull/146))
+
 ## 4.0.0
 
 - Added fixer for `promise/no-new-statics` rule
