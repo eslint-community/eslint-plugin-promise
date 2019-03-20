@@ -193,6 +193,11 @@ ruleTester.run('catch-or-return', rule, {
       options: [{ allowFinally: true }],
       errors: [{ message: catchMessage }]
     },
+    {
+      code: 'frank().then(go).catch(doIt).finally(fn).foobar(foo)',
+      options: [{ allowFinally: true }],
+      errors: [{ message: catchMessage }]
+    },
 
     // terminationMethod=done - .done(null, fn)
     {
@@ -204,6 +209,12 @@ ruleTester.run('catch-or-return', rule, {
       code: 'frank().catch(go)',
       options: [{ terminationMethod: 'done' }],
       errors: [{ message: doneMessage }]
+    },
+
+    // assume somePromise.ANYTHING() is a new promise
+    {
+      code: 'frank().catch(go).someOtherMethod()',
+      errors: [{ message: catchMessage }]
     }
   ]
 })
