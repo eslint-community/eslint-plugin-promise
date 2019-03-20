@@ -21,10 +21,57 @@ module.exports = {
   create(context) {
     const options = context.options[0] || {}
     const allowThen = options.allowThen
+    const allowFinally = options.allowFinally
     let terminationMethod = options.terminationMethod || 'catch'
 
     if (typeof terminationMethod === 'string') {
       terminationMethod = [terminationMethod]
+    }
+
+    function isAllowedPromiseTermination(expression) {
+      // somePromise.then(a, b)
+      if (
+        allowThen &&
+        expression.type === 'CallExpression' &&
+        expression.callee.type === 'MemberExpression' &&
+        expression.callee.property.name === 'then' &&
+        expression.arguments.length === 2
+      ) {
+        return true
+      }
+
+      // somePromise.catch().finally(fn)
+      if (
+        allowFinally &&
+        expression.type === 'CallExpression' &&
+        expression.callee.type === 'MemberExpression' &&
+        expression.callee.property.name === 'finally' &&
+        isPromise(expression.callee.object) &&
+        isAllowedPromiseTermination(expression.callee.object)
+      ) {
+        return true
+      }
+
+      // somePromise.catch()
+      if (
+        expression.type === 'CallExpression' &&
+        expression.callee.type === 'MemberExpression' &&
+        terminationMethod.indexOf(expression.callee.property.name) !== -1
+      ) {
+        return true
+      }
+
+      // somePromise['catch']()
+      if (
+        expression.type === 'CallExpression' &&
+        expression.callee.type === 'MemberExpression' &&
+        expression.callee.property.type === 'Literal' &&
+        expression.callee.property.value === 'catch'
+      ) {
+        return true
+      }
+
+      return false
     }
 
     return {
@@ -33,33 +80,7 @@ module.exports = {
           return
         }
 
-        // somePromise.then(a, b)
-        if (
-          allowThen &&
-          node.expression.type === 'CallExpression' &&
-          node.expression.callee.type === 'MemberExpression' &&
-          node.expression.callee.property.name === 'then' &&
-          node.expression.arguments.length === 2
-        ) {
-          return
-        }
-
-        // somePromise.catch()
-        if (
-          node.expression.type === 'CallExpression' &&
-          node.expression.callee.type === 'MemberExpression' &&
-          terminationMethod.indexOf(node.expression.callee.property.name) !== -1
-        ) {
-          return
-        }
-
-        // somePromise['catch']()
-        if (
-          node.expression.type === 'CallExpression' &&
-          node.expression.callee.type === 'MemberExpression' &&
-          node.expression.callee.property.type === 'Literal' &&
-          node.expression.callee.property.value === 'catch'
-        ) {
+        if (isAllowedPromiseTermination(node.expression)) {
           return
         }
 

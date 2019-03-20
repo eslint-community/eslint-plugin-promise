@@ -34,6 +34,13 @@ You can pass an `{ allowThen: true }` as an option to this rule to allow for
 `.then(null, fn)` to be used instead of `catch()` at the end of the promise
 chain.
 
+##### `allowFinally`
+
+You can pass an `{ allowFinally: true }` as an option to this rule to allow for
+`.finally(fn)` to be used after `catch()` at the end of the promise chain. This
+is different from adding `'finally'` as a `terminationMethod` because it will
+still require the Promise chain to be "caught" beforehand.
+
 ##### `terminationMethod`
 
 You can pass a `{ terminationMethod: 'done' }` as an option to this rule to
