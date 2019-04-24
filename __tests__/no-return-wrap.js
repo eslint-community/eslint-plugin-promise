@@ -202,6 +202,18 @@ ruleTester.run('no-return-wrap', rule, {
     {
       code: 'doThing().then(() => { return Promise.resolve(4) })',
       errors: [{ message: resolveMessage }]
+    },
+
+    // issue #150
+    {
+      code: `
+      function a () {
+        return p.then(function(val) {
+          return Promise.resolve(val * 4)
+        })
+      }
+      `,
+      errors: [{ message: resolveMessage }]
     }
   ]
 })
