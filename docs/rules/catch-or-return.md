@@ -22,7 +22,7 @@ function doSomethingElse() {
 myPromise.then(doSomething)
 myPromise.then(doSomething, catchErrors) // catch() may be a little better
 function doSomethingElse() {
-  myPromise.then(doSomething)
+  return myPromise.then(doSomething)
 }
 ```
 
