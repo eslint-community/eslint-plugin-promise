@@ -1,3 +1,7 @@
+## 4.2.1
+
+- Added more use cases to `no-return-wrap`
+
 ## 4.0.1
 
 - Remove `promise/param-names` fixer
