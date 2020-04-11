@@ -11,6 +11,7 @@ const isPromise = require('./lib/is-promise')
 
 module.exports = {
   meta: {
+    type: 'problem',
     docs: {
       url: getDocsUrl('catch-or-return')
     },

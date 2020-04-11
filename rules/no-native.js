@@ -21,6 +21,7 @@ function isDeclared(scope, ref) {
 
 module.exports = {
   meta: {
+    type: 'suggestion',
     docs: {
       url: getDocsUrl('no-native')
     },

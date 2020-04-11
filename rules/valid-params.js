@@ -5,6 +5,7 @@ const isPromise = require('./lib/is-promise')
 
 module.exports = {
   meta: {
+    type: 'problem',
     docs: {
       description:
         'Ensures the proper number of arguments are passed to Promise functions',

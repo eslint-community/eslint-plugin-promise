@@ -12,6 +12,7 @@ const isCallback = require('./lib/is-callback')
 
 module.exports = {
   meta: {
+    type: 'suggestion',
     docs: {
       url: getDocsUrl('no-callback-in-promise')
     },
