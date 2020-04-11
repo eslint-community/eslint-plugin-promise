@@ -4,8 +4,8 @@ const rule = require('../rules/prefer-await-to-then')
 const RuleTester = require('eslint').RuleTester
 const ruleTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: 8
-  }
+    ecmaVersion: 8,
+  },
 })
 
 const message = 'Prefer await to then()/catch()/finally().'
@@ -19,34 +19,34 @@ ruleTester.run('prefer-await-to-then', rule, {
     `a = async () => {
       try { await something() } catch (error) { somethingElse() }
     }`,
-    'something().then(async () => await somethingElse())'
+    'something().then(async () => await somethingElse())',
   ],
 
   invalid: [
     {
       code: 'function foo() { hey.then(x => {}) }',
-      errors: [{ message }]
+      errors: [{ message }],
     },
     {
       code: 'function foo() { hey.then(function() { }).then() }',
-      errors: [{ message }, { message }]
+      errors: [{ message }, { message }],
     },
     {
       code: 'function foo() { hey.then(function() { }).then(x).catch() }',
-      errors: [{ message }, { message }, { message }]
+      errors: [{ message }, { message }, { message }],
     },
     {
       code:
         'async function a() { hey.then(function() { }).then(function() { }) }',
-      errors: [{ message }, { message }]
+      errors: [{ message }, { message }],
     },
     {
       code: 'function foo() { hey.catch(x => {}) }',
-      errors: [{ message }]
+      errors: [{ message }],
     },
     {
       code: 'function foo() { hey.finally(x => {}) }',
-      errors: [{ message }]
-    }
-  ]
+      errors: [{ message }],
+    },
+  ],
 })
