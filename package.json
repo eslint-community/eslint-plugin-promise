@@ -10,12 +10,18 @@
     "promises"
   ],
   "author": "jden <jason@denizac.org>",
-  "repository": "git@github.com:xjamundx/eslint-plugin-promise.git",
+  "contributors": [
+    "Brett Zamir"
+  ],
+  "repository": "https://github.com/xjamundx/eslint-plugin-promise",
+  "homepage": "https://github.com/xjamundx/eslint-plugin-promise",
+  "bugs": "https://github.com/xjamundx/eslint-plugin-promise/issues",
   "scripts": {
     "precommit": "lint-staged --concurrent false",
     "test": "jest",
     "lint": "eslint rules __tests__ index.js"
   },
+  "dependencies": {},
   "devDependencies": {
     "doctoc": "^1.4.0",
     "eslint": "^6.8.0",
