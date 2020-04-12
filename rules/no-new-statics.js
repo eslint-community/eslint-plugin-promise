@@ -8,7 +8,8 @@ module.exports = {
     docs: {
       url: getDocsUrl('no-new-statics')
     },
-    fixable: 'code'
+    fixable: 'code',
+    type: 'suggestion'
   },
   create(context) {
     return {

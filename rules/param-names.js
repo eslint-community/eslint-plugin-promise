@@ -6,8 +6,7 @@ module.exports = {
   meta: {
     docs: {
       url: getDocsUrl('param-names')
-    },
-    fixable: 'code'
+    }
   },
   create(context) {
     return {
