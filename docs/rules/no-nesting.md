@@ -12,19 +12,19 @@ myPromise
 #### Invalid
 
 ```js
-myPromise.then(val => {
+myPromise.then(val =>
   doSomething(val).then(doSomethingElse)
-})
+)
 
-myPromise.then(val => {
+myPromise.then(val =>
   doSomething(val).catch(errors)
-})
+)
 
-myPromise.catch(err => {
+myPromise.catch(err =>
   doSomething(err).then(doSomethingElse)
-})
+)
 
-myPromise.catch(err => {
+myPromise.catch(err =>
   doSomething(err).catch(errors)
-})
+)
 ```
