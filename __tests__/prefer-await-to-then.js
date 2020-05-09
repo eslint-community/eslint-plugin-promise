@@ -8,7 +8,7 @@ const ruleTester = new RuleTester({
   },
 })
 
-const message = 'Prefer await to then().'
+const message = 'Prefer await to then()/catch()/finally().'
 
 ruleTester.run('prefer-await-to-then', rule, {
   valid: [
@@ -16,6 +16,7 @@ ruleTester.run('prefer-await-to-then', rule, {
     'async function hi() { await thing().then() }',
     'async function hi() { await thing().catch() }',
     'a = async () => (await something())',
+    'a = async () => (try { await something() } catch { somethingElse() })',
     'something().then(async () => await somethingElse())',
   ],
 
@@ -36,6 +37,14 @@ ruleTester.run('prefer-await-to-then', rule, {
       code:
         'async function a() { hey.then(function() { }).then(function() { }) }',
       errors: [{ message }, { message }],
+    },
+    {
+      code: 'function foo() { hey.catch(x => {}) }',
+      errors: [{ message }],
+    },
+    {
+      code: 'function foo() { hey.finally(x => {}) }',
+      errors: [{ message }],
     },
   ],
 })
