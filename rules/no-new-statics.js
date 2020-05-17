@@ -25,7 +25,7 @@ module.exports = {
             data: { name: node.callee.property.name },
             fix(fixer) {
               return fixer.replaceTextRange(
-                [node.start, node.start + 'new '.length],
+                [node.range[0], node.range[0] + 'new '.length],
                 ''
               )
             },
