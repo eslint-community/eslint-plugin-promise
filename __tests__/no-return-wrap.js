@@ -54,7 +54,20 @@ ruleTester.run('no-return-wrap', rule, {
     },
 
     // not function bind
-    'doThing().then((function() { return Promise.resolve(4) }).toString())'
+    'doThing().then((function() { return Promise.resolve(4) }).toString())',
+
+    {
+      code: 'doThing().then(() => Promise.reject(4))',
+      options: [{ allowReject: true }]
+    },
+
+    // Call expressions that aren't Promise.resolve/reject
+    'doThing().then(function() { return a() })',
+    'doThing().then(function() { return Promise.a() })',
+    'doThing().then(() => { return a() })',
+    'doThing().then(() => { return Promise.a() })',
+    'doThing().then(() => a())',
+    'doThing().then(() => Promise.a())'
   ],
 
   invalid: [
@@ -115,7 +128,7 @@ ruleTester.run('no-return-wrap', rule, {
     // {code: 'doThing().catch(function(x) { return true ? Promise.resolve(4) : Promise.reject(5) })', errors: [{message: rejectMessage }, {message: resolveMessage}]},
     // {code: 'doThing().catch(function(x) { return x && Promise.reject(4) })', errors: [{message: rejectMessage}]}
 
-    // mltiple "ExpressionStatement"
+    // multiple "ExpressionStatement"
     {
       code: `
       fn(function() {
@@ -214,6 +227,16 @@ ruleTester.run('no-return-wrap', rule, {
       }
       `,
       errors: [{ message: resolveMessage }]
+    },
+
+    // issue #193
+    {
+      code: 'doThing().then(() => Promise.resolve(4))',
+      errors: [{ message: resolveMessage }]
+    },
+    {
+      code: 'doThing().then(() => Promise.reject(4))',
+      errors: [{ message: rejectMessage }]
     }
   ]
 })
