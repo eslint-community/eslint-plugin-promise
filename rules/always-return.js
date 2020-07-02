@@ -68,7 +68,7 @@ module.exports = {
     // funcInfoStack[i].branchInfoMap is an object representing information
     //   about all branches within the given function
     // funcInfoStack[i].branchInfoMap[j].good is a boolean representing whether
-    //   the given branch explictly `return`s or `throw`s. It starts as `false`
+    //   the given branch explicitly `return`s or `throw`s. It starts as `false`
     //   for every branch and is updated to `true` if a `return` or `throw`
     //   statement is found
     // funcInfoStack[i].branchInfoMap[j].loc is a eslint SourceLocation object
