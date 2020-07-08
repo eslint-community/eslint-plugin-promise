@@ -19,7 +19,8 @@
   "scripts": {
     "precommit": "lint-staged --concurrent false",
     "test": "jest",
-    "lint": "eslint rules __tests__ index.js"
+    "lint": "eslint rules __tests__ index.js",
+    "format": "prettier --write '**/*.js'"
   },
   "dependencies": {},
   "devDependencies": {
