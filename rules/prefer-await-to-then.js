@@ -40,7 +40,12 @@ module.exports = {
         }
 
         // if you're a then/catch/finally expression then you're probably a promise
-        if (node.property && (node.property.name === 'then' || node.property.name === 'catch' || node.property.name === 'finally')) {
+        if (
+          node.property &&
+          (node.property.name === 'then' ||
+            node.property.name === 'catch' ||
+            node.property.name === 'finally')
+        ) {
           context.report({
             node: node.property,
             message: 'Prefer await to then()/catch()/finally().'
