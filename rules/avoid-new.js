@@ -9,6 +9,7 @@ const getDocsUrl = require('./lib/get-docs-url')
 
 module.exports = {
   meta: {
+    type: 'suggestion',
     docs: {
       url: getDocsUrl('avoid-new')
     }

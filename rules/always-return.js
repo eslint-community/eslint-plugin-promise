@@ -56,6 +56,7 @@ function peek(arr) {
 
 module.exports = {
   meta: {
+    type: 'problem',
     docs: {
       url: getDocsUrl('always-return')
     }

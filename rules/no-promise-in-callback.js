@@ -11,6 +11,7 @@ const isInsideCallback = require('./lib/is-inside-callback')
 
 module.exports = {
   meta: {
+    type: 'suggestion',
     docs: {
       url: getDocsUrl('no-promise-in-callback')
     }

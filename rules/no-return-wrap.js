@@ -37,6 +37,7 @@ function isInPromise(context) {
 
 module.exports = {
   meta: {
+    type: 'suggestion',
     docs: {
       url: getDocsUrl('no-return-wrap')
     },

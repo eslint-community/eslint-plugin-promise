@@ -11,6 +11,7 @@ const isInsidePromise = require('./lib/is-inside-promise')
 
 module.exports = {
   meta: {
+    type: 'suggestion',
     docs: {
       url: getDocsUrl('no-nesting')
     }

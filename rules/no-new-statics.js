@@ -5,6 +5,7 @@ const getDocsUrl = require('./lib/get-docs-url')
 
 module.exports = {
   meta: {
+    type: 'problem',
     docs: {
       url: getDocsUrl('no-new-statics')
     },
