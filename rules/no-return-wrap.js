@@ -1,6 +1,6 @@
 /**
  * Rule: no-return-wrap function
- * Prevents uneccessary wrapping of results in Promise.resolve
+ * Prevents unnecessary wrapping of results in Promise.resolve
  * or Promise.reject as the Promise will do that for us
  */
 
@@ -49,26 +49,33 @@ module.exports = {
     const options = context.options[0] || {}
     const allowReject = options.allowReject
 
+    /**
+     * Checks a call expression, reporting if necessary.
+     * @param callExpression The call expression.
+     * @param node The node to report.
+     */
+    function checkCallExpression({ callee }, node) {
+      if (
+        isInPromise(context) &&
+        callee.type === 'MemberExpression' &&
+        callee.object.name === 'Promise'
+      ) {
+        if (callee.property.name === 'resolve') {
+          context.report({ node, messageId: 'resolve' })
+        } else if (!allowReject && callee.property.name === 'reject') {
+          context.report({ node, messageId: 'reject' })
+        }
+      }
+    }
+
     return {
       ReturnStatement(node) {
-        if (isInPromise(context)) {
-          if (node.argument) {
-            if (node.argument.type === 'CallExpression') {
-              if (node.argument.callee.type === 'MemberExpression') {
-                if (node.argument.callee.object.name === 'Promise') {
-                  if (node.argument.callee.property.name === 'resolve') {
-                    context.report({ node, messageId: 'resolve' })
-                  } else if (
-                    !allowReject &&
-                    node.argument.callee.property.name === 'reject'
-                  ) {
-                    context.report({ node, messageId: 'reject' })
-                  }
-                }
-              }
-            }
-          }
+        if (node.argument && node.argument.type === 'CallExpression') {
+          checkCallExpression(node.argument, node)
         }
+      },
+      'ArrowFunctionExpression > CallExpression'(node) {
+        checkCallExpression(node, node)
       }
     }
   }

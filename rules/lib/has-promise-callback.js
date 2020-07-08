@@ -1,5 +1,5 @@
 /**
- * Library: Has Promis eCallback
+ * Library: Has Promise Callback
  * Makes sure that an Expression node is part of a promise
  * with callback functions (like then() or catch())
  */
