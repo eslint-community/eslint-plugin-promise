@@ -3,6 +3,9 @@
 Calling a Promise static method with `new` is invalid, resulting in a
 `TypeError` at runtime.
 
+:wrench: The `--fix` option on the command line can automatically fix the
+problems reported by this rule.
+
 ## Rule Details
 
 This rule is aimed at flagging instances where a Promise static method is called
