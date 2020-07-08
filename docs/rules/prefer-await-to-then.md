@@ -1,4 +1,4 @@
-# Prefer `await` to `then()` for reading Promise values (prefer-await-to-then)
+# Prefer `await` to `then()`/`catch()`/`finally()` for reading Promise values (prefer-await-to-then)
 
 #### Valid
 
@@ -32,5 +32,15 @@ function exampleTwo() {
     .then(doSomethingSync)
     .then(doSomethingElseAsync)
     .catch(errors)
+}
+
+function exampleThree() {
+  return myPromise
+    .catch(errors)
+}
+
+function exampleFour() {
+  return myPromise
+    .finally(cleanup)
 }
 ```
