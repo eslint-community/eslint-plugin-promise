@@ -18,7 +18,7 @@
   "bugs": "https://github.com/xjamundx/eslint-plugin-promise/issues",
   "scripts": {
     "precommit": "lint-staged --concurrent false",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint rules __tests__ index.js",
     "format": "prettier --write '**/*.js'"
   },
