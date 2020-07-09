@@ -11,10 +11,14 @@ function isDeclared(scope, ref) {
       return false
     }
 
+    // Presumably can't pass this since the implicit `Promise` global
+    //  being checked here would always lack `defs`
+    // istanbul ignore else
     if (!variable.defs || !variable.defs.length) {
       return false
     }
 
+    // istanbul ignore next
     return true
   })
 }
@@ -46,6 +50,7 @@ module.exports = {
             return
           }
 
+          // istanbul ignore else
           if (!isDeclared(scope, ref)) {
             context.report({
               node: ref.identifier,

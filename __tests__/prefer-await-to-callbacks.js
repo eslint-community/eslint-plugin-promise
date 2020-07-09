@@ -17,6 +17,7 @@ ruleTester.run('prefer-await-to-callbacks', rule, {
     'async function hi() { await thing().catch() }',
     'dbConn.on("error", err => { console.error(err) })',
     'dbConn.once("error", err => { console.error(err) })',
+    'heart(something => {})',
   ],
 
   invalid: [

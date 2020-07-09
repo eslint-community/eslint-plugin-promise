@@ -20,6 +20,7 @@ ruleTester.run('prefer-await-to-then', rule, {
       try { await something() } catch (error) { somethingElse() }
     }`,
     'something().then(async () => await somethingElse())',
+    'function foo() { hey.somethingElse(x => {}) }',
   ],
 
   invalid: [

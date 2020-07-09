@@ -19,6 +19,7 @@ module.exports = {
             node.callee.property &&
             node.callee.property.name === 'finally'
           ) {
+            // istanbul ignore else -- passing `isPromise` means should have a body
             if (
               node.arguments &&
               node.arguments[0] &&
