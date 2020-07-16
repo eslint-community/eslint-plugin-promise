@@ -1,8 +1,5 @@
 # Wrap awaits with try/catch blocks (wrap-await-with-try-catch)
 
-Calling a Promise static method with `new` is invalid, resulting in a
-`TypeError` at runtime.
-
 ## Rule Details
 
 This rule is aimed at flagging awaits where they are not checked for possible rejections.
