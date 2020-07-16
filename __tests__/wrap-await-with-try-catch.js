@@ -32,6 +32,21 @@ ruleTester.run('wrap-await-with-try-catch', rule, {
                 console.log(ex1)
             }
         }
+    }`,
+    `async function test() { 
+        try {
+            (async function innerFn() {
+                try {
+                    await doSomething()
+                }
+                catch (ex) {
+                    console.log(ex)
+                }
+            })()
+        }
+        catch (ex) {
+            console.log(ex)
+        }
     }`
   ],
   invalid: [
@@ -57,6 +72,19 @@ ruleTester.run('wrap-await-with-try-catch', rule, {
             }
             catch (ex) {
                 await doSomethingOther()
+            }
+        }`,
+      errors: [{ message }]
+    },
+    {
+      code: `async function test() { 
+            try {
+                (async function innerFn() {
+                    await doSomething()
+                })()
+            }
+            catch (ex) {
+                console.log(ex)
             }
         }`,
       errors: [{ message }]
