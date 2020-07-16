@@ -17,7 +17,7 @@ ruleTester.run('wrap-await-with-try-catch', rule, {
             await doSomething()
         }
         catch(ex){
-            console.log(ex)
+            errorHandler(ex)
         }
     }`,
     `async function test() { 
@@ -29,7 +29,7 @@ ruleTester.run('wrap-await-with-try-catch', rule, {
                 await doSomething()
             }
             catch(ex1) {
-                console.log(ex1)
+                errorHandler(ex1)
             }
         }
     }`,
@@ -40,12 +40,19 @@ ruleTester.run('wrap-await-with-try-catch', rule, {
                     await doSomething()
                 }
                 catch (ex) {
-                    console.log(ex)
+                    errorHandler(ex)
                 }
             })()
         }
         catch (ex) {
-            console.log(ex)
+            errorHandler(ex)
+        }
+    }`,
+    `var foo = async () => {
+        try {
+             await fetch();
+        } catch (error) {
+             errorHandler(error);
         }
     }`
   ],
@@ -60,7 +67,7 @@ ruleTester.run('wrap-await-with-try-catch', rule, {
                 await doSomething()
             }
             finally {
-                console.log("ok.")
+                errorHandler("ok.")
             }
         }`,
       errors: [{ message }]
@@ -84,9 +91,15 @@ ruleTester.run('wrap-await-with-try-catch', rule, {
                 })()
             }
             catch (ex) {
-                console.log(ex)
+                errorHandler(ex)
             }
         }`,
+      errors: [{ message }]
+    },
+    {
+      code: `var foo = async () => {
+        await fetch();
+    }`,
       errors: [{ message }]
     }
   ]
