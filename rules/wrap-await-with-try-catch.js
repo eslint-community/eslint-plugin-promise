@@ -33,6 +33,8 @@ module.exports = {
           })
         } else if (
           ancestor.type === 'BlockStatement' &&
+          ancestor.parent &&
+          ancestor.parent.type === 'TryStatement' &&
           ancestor.parent.finalizer === ancestor
         ) {
           handledInOrder.push({
