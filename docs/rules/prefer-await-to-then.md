@@ -1,6 +1,39 @@
 # Prefer `await` to `then()`/`catch()`/`finally()` for reading Promise values (prefer-await-to-then)
 
-#### Valid
+`async` and `await` can be clearer and easier to understand than using `then()`.
+
+## Rule Details
+
+ES2017's `async` and `await` can be easier and clearer to deal with promises
+than using `then()` and `catch()`.
+
+Examples of **incorrect** code for this rule:
+
+```js
+function example() {
+  return myPromise.then(doSomethingSync).then(doSomethingElseAsync)
+}
+
+function exampleTwo() {
+  return myPromise
+    .then(doSomethingSync)
+    .then(doSomethingElseAsync)
+    .catch(errors)
+}
+
+
+function exampleThree() {
+  return myPromise
+    .catch(errors)
+}
+
+function exampleFour() {
+  return myPromise
+    .finally(cleanup)
+}
+```
+
+Examples of **correct** code for this rule:
 
 ```js
 async function example() {
@@ -18,29 +51,29 @@ async function exampleTwo() {
     errors(err)
   }
 }
-```
 
-#### Invalid
-
-```js
-function example() {
-  return myPromise.then(doSomethingSync).then(doSomethingElseAsync)
+async function exampleThree() {
+  try {
+    await myPromise
+  } catch(error) {
+    errors(error)
+  }
 }
 
-function exampleTwo() {
-  return myPromise
-    .then(doSomethingSync)
-    .then(doSomethingElseAsync)
-    .catch(errors)
-}
-
-function exampleThree() {
-  return myPromise
-    .catch(errors)
-}
-
-function exampleFour() {
-  return myPromise
-    .finally(cleanup)
+async function exampleFour() {
+  try {
+    await myPromise
+  } finally {
+    cleanup()
+  }
 }
 ```
+
+## When Not To Use It
+
+If you are not targeting an ES2017 or above environment and do not have a
+shim for `async`/`await`, you should disable this rule.
+
+## Further Reading
+
+- [Making asynchronous programming easier with async and await on MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await)
