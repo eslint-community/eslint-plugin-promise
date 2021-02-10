@@ -15,7 +15,8 @@ module.exports = {
     'avoid-new': require('./rules/avoid-new'),
     'no-new-statics': require('./rules/no-new-statics'),
     'no-return-in-finally': require('./rules/no-return-in-finally'),
-    'valid-params': require('./rules/valid-params')
+    'valid-params': require('./rules/valid-params'),
+    'wrap-await-with-try-catch': require('./rules/wrap-await-with-try-catch')
   },
   rulesConfig: {
     'param-names': 1,
@@ -39,7 +40,8 @@ module.exports = {
         'promise/avoid-new': 'off',
         'promise/no-new-statics': 'error',
         'promise/no-return-in-finally': 'warn',
-        'promise/valid-params': 'warn'
+        'promise/valid-params': 'warn',
+        'promise/wrap-await-with-try-catch': 'warn'
       }
     }
   }

@@ -61,7 +61,8 @@ Then configure the rules you want to use under the rules section.
     "promise/avoid-new": "warn",
     "promise/no-new-statics": "error",
     "promise/no-return-in-finally": "warn",
-    "promise/valid-params": "warn"
+    "promise/valid-params": "warn",
+    "promise/wrap-await-with-try-catch": "warn"
   }
 }
 ```
@@ -92,6 +93,7 @@ or start with the recommended rule set:
 | [`valid-params`][valid-params]                           | Ensures the proper number of arguments are passed to Promise functions           | :warning:   |          |
 | [`prefer-await-to-then`][prefer-await-to-then]           | Prefer `await` to `then()` for reading Promise values                            | :seven:     |          |
 | [`prefer-await-to-callbacks`][prefer-await-to-callbacks] | Prefer async/await to the callback pattern                                       | :seven:     |          |
+| [`wrap-await-with-try-catch`][wrap-await-with-try-catch] | Ensures `await` expressions are wrapped with a try/catch                         | :warning:   |          |
 
 **Key**
 
@@ -126,6 +128,7 @@ or start with the recommended rule set:
 [valid-params]: docs/rules/valid-params.md
 [prefer-await-to-then]: docs/rules/prefer-await-to-then.md
 [prefer-await-to-callbacks]: docs/rules/prefer-await-to-callbacks.md
+[wrap-await-with-try-catch]: docs/rules/wrap-await-with-try-catch.md
 [nodeify]: https://www.npmjs.com/package/nodeify
 [pify]: https://www.npmjs.com/package/pify
 [@macklinu]: https://github.com/macklinu
