@@ -50,7 +50,11 @@ module.exports = {
           ) {
             return
           }
-          if (arg.params && arg.params[0] && arg.params[0].name === 'err') {
+          if (
+            arg.params &&
+            arg.params[0] &&
+            (arg.params[0].name === 'err' || arg.params[0].name === 'error')
+          ) {
             if (!isInsideYieldOrAwait()) {
               context.report({ node: arg, messageId: 'error' })
             }

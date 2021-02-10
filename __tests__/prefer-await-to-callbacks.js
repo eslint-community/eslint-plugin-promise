@@ -51,6 +51,14 @@ ruleTester.run('prefer-await-to-callbacks', rule, {
     {
       code: 'callback()',
       errors: [{ message }]
+    },
+    {
+      code: 'heart(error => {})',
+      errors: [{ message }]
+    },
+    {
+      code: 'heart(function(error) {})',
+      errors: [{ message }]
     }
   ]
 })
