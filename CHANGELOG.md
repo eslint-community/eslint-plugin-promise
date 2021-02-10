@@ -1,3 +1,7 @@
+## 4.3.1.
+
+- Updated and applied prettier
+
 ## 4.3.0
 
 - https://github.com/xjamundx/eslint-plugin-promise/pull/202
