@@ -1,3 +1,13 @@
+## 4.3.0
+
+- https://github.com/xjamundx/eslint-plugin-promise/pull/202
+- Udpated jest
+
+## 4.2.2
+
+- Added license
+- Dependabot security updates
+
 ## 4.2.1
 
 - Added more use cases to `no-return-wrap`
