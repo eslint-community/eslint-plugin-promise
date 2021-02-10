@@ -11,13 +11,13 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      url: getDocsUrl('prefer-await-to-then')
-    }
+      url: getDocsUrl('prefer-await-to-then'),
+    },
   },
   create(context) {
     /** Returns true if node is inside yield or await expression. */
     function isInsideYieldOrAwait() {
-      return context.getAncestors().some(parent => {
+      return context.getAncestors().some((parent) => {
         return (
           parent.type === 'AwaitExpression' || parent.type === 'YieldExpression'
         )
@@ -43,10 +43,10 @@ module.exports = {
         if (node.property && node.property.name === 'then') {
           context.report({
             node: node.property,
-            message: 'Prefer await to then().'
+            message: 'Prefer await to then().',
           })
         }
-      }
+      },
     }
-  }
+  },
 }
