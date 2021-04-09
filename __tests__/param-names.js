@@ -17,6 +17,7 @@ ruleTester.run('param-names', rule, {
     'new Promise(resolve => {})',
     'new Promise((resolve, reject) => {})',
     'new Promise(() => {})',
+    'new NonPromise()',
   ],
 
   invalid: [

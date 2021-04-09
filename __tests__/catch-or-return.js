@@ -123,6 +123,9 @@ ruleTester.run('catch-or-return', rule, {
       code: 'frank().then(go).finally()',
       options: [{ terminationMethod: ['catch', 'finally'] }],
     },
+
+    // for coverage
+    'nonPromiseExpressionStatement();',
   ],
 
   invalid: [

@@ -22,6 +22,7 @@ module.exports = {
         const name = node.callee.property.name
         const numArgs = node.arguments.length
 
+        // istanbul ignore next -- `isPromise` filters out others
         switch (name) {
           case 'resolve':
           case 'reject':
@@ -58,6 +59,7 @@ module.exports = {
             }
             break
           default:
+            // istanbul ignore next -- `isPromise` filters out others
             break
         }
       },

@@ -35,6 +35,7 @@ function isInlineThenFunctionExpression(node) {
 }
 
 function hasParentReturnStatement(node) {
+  // istanbul ignore else -- not reachable given not checking `Program`
   if (node && node.parent && node.parent.type) {
     // if the parent is a then, and we haven't returned anything, fail
     if (isThenCallExpression(node.parent)) {
@@ -47,6 +48,7 @@ function hasParentReturnStatement(node) {
     return hasParentReturnStatement(node.parent)
   }
 
+  // istanbul ignore next -- not reachable given not checking `Program`
   return false
 }
 
@@ -137,13 +139,6 @@ module.exports = {
           if (!branch.good) {
             if (hasParentReturnStatement(branch.node)) {
               return
-            }
-
-            // check shortcircuit syntax like `x && x()` and `y || x()``
-            const prevSegments = segment.prevSegments
-            for (let ii = prevSegments.length - 1; ii >= 0; --ii) {
-              const prevSegment = prevSegments[ii]
-              if (funcInfo.branchInfoMap[prevSegment.id].good) return
             }
 
             context.report({
