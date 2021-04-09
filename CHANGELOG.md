@@ -1,3 +1,7 @@
+## 5.0.0
+
+- ESLint 7.0 Support
+
 ## 4.3.1.
 
 - Updated and applied prettier
