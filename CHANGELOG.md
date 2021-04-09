@@ -1,3 +1,8 @@
+## 5.1.0
+
+- Included `catch()` and `finally()` in `prefer-await-to-then`
+- Added some additional tests and upgraded some dev deps
+
 ## 5.0.0
 
 - ESLint 7.0 Support
