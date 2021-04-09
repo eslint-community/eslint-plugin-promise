@@ -1,7 +1,8 @@
 ## 5.1.0
 
-- Included `catch()` and `finally()` in `prefer-await-to-then`
-- Added some additional tests and upgraded some dev deps
+- Included `catch()` and `finally()` in `prefer-await-to-then` #196
+- Added some additional tests and upgraded some dev deps #196
+- Exempted array methods in prefer-await-to-callbacks ([#212](https://github.com/xjamundx/eslint-plugin-promise/issues/212))
 
 ## 5.0.0
 
