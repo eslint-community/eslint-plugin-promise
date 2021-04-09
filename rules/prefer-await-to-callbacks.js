@@ -50,6 +50,31 @@ module.exports = {
           ) {
             return
           }
+
+          // carve out exemption for map/filter/etc
+          const arrayMethods = [
+            'map',
+            'every',
+            'forEach',
+            'some',
+            'find',
+            'filter',
+          ]
+          const isLodash =
+            node.callee.object &&
+            ['lodash', 'underscore', '_'].includes(node.callee.object.name)
+          const callsArrayMethod =
+            node.callee.property &&
+            arrayMethods.includes(node.callee.property.name) &&
+            (node.arguments.length === 1 ||
+              (node.arguments.length === 2 && isLodash))
+          const isArrayMethod =
+            node.callee.name &&
+            arrayMethods.includes(node.callee.name) &&
+            node.arguments.length === 2
+          if (callsArrayMethod || isArrayMethod) return
+
+          // actually check for callbacks (I know this is the worst)
           if (
             arg.params &&
             arg.params[0] &&
