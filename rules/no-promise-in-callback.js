@@ -15,6 +15,7 @@ module.exports = {
     docs: {
       url: getDocsUrl('no-promise-in-callback'),
     },
+    schema: [],
   },
   create(context) {
     return {

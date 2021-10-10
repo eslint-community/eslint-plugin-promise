@@ -8,6 +8,7 @@ module.exports = {
     docs: {
       url: getDocsUrl('param-names'),
     },
+    schema: [],
   },
   create(context) {
     return {

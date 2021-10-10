@@ -15,6 +15,7 @@ module.exports = {
     docs: {
       url: getDocsUrl('no-nesting'),
     },
+    schema: [],
   },
   create(context) {
     return {

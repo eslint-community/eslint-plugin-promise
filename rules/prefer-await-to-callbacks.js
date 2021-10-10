@@ -11,6 +11,7 @@ module.exports = {
     messages: {
       error: 'Avoid callbacks. Prefer Async/Await.',
     },
+    schema: [],
   },
   create(context) {
     function checkLastParamsForCallback(node) {

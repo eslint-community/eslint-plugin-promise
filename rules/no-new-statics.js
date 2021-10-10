@@ -10,6 +10,7 @@ module.exports = {
       url: getDocsUrl('no-new-statics'),
     },
     fixable: 'code',
+    schema: [],
   },
   create(context) {
     return {

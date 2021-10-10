@@ -19,6 +19,20 @@ module.exports = {
     messages: {
       callback: 'Avoid calling back inside of a promise.',
     },
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          exceptions: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
   },
   create(context) {
     return {
