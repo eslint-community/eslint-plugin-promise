@@ -1,3 +1,7 @@
+## 5.1.1
+
+- Updated docs to include `no-callback-in-promise` reasons #215
+
 ## 5.1.0
 
 - Included `catch()` and `finally()` in `prefer-await-to-then` #196
