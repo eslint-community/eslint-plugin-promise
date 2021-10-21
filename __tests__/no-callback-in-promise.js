@@ -17,6 +17,14 @@ ruleTester.run('no-callback-in-promise', rule, {
     'function thing(callback) { callback() }',
     'doSomething(function(err) { callback(err) })',
 
+    // TODO: support safe callbacks (see #220)
+    // 'whatever.then((err) => { process.nextTick(() => cb()) })',
+    // 'whatever.then((err) => { setImmediate(() => cb())) })',
+    // 'whatever.then((err) => setImmediate(() => cb()))',
+    // 'whatever.then((err) => process.nextTick(() => cb()))',
+    // 'whatever.then((err) => process.nextTick(cb))',
+    // 'whatever.then((err) => setImmediate(cb))',
+
     // arrow functions and other things
     'let thing = (cb) => cb()',
     'doSomething(err => cb(err))',

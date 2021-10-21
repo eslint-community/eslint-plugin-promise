@@ -1,6 +1,8 @@
 # Avoid calling `cb()` inside of a `then()` or `catch()` (no-callback-in-promise)
 
-As a general rule, callbacks should never be directly invoked inside a [Promise.prototype.then()] or [Promise.prototype.catch()] method. That's because your callback may be unintentionally be invoked twice. Take the following example:
+As a general rule, callbacks should never be directly invoked inside a [Promise.prototype.then()] or [Promise.prototype.catch()] method. That's because your callback may be unintentionally be invoked twice. It also can be confusing to mix paradigms.
+
+Take the following example:
 
 ```js
 function callback(err, data) {
@@ -45,9 +47,9 @@ Your output will now look like the following:
 Callback got called with: null data
 ```
 
-Finally, if your callbacks have a Node.js signature (i.e. `callback(err, data)`), consider using [nodeify] for simplifying your code.
+Finally, if your callbacks have a Node.js signature (i.e. `callback(err, data)`), consider using [util.promsify] for promisifying your callback code instead of combining the approaches.
 
-[nodeify]: https://www.npmjs.com/package/nodeify
+[util.promisify]: https://nodejs.org/dist/latest/docs/api/util.html#utilpromisifyoriginal
 [Promise.prototype.then()]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then
 [Promise.prototype.catch()]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch
 [setImmediate()]: https://nodejs.org/docs/latest-v14.x/api/timers.html#timers_setimmediate_callback_args
