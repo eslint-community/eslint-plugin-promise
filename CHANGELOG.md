@@ -1,3 +1,7 @@
+## 5.2.0
+
+- Updated `param-names` rule to allow for unused params
+
 ## 5.1.1
 
 - Updated docs to include `no-callback-in-promise` reasons #215
@@ -6,7 +10,8 @@
 
 - Included `catch()` and `finally()` in `prefer-await-to-then` #196
 - Added some additional tests and upgraded some dev deps #196
-- Exempted array methods in prefer-await-to-callbacks ([#212](https://github.com/xjamundx/eslint-plugin-promise/issues/212))
+- Exempted array methods in prefer-await-to-callbacks
+  ([#212](https://github.com/xjamundx/eslint-plugin-promise/issues/212))
 
 ## 5.0.0
 
