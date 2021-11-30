@@ -7,6 +7,7 @@ Enforce standard parameter names for Promise constructors
 ```js
 new Promise(function (resolve) { ... })
 new Promise(function (resolve, reject) { ... })
+new Promise(function (_resolve, _reject) { ... }) // Unused marker for parameters are allowed
 ```
 
 #### Invalid
