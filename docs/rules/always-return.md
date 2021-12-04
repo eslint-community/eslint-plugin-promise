@@ -19,11 +19,11 @@ myPromise.then((b) => { if (b) { return "yes" } else { return "no" } });
 #### Invalid
 
 ```js
-myPromise.then(function(val) {})
+myPromise.then(function (val) {})
 myPromise.then(() => {
   doSomething()
 })
-myPromise.then(b => {
+myPromise.then((b) => {
   if (b) {
     return 'yes'
   } else {

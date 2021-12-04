@@ -17,12 +17,11 @@
   "homepage": "https://github.com/xjamundx/eslint-plugin-promise",
   "bugs": "https://github.com/xjamundx/eslint-plugin-promise/issues",
   "scripts": {
-    "precommit": "lint-staged --concurrent false",
-    "test": "jest --coverage",
-    "lint": "eslint rules __tests__ index.js",
-    "format": "prettier --write '**/*.js'"
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "prepare": "husky install",
+    "test": "jest --coverage"
   },
-  "dependencies": {},
   "devDependencies": {
     "doctoc": "^2.0.0",
     "eslint": "^7.23.0",
@@ -31,10 +30,10 @@
     "eslint-plugin-jest": "^24.3.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "husky": "^6.0.0",
+    "husky": "^7.0.4",
     "jest": "^26.6.3",
     "jest-runner-eslint": "^0.10.0",
-    "lint-staged": "^10.5.4",
+    "lint-staged": "^12.1.2",
     "prettier": "^2.2.1"
   },
   "peerDependencies": {
@@ -48,13 +47,8 @@
     "{README.md,CONTRIBUTING.md}": [
       "doctoc --maxlevel 3 --notitle"
     ],
-    "*.js": [
-      "prettier --write",
-      "eslint --fix"
-    ],
-    "*.+(json|md)": [
-      "prettier --write"
-    ]
+    "*.js": "eslint --cache --fix",
+    "*": "prettier --write --ignore-unknown"
   },
   "prettier": {
     "semi": false,

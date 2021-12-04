@@ -6,7 +6,7 @@ nothing would consume what's returned.
 #### Valid
 
 ```js
-myPromise.finally(function(val) {
+myPromise.finally(function (val) {
   console.log('value:', val)
 })
 ```
@@ -14,7 +14,7 @@ myPromise.finally(function(val) {
 #### Invalid
 
 ```js
-myPromise.finally(function(val) {
+myPromise.finally(function (val) {
   return val
 })
 ```
