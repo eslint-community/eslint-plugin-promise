@@ -18,6 +18,31 @@ module.exports = {
     messages: {
       terminationMethod: 'Expected {{ terminationMethod }}() or return',
     },
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          allowFinally: {
+            type: 'boolean',
+          },
+          allowThen: {
+            type: 'boolean',
+          },
+          terminationMethod: {
+            oneOf: [
+              { type: 'string' },
+              {
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
+              },
+            ],
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
   },
   create(context) {
     const options = context.options[0] || {}

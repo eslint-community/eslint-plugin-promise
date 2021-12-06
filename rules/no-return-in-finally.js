@@ -9,6 +9,7 @@ module.exports = {
     docs: {
       url: getDocsUrl('no-return-in-finally'),
     },
+    schema: [],
   },
   create(context) {
     return {

@@ -45,6 +45,17 @@ module.exports = {
       resolve: 'Avoid wrapping return values in Promise.resolve',
       reject: 'Expected throw instead of Promise.reject',
     },
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          allowReject: {
+            type: 'boolean',
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
   },
   create(context) {
     const options = context.options[0] || {}
