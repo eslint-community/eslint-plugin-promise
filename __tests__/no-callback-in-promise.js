@@ -67,8 +67,7 @@ ruleTester.run('no-callback-in-promise', rule, {
       errors: [{ message: errorMessage, column: 24 }],
     },
     {
-      code:
-        'a.then(function(data) { callback(data) }, function(err) { callback(err) })',
+      code: 'a.then(function(data) { callback(data) }, function(err) { callback(err) })',
       errors: [
         { message: errorMessage },
         { column: 59, message: errorMessage },

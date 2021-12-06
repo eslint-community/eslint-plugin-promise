@@ -82,8 +82,7 @@ ruleTester.run('always-return', rule, {
       errors: [{ message }],
     },
     {
-      code:
-        'hey.then(function() { if (x) { return you.then(function() { return x; }); } })',
+      code: 'hey.then(function() { if (x) { return you.then(function() { return x; }); } })',
       errors: [{ message }],
     },
     {

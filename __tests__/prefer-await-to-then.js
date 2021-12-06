@@ -37,8 +37,7 @@ ruleTester.run('prefer-await-to-then', rule, {
       errors: [{ message }, { message }, { message }],
     },
     {
-      code:
-        'async function a() { hey.then(function() { }).then(function() { }) }',
+      code: 'async function a() { hey.then(function() { }).then(function() { }) }',
       errors: [{ message }, { message }],
     },
     {
