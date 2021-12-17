@@ -20,8 +20,7 @@ ruleTester.run('catch-or-return', rule, {
 
     // arrow function use case
     {
-      code:
-        'postJSON("/smajobber/api/reportJob.json")\n\t.then(()=>this.setState())\n\t.catch(()=>this.setState())',
+      code: 'postJSON("/smajobber/api/reportJob.json")\n\t.then(()=>this.setState())\n\t.catch(()=>this.setState())',
       parserOptions: { ecmaVersion: 6 },
     },
 
@@ -41,8 +40,7 @@ ruleTester.run('catch-or-return', rule, {
       options: [{ allowThen: true }],
     },
     {
-      code:
-        'frank().then(go).then().then(null, function() { /* why bother */ })',
+      code: 'frank().then(go).then().then(null, function() { /* why bother */ })',
       options: [{ allowThen: true }],
     },
     {
@@ -65,8 +63,7 @@ ruleTester.run('catch-or-return', rule, {
       options: [{ allowThen: true }],
     },
     {
-      code:
-        'frank().then(a).then(b).then(null, function() { /* why bother */ })',
+      code: 'frank().then(a).then(b).then(null, function() { /* why bother */ })',
       options: [{ allowThen: true }],
     },
 
@@ -80,8 +77,7 @@ ruleTester.run('catch-or-return', rule, {
       options: [{ allowThen: true }],
     },
     {
-      code:
-        'frank().then(go).then().then(function() {}, function() { /* why bother */ })',
+      code: 'frank().then(go).then().then(function() {}, function() { /* why bother */ })',
       options: [{ allowThen: true }],
     },
     {
@@ -99,8 +95,7 @@ ruleTester.run('catch-or-return', rule, {
       options: [{ allowFinally: true }],
     },
     {
-      code:
-        'frank().then(go).then().catch(function() { /* why bother */ }).finally(fn)',
+      code: 'frank().then(go).then().catch(function() { /* why bother */ }).finally(fn)',
       options: [{ allowFinally: true }],
     },
 
@@ -167,8 +162,7 @@ ruleTester.run('catch-or-return', rule, {
       errors: [{ message: catchMessage }],
     },
     {
-      code:
-        'frank().then(go).then().catch(function() { /* why bother */ }).finally(fn)',
+      code: 'frank().then(go).then().catch(function() { /* why bother */ }).finally(fn)',
       errors: [{ message: catchMessage }],
     },
 

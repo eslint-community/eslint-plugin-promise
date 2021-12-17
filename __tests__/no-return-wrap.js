@@ -101,25 +101,21 @@ ruleTester.run('no-return-wrap', rule, {
 
     // needs to also look at weird paths
     {
-      code:
-        'doThing().then(function(x) { if (x>1) { return Promise.resolve(4) } else { throw "bad" } })',
+      code: 'doThing().then(function(x) { if (x>1) { return Promise.resolve(4) } else { throw "bad" } })',
       errors: [{ message: resolveMessage }],
     },
     {
-      code:
-        'doThing().then(function(x) { if (x>1) { return Promise.reject(4) } })',
+      code: 'doThing().then(function(x) { if (x>1) { return Promise.reject(4) } })',
       errors: [{ message: rejectMessage }],
     },
     {
-      code:
-        'doThing().then(null, function() { if (true && false) { return Promise.resolve() } })',
+      code: 'doThing().then(null, function() { if (true && false) { return Promise.resolve() } })',
       errors: [{ message: resolveMessage }],
     },
 
     // should do both
     {
-      code:
-        'doThing().catch(function(x) {if (x) { return Promise.resolve(4) } else { return Promise.reject() } })',
+      code: 'doThing().catch(function(x) {if (x) { return Promise.resolve(4) } else { return Promise.reject() } })',
       errors: [{ message: resolveMessage }, { message: rejectMessage }],
     },
 
@@ -201,13 +197,11 @@ ruleTester.run('no-return-wrap', rule, {
 
     // function bind
     {
-      code:
-        'doThing().then((function() { return Promise.resolve(4) }).bind(this))',
+      code: 'doThing().then((function() { return Promise.resolve(4) }).bind(this))',
       errors: [{ message: resolveMessage }],
     },
     {
-      code:
-        'doThing().then((function() { return Promise.resolve(4) }).bind(this).bind(this))',
+      code: 'doThing().then((function() { return Promise.resolve(4) }).bind(this).bind(this))',
       errors: [{ message: resolveMessage }],
     },
 
