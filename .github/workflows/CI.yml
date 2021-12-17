@@ -6,13 +6,12 @@ jobs:
   main:
     strategy:
       matrix:
-        node: [10.12, 10, 12.0, 12, 14, 15]
+        eslint: [7]
+        node: [10.12, 10, 12.0, 12, 14, 16]
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.8.0
-        with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
+        uses: styfle/cancel-workflow-action@0.9.1
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v2
@@ -22,10 +21,13 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: 📥 Download deps
+      - name: 📥 Download dependencies
         uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
+
+      - name: 📥 Install ESLint v${{ matrix.eslint }}
+        run: npm install eslint@${{ matrix.eslint }}
 
       - name: ▶️ Run test script
         run: npm run test -- --runInBand
