@@ -32,6 +32,7 @@ module.exports = {
     messages: {
       name: '"{{name}}" is not defined.',
     },
+    schema: [],
   },
   create(context) {
     /**

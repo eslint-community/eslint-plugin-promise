@@ -13,6 +13,7 @@ module.exports = {
     docs: {
       url: getDocsUrl('prefer-await-to-then'),
     },
+    schema: [],
   },
   create(context) {
     /** Returns true if node is inside yield or await expression. */

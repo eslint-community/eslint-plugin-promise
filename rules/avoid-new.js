@@ -13,6 +13,7 @@ module.exports = {
     docs: {
       url: getDocsUrl('avoid-new'),
     },
+    schema: [],
   },
   create(context) {
     return {

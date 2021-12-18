@@ -62,6 +62,7 @@ module.exports = {
     docs: {
       url: getDocsUrl('always-return'),
     },
+    schema: [],
   },
   create(context) {
     // funcInfoStack is a stack representing the stack of currently executing

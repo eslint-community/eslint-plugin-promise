@@ -11,6 +11,7 @@ module.exports = {
         'Ensures the proper number of arguments are passed to Promise functions',
       url: getDocsUrl('valid-params'),
     },
+    schema: [],
   },
   create(context) {
     return {
