@@ -23,5 +23,19 @@
     "eslint-plugin/test-case-shorthand-strings": "error",
     "node/no-unsupported-features": ["error", { "version": 6 }],
     "prettier/prettier": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["__tests__/*.js"],
+      "plugins": ["jest"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:jest/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "env": {
+        "jest/globals": true
+      }
+    }
+  ]
 }
