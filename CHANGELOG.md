@@ -1,3 +1,9 @@
+## 6.0.0
+
+- Dropped node 10 from engines #231
+- Updated a ton of deps #236, #237, #235, #234
+- ESLint 8 support #219
+
 ## 5.2.0
 
 - Updated `param-names` rule to allow for unused params
