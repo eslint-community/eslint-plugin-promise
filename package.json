@@ -25,22 +25,15 @@
     "format": "prettier --write . && eslint . --fix",
     "lint": "npm-run-all \"lint:*\"",
     "lint:eslint-docs": "npm run update:eslint-docs && git diff --exit-code",
-    "lint:js": "eslint --report-unused-disable-directives .",
+    "lint:js": "eslint --report-unused-disable-directives . && prettier --check .",
     "prepare": "husky",
     "test": "jest --coverage",
     "update:eslint-docs": "eslint-doc-generator && npm run format"
   },
   "lint-staged": {
-    "{README.md,CONTRIBUTING.md}": [
-      "doctoc --maxlevel 3 --notitle"
-    ],
-    "*.js": [
-      "prettier --write",
-      "eslint --report-unused-disable-directives --fix"
-    ],
-    "*.+(json|md)": [
-      "prettier --write"
-    ]
+    "*": "prettier --write --ignore-unknown",
+    "{README.md,CONTRIBUTING.md}": "doctoc --maxlevel 3 --notitle",
+    "*.js": "eslint --report-unused-disable-directives --fix"
   },
   "prettier": {
     "proseWrap": "always",
