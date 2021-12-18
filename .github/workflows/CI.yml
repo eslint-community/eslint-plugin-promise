@@ -6,7 +6,7 @@ jobs:
   main:
     strategy:
       matrix:
-        eslint: [7]
+        eslint: [7, 8]
         node: [12.22.0, 12, 14.17.0, 14, 16]
     runs-on: ubuntu-latest
     steps:
