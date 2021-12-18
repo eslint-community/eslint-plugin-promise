@@ -41,11 +41,11 @@ Promise.reject(Error())
 Promise.reject(referenceToError)
 
 // Promise.then() requires 1 or 2 arguments
-somePromise().then(value => doSomething(value))
+somePromise().then((value) => doSomething(value))
 somePromise().then(successCallback, errorCallback)
 
 // Promise.catch() requires 1 argument
-somePromise().catch(error => {
+somePromise().catch((error) => {
   handleError(error)
 })
 somePromise().catch(console.error)

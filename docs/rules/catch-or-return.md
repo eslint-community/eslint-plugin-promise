@@ -7,10 +7,7 @@ as well. Exceptions are made if you are returning that promise.
 
 ```js
 myPromise.then(doSomething).catch(errors)
-myPromise
-  .then(doSomething)
-  .then(doSomethingElse)
-  .catch(errors)
+myPromise.then(doSomething).then(doSomethingElse).catch(errors)
 function doSomethingElse() {
   return myPromise.then(doSomething)
 }
