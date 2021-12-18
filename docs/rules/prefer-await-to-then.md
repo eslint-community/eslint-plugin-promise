@@ -35,12 +35,10 @@ function exampleTwo() {
 }
 
 function exampleThree() {
-  return myPromise
-    .catch(errors)
+  return myPromise.catch(errors)
 }
 
 function exampleFour() {
-  return myPromise
-    .finally(cleanup)
+  return myPromise.finally(cleanup)
 }
 ```
