@@ -16,6 +16,10 @@
   "repository": "https://github.com/xjamundx/eslint-plugin-promise",
   "homepage": "https://github.com/xjamundx/eslint-plugin-promise",
   "bugs": "https://github.com/xjamundx/eslint-plugin-promise/issues",
+  "main": "index.js",
+  "files": [
+    "rules"
+  ],
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint .",
