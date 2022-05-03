@@ -64,8 +64,7 @@ issue because somebody else is likely already working on it.
 
 ## Setup
 
-When developing, prefer using Node ≥8 and npm ≥5. While this plugin supports
-Node 4, writing code with the latest stable Node and npm versions allows us to
+When developing, prefer using Node ≥14 and npm ≥8. Writing code with the latest stable Node and npm versions allows us to
 use newer developer tools.
 
 After
