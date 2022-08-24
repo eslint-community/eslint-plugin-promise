@@ -23,7 +23,6 @@
     "prepare": "husky install",
     "test": "jest --coverage"
   },
-  "dependencies": {},
   "devDependencies": {
     "doctoc": "^2.1.0",
     "eslint": "^8.5.0",
