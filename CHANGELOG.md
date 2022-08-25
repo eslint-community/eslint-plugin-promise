@@ -1,3 +1,7 @@
+## 6.0.1
+
+- Fixed @typescript-eslint/parser issue #331, #205
+
 ## 6.0.0
 
 - Dropped node 10 from engines #231
