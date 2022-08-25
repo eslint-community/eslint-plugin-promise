@@ -45,8 +45,16 @@ module.exports = {
     return {
       'Program:exit'() {
         const scope = context.getScope()
+        const leftToBeResolved =
+          scope.implicit.left ||
+          /* istanbul ignore next
+           * Fixes https://github.com/xjamundx/eslint-plugin-promise/issues/205.
+           * The problem was that @typescript-eslint has a scope manager
+           * which has `leftToBeResolved` instead of the default `left`.
+           */
+          scope.implicit.leftToBeResolved
 
-        scope.implicit.left.forEach((ref) => {
+        leftToBeResolved.forEach((ref) => {
           if (ref.identifier.name !== 'Promise') {
             return
           }

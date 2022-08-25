@@ -106,6 +106,7 @@ or start with the recommended rule set:
 
 - Jamund Ferguson - [@xjamundx][]
 - Macklin Underdown - [@macklinu][]
+- Aadit M Shah - [@aaditmshah][]
 
 ## License
 
@@ -128,5 +129,6 @@ or start with the recommended rule set:
 [prefer-await-to-callbacks]: docs/rules/prefer-await-to-callbacks.md
 [nodeify]: https://www.npmjs.com/package/nodeify
 [pify]: https://www.npmjs.com/package/pify
+[@aaditmshah]: https://github.com/aaditmshah
 [@macklinu]: https://github.com/macklinu
 [@xjamundx]: https://github.com/xjamundx

@@ -11,7 +11,8 @@
   ],
   "author": "jden <jason@denizac.org>",
   "contributors": [
-    "Brett Zamir"
+    "Brett Zamir",
+    "Aadit M Shah <aaditmshah@aadit.codes> (https://aadit.codes/)"
   ],
   "repository": "https://github.com/xjamundx/eslint-plugin-promise",
   "homepage": "https://github.com/xjamundx/eslint-plugin-promise",
@@ -22,7 +23,6 @@
     "prepare": "husky install",
     "test": "jest --coverage"
   },
-  "dependencies": {},
   "devDependencies": {
     "doctoc": "^2.1.0",
     "eslint": "^8.5.0",
