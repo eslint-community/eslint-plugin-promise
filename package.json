@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-promise",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "Enforce best practices for JavaScript promises",
   "keywords": [
     "eslint",
@@ -24,6 +24,7 @@
     "test": "jest --coverage"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^5.35.1",
     "doctoc": "^2.1.0",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
