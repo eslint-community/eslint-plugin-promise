@@ -1,3 +1,7 @@
+## 6.0.2
+
+- Added tests for @typescript-eslint/parser support
+
 ## 6.0.1
 
 - Fixed @typescript-eslint/parser issue #331, #205
