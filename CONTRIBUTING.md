@@ -41,22 +41,22 @@ We're always looking for more opinions on discussions in the issue tracker. It's
 a good opportunity to influence the future direction of this tool.
 
 The
-[`question` label](https://github.com/xjamundx/eslint-plugin-promise/labels/question)
+[`question` label](https://github.com/eslint-community/eslint-plugin-promise/labels/question)
 is a good place to find ongoing discussions.
 
 ### Write code
 
 You can use issue labels to discover issues you could help out with:
 
-- [`bug` issues](https://github.com/xjamundx/eslint-plugin-promise/labels/bug)
+- [`bug` issues](https://github.com/eslint-community/eslint-plugin-promise/labels/bug)
   are known bugs we'd like to fix
-- [`enhancement` issues](https://github.com/xjamundx/eslint-plugin-promise/labels/enhancement)
+- [`enhancement` issues](https://github.com/eslint-community/eslint-plugin-promise/labels/enhancement)
   are features we're open to including
 
 The
-[`help wanted`](https://github.com/xjamundx/eslint-plugin-promise/labels/help%20wanted)
+[`help wanted`](https://github.com/eslint-community/eslint-plugin-promise/labels/help%20wanted)
 and
-[`good first issue`](https://github.com/xjamundx/eslint-plugin-promise/labels/good%20first%20issue)
+[`good first issue`](https://github.com/eslint-community/eslint-plugin-promise/labels/good%20first%20issue)
 labels are especially useful.
 
 You may find an issue is assigned. Please double-check before starting on this

@@ -25,7 +25,7 @@
 - Included `catch()` and `finally()` in `prefer-await-to-then` #196
 - Added some additional tests and upgraded some dev deps #196
 - Exempted array methods in prefer-await-to-callbacks
-  ([#212](https://github.com/xjamundx/eslint-plugin-promise/issues/212))
+  ([#212](https://github.com/eslint-community/eslint-plugin-promise/issues/212))
 
 ## 5.0.0
 
@@ -37,7 +37,7 @@
 
 ## 4.3.0
 
-- https://github.com/xjamundx/eslint-plugin-promise/pull/202
+- https://github.com/eslint-community/eslint-plugin-promise/pull/202
 - Udpated jest
 
 ## 4.2.2
@@ -52,14 +52,14 @@
 ## 4.0.1
 
 - Remove `promise/param-names` fixer
-  ([#146](https://github.com/xjamundx/eslint-plugin-promise/pull/146))
+  ([#146](https://github.com/eslint-community/eslint-plugin-promise/pull/146))
 
 ## 4.0.0
 
 - Added fixer for `promise/no-new-statics` rule
-  ([#133](https://github.com/xjamundx/eslint-plugin-promise/pull/133))
+  ([#133](https://github.com/eslint-community/eslint-plugin-promise/pull/133))
 - Support ESLint v5
-  ([#144](https://github.com/xjamundx/eslint-plugin-promise/pull/144))
+  ([#144](https://github.com/eslint-community/eslint-plugin-promise/pull/144))
 
 This is a breaking change that drops support for Node v4. In order to use ESLint
 v5 and eslint-plugin-promise v4, you must use Node >=6.
@@ -67,25 +67,25 @@ v5 and eslint-plugin-promise v4, you must use Node >=6.
 ## 3.8.0
 
 - Removed `promise/avoid-new` from recommended configuration
-  ([#119](https://github.com/xjamundx/eslint-plugin-promise/pull/119))
+  ([#119](https://github.com/eslint-community/eslint-plugin-promise/pull/119))
 - Ignored event listener callbacks in `promise/prefer-await-to-callbacks`
-  ([#117](https://github.com/xjamundx/eslint-plugin-promise/pull/117))
+  ([#117](https://github.com/eslint-community/eslint-plugin-promise/pull/117))
 - Ignored top-level awaits in `promise/prefer-await-to-then`
-  ([#126](https://github.com/xjamundx/eslint-plugin-promise/pull/126))
+  ([#126](https://github.com/eslint-community/eslint-plugin-promise/pull/126))
 - Added docs for `promise/no-nesting` and `promise/prefer-await-to-then`
-  ([#120](https://github.com/xjamundx/eslint-plugin-promise/pull/120))
-  ([#121](https://github.com/xjamundx/eslint-plugin-promise/pull/121))
+  ([#120](https://github.com/eslint-community/eslint-plugin-promise/pull/120))
+  ([#121](https://github.com/eslint-community/eslint-plugin-promise/pull/121))
 
 ## 3.7.0
 
 - Added `promise/valid-params` rule
-  ([#85](https://github.com/xjamundx/eslint-plugin-promise/pull/85))
+  ([#85](https://github.com/eslint-community/eslint-plugin-promise/pull/85))
 - Added `promise/no-new-statics` rule
-  ([#82](https://github.com/xjamundx/eslint-plugin-promise/pull/82))
+  ([#82](https://github.com/eslint-community/eslint-plugin-promise/pull/82))
 - Added fixer for `promise/param-names` rule
-  ([#99](https://github.com/xjamundx/eslint-plugin-promise/pull/99))
+  ([#99](https://github.com/eslint-community/eslint-plugin-promise/pull/99))
 - Added rule documentation to each rule
-  ([#91](https://github.com/xjamundx/eslint-plugin-promise/pull/91))
+  ([#91](https://github.com/eslint-community/eslint-plugin-promise/pull/91))
 
 ## 3.6.0
 
