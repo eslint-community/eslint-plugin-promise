@@ -48,7 +48,7 @@ module.exports = {
         const leftToBeResolved =
           scope.implicit.left ||
           /**
-           * Fixes https://github.com/xjamundx/eslint-plugin-promise/issues/205.
+           * Fixes https://github.com/eslint-community/eslint-plugin-promise/issues/205.
            * The problem was that @typescript-eslint has a scope manager
            * which has `leftToBeResolved` instead of the default `left`.
            */

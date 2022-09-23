@@ -1,6 +1,6 @@
 'use strict'
 
-const REPO_URL = 'https://github.com/xjamundx/eslint-plugin-promise'
+const REPO_URL = 'https://github.com/eslint-community/eslint-plugin-promise'
 
 /**
  * Generates the URL to documentation for the given rule name. It uses the
