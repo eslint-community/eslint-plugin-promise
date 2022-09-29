@@ -2,10 +2,12 @@ node_modules
 .idea
 __tests__
 .npmignore
-.travis.yml
 .eslintrc.json
 docs
 coverage
 .github
 CONTRIBUTING.md
 CODE_OF_CONDUCT.md
+.husky
+.editorconfig
+.prettierignore
