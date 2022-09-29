@@ -42,6 +42,12 @@ ruleTester.run('always-return', rule, {
           }
         })
       })`,
+    `hey.then(({x, y}) => {
+        if (y) {
+          throw new Error(x || y)
+        }
+        return x
+      })`,
   ],
 
   invalid: [
@@ -104,6 +110,24 @@ ruleTester.run('always-return', rule, {
           })
         })
       })()`,
+      errors: [{ message }],
+    },
+    {
+      code: `
+      hey.then(({x, y}) => {
+        if (y) {
+          throw new Error(x || y)
+        }
+      })`,
+      errors: [{ message }],
+    },
+    {
+      code: `
+      hey.then(({x, y}) => {
+        if (y) {
+          return x
+        }
+      })`,
       errors: [{ message }],
     },
   ],
