@@ -53,7 +53,7 @@ Callback got called with: null data
 ```
 
 Finally, if your callbacks have a Node.js signature (i.e.
-`callback(err, data)`), consider using [util.promsify] for promisifying your
+`callback(err, data)`), consider using [util.promisify] for promisifying your
 callback code instead of combining the approaches.
 
 [util.promisify]:
