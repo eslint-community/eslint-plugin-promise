@@ -34,24 +34,6 @@ function isInlineThenFunctionExpression(node) {
   )
 }
 
-function hasParentReturnStatement(node) {
-  // istanbul ignore else -- not reachable given not checking `Program`
-  if (node && node.parent && node.parent.type) {
-    // if the parent is a then, and we haven't returned anything, fail
-    if (isThenCallExpression(node.parent)) {
-      return false
-    }
-
-    if (node.parent.type === 'ReturnStatement') {
-      return true
-    }
-    return hasParentReturnStatement(node.parent)
-  }
-
-  // istanbul ignore next -- not reachable given not checking `Program`
-  return false
-}
-
 function peek(arr) {
   return arr[arr.length - 1]
 }
@@ -106,8 +88,8 @@ module.exports = {
     }
 
     return {
-      ReturnStatement: markCurrentBranchAsGood,
-      ThrowStatement: markCurrentBranchAsGood,
+      'ReturnStatement:exit': markCurrentBranchAsGood,
+      'ThrowStatement:exit': markCurrentBranchAsGood,
 
       onCodePathSegmentStart(segment, node) {
         const funcInfo = peek(funcInfoStack)
@@ -138,10 +120,6 @@ module.exports = {
           const id = segment.id
           const branch = funcInfo.branchInfoMap[id]
           if (!branch.good) {
-            if (hasParentReturnStatement(branch.node)) {
-              return
-            }
-
             context.report({
               message: 'Each then() should return a value or throw',
               node: branch.node,
