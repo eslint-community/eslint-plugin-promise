@@ -22,7 +22,7 @@
   "bugs": "https://github.com/eslint-community/eslint-plugin-promise/issues",
   "scripts": {
     "format": "prettier --write .",
-    "lint": "eslint .",
+    "lint": "eslint --report-unused-disable-directives .",
     "prepare": "husky install",
     "test": "jest --coverage"
   },
@@ -55,7 +55,7 @@
     ],
     "*.js": [
       "prettier --write",
-      "eslint --fix"
+      "eslint --report-unused-disable-directives --fix"
     ],
     "*.+(json|md)": [
       "prettier --write"
