@@ -45,6 +45,17 @@ ruleTester.run('no-nesting', rule, {
     'doThing().then(function() { return Promise.resolve(4) })',
     'doThing().then(() => Promise.resolve(4))',
     'doThing().then(() => Promise.all([a]))',
+
+    // references vars in closure
+    `doThing()
+      .then(a => getB(a)
+        .then(b => getC(a, b))
+      )`,
+    `doThing()
+      .then(a => {
+        const c = a * 2;
+        return getB(c).then(b => getC(c, b))
+      })`,
   ],
 
   invalid: [
@@ -79,6 +90,25 @@ ruleTester.run('no-nesting', rule, {
     {
       code: 'doThing().then(() => b.catch())',
       errors: [{ message: errorMessage }],
+    },
+    // references vars in closure
+    {
+      code: `
+      doThing()
+        .then(a => getB(a)
+          .then(b => getC(b))
+        )`,
+      errors: [{ message: errorMessage, line: 4 }],
+    },
+    {
+      code: `
+      doThing()
+        .then(a => getB(a)
+          .then(b => getC(a, b)
+            .then(c => getD(a, c))
+          )
+        )`,
+      errors: [{ message: errorMessage, line: 5 }],
     },
   ],
 })
