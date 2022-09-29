@@ -8,6 +8,9 @@ jobs:
       matrix:
         eslint: [7, 8]
         node: [12.22.0, 12, 14.17.0, 14, 16]
+        include:
+          - eslint: 8
+            node: 18
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
