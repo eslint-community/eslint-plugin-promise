@@ -20,7 +20,7 @@ ruleTester.run('no-promise-in-callback', rule, {
     // arrow functions and other things
     'go(() => Promise.resolve(4))',
     'go((errrr) => a.then(b))',
-    'go((elpers) => { b.catch(c) })',
+    'go((helpers) => { b.catch(c) })',
     'go((e) => { b.then(c, d) })',
 
     // within promises it won't complain

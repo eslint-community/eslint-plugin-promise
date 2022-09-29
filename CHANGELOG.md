@@ -38,7 +38,7 @@
 ## 4.3.0
 
 - https://github.com/eslint-community/eslint-plugin-promise/pull/202
-- Udpated jest
+- Updated jest
 
 ## 4.2.2
 

@@ -38,7 +38,7 @@ module.exports = {
     /**
      * Checks for and reports reassigned constants
      *
-     * @param {Scope} scope - an escope Scope object
+     * @param {Scope} scope - an eslint-scope Scope object
      * @returns {void}
      * @private
      */
