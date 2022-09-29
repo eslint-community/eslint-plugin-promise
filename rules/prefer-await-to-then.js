@@ -35,7 +35,7 @@ module.exports = {
     }
 
     return {
-      MemberExpression(node) {
+      'CallExpression > MemberExpression.callee'(node) {
         if (isTopLevelScoped() || isInsideYieldOrAwait()) {
           return
         }

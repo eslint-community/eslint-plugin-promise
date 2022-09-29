@@ -21,6 +21,12 @@ ruleTester.run('prefer-await-to-then', rule, {
     }`,
     'something().then(async () => await somethingElse())',
     'function foo() { hey.somethingElse(x => {}) }',
+    `const isThenable = (obj) => {
+      return obj && typeof obj.then === 'function';
+    };`,
+    `function isThenable(obj) {
+      return obj && typeof obj.then === 'function';
+    }`,
   ],
 
   invalid: [
