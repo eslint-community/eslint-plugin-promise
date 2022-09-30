@@ -49,33 +49,41 @@ last `then()` callback in a promise chain does not warn if it does not have a
 `return`. Default is `false`.
 
 ```js
+// OK
 promise.then((x) => {
   console.log(x)
-}) // OK
+})
+// OK
 void promise.then((x) => {
   console.log(x)
-}) // OK
+})
+// OK
 await promise.then((x) => {
   console.log(x)
-}) // OK
+})
 
 promise
+  // NG
   .then((x) => {
     console.log(x)
-  }) // NG
+  })
+  // OK
   .then((x) => {
     console.log(x)
-  }) // OK
+  })
 
+// NG
 var v = promise.then((x) => {
   console.log(x)
-}) // NG
+})
+// NG
 var v = await promise.then((x) => {
   console.log(x)
-}) // NG
+})
 function foo() {
+  // NG
   return promise.then((x) => {
     console.log(x)
-  }) // NG
+  })
 }
 ```
