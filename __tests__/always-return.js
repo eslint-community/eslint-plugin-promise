@@ -4,7 +4,7 @@ const rule = require('../rules/always-return')
 const RuleTester = require('eslint').RuleTester
 const ruleTester = new RuleTester({
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 11,
   },
 })
 
@@ -48,6 +48,59 @@ ruleTester.run('always-return', rule, {
         }
         return x
       })`,
+    {
+      code: 'hey.then(x => { console.log(x) })',
+      options: [{ ignoreLastCallback: true }],
+    },
+    {
+      code: 'if(foo) { hey.then(x => { console.log(x) }) }',
+      options: [{ ignoreLastCallback: true }],
+    },
+    {
+      code: 'void hey.then(x => { console.log(x) })',
+      options: [{ ignoreLastCallback: true }],
+    },
+    {
+      code: `
+      async function foo() {
+        await hey.then(x => { console.log(x) })
+      }`,
+      options: [{ ignoreLastCallback: true }],
+    },
+    {
+      code: `hey?.then(x => { console.log(x) })`,
+      options: [{ ignoreLastCallback: true }],
+    },
+    {
+      code: `foo = (hey.then(x => { console.log(x) }), 42)`,
+      options: [{ ignoreLastCallback: true }],
+    },
+    {
+      code: `(42, hey.then(x => { console.log(x) }))`,
+      options: [{ ignoreLastCallback: true }],
+    },
+    {
+      code: `
+      hey
+        .then(x => { console.log(x) })
+        .catch(e => console.error(e))`,
+      options: [{ ignoreLastCallback: true }],
+    },
+    {
+      code: `
+      hey
+        .then(x => { console.log(x) })
+        .catch(e => console.error(e))
+        .finally(() => console.error('end'))`,
+      options: [{ ignoreLastCallback: true }],
+    },
+    {
+      code: `
+      hey
+        .then(x => { console.log(x) })
+        .finally(() => console.error('end'))`,
+      options: [{ ignoreLastCallback: true }],
+    },
   ],
 
   invalid: [
@@ -128,6 +181,45 @@ ruleTester.run('always-return', rule, {
           return x
         }
       })`,
+      errors: [{ message }],
+    },
+    {
+      code: `
+      hey
+        .then(function(x) { console.log(x) /* missing return here */ })
+        .then(function(y) { console.log(y) /* no error here */ })`,
+      options: [{ ignoreLastCallback: true }],
+      errors: [{ message, line: 3 }],
+    },
+    {
+      code: `const foo = hey.then(function(x) {});`,
+      options: [{ ignoreLastCallback: true }],
+      errors: [{ message }],
+    },
+    {
+      code: `
+      function foo() {
+        return hey.then(function(x) {});
+      }`,
+      options: [{ ignoreLastCallback: true }],
+      errors: [{ message }],
+    },
+    {
+      code: `
+      async function foo() {
+        return await hey.then(x => { console.log(x) })
+      }`,
+      options: [{ ignoreLastCallback: true }],
+      errors: [{ message }],
+    },
+    {
+      code: `const foo = hey?.then(x => { console.log(x) })`,
+      options: [{ ignoreLastCallback: true }],
+      errors: [{ message }],
+    },
+    {
+      code: `const foo = (42, hey.then(x => { console.log(x) }))`,
+      options: [{ ignoreLastCallback: true }],
       errors: [{ message }],
     },
   ],
