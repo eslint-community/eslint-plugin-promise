@@ -89,6 +89,7 @@ function findSameRoutePathSegment(segment) {
   const routeSegments = new Set()
   for (const route of iterateAllPrevPathSegments(segment)) {
     if (routeSegments.size === 0) {
+      // First
       for (const seg of route) {
         routeSegments.add(seg)
       }
@@ -100,10 +101,7 @@ function findSameRoutePathSegment(segment) {
       }
     }
   }
-  // istanbul ignore next -- Usually always present.
-  if (routeSegments.size === 0) {
-    return null
-  }
+
   for (const routeSegment of routeSegments) {
     let hasUnreached = false
     for (const segments of iterateAllNextPathSegments(routeSegment)) {
