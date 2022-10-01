@@ -33,6 +33,16 @@ ruleTester.run('valid-params', rule, {
     'Promise.all(iterable)',
     'Promise.all([one, two, three])',
 
+    // valid Promise.allSettled()
+    'Promise.allSettled([])',
+    'Promise.allSettled(iterable)',
+    'Promise.allSettled([one, two, three])',
+
+    // valid Promise.any()
+    'Promise.any([])',
+    'Promise.any(iterable)',
+    'Promise.any([one, two, three])',
+
     // valid Promise.then()
     'somePromise().then(success)',
     'somePromise().then(success, failure)',
@@ -127,6 +137,32 @@ ruleTester.run('valid-params', rule, {
       code: 'Promise.all({}, function() {}, 1, 2)',
       errors: [
         { message: 'Promise.all() requires 1 argument, but received 4' },
+      ],
+    },
+    // invalid Promise.allSettled()
+    {
+      code: 'Promise.allSettled(1, 2, 3)',
+      errors: [
+        { message: 'Promise.allSettled() requires 1 argument, but received 3' },
+      ],
+    },
+    {
+      code: 'Promise.allSettled({}, function() {}, 1, 2)',
+      errors: [
+        { message: 'Promise.allSettled() requires 1 argument, but received 4' },
+      ],
+    },
+    // invalid Promise.any()
+    {
+      code: 'Promise.any(1, 2, 3)',
+      errors: [
+        { message: 'Promise.any() requires 1 argument, but received 3' },
+      ],
+    },
+    {
+      code: 'Promise.any({}, function() {}, 1, 2)',
+      errors: [
+        { message: 'Promise.any() requires 1 argument, but received 4' },
       ],
     },
 

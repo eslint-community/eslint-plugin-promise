@@ -142,6 +142,22 @@ ruleTester.run('catch-or-return', rule, {
       errors: [{ message: catchMessage }],
     },
     {
+      code: 'Promise.all([])',
+      errors: [{ message: catchMessage }],
+    },
+    {
+      code: 'Promise.allSettled([])',
+      errors: [{ message: catchMessage }],
+    },
+    {
+      code: 'Promise.any([])',
+      errors: [{ message: catchMessage }],
+    },
+    {
+      code: 'Promise.race([])',
+      errors: [{ message: catchMessage }],
+    },
+    {
       code: 'frank().then(to).catch(fn).then(foo)',
       errors: [{ message: catchMessage }],
     },
