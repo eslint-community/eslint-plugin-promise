@@ -1,6 +1,9 @@
 'use strict'
 
 const getDocsUrl = require('./lib/get-docs-url')
+const {
+  isPromiseConstructorWithInlineExecutor,
+} = require('./lib/is-promise-constructor')
 
 module.exports = {
   meta: {
@@ -29,7 +32,7 @@ module.exports = {
 
     return {
       NewExpression(node) {
-        if (node.callee.name === 'Promise' && node.arguments.length === 1) {
+        if (isPromiseConstructorWithInlineExecutor(node)) {
           const params = node.arguments[0].params
 
           if (!params || !params.length) {
