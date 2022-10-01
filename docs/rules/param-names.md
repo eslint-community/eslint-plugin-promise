@@ -24,3 +24,17 @@ Promise constructor uses the
 [RevealingConstructor pattern](https://blog.domenic.me/the-revealing-constructor-pattern/).
 Using the same parameter names as the language specification makes code more
 uniform and easier to understand.
+
+#### Options
+
+##### `resolvePattern`
+
+You can pass a `{ resolvePattern: "^_?resolve$" }` as an option to this rule to
+the first argument name pattern that the rule allows. Default is
+`"^_?resolve$"`.
+
+##### `rejectPattern`
+
+You can pass a `{ rejectPattern: "^_?reject$" }` as an option to this rule to
+the second argument name pattern that the rule allows. Default is
+`"^_?reject$"`.
