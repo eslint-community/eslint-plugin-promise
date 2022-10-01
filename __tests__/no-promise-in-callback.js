@@ -78,6 +78,14 @@ ruleTester.run('no-promise-in-callback', rule, {
       errors: [{ message: errorMessage }],
     },
     {
+      code: 'function x(err) { Promise.allSettled() }',
+      errors: [{ message: errorMessage }],
+    },
+    {
+      code: 'function x(err) { Promise.any() }',
+      errors: [{ message: errorMessage }],
+    },
+    {
       code: 'let x = (err) => doThingWith(err).then(a)',
       errors: [{ message: errorMessage }],
     },

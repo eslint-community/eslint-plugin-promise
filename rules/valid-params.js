@@ -48,6 +48,8 @@ module.exports = {
             break
           case 'race':
           case 'all':
+          case 'allSettled':
+          case 'any':
           case 'catch':
           case 'finally':
             if (numArgs !== 1) {

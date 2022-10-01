@@ -32,6 +32,16 @@ ruleTester.run('no-new-statics', rule, {
       errors: [{ message: "Avoid calling 'new' on 'Promise.all()'" }],
     },
     {
+      code: 'new Promise.allSettled()',
+      output: 'Promise.allSettled()',
+      errors: [{ message: "Avoid calling 'new' on 'Promise.allSettled()'" }],
+    },
+    {
+      code: 'new Promise.any()',
+      output: 'Promise.any()',
+      errors: [{ message: "Avoid calling 'new' on 'Promise.any()'" }],
+    },
+    {
       code: 'new Promise.race()',
       output: 'Promise.race()',
       errors: [{ message: "Avoid calling 'new' on 'Promise.race()'" }],
