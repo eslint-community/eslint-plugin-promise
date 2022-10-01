@@ -8,7 +8,10 @@ const ruleTester = new RuleTester({
   },
 })
 
-const message = 'Promise constructor parameters must be named resolve, reject'
+const messageForResolve =
+  'Promise constructor parameters must be named to match "^_?resolve$"'
+const messageForReject =
+  'Promise constructor parameters must be named to match "^_?reject$"'
 
 ruleTester.run('param-names', rule, {
   valid: [
@@ -22,24 +25,42 @@ ruleTester.run('param-names', rule, {
     'new Promise((resolve, reject) => {})',
     'new Promise(() => {})',
     'new NonPromise()',
+    {
+      code: 'new Promise((yes, no) => {})',
+      options: [{ resolvePattern: '^yes$', rejectPattern: '^no$' }],
+    },
   ],
 
   invalid: [
     {
       code: 'new Promise(function(reject, resolve) {})',
-      errors: [{ message }],
+      errors: [{ message: messageForResolve }, { message: messageForReject }],
     },
     {
       code: 'new Promise(function(resolve, rej) {})',
-      errors: [{ message }],
+      errors: [{ message: messageForReject }],
     },
     {
       code: 'new Promise(yes => {})',
-      errors: [{ message }],
+      errors: [{ message: messageForResolve }],
     },
     {
       code: 'new Promise((yes, no) => {})',
-      errors: [{ message }],
+      errors: [{ message: messageForResolve }, { message: messageForReject }],
+    },
+    {
+      code: 'new Promise(function(resolve, reject) {})',
+      options: [{ resolvePattern: '^yes$', rejectPattern: '^no$' }],
+      errors: [
+        {
+          message:
+            'Promise constructor parameters must be named to match "^yes$"',
+        },
+        {
+          message:
+            'Promise constructor parameters must be named to match "^no$"',
+        },
+      ],
     },
   ],
 })

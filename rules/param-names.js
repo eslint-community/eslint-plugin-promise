@@ -8,9 +8,25 @@ module.exports = {
     docs: {
       url: getDocsUrl('param-names'),
     },
-    schema: [],
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          resolvePattern: { type: 'string' },
+          rejectPattern: { type: 'string' },
+        },
+        additionalProperties: false,
+      },
+    ],
   },
   create(context) {
+    const options = context.options[0] || {}
+    const resolvePattern = new RegExp(
+      options.resolvePattern || '^_?resolve$',
+      'u'
+    )
+    const rejectPattern = new RegExp(options.rejectPattern || '^_?reject$', 'u')
+
     return {
       NewExpression(node) {
         if (node.callee.name === 'Promise' && node.arguments.length === 1) {
@@ -20,16 +36,26 @@ module.exports = {
             return
           }
 
-          if (
-            (params[0].name !== 'resolve' && params[0].name !== '_resolve') ||
-            (params[1] &&
-              params[1].name !== 'reject' &&
-              params[1].name !== '_reject')
-          ) {
+          const resolveParamName = params[0] && params[0].name
+          if (resolveParamName && !resolvePattern.test(resolveParamName)) {
             context.report({
-              node,
+              node: params[0],
               message:
-                'Promise constructor parameters must be named resolve, reject',
+                'Promise constructor parameters must be named to match "{{ resolvePattern }}"',
+              data: {
+                resolvePattern: resolvePattern.source,
+              },
+            })
+          }
+          const rejectParamName = params[1] && params[1].name
+          if (rejectParamName && !rejectPattern.test(rejectParamName)) {
+            context.report({
+              node: params[1],
+              message:
+                'Promise constructor parameters must be named to match "{{ rejectPattern }}"',
+              data: {
+                rejectPattern: rejectPattern.source,
+              },
             })
           }
         }
