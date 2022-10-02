@@ -92,6 +92,7 @@ or start with the recommended rule set:
 | [`valid-params`][valid-params]                           | Ensures the proper number of arguments are passed to Promise functions           | :warning:   |          |
 | [`prefer-await-to-then`][prefer-await-to-then]           | Prefer `await` to `then()`/`catch()`/`finally()` for reading Promise values      | :seven:     |          |
 | [`prefer-await-to-callbacks`][prefer-await-to-callbacks] | Prefer async/await to the callback pattern                                       | :seven:     |          |
+| [`no-multiple-resolved`][no-multiple-resolved]           | Disallow creating new promises with paths that resolve multiple times            |             |          |
 
 **Key**
 
@@ -127,6 +128,7 @@ or start with the recommended rule set:
 [valid-params]: docs/rules/valid-params.md
 [prefer-await-to-then]: docs/rules/prefer-await-to-then.md
 [prefer-await-to-callbacks]: docs/rules/prefer-await-to-callbacks.md
+[no-multiple-resolved]: docs/rules/no-multiple-resolved.md
 [nodeify]: https://www.npmjs.com/package/nodeify
 [pify]: https://www.npmjs.com/package/pify
 [@aaditmshah]: https://github.com/aaditmshah
