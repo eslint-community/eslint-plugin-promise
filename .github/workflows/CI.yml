@@ -1,28 +1,70 @@
 name: CI
 on:
-  push: {}
-  pull_request: {}
+  push:
+  pull_request:
+
 jobs:
-  main:
-    strategy:
-      matrix:
-        eslint: [7, 8]
-        node: [12.22.0, 12, 14.17.0, 14, 16, 18]
+  lint:
+    name: ⬣ Lint
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.10.1
+        uses: styfle/cancel-workflow-action@0.11.0
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v3
 
-      - name: ⎔ Setup node
+      - name: ⎔ Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
-          cache: npm
+          node-version: 18
 
-      - name: 📥 Download deps
+      - name: 📥 Install dependencies
+        run: npm install
+
+      - name: ▶️ Run lint script
+        run: npm run lint
+
+  test:
+    name:
+      🧪 Test (Node@${{ matrix.node }} - ESLint@${{ matrix.eslint }} - ${{
+      matrix.os }})
+    strategy:
+      matrix:
+        eslint: [8]
+        node: [12.22.0, 12, 14.17.0, 14, 16.0.0, 16, 18]
+        os: [ubuntu-latest]
+        include:
+          # On other platforms
+          - os: windows-latest
+            eslint: 8
+            node: 18
+          - os: macos-latest
+            eslint: 8
+            node: 18
+          # On old ESLint versions
+          - eslint: 7
+            node: 18
+            os: ubuntu-latest
+          # On the minimum supported ESLint/Node.js version
+          - eslint: 7.0.0
+            node: 12.22.0
+            os: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.11.0
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup Node v${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          cache: npm
+          node-version: ${{ matrix.node }}
+
+      - name: 📥 Install dependencies
         run: npm ci
 
       - name: 📥 Install ESLint v${{ matrix.eslint }}
@@ -30,3 +72,6 @@ jobs:
 
       - name: ▶️ Run test script
         run: npm run test -- --runInBand
+
+      - name: ⬆️ Upload coverage report
+        uses: codecov/codecov-action@v3
