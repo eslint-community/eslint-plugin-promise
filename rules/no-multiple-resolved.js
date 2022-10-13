@@ -12,12 +12,23 @@ const {
 
 /**
  * @typedef {import('estree').Node} Node
+ * @typedef {import('estree').Expression} Expression
  * @typedef {import('estree').Identifier} Identifier
  * @typedef {import('estree').FunctionExpression} FunctionExpression
  * @typedef {import('estree').ArrowFunctionExpression} ArrowFunctionExpression
  * @typedef {import('estree').SimpleCallExpression} CallExpression
+ * @typedef {import('estree').MemberExpression} MemberExpression
+ * @typedef {import('estree').NewExpression} NewExpression
+ * @typedef {import('estree').ImportExpression} ImportExpression
+ * @typedef {import('estree').YieldExpression} YieldExpression
  * @typedef {import('eslint').Rule.CodePath} CodePath
  * @typedef {import('eslint').Rule.CodePathSegment} CodePathSegment
+ */
+
+/**
+ * An expression that can throw an error.
+ * see https://github.com/eslint/eslint/blob/e940be7a83d0caea15b64c1e1c2785a6540e2641/lib/linter/code-path-analysis/code-path-analyzer.js#L639-L643
+ * @typedef {CallExpression | MemberExpression | NewExpression | ImportExpression | YieldExpression} ThrowableExpression
  */
 
 /**
@@ -150,14 +161,18 @@ class CodePathInfo {
 
   /**
    * Check all paths and return paths resolved multiple times.
+   * @param {PromiseCodePathContext} promiseCodePathContext
    * @returns {Iterable<AlreadyResolvedData & { node: Identifier }>}
    */
-  *iterateReports() {
+  *iterateReports(promiseCodePathContext) {
     const targets = [...this.segmentInfos.values()].filter(
       (info) => info.resolved
     )
     for (const segmentInfo of targets) {
-      const result = this._getAlreadyResolvedData(segmentInfo.segment)
+      const result = this._getAlreadyResolvedData(
+        segmentInfo.segment,
+        promiseCodePathContext
+      )
       if (result) {
         yield {
           node: segmentInfo.resolved,
@@ -170,14 +185,18 @@ class CodePathInfo {
   /**
    * Compute the previously resolved path.
    * @param {CodePathSegment} segment
+   * @param {PromiseCodePathContext} promiseCodePathContext
    * @returns {AlreadyResolvedData | null}
    */
-  _getAlreadyResolvedData(segment) {
-    if (segment.prevSegments.length === 0) {
+  _getAlreadyResolvedData(segment, promiseCodePathContext) {
+    const prevSegments = segment.prevSegments.filter(
+      (prev) => !promiseCodePathContext.isResolvedTryBlockCodePathSegment(prev)
+    )
+    if (prevSegments.length === 0) {
       return null
     }
-    const prevSegmentInfos = segment.prevSegments.map((prev) =>
-      this._getProcessedSegmentInfo(prev)
+    const prevSegmentInfos = prevSegments.map((prev) =>
+      this._getProcessedSegmentInfo(prev, promiseCodePathContext)
     )
     if (prevSegmentInfos.every((info) => info.resolved)) {
       // If the previous paths are all resolved, the next path is also resolved.
@@ -246,8 +265,9 @@ class CodePathInfo {
   }
   /**
    * @param {CodePathSegment} segment
+   * @param {PromiseCodePathContext} promiseCodePathContext
    */
-  _getProcessedSegmentInfo(segment) {
+  _getProcessedSegmentInfo(segment, promiseCodePathContext) {
     const segmentInfo = this.segmentInfos.get(segment)
     if (segmentInfo) {
       return segmentInfo
@@ -255,7 +275,10 @@ class CodePathInfo {
     const newInfo = new CodePathSegmentInfo(this, segment)
     this.segmentInfos.set(segment, newInfo)
 
-    const alreadyResolvedData = this._getAlreadyResolvedData(segment)
+    const alreadyResolvedData = this._getAlreadyResolvedData(
+      segment,
+      promiseCodePathContext
+    )
     if (alreadyResolvedData) {
       if (alreadyResolvedData.kind === 'certain') {
         newInfo.resolved = alreadyResolvedData.resolved
@@ -291,6 +314,21 @@ class CodePathSegmentInfo {
   }
 }
 
+class PromiseCodePathContext {
+  constructor() {
+    /** @type {Set<string>} */
+    this.resolvedSegmentIds = new Set()
+  }
+  /** @param {CodePathSegment} */
+  addResolvedTryBlockCodePathSegment(segment) {
+    this.resolvedSegmentIds.add(segment.id)
+  }
+  /** @param {CodePathSegment} */
+  isResolvedTryBlockCodePathSegment(segment) {
+    return this.resolvedSegmentIds.has(segment.id)
+  }
+}
+
 module.exports = {
   meta: {
     type: 'problem',
@@ -308,6 +346,7 @@ module.exports = {
   /** @param {import('eslint').Rule.RuleContext} context */
   create(context) {
     const reported = new Set()
+    const promiseCodePathContext = new PromiseCodePathContext()
     /**
      * @param {Identifier} node
      * @param {Identifier} resolved
@@ -327,9 +366,14 @@ module.exports = {
         },
       })
     }
-    /** @param {CodePathInfo} codePathInfo */
-    function verifyMultipleResolvedPath(codePathInfo) {
-      for (const { node, resolved, kind } of codePathInfo.iterateReports()) {
+    /**
+     * @param {CodePathInfo} codePathInfo
+     * @param {PromiseCodePathContext} promiseCodePathContext
+     */
+    function verifyMultipleResolvedPath(codePathInfo, promiseCodePathContext) {
+      for (const { node, resolved, kind } of codePathInfo.iterateReports(
+        promiseCodePathContext
+      )) {
         report(node, resolved, kind)
       }
     }
@@ -338,6 +382,8 @@ module.exports = {
     const codePathInfoStack = []
     /** @type {Set<Identifier>[]} */
     const resolverReferencesStack = [new Set()]
+    /** @type {ThrowableExpression | null} */
+    let lastThrowableExpression = null
     return {
       /** @param {FunctionExpression | ArrowFunctionExpression} node */
       'FunctionExpression, ArrowFunctionExpression'(node) {
@@ -376,7 +422,33 @@ module.exports = {
       onCodePathEnd() {
         const codePathInfo = codePathInfoStack.shift()
         if (codePathInfo.resolvedCount > 1) {
-          verifyMultipleResolvedPath(codePathInfo)
+          verifyMultipleResolvedPath(codePathInfo, promiseCodePathContext)
+        }
+      },
+      /** @param {ThrowableExpression} node */
+      'CallExpression, MemberExpression, NewExpression, ImportExpression, YieldExpression:exit'(
+        node
+      ) {
+        lastThrowableExpression = node
+      },
+      /**
+       * @param {CodePathSegment} segment
+       * @param {Node} node
+       */
+      onCodePathSegmentEnd(segment, node) {
+        if (
+          node.type === 'CatchClause' &&
+          lastThrowableExpression &&
+          lastThrowableExpression.type === 'CallExpression' &&
+          node.parent.type === 'TryStatement' &&
+          node.parent.range[0] <= lastThrowableExpression.range[0] &&
+          lastThrowableExpression.range[1] <= node.parent.range[1]
+        ) {
+          const resolverReferences = resolverReferencesStack[0]
+          if (resolverReferences.has(lastThrowableExpression.callee)) {
+            // Mark a segment if the last expression in the try block is a call to resolve.
+            promiseCodePathContext.addResolvedTryBlockCodePathSegment(segment)
+          }
         }
       },
       /** @type {Identifier} */
