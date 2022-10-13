@@ -104,6 +104,9 @@ jobs:
         with:
           node-version: 18
 
+      - name: 📥 Install dependencies
+        run: npm install
+
       - name: 🚀 Release
         uses: cycjimmy/semantic-release-action@v3
         with:
