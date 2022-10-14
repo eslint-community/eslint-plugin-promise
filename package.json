@@ -9,22 +9,50 @@
     "promise",
     "promises"
   ],
+  "homepage": "https://github.com/eslint-community/eslint-plugin-promise",
+  "bugs": "https://github.com/eslint-community/eslint-plugin-promise/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eslint-community/eslint-plugin-promise"
+  },
+  "license": "ISC",
   "author": "jden <jason@denizac.org>",
   "contributors": [
     "Brett Zamir",
     "Aadit M Shah <aaditmshah@aadit.codes> (https://aadit.codes/)"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/eslint-community/eslint-plugin-promise"
-  },
-  "homepage": "https://github.com/eslint-community/eslint-plugin-promise",
-  "bugs": "https://github.com/eslint-community/eslint-plugin-promise/issues",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint --report-unused-disable-directives .",
     "prepare": "husky install",
     "test": "jest --coverage"
+  },
+  "lint-staged": {
+    "{README.md,CONTRIBUTING.md}": [
+      "doctoc --maxlevel 3 --notitle"
+    ],
+    "*.js": [
+      "prettier --write",
+      "eslint --report-unused-disable-directives --fix"
+    ],
+    "*.+(json|md)": [
+      "prettier --write"
+    ]
+  },
+  "prettier": {
+    "proseWrap": "always",
+    "semi": false,
+    "singleQuote": true
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^5.40.0",
@@ -46,33 +74,5 @@
   },
   "engines": {
     "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
-  },
-  "license": "ISC",
-  "lint-staged": {
-    "{README.md,CONTRIBUTING.md}": [
-      "doctoc --maxlevel 3 --notitle"
-    ],
-    "*.js": [
-      "prettier --write",
-      "eslint --report-unused-disable-directives --fix"
-    ],
-    "*.+(json|md)": [
-      "prettier --write"
-    ]
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "proseWrap": "always"
-  },
-  "jest": {
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    }
   }
 }
