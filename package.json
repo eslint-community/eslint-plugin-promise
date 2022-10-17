@@ -23,21 +23,14 @@
   ],
   "scripts": {
     "format": "prettier --write .",
-    "lint": "eslint --report-unused-disable-directives .",
+    "lint": "eslint --report-unused-disable-directives . && prettier --check .",
     "prepare": "husky install",
     "test": "jest --coverage"
   },
   "lint-staged": {
-    "{README.md,CONTRIBUTING.md}": [
-      "doctoc --maxlevel 3 --notitle"
-    ],
-    "*.js": [
-      "prettier --write",
-      "eslint --report-unused-disable-directives --fix"
-    ],
-    "*.+(json|md)": [
-      "prettier --write"
-    ]
+    "*": "prettier --write --ignore-unknown",
+    "{README.md,CONTRIBUTING.md}": "doctoc --maxlevel 3 --notitle",
+    "*.js": "eslint --report-unused-disable-directives --fix"
   },
   "prettier": {
     "proseWrap": "always",
