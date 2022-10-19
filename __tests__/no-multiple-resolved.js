@@ -88,6 +88,74 @@ ruleTester.run('no-multiple-resolved', rule, {
         resolve(value)
       })
     })`,
+    `new Promise(async (resolve, reject) => {
+      try {
+        await foo();
+        resolve();
+      } catch (error) {
+        reject(error);
+      }
+    })`,
+    `new Promise(async (resolve, reject) => {
+      try {
+        const r = await foo();
+        resolve(r);
+      } catch (error) {
+        reject(error);
+      }
+    })`,
+    `new Promise(async (resolve, reject) => {
+      try {
+        const r = await foo();
+        resolve(r());
+      } catch (error) {
+        reject(error);
+      }
+    })`,
+    `new Promise(async (resolve, reject) => {
+      try {
+        const r = await foo();
+        resolve(r.foo);
+      } catch (error) {
+        reject(error);
+      }
+    })`,
+    `new Promise(async (resolve, reject) => {
+      try {
+        const r = await foo();
+        resolve(new r());
+      } catch (error) {
+        reject(error);
+      }
+    })`,
+    `new Promise(async (resolve, reject) => {
+      try {
+        const r = await foo();
+        resolve(import(r));
+      } catch (error) {
+        reject(error);
+      }
+    })`,
+    `new Promise((resolve, reject) => {
+      fn(async function * () {
+        try {
+          const r = await foo();
+          resolve(yield r);
+        } catch (error) {
+          reject(error);
+        }
+      })
+    })`,
+    `new Promise(async (resolve, reject) => {
+      let a;
+      try {
+        const r = await foo();
+        resolve();
+        if(r) return;
+      } catch (error) {
+        reject(error);
+      }
+    })`,
   ],
 
   invalid: [
@@ -297,6 +365,101 @@ ruleTester.run('no-multiple-resolved', rule, {
         } finally {
           resolve(value)
         }
+      })`,
+      errors: [
+        {
+          message:
+            'Promise should not be resolved multiple times. Promise is potentially resolved on line 5.',
+          line: 8,
+        },
+      ],
+    },
+    {
+      code: `new Promise(async (resolve, reject) => {
+        try {
+          const r = await foo();
+          resolve();
+          r();
+        } catch (error) {
+          reject(error);
+        }
+      })`,
+      errors: [
+        {
+          message:
+            'Promise should not be resolved multiple times. Promise is potentially resolved on line 4.',
+          line: 7,
+        },
+      ],
+    },
+    {
+      code: `new Promise(async (resolve, reject) => {
+        let a;
+        try {
+          const r = await foo();
+          resolve();
+          a = r.foo;
+        } catch (error) {
+          reject(error);
+        }
+      })`,
+      errors: [
+        {
+          message:
+            'Promise should not be resolved multiple times. Promise is potentially resolved on line 5.',
+          line: 8,
+        },
+      ],
+    },
+    {
+      code: `new Promise(async (resolve, reject) => {
+        let a;
+        try {
+          const r = await foo();
+          resolve();
+          a = new r();
+        } catch (error) {
+          reject(error);
+        }
+      })`,
+      errors: [
+        {
+          message:
+            'Promise should not be resolved multiple times. Promise is potentially resolved on line 5.',
+          line: 8,
+        },
+      ],
+    },
+    {
+      code: `new Promise(async (resolve, reject) => {
+        let a;
+        try {
+          const r = await foo();
+          resolve();
+          import(r);
+        } catch (error) {
+          reject(error);
+        }
+      })`,
+      errors: [
+        {
+          message:
+            'Promise should not be resolved multiple times. Promise is potentially resolved on line 5.',
+          line: 8,
+        },
+      ],
+    },
+    {
+      code: `new Promise((resolve, reject) => {
+        fn(async function * () {
+          try {
+            const r = await foo();
+            resolve();
+            yield r;
+          } catch (error) {
+            reject(error);
+          }
+        })
       })`,
       errors: [
         {
