@@ -6,6 +6,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
+      description: 'Prefer async/await to the callback pattern.',
       url: getDocsUrl('prefer-await-to-callbacks'),
     },
     messages: {

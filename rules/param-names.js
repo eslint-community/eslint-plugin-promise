@@ -9,6 +9,8 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
+      description:
+        'Enforce consistent param names and ordering when creating new promises.',
       url: getDocsUrl('param-names'),
     },
     schema: [

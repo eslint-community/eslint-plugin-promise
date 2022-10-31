@@ -128,6 +128,8 @@ module.exports = {
   meta: {
     type: 'problem',
     docs: {
+      description:
+        'Require returning inside each `then()` to create readable and reusable Promise chains.',
       url: getDocsUrl('always-return'),
     },
     schema: [

@@ -1,10 +1,13 @@
-# Avoid calling `new` on a Promise static method (no-new-statics)
+# Disallow calling `new` on a Promise static method (`promise/no-new-statics`)
+
+✅ This rule is enabled in the `recommended` config.
+
+🔧 This rule is automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
+<!-- end auto-generated rule header -->
 
 Calling a Promise static method with `new` is invalid, resulting in a
 `TypeError` at runtime.
-
-:wrench: The `--fix` option on the command line can automatically fix the
-problems reported by this rule.
 
 ## Rule Details
 

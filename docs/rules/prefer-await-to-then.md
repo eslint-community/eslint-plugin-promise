@@ -1,4 +1,6 @@
-# Prefer `await` to `then()`/`catch()`/`finally()` for reading Promise values (prefer-await-to-then)
+# Prefer `await` to `then()`/`catch()`/`finally()` for reading Promise values (`promise/prefer-await-to-then`)
+
+<!-- end auto-generated rule header -->
 
 #### Valid
 

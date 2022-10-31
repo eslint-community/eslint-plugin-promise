@@ -1,4 +1,8 @@
-# Enforces the use of `catch()` on un-returned promises (catch-or-return)
+# Enforce the use of `catch()` on un-returned promises (`promise/catch-or-return`)
+
+✅ This rule is enabled in the `recommended` config.
+
+<!-- end auto-generated rule header -->
 
 Ensure that each time a `then()` is applied to a promise, a `catch()` is applied
 as well. Exceptions are made if you are returning that promise.

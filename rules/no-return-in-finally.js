@@ -7,6 +7,7 @@ module.exports = {
   meta: {
     type: 'problem',
     docs: {
+      description: 'Disallow return statements in `finally()`.',
       url: getDocsUrl('no-return-in-finally'),
     },
     schema: [],

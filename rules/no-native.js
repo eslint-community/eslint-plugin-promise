@@ -27,6 +27,8 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
+      description:
+        'Require creating a `Promise` constructor before using it in an ES5 environment.',
       url: getDocsUrl('no-native'),
     },
     messages: {
