@@ -333,6 +333,8 @@ module.exports = {
   meta: {
     type: 'problem',
     docs: {
+      description:
+        'Disallow creating new promises with paths that resolve multiple times.',
       url: getDocsUrl('no-multiple-resolved'),
     },
     messages: {

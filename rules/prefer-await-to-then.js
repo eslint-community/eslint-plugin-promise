@@ -11,6 +11,8 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
+      description:
+        'Prefer `await` to `then()`/`catch()`/`finally()` for reading Promise values.',
       url: getDocsUrl('prefer-await-to-then'),
     },
     schema: [],

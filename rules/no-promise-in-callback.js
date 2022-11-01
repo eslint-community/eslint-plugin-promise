@@ -13,6 +13,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
+      description: 'Disallow using promises inside of callbacks.',
       url: getDocsUrl('no-promise-in-callback'),
     },
     schema: [],

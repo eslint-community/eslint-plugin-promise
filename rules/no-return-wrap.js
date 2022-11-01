@@ -39,6 +39,8 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
+      description:
+        'Disallow wrapping values in `Promise.resolve` or `Promise.reject` when not needed.',
       url: getDocsUrl('no-return-wrap'),
     },
     messages: {

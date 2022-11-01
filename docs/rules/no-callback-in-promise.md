@@ -1,4 +1,8 @@
-# Avoid calling `cb()` inside of a `then()` or `catch()` (no-callback-in-promise)
+# Disallow calling `cb()` inside of a `then()` (use [nodeify][] instead) (`promise/no-callback-in-promise`)
+
+✅ This rule will _warn_ in the `recommended` config.
+
+<!-- end auto-generated rule header -->
 
 As a general rule, callbacks should never be directly invoked inside a
 [Promise.prototype.then()] or [Promise.prototype.catch()] method. That's because
@@ -68,3 +72,11 @@ callback code instead of combining the approaches.
   https://nodejs.org/docs/latest-v14.x/api/process.html#process_process_nexttick_callback_args
 [settimeout()]:
   https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
+
+## Options
+
+### `exceptions`
+
+String list of callback function names to exempt.
+
+[nodeify]: https://www.npmjs.com/package/nodeify

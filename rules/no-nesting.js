@@ -13,6 +13,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
+      description: 'Disallow nested `then()` or `catch()` statements.',
       url: getDocsUrl('no-nesting'),
     },
     schema: [],

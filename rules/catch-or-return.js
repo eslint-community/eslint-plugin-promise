@@ -13,6 +13,7 @@ module.exports = {
   meta: {
     type: 'problem',
     docs: {
+      description: 'Enforce the use of `catch()` on un-returned promises.',
       url: getDocsUrl('catch-or-return'),
     },
     messages: {

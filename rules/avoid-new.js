@@ -11,6 +11,8 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
+      description:
+        'Disallow creating `new` promises outside of utility libs (use [pify][] instead).',
       url: getDocsUrl('avoid-new'),
     },
     schema: [],

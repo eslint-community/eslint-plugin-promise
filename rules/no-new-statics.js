@@ -7,6 +7,7 @@ module.exports = {
   meta: {
     type: 'problem',
     docs: {
+      description: 'Disallow calling `new` on a Promise static method.',
       url: getDocsUrl('no-new-statics'),
     },
     fixable: 'code',

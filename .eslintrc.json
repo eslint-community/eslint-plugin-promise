@@ -19,6 +19,7 @@
     "prefer-arrow-callback": "error",
     "prefer-const": "error",
     "strict": ["error", "global"],
+    "eslint-plugin/require-meta-docs-description": ["error", { "pattern": "^(Enforce|Require|Disallow|Prefer).+\\.$" }],
     "eslint-plugin/prefer-placeholders": "error",
     "eslint-plugin/test-case-shorthand-strings": "error",
     "node/no-unsupported-features": ["error", { "version": 6 }],

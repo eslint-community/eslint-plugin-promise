@@ -8,7 +8,7 @@ module.exports = {
     type: 'problem',
     docs: {
       description:
-        'Ensures the proper number of arguments are passed to Promise functions',
+        'Enforces the proper number of arguments are passed to Promise functions.',
       url: getDocsUrl('valid-params'),
     },
     schema: [],
