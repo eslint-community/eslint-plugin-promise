@@ -1,6 +1,6 @@
 # Require returning inside each `then()` to create readable and reusable Promise chains (`promise/always-return`)
 
-✅ This rule is enabled in the `recommended` config.
+💼 This rule is enabled in the ✅ `recommended` config.
 
 <!-- end auto-generated rule header -->
 

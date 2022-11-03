@@ -1,6 +1,6 @@
 # Enforces the proper number of arguments are passed to Promise functions (`promise/valid-params`)
 
-✅ This rule will _warn_ in the `recommended` config.
+⚠️ This rule _warns_ in the ✅ `recommended` config.
 
 <!-- end auto-generated rule header -->
 
