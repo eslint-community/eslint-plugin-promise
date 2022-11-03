@@ -1,6 +1,6 @@
 # Require creating a `Promise` constructor before using it in an ES5 environment (`promise/no-native`)
 
-✅ This rule is _disabled_ in the `recommended` config.
+🚫 This rule is _disabled_ in the ✅ `recommended` config.
 
 <!-- end auto-generated rule header -->
 

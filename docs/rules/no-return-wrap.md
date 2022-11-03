@@ -1,6 +1,6 @@
 # Disallow wrapping values in `Promise.resolve` or `Promise.reject` when not needed (`promise/no-return-wrap`)
 
-✅ This rule is enabled in the `recommended` config.
+💼 This rule is enabled in the ✅ `recommended` config.
 
 <!-- end auto-generated rule header -->
 

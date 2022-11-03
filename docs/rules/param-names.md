@@ -1,6 +1,6 @@
 # Enforce consistent param names and ordering when creating new promises (`promise/param-names`)
 
-✅ This rule is enabled in the `recommended` config.
+💼 This rule is enabled in the ✅ `recommended` config.
 
 <!-- end auto-generated rule header -->
 
