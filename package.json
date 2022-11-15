@@ -58,7 +58,7 @@
     }
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^5.42.0",
+    "@typescript-eslint/parser": "^5.43.0",
     "doctoc": "^2.2.1",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
