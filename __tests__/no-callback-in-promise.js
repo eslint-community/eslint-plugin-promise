@@ -34,6 +34,18 @@ ruleTester.run('no-callback-in-promise', rule, {
       code: 'a.then(() => next())',
       options: [{ exceptions: ['next'] }],
     },
+    {
+      code: 'a.then(() => next()).catch((err) => next(err))',
+      options: [{ exceptions: ['next'] }],
+    },
+    {
+      code: 'a.then(next)',
+      options: [{ exceptions: ['next'] }],
+    },
+    {
+      code: 'a.then(next).catch(next)',
+      options: [{ exceptions: ['next'] }],
+    },
   ],
 
   invalid: [

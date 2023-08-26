@@ -11,6 +11,8 @@ const hasPromiseCallback = require('./lib/has-promise-callback')
 const isInsidePromise = require('./lib/is-inside-promise')
 const isCallback = require('./lib/is-callback')
 
+const CB_BLACKLIST = ['callback', 'cb', 'next', 'done']
+
 module.exports = {
   meta: {
     type: 'suggestion',
@@ -48,12 +50,7 @@ module.exports = {
           if (hasPromiseCallback(node)) {
             const name =
               node.arguments && node.arguments[0] && node.arguments[0].name
-            if (
-              name === 'callback' ||
-              name === 'cb' ||
-              name === 'next' ||
-              name === 'done'
-            ) {
+            if (!exceptions.includes(name) && CB_BLACKLIST.includes(name)) {
               context.report({
                 node: node.arguments[0],
                 messageId: 'callback',
