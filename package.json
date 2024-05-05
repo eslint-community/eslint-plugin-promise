@@ -56,6 +56,11 @@
         "statements": 100
       }
     },
+    "collectCoverageFrom": [
+      "rules/*.js",
+      "rules/*/*.js",
+      "!rules/lib/eslint-compat.js"
+    ],
     "testPathIgnorePatterns": [
       "__tests__/rule-tester.js"
     ],
