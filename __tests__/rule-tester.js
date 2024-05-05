@@ -6,7 +6,7 @@
 const { version } = require('eslint/package.json')
 const { RuleTester } = require('eslint')
 
-const majorVersion = Number.parseInt(version.split('.').at(0), 10)
+const majorVersion = Number.parseInt(version.split('.')[0], 10)
 
 exports.RuleTester = function (config = {}) {
   if (majorVersion <= 8) {
