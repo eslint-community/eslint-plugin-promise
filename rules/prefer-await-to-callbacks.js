@@ -1,5 +1,6 @@
 'use strict'
 
+const { getAncestors } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
 
 module.exports = {
@@ -21,8 +22,8 @@ module.exports = {
         context.report({ node: lastParam, messageId: 'error' })
       }
     }
-    function isInsideYieldOrAwait() {
-      return context.getAncestors().some((parent) => {
+    function isInsideYieldOrAwait(node) {
+      return getAncestors(context, node).some((parent) => {
         return (
           parent.type === 'AwaitExpression' || parent.type === 'YieldExpression'
         )
@@ -82,7 +83,7 @@ module.exports = {
             arg.params[0] &&
             (arg.params[0].name === 'err' || arg.params[0].name === 'error')
           ) {
-            if (!isInsideYieldOrAwait()) {
+            if (!isInsideYieldOrAwait(node)) {
               context.report({ node: arg, messageId: 'error' })
             }
           }

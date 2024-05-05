@@ -5,6 +5,7 @@
 
 'use strict'
 
+const { getAncestors } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
 const isPromise = require('./lib/is-promise')
 const isInsideCallback = require('./lib/is-inside-callback')
@@ -30,7 +31,7 @@ module.exports = {
         // what about if the parent is an ArrowFunctionExpression
         // would that imply an implicit return?
 
-        if (context.getAncestors().some(isInsideCallback)) {
+        if (getAncestors(context, node).some(isInsideCallback)) {
           context.report({
             node: node.callee,
             message: 'Avoid using promises inside of callbacks.',

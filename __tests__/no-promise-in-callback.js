@@ -1,7 +1,7 @@
 'use strict'
 
 const rule = require('../rules/no-promise-in-callback')
-const RuleTester = require('eslint').RuleTester
+const { RuleTester } = require('./rule-tester')
 const ruleTester = new RuleTester({
   parserOptions: {
     ecmaVersion: 6,

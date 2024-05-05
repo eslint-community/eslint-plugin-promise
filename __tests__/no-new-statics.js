@@ -1,7 +1,7 @@
 'use strict'
 
 const rule = require('../rules/no-new-statics')
-const RuleTester = require('eslint').RuleTester
+const { RuleTester } = require('./rule-tester')
 const ruleTester = new RuleTester()
 
 ruleTester.run('no-new-statics', rule, {

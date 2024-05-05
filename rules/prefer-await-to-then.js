@@ -5,6 +5,7 @@
 
 'use strict'
 
+const { getAncestors, getScope } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
 
 module.exports = {
@@ -19,8 +20,8 @@ module.exports = {
   },
   create(context) {
     /** Returns true if node is inside yield or await expression. */
-    function isInsideYieldOrAwait() {
-      return context.getAncestors().some((parent) => {
+    function isInsideYieldOrAwait(node) {
+      return getAncestors(context, node).some((parent) => {
         return (
           parent.type === 'AwaitExpression' || parent.type === 'YieldExpression'
         )
@@ -32,13 +33,13 @@ module.exports = {
      * Await statements are not allowed at the top level,
      * only within function declarations.
      */
-    function isTopLevelScoped() {
-      return context.getScope().block.type === 'Program'
+    function isTopLevelScoped(node) {
+      return getScope(context, node).block.type === 'Program'
     }
 
     return {
       'CallExpression > MemberExpression.callee'(node) {
-        if (isTopLevelScoped() || isInsideYieldOrAwait()) {
+        if (isTopLevelScoped(node) || isInsideYieldOrAwait(node)) {
           return
         }
 

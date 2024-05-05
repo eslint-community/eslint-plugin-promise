@@ -5,6 +5,7 @@
 
 'use strict'
 
+const { getScope } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
 const hasPromiseCallback = require('./lib/has-promise-callback')
 const isInsidePromise = require('./lib/is-inside-promise')
@@ -41,7 +42,7 @@ module.exports = {
     return {
       ':function'(node) {
         if (isInsidePromise(node)) {
-          callbackScopes.unshift(context.getScope())
+          callbackScopes.unshift(getScope(context, node))
         }
       },
       ':function:exit'(node) {
