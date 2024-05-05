@@ -29,7 +29,6 @@ exports.RuleTester = function (config = {}) {
 
   delete config.parserOptions
   delete config.parser
-  console.error(config)
 
   return new RuleTester(config)
 }
