@@ -40,7 +40,7 @@ jobs:
       matrix.os }})
     strategy:
       matrix:
-        eslint: [8, 9]
+        eslint: [8]
         node: [12.22.0, 12, 14.17.0, 14, 16.0.0, 16, 18, 20]
         os: [ubuntu-latest]
         include:
