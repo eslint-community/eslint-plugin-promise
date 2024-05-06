@@ -63,10 +63,7 @@
     ],
     "testPathIgnorePatterns": [
       "__tests__/rule-tester.js"
-    ],
-    "moduleNameMapper": {
-      "^@rule-tester$": "<rootDir>/tests/eslint-rule-tester.js"
-    }
+    ]
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^5.45.0",
