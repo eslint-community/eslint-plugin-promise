@@ -5,30 +5,62 @@
 'use strict'
 const { version } = require('eslint/package.json')
 const { RuleTester } = require('eslint')
+const globals = require('globals')
 
 const majorVersion = Number.parseInt(version.split('.')[0], 10)
+
+function convertConfig(config) {
+  if (config instanceof Object === false) {
+    return config
+  }
+
+  if (config.languageOptions == null) {
+    config.languageOptions = {}
+  }
+
+  if (config.parserOptions) {
+    Object.assign(config.languageOptions, config.parserOptions)
+  }
+
+  if (typeof config.parser === 'string') {
+    config.languageOptions.parser = require(config.parser)
+  }
+
+  if (config.globals instanceof Object) {
+    config.languageOptions.globals = config.globals
+    delete config.globals
+  }
+
+  if (config.env instanceof Object) {
+    if (config.languageOptions.globals == null) {
+      config.languageOptions.globals = {}
+    }
+
+    for (const key in config.env) {
+      Object.assign(config.languageOptions.globals, globals[key])
+    }
+
+    delete config.env
+  }
+
+  delete config.parserOptions
+  delete config.parser
+
+  return config
+}
 
 exports.RuleTester = function (config = {}) {
   if (majorVersion <= 8) {
     return new RuleTester(config)
   }
 
-  if (config.languageOptions == null) {
-    config.languageOptions = {}
-  }
-  if (config.languageOptions.ecmaVersion == null) {
-    config.languageOptions.ecmaVersion = 2020
-  }
-  if (config.parserOptions) {
-    Object.assign(config.languageOptions, config.parserOptions)
-  }
+  const ruleTester = new RuleTester(convertConfig(config))
+  const $run = ruleTester.run.bind(ruleTester)
+  ruleTester.run = function (name, rule, tests) {
+    tests.valid = tests.valid.map(convertConfig)
+    tests.invalid = tests.invalid.map(convertConfig)
 
-  if (config.parser) {
-    config.languageOptions.parser = require(config.parser)
+    $run(name, rule, tests)
   }
-
-  delete config.parserOptions
-  delete config.parser
-
-  return new RuleTester(config)
+  return ruleTester
 }
