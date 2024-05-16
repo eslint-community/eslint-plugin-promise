@@ -20,10 +20,12 @@ function convertConfig(config) {
 
   if (config.parserOptions) {
     Object.assign(config.languageOptions, config.parserOptions)
+    delete config.parserOptions
   }
 
   if (typeof config.parser === 'string') {
     config.languageOptions.parser = require(config.parser)
+     delete config.parser
   }
 
   if (config.globals instanceof Object) {
