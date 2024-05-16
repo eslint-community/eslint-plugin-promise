@@ -25,7 +25,7 @@ function convertConfig(config) {
 
   if (typeof config.parser === 'string') {
     config.languageOptions.parser = require(config.parser)
-     delete config.parser
+    delete config.parser
   }
 
   if (config.globals instanceof Object) {
