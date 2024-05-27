@@ -44,7 +44,7 @@ function isMemberCall(memberName, node) {
 /** @param {Node} node */
 function isFirstArgument(node) {
   return Boolean(
-    node.parent && node.parent.arguments && node.parent.arguments[0] === node
+    node.parent && node.parent.arguments && node.parent.arguments[0] === node,
   )
 }
 
@@ -143,6 +143,9 @@ module.exports = {
         additionalProperties: false,
       },
     ],
+    messages: {
+      thenShouldThrow: 'Each then() should return a value or throw',
+    },
   },
   create(context) {
     const options = context.options[0] || {}
@@ -242,7 +245,7 @@ module.exports = {
           const branch = funcInfo.branchInfoMap[id]
           if (!branch.good) {
             context.report({
-              message: 'Each then() should return a value or throw',
+              messageId: 'thenShouldThrow',
               node: branch.node,
             })
           }

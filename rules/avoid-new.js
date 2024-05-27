@@ -16,12 +16,15 @@ module.exports = {
       url: getDocsUrl('avoid-new'),
     },
     schema: [],
+    messages: {
+      avoidNew: 'Avoid creating new promises.',
+    },
   },
   create(context) {
     return {
       NewExpression(node) {
         if (node.callee.name === 'Promise') {
-          context.report({ node, message: 'Avoid creating new promises.' })
+          context.report({ node, messageId: 'avoidNew' })
         }
       },
     }

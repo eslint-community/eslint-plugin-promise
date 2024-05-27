@@ -18,6 +18,9 @@ module.exports = {
       url: getDocsUrl('no-promise-in-callback'),
     },
     schema: [],
+    messages: {
+      avoidPromiseInCallback: 'Avoid using promises inside of callbacks.',
+    },
   },
   create(context) {
     return {
@@ -34,7 +37,7 @@ module.exports = {
         if (getAncestors(context, node).some(isInsideCallback)) {
           context.report({
             node: node.callee,
-            message: 'Avoid using promises inside of callbacks.',
+            messageId: 'avoidPromiseInCallback',
           })
         }
       },

@@ -167,12 +167,12 @@ class CodePathInfo {
    */
   *iterateReports(promiseCodePathContext) {
     const targets = [...this.segmentInfos.values()].filter(
-      (info) => info.resolved
+      (info) => info.resolved,
     )
     for (const segmentInfo of targets) {
       const result = this._getAlreadyResolvedData(
         segmentInfo.segment,
-        promiseCodePathContext
+        promiseCodePathContext,
       )
       if (result) {
         yield {
@@ -191,13 +191,13 @@ class CodePathInfo {
    */
   _getAlreadyResolvedData(segment, promiseCodePathContext) {
     const prevSegments = segment.prevSegments.filter(
-      (prev) => !promiseCodePathContext.isResolvedTryBlockCodePathSegment(prev)
+      (prev) => !promiseCodePathContext.isResolvedTryBlockCodePathSegment(prev),
     )
     if (prevSegments.length === 0) {
       return null
     }
     const prevSegmentInfos = prevSegments.map((prev) =>
-      this._getProcessedSegmentInfo(prev, promiseCodePathContext)
+      this._getProcessedSegmentInfo(prev, promiseCodePathContext),
     )
     if (prevSegmentInfos.every((info) => info.resolved)) {
       // If the previous paths are all resolved, the next path is also resolved.
@@ -278,7 +278,7 @@ class CodePathInfo {
 
     const alreadyResolvedData = this._getAlreadyResolvedData(
       segment,
-      promiseCodePathContext
+      promiseCodePathContext,
     )
     if (alreadyResolvedData) {
       if (alreadyResolvedData.kind === 'certain') {
@@ -375,7 +375,7 @@ module.exports = {
      */
     function verifyMultipleResolvedPath(codePathInfo, promiseCodePathContext) {
       for (const { node, resolved, kind } of codePathInfo.iterateReports(
-        promiseCodePathContext
+        promiseCodePathContext,
       )) {
         report(node, resolved, kind)
       }
@@ -398,7 +398,7 @@ module.exports = {
         const resolverReferences = new Set()
         const resolvers = node.params.filter(
           /** @returns {node is Identifier} */
-          (node) => node && node.type === 'Identifier'
+          (node) => node && node.type === 'Identifier',
         )
         for (const resolver of resolvers) {
           const variable = getScope(context, node).set.get(resolver.name)
@@ -430,7 +430,7 @@ module.exports = {
       },
       /** @param {ThrowableExpression} node */
       'CallExpression, MemberExpression, NewExpression, ImportExpression, YieldExpression:exit'(
-        node
+        node,
       ) {
         lastThrowableExpression = node
       },
