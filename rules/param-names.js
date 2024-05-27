@@ -23,12 +23,18 @@ module.exports = {
         additionalProperties: false,
       },
     ],
+    messages: {
+      resolveParamNames:
+        'Promise constructor parameters must be named to match "{{ resolvePattern }}"',
+      rejectParamNames:
+        'Promise constructor parameters must be named to match "{{ rejectPattern }}"',
+    },
   },
   create(context) {
     const options = context.options[0] || {}
     const resolvePattern = new RegExp(
       options.resolvePattern || '^_?resolve$',
-      'u'
+      'u',
     )
     const rejectPattern = new RegExp(options.rejectPattern || '^_?reject$', 'u')
 
@@ -45,8 +51,7 @@ module.exports = {
           if (resolveParamName && !resolvePattern.test(resolveParamName)) {
             context.report({
               node: params[0],
-              message:
-                'Promise constructor parameters must be named to match "{{ resolvePattern }}"',
+              messageId: 'resolveParamNames',
               data: {
                 resolvePattern: resolvePattern.source,
               },
@@ -56,8 +61,7 @@ module.exports = {
           if (rejectParamName && !rejectPattern.test(rejectParamName)) {
             context.report({
               node: params[1],
-              message:
-                'Promise constructor parameters must be named to match "{{ rejectPattern }}"',
+              messageId: 'rejectParamNames',
               data: {
                 rejectPattern: rejectPattern.source,
               },

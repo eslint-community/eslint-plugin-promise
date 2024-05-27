@@ -12,6 +12,9 @@ module.exports = {
     },
     fixable: 'code',
     schema: [],
+    messages: {
+      avoidNewStatic: "Avoid calling 'new' on 'Promise.{{ name }}()'",
+    },
   },
   create(context) {
     return {
@@ -23,12 +26,12 @@ module.exports = {
         ) {
           context.report({
             node,
-            message: "Avoid calling 'new' on 'Promise.{{ name }}()'",
+            messageId: 'avoidNewStatic',
             data: { name: node.callee.property.name },
             fix(fixer) {
               return fixer.replaceTextRange(
                 [node.range[0], node.range[0] + 'new '.length],
-                ''
+                '',
               )
             },
           })

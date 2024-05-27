@@ -17,6 +17,9 @@ module.exports = {
       url: getDocsUrl('prefer-await-to-then'),
     },
     schema: [],
+    messages: {
+      preferWaitToCallback: 'Prefer await to then()/catch()/finally().',
+    },
   },
   create(context) {
     /** Returns true if node is inside yield or await expression. */
@@ -52,7 +55,7 @@ module.exports = {
         ) {
           context.report({
             node: node.property,
-            message: 'Prefer await to then()/catch()/finally().',
+            messageId: 'preferWaitToCallback',
           })
         }
       },

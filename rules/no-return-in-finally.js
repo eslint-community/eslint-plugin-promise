@@ -11,6 +11,9 @@ module.exports = {
       url: getDocsUrl('no-return-in-finally'),
     },
     schema: [],
+    messages: {
+      avoidReturnInFinally: 'No return in finally',
+    },
   },
   create(context) {
     return {
@@ -35,7 +38,7 @@ module.exports = {
               ) {
                 context.report({
                   node: node.callee.property,
-                  message: 'No return in finally',
+                  messageId: 'avoidReturnInFinally',
                 })
               }
             }
