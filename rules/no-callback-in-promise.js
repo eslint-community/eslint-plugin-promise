@@ -5,6 +5,7 @@
 
 'use strict'
 
+const { getAncestors } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
 const hasPromiseCallback = require('./lib/has-promise-callback')
 const isInsidePromise = require('./lib/is-inside-promise')
@@ -61,7 +62,7 @@ module.exports = {
           }
           return
         }
-        if (context.getAncestors().some(isInsidePromise)) {
+        if (getAncestors(context, node).some(isInsidePromise)) {
           context.report({
             node,
             messageId: 'callback',

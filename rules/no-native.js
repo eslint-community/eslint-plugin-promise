@@ -3,6 +3,7 @@
 
 'use strict'
 
+const { getScope } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
 
 function isDeclared(scope, ref) {
@@ -45,8 +46,8 @@ module.exports = {
      * @private
      */
     return {
-      'Program:exit'() {
-        const scope = context.getScope()
+      'Program:exit'(node) {
+        const scope = getScope(context, node)
         const leftToBeResolved =
           scope.implicit.left ||
           /**

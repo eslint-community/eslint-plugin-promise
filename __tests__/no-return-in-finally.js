@@ -1,6 +1,6 @@
 'use strict'
 
-const RuleTester = require('eslint').RuleTester
+const { RuleTester } = require('./rule-tester')
 const rule = require('../rules/no-return-in-finally')
 const ruleTester = new RuleTester({
   parserOptions: {

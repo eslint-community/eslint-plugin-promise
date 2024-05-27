@@ -1,7 +1,7 @@
 'use strict'
 
 const rule = require('../rules/no-native')
-const RuleTester = require('eslint').RuleTester
+const { RuleTester } = require('./rule-tester')
 const parserOptions = {
   ecmaVersion: 6,
   sourceType: 'module',

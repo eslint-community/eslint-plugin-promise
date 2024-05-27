@@ -5,6 +5,7 @@
 
 'use strict'
 
+const { getScope } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
 const {
   isPromiseConstructorWithInlineExecutor,
@@ -400,7 +401,7 @@ module.exports = {
           (node) => node && node.type === 'Identifier'
         )
         for (const resolver of resolvers) {
-          const variable = context.getScope().set.get(resolver.name)
+          const variable = getScope(context, node).set.get(resolver.name)
           // istanbul ignore next -- Usually always present.
           if (!variable) continue
           for (const reference of variable.references) {

@@ -1,8 +1,12 @@
 'use strict'
 
 const rule = require('../rules/catch-or-return')
-const RuleTester = require('eslint').RuleTester
-const ruleTester = new RuleTester()
+const { RuleTester } = require('./rule-tester')
+const ruleTester = new RuleTester({
+  parserOptions: {
+    ecmaVersion: 6,
+  },
+})
 
 const catchMessage = 'Expected catch() or return'
 const doneMessage = 'Expected done() or return'
@@ -19,10 +23,7 @@ ruleTester.run('catch-or-return', rule, {
     'frank.then(to).finally(fn).catch(jail)',
 
     // arrow function use case
-    {
-      code: 'postJSON("/smajobber/api/reportJob.json")\n\t.then(()=>this.setState())\n\t.catch(()=>this.setState())',
-      parserOptions: { ecmaVersion: 6 },
-    },
+    'postJSON("/smajobber/api/reportJob.json")\n\t.then(()=>this.setState())\n\t.catch(()=>this.setState())',
 
     // return
     'function a() { return frank().then(go) }',

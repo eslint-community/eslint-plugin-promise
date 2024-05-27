@@ -6,12 +6,12 @@
 
 'use strict'
 
+const { getAncestors } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
 const isPromise = require('./lib/is-promise')
 
-function isInPromise(context) {
-  let functionNode = context
-    .getAncestors()
+function isInPromise(context, node) {
+  let functionNode = getAncestors(context, node)
     .filter((node) => {
       return (
         node.type === 'ArrowFunctionExpression' ||
@@ -70,7 +70,7 @@ module.exports = {
      */
     function checkCallExpression({ callee }, node) {
       if (
-        isInPromise(context) &&
+        isInPromise(context, node) &&
         callee.type === 'MemberExpression' &&
         callee.object.name === 'Promise'
       ) {
