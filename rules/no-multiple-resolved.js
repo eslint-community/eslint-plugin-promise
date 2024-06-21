@@ -139,12 +139,22 @@ class CodePathInfo {
     /** @type {Map<CodePathSegment, CodePathSegmentInfo>} */
     this.segmentInfos = new Map()
     this.resolvedCount = 0
-    /** @type {CodePathSegment[]} */
-    this.allSegments = []
+    /** @type {Set<CodePathSegment>} */
+    this.currentSegments = new Set()
+  }
+
+  /** @param {CodePathSegment} segment */
+  onSegmentEnter(segment) {
+    this.currentSegments.add(segment)
+  }
+
+  /** @param {CodePathSegment} segment */
+  onSegmentExit(segment) {
+    this.currentSegments.delete(segment)
   }
 
   getCurrentSegmentInfos() {
-    return this.path.currentSegments.map((segment) => {
+    return [...this.currentSegments].map((segment) => {
       const info = this.segmentInfos.get(segment)
       if (info) {
         return info
@@ -434,6 +444,14 @@ module.exports = {
       ) {
         lastThrowableExpression = node
       },
+      /** @param {CodePathSegment} segment */
+      onCodePathSegmentStart(segment) {
+        codePathInfoStack[0].onSegmentEnter(segment)
+      },
+      /** @param {CodePathSegment} segment */
+      onUnreachableCodePathSegmentStart(segment) {
+        codePathInfoStack[0].onSegmentEnter(segment)
+      },
       /**
        * @param {CodePathSegment} segment
        * @param {Node} node
@@ -453,6 +471,11 @@ module.exports = {
             promiseCodePathContext.addResolvedTryBlockCodePathSegment(segment)
           }
         }
+        codePathInfoStack[0].onSegmentExit(segment)
+      },
+      /** @param {CodePathSegment} segment */
+      onUnreachableCodePathSegmentEnd(segment) {
+        codePathInfoStack[0].onSegmentExit(segment)
       },
       /** @type {Identifier} */
       'CallExpression > Identifier.callee'(node) {
