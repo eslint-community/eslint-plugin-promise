@@ -449,6 +449,7 @@ module.exports = {
         codePathInfoStack[0].onSegmentEnter(segment)
       },
       /** @param {CodePathSegment} segment */
+      /* istanbul ignore next */ // It is not called in ESLint v7.
       onUnreachableCodePathSegmentStart(segment) {
         codePathInfoStack[0].onSegmentEnter(segment)
       },
@@ -474,6 +475,7 @@ module.exports = {
         codePathInfoStack[0].onSegmentExit(segment)
       },
       /** @param {CodePathSegment} segment */
+      /* istanbul ignore next */ // It is not called in ESLint v7.
       onUnreachableCodePathSegmentEnd(segment) {
         codePathInfoStack[0].onSegmentExit(segment)
       },
