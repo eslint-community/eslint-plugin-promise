@@ -93,9 +93,9 @@ or start with the recommended rule set:
 💼 Configurations enabled in.\
 ⚠️ Configurations set to warn in.\
 🚫 Configurations disabled in.\
+✅ Set in the `flat/recommended` configuration.\
 ✅ Set in the `recommended` configuration.\
-🔧 Automatically fixable by the
-[`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).
+🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).
 
 | Name                                                                 | Description                                                                            | 💼  | ⚠️  | 🚫  | 🔧  |
 | :------------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :-- | :-- | :-- | :-- |
