@@ -68,11 +68,23 @@ Then configure the rules you want to use under the rules section.
 
 or start with the recommended rule set:
 
-```json
-{
-  "extends": ["plugin:promise/recommended"]
-}
-```
+- `eslint.config.js`:
+
+  ```js
+  import pluginPromise from 'eslint-plugin-promise'
+  export default [
+    // ...
+    pluginPromise.configs['flat/recommended'],
+  ]
+  ```
+
+- `.eslintrc.*`:
+
+  ```json
+  {
+    "extends": ["plugin:promise/recommended"]
+  }
+  ```
 
 ## Rules
 

@@ -1,6 +1,21 @@
 'use strict'
 
-module.exports = {
+const recommendedRules = {
+  'promise/always-return': 'error',
+  'promise/no-return-wrap': 'error',
+  'promise/param-names': 'error',
+  'promise/catch-or-return': 'error',
+  'promise/no-native': 'off',
+  'promise/no-nesting': 'warn',
+  'promise/no-promise-in-callback': 'warn',
+  'promise/no-callback-in-promise': 'warn',
+  'promise/avoid-new': 'off',
+  'promise/no-new-statics': 'error',
+  'promise/no-return-in-finally': 'warn',
+  'promise/valid-params': 'warn',
+}
+
+const pluginPromise = {
   rules: {
     'param-names': require('./rules/param-names'),
     'no-return-wrap': require('./rules/no-return-wrap'),
@@ -25,23 +40,15 @@ module.exports = {
     'no-native': 0,
     'catch-or-return': 1,
   },
-  configs: {
-    recommended: {
-      plugins: ['promise'],
-      rules: {
-        'promise/always-return': 'error',
-        'promise/no-return-wrap': 'error',
-        'promise/param-names': 'error',
-        'promise/catch-or-return': 'error',
-        'promise/no-native': 'off',
-        'promise/no-nesting': 'warn',
-        'promise/no-promise-in-callback': 'warn',
-        'promise/no-callback-in-promise': 'warn',
-        'promise/avoid-new': 'off',
-        'promise/no-new-statics': 'error',
-        'promise/no-return-in-finally': 'warn',
-        'promise/valid-params': 'warn',
-      },
-    },
+}
+pluginPromise.configs = {
+  recommended: {
+    plugins: ['promise'],
+    rules: recommendedRules,
+  },
+  'flat/recommended': {
+    plugins: { promise: pluginPromise },
+    rules: recommendedRules,
   },
 }
+module.exports = pluginPromise
