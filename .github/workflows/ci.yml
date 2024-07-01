@@ -44,6 +44,10 @@ jobs:
         node: [12.22.0, 12, 14.17.0, 14, 16.0.0, 16, 18, 20]
         os: [ubuntu-latest]
         include:
+          # ESLint v9
+          - eslint: 9
+            node: 20
+            os: ubuntu-latest
           # On other platforms
           - os: windows-latest
             eslint: 8
