@@ -97,23 +97,24 @@ or start with the recommended rule set:
 ✅ Set in the `recommended` configuration.\
 🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).
 
-| Name                                                                 | Description                                                                            | 💼  | ⚠️  | 🚫  | 🔧  |
-| :------------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :-- | :-- | :-- | :-- |
-| [always-return](docs/rules/always-return.md)                         | Require returning inside each `then()` to create readable and reusable Promise chains. | ✅  |     |     |     |
-| [avoid-new](docs/rules/avoid-new.md)                                 | Disallow creating `new` promises outside of utility libs (use [pify][] instead).       |     |     | ✅  |     |
-| [catch-or-return](docs/rules/catch-or-return.md)                     | Enforce the use of `catch()` on un-returned promises.                                  | ✅  |     |     |     |
-| [no-callback-in-promise](docs/rules/no-callback-in-promise.md)       | Disallow calling `cb()` inside of a `then()` (use [nodeify][] instead).                |     | ✅  |     |     |
-| [no-multiple-resolved](docs/rules/no-multiple-resolved.md)           | Disallow creating new promises with paths that resolve multiple times.                 |     |     |     |     |
-| [no-native](docs/rules/no-native.md)                                 | Require creating a `Promise` constructor before using it in an ES5 environment.        |     |     | ✅  |     |
-| [no-nesting](docs/rules/no-nesting.md)                               | Disallow nested `then()` or `catch()` statements.                                      |     | ✅  |     |     |
-| [no-new-statics](docs/rules/no-new-statics.md)                       | Disallow calling `new` on a Promise static method.                                     | ✅  |     |     | 🔧  |
-| [no-promise-in-callback](docs/rules/no-promise-in-callback.md)       | Disallow using promises inside of callbacks.                                           |     | ✅  |     |     |
-| [no-return-in-finally](docs/rules/no-return-in-finally.md)           | Disallow return statements in `finally()`.                                             |     | ✅  |     |     |
-| [no-return-wrap](docs/rules/no-return-wrap.md)                       | Disallow wrapping values in `Promise.resolve` or `Promise.reject` when not needed.     | ✅  |     |     |     |
-| [param-names](docs/rules/param-names.md)                             | Enforce consistent param names and ordering when creating new promises.                | ✅  |     |     |     |
-| [prefer-await-to-callbacks](docs/rules/prefer-await-to-callbacks.md) | Prefer async/await to the callback pattern.                                            |     |     |     |     |
-| [prefer-await-to-then](docs/rules/prefer-await-to-then.md)           | Prefer `await` to `then()`/`catch()`/`finally()` for reading Promise values.           |     |     |     |     |
-| [valid-params](docs/rules/valid-params.md)                           | Enforces the proper number of arguments are passed to Promise functions.               |     | ✅  |     |     |
+| Name                                                                         | Description                                                                            | 💼  | ⚠️  | 🚫  | 🔧  |
+| :--------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :-- | :-- | :-- | :-- |
+| [always-return](docs/rules/always-return.md)                                 | Require returning inside each `then()` to create readable and reusable Promise chains. | ✅  |     |     |     |
+| [avoid-new](docs/rules/avoid-new.md)                                         | Disallow creating `new` promises outside of utility libs (use [pify][] instead).       |     |     | ✅  |     |
+| [catch-or-return](docs/rules/catch-or-return.md)                             | Enforce the use of `catch()` on un-returned promises.                                  | ✅  |     |     |     |
+| [no-callback-in-promise](docs/rules/no-callback-in-promise.md)               | Disallow calling `cb()` inside of a `then()` (use [nodeify][] instead).                |     | ✅  |     |     |
+| [no-multiple-resolved](docs/rules/no-multiple-resolved.md)                   | Disallow creating new promises with paths that resolve multiple times.                 |     |     |     |     |
+| [no-native](docs/rules/no-native.md)                                         | Require creating a `Promise` constructor before using it in an ES5 environment.        |     |     | ✅  |     |
+| [no-nesting](docs/rules/no-nesting.md)                                       | Disallow nested `then()` or `catch()` statements.                                      |     | ✅  |     |     |
+| [no-new-statics](docs/rules/no-new-statics.md)                               | Disallow calling `new` on a Promise static method.                                     | ✅  |     |     | 🔧  |
+| [no-promise-in-callback](docs/rules/no-promise-in-callback.md)               | Disallow using promises inside of callbacks.                                           |     | ✅  |     |     |
+| [no-return-in-finally](docs/rules/no-return-in-finally.md)                   | Disallow return statements in `finally()`.                                             |     | ✅  |     |     |
+| [no-return-wrap](docs/rules/no-return-wrap.md)                               | Disallow wrapping values in `Promise.resolve` or `Promise.reject` when not needed.     | ✅  |     |     |     |
+| [param-names](docs/rules/param-names.md)                                     | Enforce consistent param names and ordering when creating new promises.                | ✅  |     |     |     |
+| [prefer-await-to-callbacks](docs/rules/prefer-await-to-callbacks.md)         | Prefer async/await to the callback pattern.                                            |     |     |     |     |
+| [prefer-await-to-then](docs/rules/prefer-await-to-then.md)                   | Prefer `await` to `then()`/`catch()`/`finally()` for reading Promise values.           |     |     |     |     |
+| [prefer-promise-static-methods](docs/rules/prefer-promise-static-methods.md) | Prefer `Promise.resolve(foo)` to `new Promise((resolve) => resolve(foo))`.             |     |     |     | 🔧  |
+| [valid-params](docs/rules/valid-params.md)                                   | Enforces the proper number of arguments are passed to Promise functions.               |     | ✅  |     |     |
 
 <!-- end auto-generated rules list -->
 
