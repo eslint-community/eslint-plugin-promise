@@ -68,11 +68,23 @@ Then configure the rules you want to use under the rules section.
 
 or start with the recommended rule set:
 
-```json
-{
-  "extends": ["plugin:promise/recommended"]
-}
-```
+- `eslint.config.js`:
+
+  ```js
+  import pluginPromise from 'eslint-plugin-promise'
+  export default [
+    // ...
+    pluginPromise.configs['flat/recommended'],
+  ]
+  ```
+
+- `.eslintrc.*`:
+
+  ```json
+  {
+    "extends": ["plugin:promise/recommended"]
+  }
+  ```
 
 ## Rules
 
@@ -81,9 +93,9 @@ or start with the recommended rule set:
 💼 Configurations enabled in.\
 ⚠️ Configurations set to warn in.\
 🚫 Configurations disabled in.\
+✅ Set in the `flat/recommended` configuration.\
 ✅ Set in the `recommended` configuration.\
-🔧 Automatically fixable by the
-[`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).
+🔧 Automatically fixable by the [`--fix` CLI option](https://eslint.org/docs/user-guide/command-line-interface#--fix).
 
 | Name                                                                 | Description                                                                            | 💼  | ⚠️  | 🚫  | 🔧  |
 | :------------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :-- | :-- | :-- | :-- |

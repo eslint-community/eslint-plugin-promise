@@ -70,7 +70,7 @@
     "doctoc": "^2.2.1",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-doc-generator": "^0.25.0",
+    "eslint-doc-generator": "^1.7.1",
     "eslint-plugin-eslint-plugin": "^4.4.1",
     "eslint-plugin-jest": "^26.9.0",
     "eslint-plugin-node": "^11.1.0",
