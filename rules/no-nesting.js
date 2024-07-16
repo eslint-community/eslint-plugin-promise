@@ -99,13 +99,13 @@ module.exports = {
         //
         const closestCallbackScope = callbackScopes[0]
         for (const reference of iterateDefinedReferences(
-          closestCallbackScope
+          closestCallbackScope,
         )) {
           if (
             node.arguments.some(
               (arg) =>
                 arg.range[0] <= reference.identifier.range[0] &&
-                reference.identifier.range[1] <= arg.range[1]
+                reference.identifier.range[1] <= arg.range[1],
             )
           ) {
             // Argument callbacks refer to variables defined in the callback function.

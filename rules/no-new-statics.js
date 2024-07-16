@@ -31,7 +31,7 @@ module.exports = {
             fix(fixer) {
               return fixer.replaceTextRange(
                 [node.range[0], node.range[0] + 'new '.length],
-                ''
+                '',
               )
             },
           })
