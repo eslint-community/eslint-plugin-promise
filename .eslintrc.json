@@ -1,16 +1,13 @@
 {
-  "env": {
-    "node": true
-  },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2024,
     "sourceType": "script"
   },
-  "plugins": ["eslint-plugin", "node", "prettier"],
+  "plugins": ["eslint-plugin", "n", "prettier"],
   "extends": [
     "eslint:recommended",
     "plugin:eslint-plugin/recommended",
-    "plugin:node/recommended",
+    "plugin:n/recommended",
     "plugin:prettier/recommended"
   ],
   "rules": {
@@ -25,7 +22,6 @@
     ],
     "eslint-plugin/prefer-placeholders": "error",
     "eslint-plugin/test-case-shorthand-strings": "error",
-    "node/no-unsupported-features": ["error", { "version": 6 }],
     "prettier/prettier": "error"
   }
 }
