@@ -18,6 +18,9 @@ module.exports = {
       url: getDocsUrl('no-nesting'),
     },
     schema: [],
+    messages: {
+      avoidNesting: 'Avoid nesting promises.',
+    },
   },
   create(context) {
     /**
@@ -112,7 +115,7 @@ module.exports = {
 
         context.report({
           node: node.callee.property,
-          message: 'Avoid nesting promises.',
+          messageId: 'avoidNesting',
         })
       },
     }
