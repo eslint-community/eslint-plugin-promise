@@ -143,6 +143,9 @@ module.exports = {
         additionalProperties: false,
       },
     ],
+    messages: {
+      thenShouldReturnOrThrow: 'Each then() should return a value or throw',
+    },
   },
   create(context) {
     const options = context.options[0] || {}
@@ -242,7 +245,7 @@ module.exports = {
           const branch = funcInfo.branchInfoMap[id]
           if (!branch.good) {
             context.report({
-              message: 'Each then() should return a value or throw',
+              messageId: 'thenShouldReturnOrThrow',
               node: branch.node,
             })
           }

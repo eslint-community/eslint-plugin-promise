@@ -12,6 +12,14 @@ module.exports = {
       url: getDocsUrl('valid-params'),
     },
     schema: [],
+    messages: {
+      requireOneOptionalArgument:
+        'Promise.{{ name }}() requires 0 or 1 arguments, but received {{ numArgs }}',
+      requireOneArgument:
+        'Promise.{{ name }}() requires 1 argument, but received {{ numArgs }}',
+      requireTwoOptionalArguments:
+        'Promise.{{ name }}() requires 1 or 2 arguments, but received {{ numArgs }}',
+    },
   },
   create(context) {
     return {
@@ -30,8 +38,7 @@ module.exports = {
             if (numArgs > 1) {
               context.report({
                 node,
-                message:
-                  'Promise.{{ name }}() requires 0 or 1 arguments, but received {{ numArgs }}',
+                messageId: 'requireOneOptionalArgument',
                 data: { name, numArgs },
               })
             }
@@ -40,8 +47,7 @@ module.exports = {
             if (numArgs < 1 || numArgs > 2) {
               context.report({
                 node,
-                message:
-                  'Promise.{{ name }}() requires 1 or 2 arguments, but received {{ numArgs }}',
+                messageId: 'requireTwoOptionalArguments',
                 data: { name, numArgs },
               })
             }
@@ -55,8 +61,7 @@ module.exports = {
             if (numArgs !== 1) {
               context.report({
                 node,
-                message:
-                  'Promise.{{ name }}() requires 1 argument, but received {{ numArgs }}',
+                messageId: 'requireOneArgument',
                 data: { name, numArgs },
               })
             }
