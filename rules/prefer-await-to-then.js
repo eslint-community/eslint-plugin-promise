@@ -18,7 +18,7 @@ module.exports = {
     },
     schema: [],
     messages: {
-      preferWaitToCallback: 'Prefer await to then()/catch()/finally().',
+      preferAwaitToCallback: 'Prefer await to then()/catch()/finally().',
     },
   },
   create(context) {
@@ -55,7 +55,7 @@ module.exports = {
         ) {
           context.report({
             node: node.property,
-            messageId: 'preferWaitToCallback',
+            messageId: 'preferAwaitToCallback',
           })
         }
       },

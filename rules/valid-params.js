@@ -17,7 +17,7 @@ module.exports = {
         'Promise.{{ name }}() requires 0 or 1 arguments, but received {{ numArgs }}',
       requireOneArgument:
         'Promise.{{ name }}() requires 1 argument, but received {{ numArgs }}',
-      requireTwoOptionalArgument:
+      requireTwoOptionalArguments:
         'Promise.{{ name }}() requires 1 or 2 arguments, but received {{ numArgs }}',
     },
   },
@@ -47,7 +47,7 @@ module.exports = {
             if (numArgs < 1 || numArgs > 2) {
               context.report({
                 node,
-                messageId: 'requireTwoOptionalArgument',
+                messageId: 'requireTwoOptionalArguments',
                 data: { name, numArgs },
               })
             }

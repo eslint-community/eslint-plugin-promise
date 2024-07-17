@@ -144,7 +144,7 @@ module.exports = {
       },
     ],
     messages: {
-      thenShouldThrow: 'Each then() should return a value or throw',
+      thenShouldReturnOrThrow: 'Each then() should return a value or throw',
     },
   },
   create(context) {
@@ -245,7 +245,7 @@ module.exports = {
           const branch = funcInfo.branchInfoMap[id]
           if (!branch.good) {
             context.report({
-              messageId: 'thenShouldThrow',
+              messageId: 'thenShouldReturnOrThrow',
               node: branch.node,
             })
           }
