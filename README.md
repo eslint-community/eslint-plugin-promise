@@ -61,7 +61,8 @@ Then configure the rules you want to use under the rules section.
     "promise/avoid-new": "warn",
     "promise/no-new-statics": "error",
     "promise/no-return-in-finally": "warn",
-    "promise/valid-params": "warn"
+    "promise/valid-params": "warn",
+    "promise/no-multiple-resolved": "error"
   }
 }
 ```
