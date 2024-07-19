@@ -43,7 +43,6 @@ const pluginPromise = {
 }
 pluginPromise.configs = {
   recommended: {
-    name: 'promise/recommended',
     plugins: ['promise'],
     rules: recommendedRules,
   },
