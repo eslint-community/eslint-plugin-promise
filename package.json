@@ -22,7 +22,7 @@
     "Aadit M Shah <aaditmshah@aadit.codes> (https://aadit.codes/)"
   ],
   "scripts": {
-    "format": "prettier --write . && npm run lint -- --fix",
+    "format": "prettier --write . && eslint . --fix",
     "lint": "npm-run-all \"lint:*\"",
     "lint:eslint-docs": "npm run update:eslint-docs && git diff --exit-code",
     "lint:js": "eslint --report-unused-disable-directives .",
