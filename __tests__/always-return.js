@@ -17,6 +17,8 @@ ruleTester.run('always-return', rule, {
     'hey.then(x => { return; })',
     'hey.then(x => { return x ? x.id : null })',
     'hey.then(x => { return x * 10 })',
+    'hey.then(x => { process.exit(0); })',
+    'hey.then(x => { process.abort(); })',
     'hey.then(function() { return 42; })',
     'hey.then(function() { return new Promise(); })',
     'hey.then(function() { return "x"; }).then(doSomethingWicked)',
@@ -24,6 +26,8 @@ ruleTester.run('always-return', rule, {
     'hey.then(function() { throw new Error("msg"); })',
     'hey.then(function(x) { if (!x) { throw new Error("no x"); } return x; })',
     'hey.then(function(x) { if (x) { return x; } throw new Error("no x"); })',
+    'hey.then(function(x) { if (x) { process.exit(0); } throw new Error("no x"); })',
+    'hey.then(function(x) { if (x) { process.abort(); } throw new Error("no x"); })',
     'hey.then(x => { throw new Error("msg"); })',
     'hey.then(x => { if (!x) { throw new Error("no x"); } return x; })',
     'hey.then(x => { if (x) { return x; } throw new Error("no x"); })',
@@ -138,6 +142,10 @@ ruleTester.run('always-return', rule, {
     },
     {
       code: 'hey.then(function() { if (x) { } else { return x; }})',
+      errors: [{ message }],
+    },
+    {
+      code: 'hey.then(function() { if (x) { process.chdir(); } else { return x; }})',
       errors: [{ message }],
     },
     {
