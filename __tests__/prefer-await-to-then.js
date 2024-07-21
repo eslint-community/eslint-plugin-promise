@@ -15,6 +15,8 @@ ruleTester.run('prefer-await-to-then', rule, {
     'async function hi() { await thing() }',
     'async function hi() { await thing().then() }',
     'async function hi() { await thing().catch() }',
+    'async function hi() { await thing().finally() }',
+    'function * hi() { yield thing().then() }',
     'a = async () => (await something())',
     `a = async () => {
       try { await something() } catch (error) { somethingElse() }
@@ -53,6 +55,42 @@ ruleTester.run('prefer-await-to-then', rule, {
     {
       code: 'function foo() { hey.finally(x => {}) }',
       errors: [{ message }],
+    },
+    {
+      code: 'async function hi() { await thing().then() }',
+      errors: [{ message }],
+      options: [
+        {
+          strict: true,
+        },
+      ],
+    },
+    {
+      code: 'async function hi() { await thing().catch() }',
+      errors: [{ message }],
+      options: [
+        {
+          strict: true,
+        },
+      ],
+    },
+    {
+      code: 'async function hi() { await thing().finally() }',
+      errors: [{ message }],
+      options: [
+        {
+          strict: true,
+        },
+      ],
+    },
+    {
+      code: 'function * hi() { yield thing().then() }',
+      errors: [{ message }],
+      options: [
+        {
+          strict: true,
+        },
+      ],
     },
   ],
 })

@@ -16,7 +16,16 @@ module.exports = {
         'Prefer `await` to `then()`/`catch()`/`finally()` for reading Promise values.',
       url: getDocsUrl('prefer-await-to-then'),
     },
-    schema: [],
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          strict: {
+            type: 'boolean',
+          },
+        },
+      },
+    ],
     messages: {
       preferAwaitToCallback: 'Prefer await to then()/catch()/finally().',
     },
@@ -40,9 +49,11 @@ module.exports = {
       return getScope(context, node).block.type === 'Program'
     }
 
+    const { strict } = context.options[0] || {}
+
     return {
       'CallExpression > MemberExpression.callee'(node) {
-        if (isTopLevelScoped(node) || isInsideYieldOrAwait(node)) {
+        if (isTopLevelScoped(node) || (!strict && isInsideYieldOrAwait(node))) {
           return
         }
 
