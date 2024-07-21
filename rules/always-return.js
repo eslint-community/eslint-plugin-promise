@@ -202,6 +202,10 @@ module.exports = {
     return {
       'ReturnStatement:exit': markCurrentBranchAsGood,
       'ThrowStatement:exit': markCurrentBranchAsGood,
+      'ExpressionStatement > CallExpression > MemberExpression[object.name="process"][property.name="exit"]:exit':
+        markCurrentBranchAsGood,
+      'ExpressionStatement > CallExpression > MemberExpression[object.name="process"][property.name="abort"]:exit':
+        markCurrentBranchAsGood,
 
       /**
        * @param {CodePathSegment} segment
