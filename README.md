@@ -112,7 +112,7 @@ or start with the recommended rule set:
 | [no-return-in-finally](docs/rules/no-return-in-finally.md)           | Disallow return statements in `finally()`.                                             |     | ✅  |     |     |
 | [no-return-wrap](docs/rules/no-return-wrap.md)                       | Disallow wrapping values in `Promise.resolve` or `Promise.reject` when not needed.     | ✅  |     |     |     |
 | [param-names](docs/rules/param-names.md)                             | Enforce consistent param names and ordering when creating new promises.                | ✅  |     |     |     |
-| [prefer-await-to-callbacks](docs/rules/prefer-await-to-callbacks.md) | Prefer async/await to the callback pattern.                                            |     |     |     |     |
+| [prefer-await-to-callbacks](docs/rules/prefer-await-to-callbacks.md) | Prefer `async`/`await` to the callback pattern.                                        |     |     |     |     |
 | [prefer-await-to-then](docs/rules/prefer-await-to-then.md)           | Prefer `await` to `then()`/`catch()`/`finally()` for reading Promise values.           |     |     |     |     |
 | [valid-params](docs/rules/valid-params.md)                           | Enforces the proper number of arguments are passed to Promise functions.               |     | ✅  |     |     |
 
