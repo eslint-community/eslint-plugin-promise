@@ -3,7 +3,7 @@
 const isInsidePromise = require('./is-inside-promise')
 
 function isInsideCallback(node) {
-  const isCallExpression =
+  const isFunction =
     node.type === 'FunctionExpression' ||
     node.type === 'ArrowFunctionExpression' ||
     node.type === 'FunctionDeclaration' // this may be controversial
@@ -13,7 +13,7 @@ function isInsideCallback(node) {
 
   const name = node.params && node.params[0] && node.params[0].name
   const firstArgIsError = name === 'err' || name === 'error'
-  const isInACallback = isCallExpression && firstArgIsError
+  const isInACallback = isFunction && firstArgIsError
   return isInACallback
 }
 
