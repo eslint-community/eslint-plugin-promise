@@ -1,4 +1,4 @@
-# Disallow calling `cb()` inside of a `then()` (use [nodeify][] instead) (`promise/no-callback-in-promise`)
+# Disallow calling `cb()` inside of a `then()` (use [util.callbackify][] instead) (`promise/no-callback-in-promise`)
 
 ⚠️ This rule _warns_ in the following configs: ✅ `flat/recommended`, ✅
 `recommended`.
@@ -80,4 +80,5 @@ callback code instead of combining the approaches.
 
 String list of callback function names to exempt.
 
-[nodeify]: https://www.npmjs.com/package/nodeify
+[util.callbackify]:
+  https://nodejs.org/docs/latest/api/util.html#utilcallbackifyoriginal
