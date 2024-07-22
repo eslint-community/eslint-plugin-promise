@@ -7,6 +7,7 @@
 
 const { getAncestors, getScope } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
+const isMemberCallWithObjectName = require('./lib/is-member-call-with-object-name')
 
 module.exports = {
   meta: {
@@ -53,7 +54,11 @@ module.exports = {
 
     return {
       'CallExpression > MemberExpression.callee'(node) {
-        if (isTopLevelScoped(node) || (!strict && isInsideYieldOrAwait(node))) {
+        if (
+          isTopLevelScoped(node) ||
+          (!strict && isInsideYieldOrAwait(node)) ||
+          isMemberCallWithObjectName('cy', node.parent)
+        ) {
           return
         }
 

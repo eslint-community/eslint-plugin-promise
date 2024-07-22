@@ -16,6 +16,11 @@ ruleTester.run('prefer-await-to-then', rule, {
     'async function hi() { await thing().then() }',
     'async function hi() { await thing().catch() }',
     'async function hi() { await thing().finally() }',
+
+    // Cypress
+    'function hi() { cy.get(".myClass").then(go) }',
+    'function hi() { cy.get("button").click().then() }',
+
     'function * hi() { yield thing().then() }',
     'a = async () => (await something())',
     `a = async () => {
