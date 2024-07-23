@@ -10,6 +10,7 @@ ruleTester.run('spec-only', rule, {
     'Promise.reject()',
     'Promise.all()',
     'Promise.race()',
+    'Promise.withResolvers()',
     'new Promise(function (resolve, reject) {})',
     'SomeClass.resolve()',
     'doSomething(Promise.all)',
