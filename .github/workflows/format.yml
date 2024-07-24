@@ -24,7 +24,7 @@ jobs:
           node-version: 18
 
       - name: 📥 Install deps
-        run: npm install
+        run: npm ci
 
       - name: 👔 Format
         run: npm run format

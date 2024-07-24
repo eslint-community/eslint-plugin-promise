@@ -23,7 +23,7 @@ jobs:
           node-version: 18
 
       - name: 📥 Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: ▶️ Run lint script
         run: npm run lint
