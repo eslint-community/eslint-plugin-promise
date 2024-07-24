@@ -34,7 +34,7 @@ module.exports = {
     const options = context.options[0] || {}
     const resolvePattern = new RegExp(
       options.resolvePattern || '^_?resolve$',
-      'u'
+      'u',
     )
     const rejectPattern = new RegExp(options.rejectPattern || '^_?reject$', 'u')
 
