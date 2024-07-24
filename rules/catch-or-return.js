@@ -8,6 +8,7 @@
 
 const getDocsUrl = require('./lib/get-docs-url')
 const isPromise = require('./lib/is-promise')
+const isMemberCallWithObjectName = require('./lib/is-member-call-with-object-name')
 
 module.exports = {
   meta: {
@@ -95,6 +96,11 @@ module.exports = {
         expression.callee.property.type === 'Literal' &&
         expression.callee.property.value === 'catch'
       ) {
+        return true
+      }
+
+      // cy.get().then(a, b);
+      if (isMemberCallWithObjectName('cy', expression)) {
         return true
       }
 

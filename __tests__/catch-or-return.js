@@ -22,6 +22,10 @@ ruleTester.run('catch-or-return', rule, {
     'Promise.resolve(frank)["catch"](jail)',
     'frank.then(to).finally(fn).catch(jail)',
 
+    // Cypress
+    'cy.get(".myClass").then(go)',
+    'cy.get("button").click().then()',
+
     // arrow function use case
     'postJSON("/smajobber/api/reportJob.json")\n\t.then(()=>this.setState())\n\t.catch(()=>this.setState())',
 
