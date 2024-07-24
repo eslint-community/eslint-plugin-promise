@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   format:
-    if: github.repository == 'eslint-community/eslint-plugin/promise'
+    if: github.repository == 'eslint-community/eslint-plugin-promise'
     runs-on: ubuntu-latest
 
     steps:
