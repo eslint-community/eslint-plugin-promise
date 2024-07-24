@@ -7,4 +7,5 @@ module.exports = {
   race: true,
   reject: true,
   resolve: true,
+  withResolvers: true,
 }

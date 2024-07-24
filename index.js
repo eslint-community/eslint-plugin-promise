@@ -32,6 +32,7 @@ const pluginPromise = {
     'no-return-in-finally': require('./rules/no-return-in-finally'),
     'valid-params': require('./rules/valid-params'),
     'no-multiple-resolved': require('./rules/no-multiple-resolved'),
+    'spec-only': require('./rules/spec-only'),
   },
   rulesConfig: {
     'param-names': 1,
