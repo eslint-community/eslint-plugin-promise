@@ -28,6 +28,26 @@ jobs:
       - name: ▶️ Run lint script
         run: npm run lint
 
+  types:
+    name: 🌋 Types
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ⎔ Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: 📥 Install dependencies
+        run: npm ci
+
+      - name: ▶️ Typecheck
+        uses: gozala/typescript-error-reporter-action@v1.0.9
+        with:
+          error_fail_threshold: 160
+
   test:
     name:
       🧪 Test (Node@${{ matrix.node }} - ESLint@${{ matrix.eslint }} - ${{

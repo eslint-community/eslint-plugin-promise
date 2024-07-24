@@ -2,3 +2,9 @@ node_modules
 .idea
 coverage/
 .eslintcache
+
+# Generated types
+/rules/**/*.d.ts
+/rules/**/*.d.ts.map
+/index.d.ts
+/index.d.ts.map
