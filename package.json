@@ -87,7 +87,7 @@
     "eslint": "^7.0.0 || ^8.0.0 || ^9.0.0"
   },
   "engines": {
-    "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+    "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
   },
   "funding": "https://opencollective.com/eslint"
 }
