@@ -7,7 +7,7 @@ test('can require index file', () => {
 test('rule set', () => {
   const plugin = require('../index')
   expect(plugin.configs.recommended.rules).toEqual(
-    plugin.configs['flat/recommended'].rules
+    plugin.configs['flat/recommended'].rules,
   )
   expect(plugin.configs['flat/recommended'].plugins.promise).toBe(plugin)
 })

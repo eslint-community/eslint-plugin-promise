@@ -2,13 +2,7 @@ name: CI
 on:
   push:
     branches:
-      # default semantic-release branches
-      - +([0-9])?(.{+([0-9]),x}).x
       - main
-      - next
-      - next-major
-      - beta
-      - alpha
   pull_request:
 
 concurrency:
@@ -26,10 +20,10 @@ jobs:
       - name: ⎔ Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: lts/*
 
       - name: 📥 Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: ▶️ Run lint script
         run: npm run lint
@@ -41,27 +35,23 @@ jobs:
     strategy:
       matrix:
         eslint: [8]
-        node: [12.22.0, 12, 14.17.0, 14, 16.0.0, 16, 18, 20]
+        node: [18.18.0, 20.9.0, 21.1.0, 22]
         os: [ubuntu-latest]
         include:
           # ESLint v9
           - eslint: 9
-            node: 20
+            node: 22
             os: ubuntu-latest
           # On other platforms
           - os: windows-latest
             eslint: 8
-            node: 18
+            node: 22
           - os: macos-latest
             eslint: 8
-            node: 18
-          # On old ESLint versions
-          - eslint: 7
-            node: 18
-            os: ubuntu-latest
+            node: 22
           # On the minimum supported ESLint/Node.js version
           - eslint: 7.0.0
-            node: 12.22.0
+            node: 18.18.0
             os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
@@ -85,40 +75,3 @@ jobs:
 
       - name: ⬆️ Upload coverage report
         uses: codecov/codecov-action@v4
-
-  release:
-    name: 🚀 Release
-    needs: [lint, test]
-    runs-on: ubuntu-latest
-    if:
-      github.repository == 'eslint-community/eslint-plugin-promise' &&
-      contains('refs/heads/main,refs/heads/next,refs/heads/beta,refs/heads/alpha',
-      github.ref) && github.event_name == 'push'
-    steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v4
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: 📥 Install dependencies
-        run: npm install
-
-      - name: 🚀 Release
-        uses: cycjimmy/semantic-release-action@v4
-        with:
-          semantic_version: 19
-          branches: |
-            [
-              '+([0-9])?(.{+([0-9]),x}).x',
-              'main',
-              'next',
-              'next-major',
-              {name: 'beta', prerelease: true},
-              {name: 'alpha', prerelease: true}
-            ]
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

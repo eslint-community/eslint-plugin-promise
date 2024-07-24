@@ -18,7 +18,7 @@ module.exports = {
     type: 'suggestion',
     docs: {
       description:
-        'Disallow calling `cb()` inside of a `then()` (use [nodeify][] instead).',
+        'Disallow calling `cb()` inside of a `then()` (use [util.callbackify][] instead).',
       url: getDocsUrl('no-callback-in-promise'),
     },
     messages: {
