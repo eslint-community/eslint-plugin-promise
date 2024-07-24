@@ -2,7 +2,7 @@
 
 /**
  * @param {string} objectName
- * @param {Node} node
+ * @param {import('estree').Node} node
  * @returns {node is CallExpression}
  */
 function isMemberCallWithObjectName(objectName, node) {
