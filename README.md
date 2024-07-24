@@ -132,8 +132,7 @@ or start with the recommended rule set:
 
 [util.callbackify]:
   https://nodejs.org/docs/latest/api/util.html#utilcallbackifyoriginal
-[util.promisify]:
-  https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original
+[util.promisify]: https://nodejs.org/api/util.html#util_util_promisify_original
 [@aaditmshah]: https://github.com/aaditmshah
 [@macklinu]: https://github.com/macklinu
 [@xjamundx]: https://github.com/xjamundx
