@@ -2,7 +2,7 @@
 
 Enforce best practices for JavaScript promises.
 
-[![CI](https://github.com/eslint-community/eslint-plugin-promise/actions/workflows/CI.yml/badge.svg)](https://github.com/eslint-community/eslint-plugin-promise/actions/workflows/CI.yml)
+[![CI](https://github.com/eslint-community/eslint-plugin-promise/actions/workflows/ci.yml/badge.svg)](https://github.com/eslint-community/eslint-plugin-promise/actions/workflows/ci.yml)
 [![npm version](https://badge.fury.io/js/eslint-plugin-promise.svg)](https://www.npmjs.com/package/eslint-plugin-promise)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
