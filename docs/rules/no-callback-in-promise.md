@@ -68,9 +68,9 @@ callback code instead of combining the approaches.
 [promise.prototype.catch()]:
   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch
 [setimmediate()]:
-  https://nodejs.org/docs/latest-v14.x/api/timers.html#timers_setimmediate_callback_args
+  https://nodejs.org/docs/latest/api/timers.html#timers_setimmediate_callback_args
 [process.nexttick()]:
-  https://nodejs.org/docs/latest-v14.x/api/process.html#process_process_nexttick_callback_args
+  https://nodejs.org/docs/latest/api/process.html#process_process_nexttick_callback_args
 [settimeout()]:
   https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
 
