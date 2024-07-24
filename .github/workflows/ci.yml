@@ -2,13 +2,7 @@ name: CI
 on:
   push:
     branches:
-      # default semantic-release branches
-      - +([0-9])?(.{+([0-9]),x}).x
       - main
-      - next
-      - next-major
-      - beta
-      - alpha
   pull_request:
 
 concurrency:
@@ -26,10 +20,10 @@ jobs:
       - name: ⎔ Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: lts/*
 
       - name: 📥 Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: ▶️ Run lint script
         run: npm run lint
@@ -81,40 +75,3 @@ jobs:
 
       - name: ⬆️ Upload coverage report
         uses: codecov/codecov-action@v4
-
-  release:
-    name: 🚀 Release
-    needs: [lint, test]
-    runs-on: ubuntu-latest
-    if:
-      github.repository == 'eslint-community/eslint-plugin-promise' &&
-      contains('refs/heads/main,refs/heads/next,refs/heads/beta,refs/heads/alpha',
-      github.ref) && github.event_name == 'push'
-    steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v4
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: 📥 Install dependencies
-        run: npm install
-
-      - name: 🚀 Release
-        uses: cycjimmy/semantic-release-action@v4
-        with:
-          semantic_version: 19
-          branches: |
-            [
-              '+([0-9])?(.{+([0-9]),x}).x',
-              'main',
-              'next',
-              'next-major',
-              {name: 'beta', prerelease: true},
-              {name: 'alpha', prerelease: true}
-            ]
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -21,10 +21,10 @@ jobs:
       - name: ⎔ Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: lts/*
 
       - name: 📥 Install deps
-        run: npm install
+        run: npm ci
 
       - name: 👔 Format
         run: npm run format
