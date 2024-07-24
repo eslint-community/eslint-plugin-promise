@@ -4,7 +4,7 @@
   "compilerOptions": {
     "lib": ["es2022"],
     "target": "es2022",
-    "types": ["node"],
+    "types": ["node", "jest"],
 
     "module": "node16",
     "moduleResolution": "node16",
