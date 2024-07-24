@@ -23,7 +23,7 @@ Examples of **incorrect** code for this rule:
 function promisifiedFn(arg) {
   return new Promise((resolve, reject) => {
     callbackStyleFn(arg, (error, result) =>
-      error ? reject(error) : resolve(result)
+      error ? reject(error) : resolve(result),
     )
   })
 }
