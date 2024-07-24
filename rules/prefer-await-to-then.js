@@ -41,6 +41,15 @@ module.exports = {
       })
     }
 
+    /** Returns true if node is inside a constructor */
+    function isInsideConstructor(node) {
+      return getAncestors(context, node).some((parent) => {
+        return (
+          parent.type === 'MethodDefinition' && parent.kind === 'constructor'
+        )
+      })
+    }
+
     /**
      * Returns true if node is created at the top-level scope.
      * Await statements are not allowed at the top level,
@@ -57,6 +66,7 @@ module.exports = {
         if (
           isTopLevelScoped(node) ||
           (!strict && isInsideYieldOrAwait(node)) ||
+          (!strict && isInsideConstructor(node)) ||
           isMemberCallWithObjectName('cy', node.parent)
         ) {
           return

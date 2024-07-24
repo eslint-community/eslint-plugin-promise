@@ -34,6 +34,11 @@ ruleTester.run('prefer-await-to-then', rule, {
     `function isThenable(obj) {
       return obj && typeof obj.then === 'function';
     }`,
+    `class Foo {
+      constructor () {
+        doSomething.then(abc);
+      }
+    }`,
   ],
 
   invalid: [
@@ -63,6 +68,19 @@ ruleTester.run('prefer-await-to-then', rule, {
     },
     {
       code: 'async function hi() { await thing().then() }',
+      errors: [{ message }],
+      options: [
+        {
+          strict: true,
+        },
+      ],
+    },
+    {
+      code: `class Foo {
+        constructor () {
+          doSomething.then(abc);
+        }
+      }`,
       errors: [{ message }],
       options: [
         {
