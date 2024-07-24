@@ -19,7 +19,7 @@
 
     /* Make it a JS-targeted config */
     "allowJs": true,
-    "checkJs": false, // Set to true to check all js files
+    "checkJs": true, // Set to true to check all js files
     "noEmit": true,
     "resolveJsonModule": true,
 
@@ -37,10 +37,8 @@
     "noUnusedParameters": true
 
     /* To make strict checking somewhat less strict during a transition stage, add one or more of: */
-    /*
-    "noImplicitThis": false,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
-    */
+    // "noImplicitThis": false,
+    // "noImplicitAny": false,
+    // "strictNullChecks": false
   }
 }

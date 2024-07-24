@@ -10,7 +10,7 @@ const getDocsUrl = require('./lib/get-docs-url')
 const isPromise = require('./lib/is-promise')
 const isInsideCallback = require('./lib/is-inside-callback')
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'suggestion',
     docs: {
@@ -43,4 +43,4 @@ module.exports = {
       },
     }
   },
-}
+})

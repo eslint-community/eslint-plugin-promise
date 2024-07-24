@@ -29,11 +29,13 @@ const {
 /**
  * An expression that can throw an error.
  * see https://github.com/eslint/eslint/blob/e940be7a83d0caea15b64c1e1c2785a6540e2641/lib/linter/code-path-analysis/code-path-analyzer.js#L639-L643
+ *
  * @typedef {CallExpression | MemberExpression | NewExpression | ImportExpression | YieldExpression} ThrowableExpression
  */
 
 /**
  * Iterate all previous path segments.
+ *
  * @param {CodePathSegment} segment
  * @returns {Iterable<CodePathSegment[]>}
  */
@@ -63,6 +65,7 @@ function* iterateAllPrevPathSegments(segment) {
 }
 /**
  * Iterate all next path segments.
+ *
  * @param {CodePathSegment} segment
  * @returns {Iterable<CodePathSegment[]>}
  */
@@ -93,6 +96,7 @@ function* iterateAllNextPathSegments(segment) {
 
 /**
  * Finds the same route path from the given path following previous path segments.
+ *
  * @param {CodePathSegment} segment
  * @returns {CodePathSegment | null}
  */
@@ -172,6 +176,7 @@ class CodePathInfo {
 
   /**
    * Check all paths and return paths resolved multiple times.
+   *
    * @param {PromiseCodePathContext} promiseCodePathContext
    * @returns {Iterable<AlreadyResolvedData & { node: Identifier }>}
    */
@@ -195,6 +200,7 @@ class CodePathInfo {
   }
   /**
    * Compute the previously resolved path.
+   *
    * @param {CodePathSegment} segment
    * @param {PromiseCodePathContext} promiseCodePathContext
    * @returns {AlreadyResolvedData | null}
@@ -330,17 +336,20 @@ class PromiseCodePathContext {
     /** @type {Set<string>} */
     this.resolvedSegmentIds = new Set()
   }
-  /** @param {CodePathSegment} */
+  /** @param {CodePathSegment} segment */
   addResolvedTryBlockCodePathSegment(segment) {
     this.resolvedSegmentIds.add(segment.id)
   }
-  /** @param {CodePathSegment} */
+  /**
+   * @param {CodePathSegment} segment
+   * @returns {boolean}
+   */
   isResolvedTryBlockCodePathSegment(segment) {
     return this.resolvedSegmentIds.has(segment.id)
   }
 }
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'problem',
     docs: {
@@ -356,7 +365,6 @@ module.exports = {
     },
     schema: [],
   },
-  /** @param {import('eslint').Rule.RuleContext} context */
   create(context) {
     const reported = new Set()
     const promiseCodePathContext = new PromiseCodePathContext()
@@ -407,7 +415,10 @@ module.exports = {
         /** @type {Set<Identifier>} */
         const resolverReferences = new Set()
         const resolvers = node.params.filter(
-          /** @returns {node is Identifier} */
+          /**
+           * @param {import('estree').Pattern} node
+           * @returns {node is Identifier}
+           */
           (node) => node && node.type === 'Identifier',
         )
         for (const resolver of resolvers) {
@@ -479,7 +490,6 @@ module.exports = {
       onUnreachableCodePathSegmentEnd(segment) {
         codePathInfoStack[0].onSegmentExit(segment)
       },
-      /** @type {Identifier} */
       'CallExpression > Identifier.callee'(node) {
         const codePathInfo = codePathInfoStack[0]
         const resolverReferences = resolverReferencesStack[0]
@@ -498,4 +508,4 @@ module.exports = {
       },
     }
   },
-}
+})

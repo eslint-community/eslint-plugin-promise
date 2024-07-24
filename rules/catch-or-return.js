@@ -10,7 +10,7 @@ const getDocsUrl = require('./lib/get-docs-url')
 const isPromise = require('./lib/is-promise')
 const isMemberCallWithObjectName = require('./lib/is-member-call-with-object-name')
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'problem',
     docs: {
@@ -125,4 +125,4 @@ module.exports = {
       },
     }
   },
-}
+})

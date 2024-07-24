@@ -13,7 +13,7 @@ const isCallback = require('./lib/is-callback')
 
 const CB_BLACKLIST = ['callback', 'cb', 'next', 'done']
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'suggestion',
     docs: {
@@ -68,4 +68,4 @@ module.exports = {
       },
     }
   },
-}
+})

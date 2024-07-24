@@ -5,7 +5,7 @@ const {
   isPromiseConstructorWithInlineExecutor,
 } = require('./lib/is-promise-constructor')
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'suggestion',
     docs: {
@@ -71,4 +71,4 @@ module.exports = {
       },
     }
   },
-}
+})
