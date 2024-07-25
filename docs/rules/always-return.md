@@ -78,11 +78,11 @@ promise
   })
 
 // NG
-var v = promise.then((x) => {
+const v = promise.then((x) => {
   console.log(x)
 })
 // NG
-var v = await promise.then((x) => {
+const v = await promise.then((x) => {
   console.log(x)
 })
 function foo() {
