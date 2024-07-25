@@ -61,6 +61,22 @@ ruleTester.run('valid-params', rule, {
     'promiseReference.finally(callback)',
     'promiseReference.finally(() => {})',
 
+    {
+      code: `
+        somePromise.then(function() {
+          return sth();
+        }).catch(TypeError, function(e) {
+          //
+        }).catch(function(e) {
+        });
+      `,
+      options: [
+        {
+          exclude: ['catch'],
+        },
+      ],
+    },
+
     // integration test
     [
       'Promise.all([',
