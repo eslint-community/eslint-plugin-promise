@@ -31,7 +31,14 @@ Callback got called with: null data
 Callback got called with: My error null
 ```
 
-**How to fix it?**
+## Options
+
+### `timeoutsErr`
+
+Boolean as to whether callbacks in timeout functions like `setTimeout` will err.
+Defaults to `false`.
+
+## How to fix it?
 
 Ensure that your callback invocations are wrapped by a deferred execution
 function such as:
