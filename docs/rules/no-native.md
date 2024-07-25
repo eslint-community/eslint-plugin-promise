@@ -12,12 +12,12 @@ existence of a native promise implementation. Helpful if you want to use
 #### Valid
 
 ```js
-var Promise = require('bluebird')
-var x = Promise.resolve('good')
+const Promise = require('bluebird')
+const x = Promise.resolve('good')
 ```
 
 #### Invalid
 
 ```js
-var x = Promise.resolve('bad')
+const x = Promise.resolve('bad')
 ```
