@@ -49,9 +49,9 @@ myPromise.then((b) => {
 
 ##### `ignoreLastCallback`
 
-You can pass an `{ ignoreLastCallback: true }` as an option to this rule to the
-last `then()` callback in a promise chain does not warn if it does not have a
-`return`. Default is `false`.
+You can pass an `{ ignoreLastCallback: false }` as an option to this rule to
+have the last `then()` callback in a promise chain not warn if it does not have
+a `return`. Default is `true`.
 
 ```js
 // OK

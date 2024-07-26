@@ -111,10 +111,12 @@ ruleTester.run('always-return', rule, {
     {
       code: 'hey.then(x => {})',
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: 'hey.then(function() { })',
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: 'hey.then(function() { }).then(x)',
@@ -123,42 +125,52 @@ ruleTester.run('always-return', rule, {
     {
       code: 'hey.then(function() { }).then(function() { })',
       errors: [{ message }, { message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: 'hey.then(function() { return; }).then(function() { })',
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: 'hey.then(function() { doSomethingWicked(); })',
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: 'hey.then(function() { if (x) { return x; } })',
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: 'hey.then(function() { if (x) { return x; } else { }})',
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: 'hey.then(function() { if (x) { } else { return x; }})',
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: 'hey.then(function() { if (x) { process.chdir(); } else { return x; }})',
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: 'hey.then(function() { if (x) { return you.then(function() { return x; }); } })',
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: 'hey.then( x => { x ? x.id : null })',
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: 'hey.then(function(x) { x ? x.id : null })',
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: `(function() {
@@ -181,6 +193,7 @@ ruleTester.run('always-return', rule, {
         }
       })`,
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: `
@@ -190,6 +203,7 @@ ruleTester.run('always-return', rule, {
         }
       })`,
       errors: [{ message }],
+      options: [{ ignoreLastCallback: false }],
     },
     {
       code: `
