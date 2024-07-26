@@ -10,7 +10,7 @@ const getDocsUrl = require('./lib/get-docs-url')
 const hasPromiseCallback = require('./lib/has-promise-callback')
 const isInsidePromise = require('./lib/is-inside-promise')
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'suggestion',
     docs: {
@@ -26,6 +26,7 @@ module.exports = {
     /**
      * Array of callback function scopes.
      * Scopes are in order closest to the current node.
+     *
      * @type {import('eslint').Scope.Scope[]}
      */
     const callbackScopes = []
@@ -120,4 +121,4 @@ module.exports = {
       },
     }
   },
-}
+})

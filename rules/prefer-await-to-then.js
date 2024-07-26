@@ -9,7 +9,7 @@ const { getAncestors, getScope } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
 const isMemberCallWithObjectName = require('./lib/is-member-call-with-object-name')
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'suggestion',
     docs: {
@@ -32,7 +32,12 @@ module.exports = {
     },
   },
   create(context) {
-    /** Returns true if node is inside yield or await expression. */
+    /**
+     * Returns true if node is inside yield or await expression.
+     *
+     * @param {import('estree').Node} node
+     * @returns {boolean}
+     */
     function isInsideYieldOrAwait(node) {
       return getAncestors(context, node).some((parent) => {
         return (
@@ -54,6 +59,9 @@ module.exports = {
      * Returns true if node is created at the top-level scope.
      * Await statements are not allowed at the top level,
      * only within function declarations.
+     *
+     * @param {import('estree').Node} node
+     * @returns {boolean}
      */
     function isTopLevelScoped(node) {
       return getScope(context, node).block.type === 'Program'
@@ -87,4 +95,4 @@ module.exports = {
       },
     }
   },
-}
+})

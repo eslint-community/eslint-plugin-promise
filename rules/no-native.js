@@ -24,7 +24,7 @@ function isDeclared(scope, ref) {
   })
 }
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'suggestion',
     docs: {
@@ -74,4 +74,4 @@ module.exports = {
       },
     }
   },
-}
+})

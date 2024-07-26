@@ -8,7 +8,8 @@
     "eslint:recommended",
     "plugin:eslint-plugin/recommended",
     "plugin:n/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:jsdoc/recommended"
   ],
   "rules": {
     "no-var": "error",
@@ -22,6 +23,15 @@
     ],
     "eslint-plugin/prefer-placeholders": "error",
     "eslint-plugin/test-case-shorthand-strings": "error",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "jsdoc/check-types": "off",
+    "jsdoc/no-undefined-types": "off",
+    "jsdoc/require-jsdoc": "off",
+    "jsdoc/require-param-description": "off",
+    "jsdoc/require-property-description": "off",
+    "jsdoc/require-returns-description": "off",
+    "jsdoc/require-yields": "off",
+    "jsdoc/tag-lines": ["warn", "never", { "startLines": 1 }],
+    "jsdoc/valid-types": "off"
   }
 }

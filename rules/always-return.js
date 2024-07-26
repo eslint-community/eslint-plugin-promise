@@ -9,13 +9,13 @@ const getDocsUrl = require('./lib/get-docs-url')
  * @typedef {import('estree').ArrowFunctionExpression} ArrowFunctionExpression
  * @typedef {import('eslint').Rule.CodePath} CodePath
  * @typedef {import('eslint').Rule.CodePathSegment} CodePathSegment
- */
-
-/**
  * @typedef { (FunctionExpression | ArrowFunctionExpression) & { parent: CallExpression }} InlineThenFunctionExpression
  */
 
-/** @param {Node} node */
+/**
+ * @param {Node} node
+ * @returns {boolean}
+ */
 function isFunctionWithBlockStatement(node) {
   if (node.type === 'FunctionExpression') {
     return true
@@ -41,7 +41,10 @@ function isMemberCall(memberName, node) {
   )
 }
 
-/** @param {Node} node */
+/**
+ * @param {Node} node
+ * @returns {boolean}
+ */
 function isFirstArgument(node) {
   return Boolean(
     node.parent && node.parent.arguments && node.parent.arguments[0] === node,
@@ -62,7 +65,9 @@ function isInlineThenFunctionExpression(node) {
 
 /**
  * Checks whether the given node is the last `then()` callback in a promise chain.
+ *
  * @param {InlineThenFunctionExpression} node
+ * @returns {boolean}
  */
 function isLastCallback(node) {
   /** @type {Node} */
@@ -124,7 +129,7 @@ function peek(arr) {
   return arr[arr.length - 1]
 }
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'problem',
     docs: {
@@ -156,7 +161,6 @@ module.exports = {
      *   executing branches ("codePathSegment"s) within the given function
      * @property {Record<string, BranchInfo | undefined>} branchInfoMap This is an object representing information
      *   about all branches within the given function
-     *
      * @typedef {object} BranchInfo
      * @property {boolean} good This is a boolean representing whether
      *   the given branch explicitly `return`s or `throw`s. It starts as `false`
@@ -168,24 +172,25 @@ module.exports = {
 
     /**
      * funcInfoStack is a stack representing the stack of currently executing
-     *   functions
+     * functions
      * example:
-     *   funcInfoStack = [ { branchIDStack: [ 's1_1' ],
-     *       branchInfoMap:
-     *        { s1_1:
-     *           { good: false,
-     *             loc: <loc> } } },
-     *     { branchIDStack: ['s2_1', 's2_4'],
-     *       branchInfoMap:
-     *        { s2_1:
-     *           { good: false,
-     *             loc: <loc> },
-     *          s2_2:
-     *           { good: true,
-     *             loc: <loc> },
-     *          s2_4:
-     *           { good: false,
-     *             loc: <loc> } } } ]
+     * funcInfoStack = [ { branchIDStack: [ 's1_1' ],
+     * branchInfoMap:
+     * { s1_1:
+     * { good: false,
+     * loc: <loc> } } },
+     * { branchIDStack: ['s2_1', 's2_4'],
+     * branchInfoMap:
+     * { s2_1:
+     * { good: false,
+     * loc: <loc> },
+     * s2_2:
+     * { good: true,
+     * loc: <loc> },
+     * s2_4:
+     * { good: false,
+     * loc: <loc> } } } ]
+     *
      * @type {FuncInfo[]}
      */
     const funcInfoStack = []
@@ -257,4 +262,4 @@ module.exports = {
       },
     }
   },
-}
+})

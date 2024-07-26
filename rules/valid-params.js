@@ -3,7 +3,7 @@
 const getDocsUrl = require('./lib/get-docs-url')
 const isPromise = require('./lib/is-promise')
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'problem',
     docs: {
@@ -73,4 +73,4 @@ module.exports = {
       },
     }
   },
-}
+})

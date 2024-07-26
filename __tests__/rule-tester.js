@@ -1,5 +1,5 @@
 /**
- * @fileoverview Helpers for tests.
+ * @file Helpers for tests.
  * @author 唯然<weiran.zsd@outlook.com>
  */
 'use strict'

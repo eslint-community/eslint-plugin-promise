@@ -22,11 +22,20 @@
     "Aadit M Shah <aaditmshah@aadit.codes> (https://aadit.codes/)"
   ],
   "scripts": {
+    "build:0": "run-s clean",
+    "build:1-declaration": "tsc -p declaration.tsconfig.json",
+    "build": "run-s build:*",
+    "check": "run-s clean && run-p check:*",
+    "clean:declarations-lib": "rm -rf $(find rules -type f -name '*.d.ts*')",
+    "clean:declarations-top": "rm -rf $(find . -maxdepth 1 -type f -name '*.d.ts*')",
+    "clean": "run-p clean:*",
     "format": "prettier --write . && eslint . --fix",
-    "lint": "npm-run-all \"lint:*\"",
     "lint:eslint-docs": "npm run update:eslint-docs && git diff --exit-code",
     "lint:js": "eslint --report-unused-disable-directives .",
+    "skip:lint:tsc": "tsc",
+    "lint": "run-s clean && run-p lint:*",
     "prepare": "husky",
+    "skip:prepublishOnly": "run-s build",
     "test": "jest --coverage",
     "update:eslint-docs": "eslint-doc-generator && npm run format"
   },
@@ -66,6 +75,10 @@
     ]
   },
   "devDependencies": {
+    "@types/eslint": "^9.6.0",
+    "@types/estree": "^1.0.5",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^18.19.42",
     "@typescript-eslint/parser": "^7.17.0",
     "doctoc": "^2.2.1",
     "eslint": "^8.56.0",
@@ -73,6 +86,7 @@
     "eslint-doc-generator": "^1.7.1",
     "eslint-plugin-eslint-plugin": "^6.2.0",
     "eslint-plugin-jest": "^28.6.0",
+    "eslint-plugin-jsdoc": "^48.8.3",
     "eslint-plugin-n": "^17.9.0",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.8.0",
@@ -81,7 +95,7 @@
     "lint-staged": "^15.2.7",
     "npm-run-all2": "^6.2.2",
     "prettier": "^3.3.3",
-    "typescript": "~5.5.4"
+    "typescript": "~5.5.3"
   },
   "peerDependencies": {
     "eslint": "^7.0.0 || ^8.0.0 || ^9.0.0"

@@ -10,13 +10,12 @@
  * @typedef {import('estree').NewExpression} NewExpression
  * @typedef {import('estree').FunctionExpression} FunctionExpression
  * @typedef {import('estree').ArrowFunctionExpression} ArrowFunctionExpression
- *
  * @typedef {NewExpression & { callee: { type: 'Identifier', name: 'Promise' } }} NewPromise
  * @typedef {NewPromise & { arguments: [FunctionExpression | ArrowFunctionExpression] }} NewPromiseWithInlineExecutor
- *
  */
 /**
  * Checks whether the given node is new Promise().
+ *
  * @param {Node} node
  * @returns {node is NewPromise}
  */
@@ -30,6 +29,7 @@ function isPromiseConstructor(node) {
 
 /**
  * Checks whether the given node is new Promise(() => {}).
+ *
  * @param {Node} node
  * @returns {node is NewPromiseWithInlineExecutor}
  */

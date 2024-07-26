@@ -7,7 +7,7 @@
 
 const getDocsUrl = require('./lib/get-docs-url')
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'suggestion',
     docs: {
@@ -29,4 +29,4 @@ module.exports = {
       },
     }
   },
-}
+})

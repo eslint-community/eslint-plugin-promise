@@ -3,7 +3,7 @@
 const PROMISE_STATICS = require('./lib/promise-statics')
 const getDocsUrl = require('./lib/get-docs-url')
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'problem',
     docs: {
@@ -39,4 +39,4 @@ module.exports = {
       },
     }
   },
-}
+})

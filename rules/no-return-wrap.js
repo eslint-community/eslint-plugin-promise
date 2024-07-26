@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * Rule: no-return-wrap function
  * Prevents unnecessary wrapping of results in Promise.resolve
@@ -35,7 +37,7 @@ function isInPromise(context, node) {
   return functionNode && functionNode.parent && isPromise(functionNode.parent)
 }
 
-module.exports = {
+module.exports = /** @satisfies {import('eslint').Rule.RuleModule} */ ({
   meta: {
     type: 'suggestion',
     docs: {
@@ -65,8 +67,9 @@ module.exports = {
 
     /**
      * Checks a call expression, reporting if necessary.
-     * @param callExpression The call expression.
-     * @param node The node to report.
+     *
+     * @param {import('estree').CallExpression} callExpression The call expression.
+     * @param {import('estree').Node} node The node to report.
      */
     function checkCallExpression({ callee }, node) {
       if (
@@ -93,4 +96,4 @@ module.exports = {
       },
     }
   },
-}
+})

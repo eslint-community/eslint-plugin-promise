@@ -1,0 +1,44 @@
+{
+  "files": ["index.js"],
+  "include": ["rules/**/*", "__tests__/**/*"],
+  "compilerOptions": {
+    "lib": ["es2022"],
+    "target": "es2022",
+    "types": ["node", "jest"],
+
+    "module": "node16",
+    "moduleResolution": "node16",
+
+    "strict": true,
+
+    "skipLibCheck": false, // See https://github.com/voxpelli/tsconfig/issues/1
+
+    /* Clean up generated declarations */
+    "removeComments": false,
+    "stripInternal": true,
+
+    /* Make it a JS-targeted config */
+    "allowJs": true,
+    "checkJs": true, // Set to true to check all js files
+    "noEmit": true,
+    "resolveJsonModule": true,
+
+    /* Additional type checks */
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+
+    /* Additional non-type checks */
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": false, // Deactivated as I believe implicit "return undefined" at end of function is okay + explicit clashes with ESLint "no-useless-return"
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+
+    /* To make strict checking somewhat less strict during a transition stage, add one or more of: */
+    // "noImplicitThis": false,
+    // "noImplicitAny": false,
+    // "strictNullChecks": false
+  }
+}
