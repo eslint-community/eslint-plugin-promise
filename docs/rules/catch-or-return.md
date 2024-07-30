@@ -32,9 +32,28 @@ function doSomethingElse() {
 
 ##### `allowThen`
 
-You can pass an `{ allowThen: true }` as an option to this rule to allow for
-`.then(null, fn)` to be used instead of `catch()` at the end of the promise
-chain.
+The second argument to `then()` can also be used to handle a promise rejection,
+but it won't catch any errors from the first argument callback. Because of this,
+this rule reports usage of `then()` with two arguments without `catch()` by
+default.
+
+However, you can use `{ allowThen: true }` to allow using `then()` with two
+arguments instead of `catch()` to handle promise rejections.
+
+Examples of **incorrect** code for the default `{ allowThen: false }` option:
+
+```js
+myPromise.then(doSomething, handleErrors)
+myPromise.then(null, handleErrors)
+```
+
+Examples of **correct** code for the `{ allowThen: true }` option:
+
+```js
+myPromise.then(doSomething, handleErrors)
+myPromise.then(null, handleErrors)
+myPromise.then(doSomething).catch(handleErrors)
+```
 
 ##### `allowFinally`
 
