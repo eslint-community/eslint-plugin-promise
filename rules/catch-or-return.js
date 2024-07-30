@@ -30,6 +30,9 @@ module.exports = {
           allowThen: {
             type: 'boolean',
           },
+          allowThenStrict: {
+            type: 'boolean',
+          },
           terminationMethod: {
             oneOf: [
               { type: 'string' },
@@ -49,6 +52,7 @@ module.exports = {
   create(context) {
     const options = context.options[0] || {}
     const allowThen = options.allowThen
+    const allowThenStrict = options.allowThenStrict
     const allowFinally = options.allowFinally
     let terminationMethod = options.terminationMethod || 'catch'
 
@@ -59,11 +63,15 @@ module.exports = {
     function isAllowedPromiseTermination(expression) {
       // somePromise.then(a, b)
       if (
-        allowThen &&
+        (allowThen || allowThenStrict) &&
         expression.type === 'CallExpression' &&
         expression.callee.type === 'MemberExpression' &&
         expression.callee.property.name === 'then' &&
-        expression.arguments.length === 2
+        expression.arguments.length === 2 &&
+        // somePromise.then(null, b)
+        ((allowThen && !allowThenStrict) ||
+          (expression.arguments[0].type === 'Literal' &&
+            expression.arguments[0].value === null))
       ) {
         return true
       }

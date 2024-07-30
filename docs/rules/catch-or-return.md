@@ -55,6 +55,34 @@ myPromise.then(null, handleErrors)
 myPromise.then(doSomething).catch(handleErrors)
 ```
 
+##### `allowThenStrict`
+
+`allowThenStrict` is similar to `allowThen` but it only permits `then` when the
+fulfillment handler is `null`. This option ensures that the final rejected
+handler works like a `catch` and can handle any uncaught errors from the final
+`then`.
+
+Examples of **incorrect** code for the default `{ allowThenStrict: false }`
+option:
+
+```js
+myPromise.then(doSomething, handleErrors)
+myPromise.then(null, handleErrors)
+```
+
+Examples of **correct** code for the `{ allowThenStrict: true }` option:
+
+```js
+myPromise.then(null, handleErrors)
+myPromise.then(doSomething).catch(handleErrors)
+```
+
+Examples of **incorrect** code for the `{ allowThenStrict: true }` option:
+
+```js
+myPromise.then(doSomething, handleErrors)
+```
+
 ##### `allowFinally`
 
 You can pass an `{ allowFinally: true }` as an option to this rule to allow for
