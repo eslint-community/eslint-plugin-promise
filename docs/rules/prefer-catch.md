@@ -1,5 +1,8 @@
 # Prefer `catch` to `then(a, b)`/`then(null, b)` for handling errors (`promise/prefer-catch`)
 
+🔧 This rule is automatically fixable by the
+[`--fix` CLI option](https://eslint.org/docs/latest/user-guide/command-line-interface#--fix).
+
 <!-- end auto-generated rule header -->
 
 A `then` call with two arguments can make it more difficult to recognize that a

@@ -89,5 +89,8 @@
   "engines": {
     "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
   },
-  "funding": "https://opencollective.com/eslint"
+  "funding": "https://opencollective.com/eslint",
+  "dependencies": {
+    "@eslint-community/eslint-utils": "^4.4.0"
+  }
 }
