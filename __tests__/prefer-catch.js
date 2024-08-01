@@ -26,22 +26,40 @@ ruleTester.run('prefer-catch', rule, {
     {
       code: 'hey.then(fn1, fn2)',
       errors: [{ message }],
+      output: 'hey.catch(fn2).then(fn1)',
+    },
+    {
+      code: 'hey.then(fn1, (fn2))',
+      errors: [{ message }],
+      output: 'hey.catch(fn2).then(fn1)',
     },
     {
       code: 'hey.then(null, fn2)',
       errors: [{ message }],
+      output: 'hey.catch(fn2)',
+    },
+    {
+      code: 'hey.then(undefined, fn2)',
+      errors: [{ message }],
+      output: 'hey.catch(fn2)',
     },
     {
       code: 'function foo() { hey.then(x => {}, () => {}) }',
       errors: [{ message }],
+      output: 'function foo() { hey.catch(() => {}).then(x => {}) }',
     },
     {
       code: `
         function foo() {
-          hey.then(function() { }, function() {}).then(fn1, fn2)
+          hey.then(function a() { }, function b() {}).then(fn1, fn2)
         }
       `,
       errors: [{ message }, { message }],
+      output: `
+        function foo() {
+          hey.catch(function b() {}).then(function a() { }).catch(fn2).then(fn1)
+        }
+      `,
     },
   ],
 })
