@@ -1,5 +1,28 @@
 # Changelog
 
+## [7.1.0](https://github.com/eslint-community/eslint-plugin-promise/compare/v7.0.0...v7.1.0) (2024-08-06)
+
+
+### 🌟 Features
+
+* **`catch-or-return`, `prefer-await-to-then`:** do not report Cypress commands ([#495](https://github.com/eslint-community/eslint-plugin-promise/issues/495)) ([943f162](https://github.com/eslint-community/eslint-plugin-promise/commit/943f16290f11af9717612e079646802e22310290))
+* **`prefer-await-to-then`:** ignore constructor scope unless with `strict` option ([#496](https://github.com/eslint-community/eslint-plugin-promise/issues/496)) ([7bffb7a](https://github.com/eslint-community/eslint-plugin-promise/commit/7bffb7a666ed74a876ba3a6c482c36ea6f9d6d07))
+* new rule `spec-only` to check for non-spec Promise methods ([#502](https://github.com/eslint-community/eslint-plugin-promise/issues/502)) ([d6e9de1](https://github.com/eslint-community/eslint-plugin-promise/commit/d6e9de1f9c81194b775484ed0299dc5cc4898684))
+
+
+### 📚 Documentation
+
+* fixes the CI readme badge ([#511](https://github.com/eslint-community/eslint-plugin-promise/issues/511)) ([030a3be](https://github.com/eslint-community/eslint-plugin-promise/commit/030a3be890d371381ef13258806f97ec62d6b4fd))
+* supply missing docs ([#503](https://github.com/eslint-community/eslint-plugin-promise/issues/503)) ([602d825](https://github.com/eslint-community/eslint-plugin-promise/commit/602d8254871e46c9d1808ee1a3a2c48cb7493334))
+
+
+### 🧹 Chores
+
+* bump dev dependencies ([#483](https://github.com/eslint-community/eslint-plugin-promise/issues/483)) ([197ae4e](https://github.com/eslint-community/eslint-plugin-promise/commit/197ae4eb4f05f34c54189102871d969379595a54))
+* **deps-dev:** bump husky from 9.1.1 to 9.1.2 ([#516](https://github.com/eslint-community/eslint-plugin-promise/issues/516)) ([ab8e7a0](https://github.com/eslint-community/eslint-plugin-promise/commit/ab8e7a0d4fc8bde63fb6a6bb1e9743152778c4ee))
+* file extension missing ([#519](https://github.com/eslint-community/eslint-plugin-promise/issues/519)) ([94c9834](https://github.com/eslint-community/eslint-plugin-promise/commit/94c983483596bca2baa6c710273d348f8cf98d58))
+* fix format.yml ([#507](https://github.com/eslint-community/eslint-plugin-promise/issues/507)) ([948c097](https://github.com/eslint-community/eslint-plugin-promise/commit/948c09776e23e7dc38f155b268dcc002d59a957b))
+
 ## 6.0.2
 
 - Added tests for @typescript-eslint/parser support
