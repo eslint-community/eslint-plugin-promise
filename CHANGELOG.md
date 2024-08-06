@@ -1,3 +1,5 @@
+# Changelog
+
 ## 6.0.2
 
 - Added tests for @typescript-eslint/parser support
