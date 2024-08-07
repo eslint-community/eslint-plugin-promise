@@ -9,7 +9,10 @@ ruleTester.run('spec-only', rule, {
     'Promise.resolve()',
     'Promise.reject()',
     'Promise.all()',
+    'Promise["all"]',
+    'Promise[method];',
     'Promise.race()',
+    'var ctch = Promise.prototype.catch',
     'Promise.withResolvers()',
     'new Promise(function (resolve, reject) {})',
     'SomeClass.resolve()',
@@ -19,6 +22,14 @@ ruleTester.run('spec-only', rule, {
       options: [
         {
           allowedMethods: ['permittedMethod'],
+        },
+      ],
+    },
+    {
+      code: 'Promise.prototype.permittedInstanceMethod',
+      options: [
+        {
+          allowedMethods: ['permittedInstanceMethod'],
         },
       ],
     },
@@ -51,6 +62,14 @@ ruleTester.run('spec-only', rule, {
           getA(Promise.done)
         }
       `,
+      errors: [{ message: "Avoid using non-standard 'Promise.done'" }],
+    },
+    {
+      code: `var done = Promise.prototype.done`,
+      errors: [{ message: "Avoid using non-standard 'Promise.prototype'" }],
+    },
+    {
+      code: `Promise["done"];`,
       errors: [{ message: "Avoid using non-standard 'Promise.done'" }],
     },
   ],
