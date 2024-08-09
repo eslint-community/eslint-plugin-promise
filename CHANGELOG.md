@@ -1,5 +1,15 @@
 # Changelog
 
+## [7.1.1](https://github.com/eslint-community/eslint-plugin-promise/compare/v7.1.0...v7.1.1) (2024-08-09)
+
+
+### 🧹 Chores
+
+* **deps-dev:** bump eslint-plugin-jest from 28.6.0 to 28.8.0 ([#536](https://github.com/eslint-community/eslint-plugin-promise/issues/536)) ([80741f8](https://github.com/eslint-community/eslint-plugin-promise/commit/80741f849db526cad362cfc976c69a1df036a6c6))
+* **deps-dev:** bump eslint-plugin-n from 17.9.0 to 17.10.2 ([#529](https://github.com/eslint-community/eslint-plugin-promise/issues/529)) ([a646010](https://github.com/eslint-community/eslint-plugin-promise/commit/a646010a7700a87c0fcc8aa0bb0d580bd6a14fd4))
+* **deps-dev:** bump globals from 15.8.0 to 15.9.0 ([#527](https://github.com/eslint-community/eslint-plugin-promise/issues/527)) ([b8afe92](https://github.com/eslint-community/eslint-plugin-promise/commit/b8afe920bd3be1120f5effb4a9a71451a3e71c24))
+* **deps-dev:** bump husky from 9.1.2 to 9.1.4 ([#524](https://github.com/eslint-community/eslint-plugin-promise/issues/524)) ([b8fdb9f](https://github.com/eslint-community/eslint-plugin-promise/commit/b8fdb9f1d23446d74a9d0976507988dac06684b2))
+
 ## [7.1.0](https://github.com/eslint-community/eslint-plugin-promise/compare/v7.0.0...v7.1.0) (2024-08-06)
 
 
