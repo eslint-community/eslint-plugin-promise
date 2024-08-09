@@ -21,6 +21,11 @@
     "Brett Zamir",
     "Aadit M Shah <aaditmshah@aadit.codes> (https://aadit.codes/)"
   ],
+  "main": "index.js",
+  "files": [
+    "rules/**/*.js",
+    "index.js"
+  ],
   "scripts": {
     "format": "prettier --write . && eslint . --fix",
     "lint": "npm-run-all \"lint:*\"",
