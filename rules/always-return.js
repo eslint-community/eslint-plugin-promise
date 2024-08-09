@@ -149,7 +149,7 @@ module.exports = {
   },
   create(context) {
     const options = context.options[0] || {}
-    const ignoreLastCallback = !!options.ignoreLastCallback
+    const ignoreLastCallback = options.ignoreLastCallback ?? true
     /**
      * @typedef {object} FuncInfo
      * @property {string[]} branchIDStack This is a stack representing the currently
