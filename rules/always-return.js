@@ -124,6 +124,57 @@ function peek(arr) {
   return arr[arr.length - 1]
 }
 
+/**
+ * Gets the full object name for a MemberExpression or Identifier
+ * @param {import('estree').MemberExpression | import('estree').Identifier} node
+ * @returns {string}
+ */
+function getFullObjectName(node) {
+  if (node.type === 'Identifier') {
+    return node.name
+  }
+  const objectName = getFullObjectName(node.object)
+  const propertyName = node.property.name
+  return `${objectName}${node.computed ? '[' : '.'}${propertyName}${node.computed ? ']' : ''}`
+}
+
+/**
+ * Checks if the given name starts with an ignored variable
+ * @param {string} name
+ * @param {string[]} ignoredVars
+ * @returns {boolean}
+ */
+function startsWithIgnoredVar(name, ignoredVars) {
+  return ignoredVars.some(
+    (ignoredVar) =>
+      name === ignoredVar ||
+      (name.startsWith(ignoredVar) &&
+        (name.charAt(ignoredVar.length) === '.' ||
+          name.charAt(ignoredVar.length) === '[')),
+  )
+}
+
+/**
+ * Checks if the node is an assignment to an ignored variable
+ * @param {Node} node
+ * @param {string[]} ignoredVars
+ * @returns {boolean}
+ */
+function isIgnoredAssignment(node, ignoredVars) {
+  if (node.type !== 'ExpressionStatement') return false
+  const expr = node.expression
+  if (expr.type !== 'AssignmentExpression') return false
+  const left = expr.left
+  // istanbul ignore else
+  if (left.type === 'MemberExpression') {
+    const fullName = getFullObjectName(left.object)
+    return startsWithIgnoredVar(fullName, ignoredVars)
+  }
+  // istanbul ignore next
+  // fallback
+  return false
+}
+
 module.exports = {
   meta: {
     type: 'problem',
@@ -139,6 +190,14 @@ module.exports = {
           ignoreLastCallback: {
             type: 'boolean',
           },
+          ignoreAssignmentVariable: {
+            type: 'array',
+            items: {
+              type: 'string',
+              pattern: '^[\\w]+$',
+            },
+            uniqueItems: true,
+          },
         },
         additionalProperties: false,
       },
@@ -150,6 +209,9 @@ module.exports = {
   create(context) {
     const options = context.options[0] || {}
     const ignoreLastCallback = !!options.ignoreLastCallback
+    const ignoreAssignmentVariable = options.ignoreAssignmentVariable || [
+      'window',
+    ]
     /**
      * @typedef {object} FuncInfo
      * @property {string[]} branchIDStack This is a stack representing the currently
@@ -242,6 +304,17 @@ module.exports = {
 
         if (ignoreLastCallback && isLastCallback(node)) {
           return
+        }
+
+        if (ignoreAssignmentVariable.length && isLastCallback(node)) {
+          // istanbul ignore else
+          if (node.body?.type === 'BlockStatement') {
+            for (const statement of node.body.body) {
+              if (isIgnoredAssignment(statement, ignoreAssignmentVariable)) {
+                return
+              }
+            }
+          }
         }
 
         path.finalSegments.forEach((segment) => {
