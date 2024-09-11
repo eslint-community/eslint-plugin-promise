@@ -113,7 +113,7 @@ ruleTester.run('always-return', rule, {
     `hey.then(x => { globalThis['12']["test"] = x })`,
     {
       code: `hey.then(x => { window['x'] = x })`,
-      options: [{ ignoreAssignmentVariable: ['window'] }],
+      options: [{ ignoreAssignmentVariable: ['globalThis', 'window'] }],
     },
   ],
 
