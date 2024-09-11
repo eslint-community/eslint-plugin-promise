@@ -241,16 +241,16 @@ ruleTester.run('always-return', rule, {
       errors: [{ message }],
     },
     {
-      code: `hey.then(x => { windo[x] = x })`,
-      options: [{ ignoreAssignmentVariable: ['window'] }],
-      errors: [{ message }],
-    },
-    {
       code: `hey.then(x => { invalid = x })`,
       errors: [{ message }],
     },
     {
       code: `hey.then(x => { invalid['x'] = x })`,
+      errors: [{ message }],
+    },
+    {
+      code: `hey.then(x => { windo[x] = x })`,
+      options: [{ ignoreAssignmentVariable: ['window'] }],
       errors: [{ message }],
     },
     {
