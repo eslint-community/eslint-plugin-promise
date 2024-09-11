@@ -140,7 +140,7 @@ function getRootObjectName(node) {
 }
 
 /**
- * Checks if the node is an assignment to an ignored variable. Use getRootObjectName to get the variable name.
+ * Checks if the node is an assignment to an ignored variable.
  * @param {Node} node
  * @param {string[]} ignoredVars
  * @returns {boolean}
