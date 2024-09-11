@@ -98,33 +98,37 @@ function foo() {
 You can pass an `{ ignoreAssignmentVariable: [] }` as an option to this rule
 with a list of variable names so that the last `then()` callback in a promise
 chain does not warn if it does an assignment to a global variable. Default is
-`["window"]`.
+`["globalThis"]`.
 
 ```js
-/* eslint promise/always-return: ["error", { ignoreAssignmentVariable: ["window", "globalThis"] }] */
+/* eslint promise/always-return: ["error", { ignoreAssignmentVariable: ["globalThis"] }] */
 
 // OK
 promise.then((x) => {
-  window.x = x
+  globalThis = x
 })
 
-// OK
-promise.then((x) => {
-  window.x.y = x
-})
-
-// OK
 promise.then((x) => {
   globalThis.x = x
 })
 
 // OK
 promise.then((x) => {
-  globalThis.modules.x = x
+  globalThis.x.y = x
 })
 
 // NG
 promise.then((x) => {
-  let a = x
+  anyOtherVariable = x
+})
+
+// NG
+promise.then((x) => {
+  anyOtherVariable.x = x
+})
+
+// NG
+promise.then((x) => {
+  x()
 })
 ```

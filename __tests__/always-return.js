@@ -105,18 +105,15 @@ ruleTester.run('always-return', rule, {
         .finally(() => console.error('end'))`,
       options: [{ ignoreLastCallback: true }],
     },
-    `hey.then(x => { window[x] = x })`,
-    `hey.then(x => { window.a = x })`,
-    `hey.then(x => { window.a.n = x })`,
-    `hey.then(x => { window[12] = x })`,
-    `hey.then(x => { window['12']["test"] = x })`,
+    `hey.then(x => { globalThis = x })`,
+    `hey.then(x => { globalThis[a] = x })`,
+    `hey.then(x => { globalThis.a = x })`,
+    `hey.then(x => { globalThis.a.n = x })`,
+    `hey.then(x => { globalThis[12] = x })`,
+    `hey.then(x => { globalThis['12']["test"] = x })`,
     {
-      code: `hey.then(x => { globalThis[x] = x })`,
-      options: [{ ignoreAssignmentVariable: ['globalThis'] }],
-    },
-    {
-      code: `hey.then(x => { globalThis.a.x = x })`,
-      options: [{ ignoreAssignmentVariable: ['globalThis'] }],
+      code: `hey.then(x => { window['x'] = x })`,
+      options: [{ ignoreAssignmentVariable: ['window'] }],
     },
   ],
 
@@ -249,7 +246,25 @@ ruleTester.run('always-return', rule, {
       errors: [{ message }],
     },
     {
-      code: `hey.then(x => { windows[x] = x })`,
+      code: `hey.then(x => { invalid = x })`,
+      errors: [{ message }],
+    },
+    {
+      code: `hey.then(x => { invalid['x'] = x })`,
+      errors: [{ message }],
+    },
+    {
+      code: `hey.then(x => { windo['x'] = x })`,
+      options: [{ ignoreAssignmentVariable: ['window'] }],
+      errors: [{ message }],
+    },
+    {
+      code: `hey.then(x => { windows['x'] = x })`,
+      options: [{ ignoreAssignmentVariable: ['window'] }],
+      errors: [{ message }],
+    },
+    {
+      code: `hey.then(x => { x() })`,
       options: [{ ignoreAssignmentVariable: ['window'] }],
       errors: [{ message }],
     },
