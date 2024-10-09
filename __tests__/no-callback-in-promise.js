@@ -17,13 +17,13 @@ ruleTester.run('no-callback-in-promise', rule, {
     'function thing(callback) { callback() }',
     'doSomething(function(err) { callback(err) })',
 
-    // TODO: support safe callbacks (see #220)
-    // 'whatever.then((err) => { process.nextTick(() => cb()) })',
-    // 'whatever.then((err) => { setImmediate(() => cb())) })',
-    // 'whatever.then((err) => setImmediate(() => cb()))',
-    // 'whatever.then((err) => process.nextTick(() => cb()))',
-    // 'whatever.then((err) => process.nextTick(cb))',
-    // 'whatever.then((err) => setImmediate(cb))',
+    // Support safe callbacks (#220)
+    'whatever.then((err) => { process.nextTick(() => cb()) })',
+    'whatever.then((err) => { setImmediate(() => cb()) })',
+    'whatever.then((err) => setImmediate(() => cb()))',
+    'whatever.then((err) => process.nextTick(() => cb()))',
+    'whatever.then((err) => process.nextTick(cb))',
+    'whatever.then((err) => setImmediate(cb))',
 
     // arrow functions and other things
     'let thing = (cb) => cb()',
@@ -96,6 +96,95 @@ ruleTester.run('no-callback-in-promise', rule, {
     {
       code: 'a.catch(function(err) { callback(err) })',
       errors: [{ message: errorMessage }],
+    },
+
+    // #167
+    {
+      code: `
+        function wait (callback) {
+          return Promise.resolve()
+            .then(() => {
+              setTimeout(callback);
+            });
+        }
+      `,
+      errors: [{ message: errorMessage }],
+      options: [
+        {
+          timeoutsErr: true,
+        },
+      ],
+    },
+    {
+      code: `
+        function wait (callback) {
+          return Promise.resolve()
+            .then(() => {
+              setTimeout(() => callback());
+            });
+        }
+      `,
+      errors: [{ message: errorMessage }],
+      options: [
+        {
+          timeoutsErr: true,
+        },
+      ],
+    },
+
+    {
+      code: 'whatever.then((err) => { process.nextTick(() => cb()) })',
+      errors: [{ message: errorMessage }],
+      options: [
+        {
+          timeoutsErr: true,
+        },
+      ],
+    },
+    {
+      code: 'whatever.then((err) => { setImmediate(() => cb()) })',
+      errors: [{ message: errorMessage }],
+      options: [
+        {
+          timeoutsErr: true,
+        },
+      ],
+    },
+    {
+      code: 'whatever.then((err) => setImmediate(() => cb()))',
+      errors: [{ message: errorMessage }],
+      options: [
+        {
+          timeoutsErr: true,
+        },
+      ],
+    },
+    {
+      code: 'whatever.then((err) => process.nextTick(() => cb()))',
+      errors: [{ message: errorMessage }],
+      options: [
+        {
+          timeoutsErr: true,
+        },
+      ],
+    },
+    {
+      code: 'whatever.then((err) => process.nextTick(cb))',
+      errors: [{ message: errorMessage }],
+      options: [
+        {
+          timeoutsErr: true,
+        },
+      ],
+    },
+    {
+      code: 'whatever.then((err) => setImmediate(cb))',
+      errors: [{ message: errorMessage }],
+      options: [
+        {
+          timeoutsErr: true,
+        },
+      ],
     },
   ],
 })
