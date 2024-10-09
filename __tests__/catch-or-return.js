@@ -53,14 +53,8 @@ ruleTester.run('catch-or-return', rule, {
       options: [{ allowThen: true }],
     },
 
-    // allowThen - .then(null, fn)
-    { code: 'frank().then(a, b)', options: [{ allowThen: true }] },
     {
       code: 'frank().then(a).then(b).then(null, c)',
-      options: [{ allowThen: true }],
-    },
-    {
-      code: 'frank().then(a).then(b).then(c, d)',
       options: [{ allowThen: true }],
     },
     {
@@ -73,8 +67,13 @@ ruleTester.run('catch-or-return', rule, {
     },
 
     // allowThen - .then(fn, fn)
+    { code: 'frank().then(a, b)', options: [{ allowThen: true }] },
     {
       code: 'frank().then(go).then(zam, doIt)',
+      options: [{ allowThen: true }],
+    },
+    {
+      code: 'frank().then(a).then(b).then(c, d)',
       options: [{ allowThen: true }],
     },
     {
@@ -88,6 +87,37 @@ ruleTester.run('catch-or-return', rule, {
     {
       code: 'frank.then(go).then(to).then(pewPew, jail)',
       options: [{ allowThen: true }],
+    },
+
+    // allowThenStrict - .then(null, fn)
+    {
+      code: 'frank().then(go).then(null, doIt)',
+      options: [{ allowThenStrict: true }],
+    },
+    {
+      code: 'frank().then(go).then().then().then().then(null, doIt)',
+      options: [{ allowThenStrict: true }],
+    },
+    {
+      code: 'frank().then(go).then().then(null, function() { /* why bother */ })',
+      options: [{ allowThenStrict: true }],
+    },
+    {
+      code: 'frank.then(go).then(to).then(null, jail)',
+      options: [{ allowThenStrict: true }],
+    },
+
+    {
+      code: 'frank().then(a).then(b).then(null, c)',
+      options: [{ allowThenStrict: true }],
+    },
+    {
+      code: 'frank().then(a).then(b).then().then().then(null, doIt)',
+      options: [{ allowThenStrict: true }],
+    },
+    {
+      code: 'frank().then(a).then(b).then(null, function() { /* why bother */ })',
+      options: [{ allowThenStrict: true }],
     },
 
     // allowFinally - .finally(fn)
@@ -233,6 +263,77 @@ ruleTester.run('catch-or-return', rule, {
     {
       code: 'frank().catch(go).someOtherMethod()',
       errors: [{ message: catchMessage }],
+    },
+
+    // .then(null, fn)
+    {
+      code: 'frank().then(a).then(b).then(null, c)',
+      errors: [{ message: catchMessage }],
+    },
+    {
+      code: 'frank().then(a).then(b).then().then().then(null, doIt)',
+      errors: [{ message: catchMessage }],
+    },
+    {
+      code: 'frank().then(a).then(b).then(null, function() { /* why bother */ })',
+      errors: [{ message: catchMessage }],
+    },
+
+    // .then(fn, fn)
+    {
+      code: 'frank().then(a, b)',
+      errors: [{ message: catchMessage }],
+    },
+    {
+      code: 'frank().then(go).then(zam, doIt)',
+      errors: [{ message: catchMessage }],
+    },
+    {
+      code: 'frank().then(a).then(b).then(c, d)',
+      errors: [{ message: catchMessage }],
+    },
+    {
+      code: 'frank().then(go).then().then().then().then(wham, doIt)',
+      errors: [{ message: catchMessage }],
+    },
+    {
+      code: 'frank().then(go).then().then(function() {}, function() { /* why bother */ })',
+      errors: [{ message: catchMessage }],
+    },
+    {
+      code: 'frank.then(go).then(to).then(pewPew, jail)',
+      errors: [{ message: catchMessage }],
+    },
+
+    {
+      code: 'frank().then(a, b)',
+      errors: [{ message: catchMessage }],
+      options: [{ allowThenStrict: true }],
+    },
+    {
+      code: 'frank().then(go).then(zam, doIt)',
+      errors: [{ message: catchMessage }],
+      options: [{ allowThenStrict: true }],
+    },
+    {
+      code: 'frank().then(a).then(b).then(c, d)',
+      errors: [{ message: catchMessage }],
+      options: [{ allowThenStrict: true }],
+    },
+    {
+      code: 'frank().then(go).then().then().then().then(wham, doIt)',
+      errors: [{ message: catchMessage }],
+      options: [{ allowThenStrict: true }],
+    },
+    {
+      code: 'frank().then(go).then().then(function() {}, function() { /* why bother */ })',
+      errors: [{ message: catchMessage }],
+      options: [{ allowThenStrict: true }],
+    },
+    {
+      code: 'frank.then(go).then(to).then(pewPew, jail)',
+      errors: [{ message: catchMessage }],
+      options: [{ allowThenStrict: true }],
     },
   ],
 })
