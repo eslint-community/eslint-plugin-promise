@@ -22,7 +22,7 @@ module.exports = {
         if (
           node.callee.type === 'MemberExpression' &&
           node.callee.object.name === 'Promise' &&
-          PROMISE_STATICS[node.callee.property.name]
+          PROMISE_STATICS.has(node.callee.property.name)
         ) {
           context.report({
             node,
