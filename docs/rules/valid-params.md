@@ -62,6 +62,12 @@ somePromise().finally(() => {
 somePromise().finally(console.log)
 ```
 
+## Options
+
+### `exclude`
+
+Array of method names to exclude from checks. Defaults to an empty array.
+
 ## When Not To Use It
 
 If you do not want to be notified when passing an invalid number of arguments to

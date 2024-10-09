@@ -61,17 +61,33 @@ ruleTester.run('valid-params', rule, {
     'promiseReference.finally(callback)',
     'promiseReference.finally(() => {})',
 
+    {
+      code: `
+        somePromise.then(function() {
+          return sth();
+        }).catch(TypeError, function(e) {
+          //
+        }).catch(function(e) {
+        });
+      `,
+      options: [
+        {
+          exclude: ['catch'],
+        },
+      ],
+    },
+
     // integration test
-    [
-      'Promise.all([',
-      '  Promise.resolve(1),',
-      '  Promise.resolve(2),',
-      '  Promise.reject(Error()),',
-      '])',
-      '  .then(console.log)',
-      '  .catch(console.error)',
-      '  .finally(console.log)',
-    ].join('\n'),
+    `
+      Promise.all([
+        Promise.resolve(1),
+        Promise.resolve(2),
+        Promise.reject(Error()),
+      ])
+        .then(console.log)
+        .catch(console.error)
+        .finally(console.log)
+    `,
   ],
   invalid: [
     // invalid Promise.resolve()
