@@ -53,18 +53,18 @@ ruleTester.run('no-new-statics', rule, {
       errors: [{ message: "Avoid calling 'new' on 'Promise.withResolvers()'" }],
     },
     {
-      code: [
-        'function foo() {',
-        '  var a = getA()',
-        '  return new Promise.resolve(a)',
-        '}',
-      ].join('\n'),
-      output: [
-        'function foo() {',
-        '  var a = getA()',
-        '  return Promise.resolve(a)',
-        '}',
-      ].join('\n'),
+      code: `
+        function foo() {
+          var a = getA()
+          return new Promise.resolve(a)
+        }
+      `,
+      output: `
+        function foo() {
+          var a = getA()
+          return Promise.resolve(a)
+        }
+      `,
       errors: [{ message: "Avoid calling 'new' on 'Promise.resolve()'" }],
     },
   ],
