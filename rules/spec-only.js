@@ -5,6 +5,28 @@ const getDocsUrl = require('./lib/get-docs-url')
 
 const PROMISE_INSTANCE_METHODS = new Set(['then', 'catch', 'finally'])
 
+function isPermittedProperty(expression, standardSet, allowedMethods) {
+  // istanbul ignore if
+  if (expression.type !== 'MemberExpression') return false
+
+  if (expression.property.type === 'Literal')
+    return (
+      standardSet.has(expression.property.value) ||
+      allowedMethods.includes(expression.property.value)
+    )
+
+  // istanbul ignore else
+  if (expression.property.type === 'Identifier')
+    return (
+      expression.computed ||
+      standardSet.has(expression.property.name) ||
+      allowedMethods.includes(expression.property.name)
+    )
+
+  // istanbul ignore next
+  return false
+}
+
 module.exports = {
   meta: {
     type: 'problem',
@@ -37,15 +59,16 @@ module.exports = {
       MemberExpression(node) {
         if (
           node.object.type === 'Identifier' &&
-          (!node.computed || node.property.type === 'Literal') &&
           node.object.name === 'Promise' &&
-          ((node.property.name && !PROMISE_STATICS.has(node.property.name)) ||
-            (node.property.value &&
-              !PROMISE_STATICS.has(node.property.value))) &&
-          (node.property.name !== 'prototype' ||
-            (!PROMISE_INSTANCE_METHODS.has(node?.parent?.property?.name) &&
-              !allowedMethods.includes(node?.parent?.property?.name))) &&
-          !allowedMethods.includes(node.property.name ?? node.property.value)
+          ((node.property.name !== 'prototype' &&
+            !isPermittedProperty(node, PROMISE_STATICS, allowedMethods)) ||
+            (node.property.name === 'prototype' &&
+              node.parent.type === 'MemberExpression' &&
+              !isPermittedProperty(
+                node.parent,
+                PROMISE_INSTANCE_METHODS,
+                allowedMethods,
+              )))
         ) {
           context.report({
             node,
