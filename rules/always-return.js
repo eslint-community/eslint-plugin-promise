@@ -124,6 +124,36 @@ function peek(arr) {
   return arr[arr.length - 1]
 }
 
+/**
+ * Gets the root object name for a MemberExpression or Identifier.
+ * @param {Node} node
+ * @returns {string | undefined}
+ */
+function getRootObjectName(node) {
+  if (node.type === 'Identifier') {
+    return node.name
+  }
+  // istanbul ignore else (fallback)
+  if (node.type === 'MemberExpression') {
+    return getRootObjectName(node.object)
+  }
+}
+
+/**
+ * Checks if the node is an assignment to an ignored variable.
+ * @param {Node} node
+ * @param {string[]} ignoredVars
+ * @returns {boolean}
+ */
+function isIgnoredAssignment(node, ignoredVars) {
+  if (node.type !== 'ExpressionStatement') return false
+  const expr = node.expression
+  if (expr.type !== 'AssignmentExpression') return false
+  const left = expr.left
+  const rootName = getRootObjectName(left)
+  return ignoredVars.includes(rootName)
+}
+
 module.exports = {
   meta: {
     type: 'problem',
@@ -139,6 +169,14 @@ module.exports = {
           ignoreLastCallback: {
             type: 'boolean',
           },
+          ignoreAssignmentVariable: {
+            type: 'array',
+            items: {
+              type: 'string',
+              pattern: '^[\\w$]+$',
+            },
+            uniqueItems: true,
+          },
         },
         additionalProperties: false,
       },
@@ -150,6 +188,10 @@ module.exports = {
   create(context) {
     const options = context.options[0] || {}
     const ignoreLastCallback = !!options.ignoreLastCallback
+    const ignoreAssignmentVariable = options.ignoreAssignmentVariable || [
+      'globalThis',
+    ]
+
     /**
      * @typedef {object} FuncInfo
      * @property {string[]} branchIDStack This is a stack representing the currently
@@ -242,6 +284,18 @@ module.exports = {
 
         if (ignoreLastCallback && isLastCallback(node)) {
           return
+        }
+
+        if (
+          ignoreAssignmentVariable.length &&
+          isLastCallback(node) &&
+          node.body?.type === 'BlockStatement'
+        ) {
+          for (const statement of node.body.body) {
+            if (isIgnoredAssignment(statement, ignoreAssignmentVariable)) {
+              return
+            }
+          }
         }
 
         path.finalSegments.forEach((segment) => {
