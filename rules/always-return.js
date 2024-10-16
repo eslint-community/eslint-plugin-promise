@@ -173,7 +173,7 @@ module.exports = {
             type: 'array',
             items: {
               type: 'string',
-              pattern: '^\\w+$',
+              pattern: '^[\\w$]+$',
             },
             uniqueItems: true,
           },
