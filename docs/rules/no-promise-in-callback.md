@@ -30,6 +30,12 @@ promisify(doSomething)()
   .catch(console.error)
 ```
 
+## Options
+
+### `exemptDeclarations`
+
+Whether or not to exempt function declarations. Defaults to `false`.
+
 ## When Not To Use It
 
 If you do not want to be notified when using promises inside of callbacks, you
