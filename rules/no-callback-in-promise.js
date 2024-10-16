@@ -7,11 +7,28 @@
 
 const { getAncestors } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
-const hasPromiseCallback = require('./lib/has-promise-callback')
 const isInsidePromise = require('./lib/is-inside-promise')
 const isCallback = require('./lib/is-callback')
 
 const CB_BLACKLIST = ['callback', 'cb', 'next', 'done']
+const TIMEOUT_WHITELIST = [
+  'setImmediate',
+  'setTimeout',
+  'requestAnimationFrame',
+  'nextTick',
+]
+
+const isInsideTimeout = (node) => {
+  const isFunctionExpression =
+    node.type === 'FunctionExpression' ||
+    node.type === 'ArrowFunctionExpression'
+  const parent = node.parent || {}
+  const callee = parent.callee || {}
+  const name = (callee.property && callee.property.name) || callee.name || ''
+  const parentIsTimeout = TIMEOUT_WHITELIST.includes(name)
+  const isInCB = isFunctionExpression && parentIsTimeout
+  return isInCB
+}
 
 module.exports = {
   meta: {
@@ -34,32 +51,43 @@ module.exports = {
               type: 'string',
             },
           },
+          timeoutsErr: {
+            type: 'boolean',
+          },
         },
         additionalProperties: false,
       },
     ],
   },
   create(context) {
+    const { timeoutsErr = false } = context.options[0] || {}
+
     return {
       CallExpression(node) {
         const options = context.options[0] || {}
         const exceptions = options.exceptions || []
         if (!isCallback(node, exceptions)) {
-          // in general we send you packing if you're not a callback
-          // but we also need to watch out for whatever.then(cb)
-          if (hasPromiseCallback(node)) {
-            const name =
-              node.arguments && node.arguments[0] && node.arguments[0].name
-            if (!exceptions.includes(name) && CB_BLACKLIST.includes(name)) {
-              context.report({
-                node: node.arguments[0],
-                messageId: 'callback',
-              })
-            }
+          const callingName = node.callee.name || node.callee.property?.name
+          const name =
+            node.arguments && node.arguments[0] && node.arguments[0].name
+          if (
+            !exceptions.includes(name) &&
+            CB_BLACKLIST.includes(name) &&
+            (timeoutsErr || !TIMEOUT_WHITELIST.includes(callingName))
+          ) {
+            context.report({
+              node: node.arguments[0],
+              messageId: 'callback',
+            })
           }
           return
         }
-        if (getAncestors(context, node).some(isInsidePromise)) {
+
+        const ancestors = getAncestors(context, node)
+        if (
+          ancestors.some(isInsidePromise) &&
+          (timeoutsErr || !ancestors.some(isInsideTimeout))
+        ) {
           context.report({
             node,
             messageId: 'callback',
