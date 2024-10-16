@@ -28,8 +28,7 @@ module.exports = {
     return {
       'CallExpression > MemberExpression.callee'(node) {
         if (
-          node.property &&
-          node.property.name === 'then' &&
+          node.property?.name === 'then' &&
           node.parent.arguments.length >= 2
         ) {
           context.report({
