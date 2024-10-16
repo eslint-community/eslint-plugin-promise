@@ -115,6 +115,7 @@ or start with the recommended rule set:
 | [param-names](docs/rules/param-names.md)                             | Enforce consistent param names and ordering when creating new promises.                    | ✅  |     |     |     |
 | [prefer-await-to-callbacks](docs/rules/prefer-await-to-callbacks.md) | Prefer `async`/`await` to the callback pattern.                                            |     |     |     |     |
 | [prefer-await-to-then](docs/rules/prefer-await-to-then.md)           | Prefer `await` to `then()`/`catch()`/`finally()` for reading Promise values.               |     |     |     |     |
+| [prefer-catch](docs/rules/prefer-catch.md)                           | Prefer `catch` to `then(a, b)`/`then(null, b)` for handling errors.                        |     |     |     | 🔧  |
 | [spec-only](docs/rules/spec-only.md)                                 | Disallow use of non-standard Promise static methods.                                       |     |     |     |     |
 | [valid-params](docs/rules/valid-params.md)                           | Enforces the proper number of arguments are passed to Promise functions.                   |     | ✅  |     |     |
 

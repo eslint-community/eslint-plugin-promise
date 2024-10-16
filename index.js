@@ -23,6 +23,7 @@ const pluginPromise = {
     'catch-or-return': require('./rules/catch-or-return'),
     'prefer-await-to-callbacks': require('./rules/prefer-await-to-callbacks'),
     'prefer-await-to-then': require('./rules/prefer-await-to-then'),
+    'prefer-catch': require('./rules/prefer-catch'),
     'no-native': require('./rules/no-native'),
     'no-callback-in-promise': require('./rules/no-callback-in-promise'),
     'no-promise-in-callback': require('./rules/no-promise-in-callback'),
