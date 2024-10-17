@@ -7,8 +7,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:eslint-plugin/recommended",
-    "plugin:n/recommended",
-    "plugin:prettier/recommended"
+    "plugin:n/recommended"
   ],
   "rules": {
     "no-var": "error",
@@ -21,7 +20,6 @@
       { "pattern": "^(Enforce|Require|Disallow|Prefer).+\\.$" }
     ],
     "eslint-plugin/prefer-placeholders": "error",
-    "eslint-plugin/test-case-shorthand-strings": "error",
-    "prettier/prettier": "error"
+    "eslint-plugin/test-case-shorthand-strings": "error"
   }
 }
