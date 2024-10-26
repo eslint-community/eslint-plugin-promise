@@ -11,7 +11,20 @@ module.exports = {
         'Enforces the proper number of arguments are passed to Promise functions.',
       url: getDocsUrl('valid-params'),
     },
-    schema: [],
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          exclude: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
     messages: {
       requireOneOptionalArgument:
         'Promise.{{ name }}() requires 0 or 1 arguments, but received {{ numArgs }}',
@@ -22,6 +35,7 @@ module.exports = {
     },
   },
   create(context) {
+    const { exclude = [] } = context.options[0] || {}
     return {
       CallExpression(node) {
         if (!isPromise(node)) {
@@ -30,6 +44,10 @@ module.exports = {
 
         const name = node.callee.property.name
         const numArgs = node.arguments.length
+
+        if (exclude.includes(name)) {
+          return
+        }
 
         // istanbul ignore next -- `isPromise` filters out others
         switch (name) {
