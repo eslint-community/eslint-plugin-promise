@@ -29,7 +29,7 @@ function isPromise(expression) {
       expression.callee.type === 'MemberExpression' &&
       expression.callee.object.type === 'Identifier' &&
       expression.callee.object.name === 'Promise' &&
-      PROMISE_STATICS[expression.callee.property.name] &&
+      PROMISE_STATICS.has(expression.callee.property.name) &&
       expression.callee.property.name !== 'withResolvers')
   )
 }

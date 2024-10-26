@@ -1,11 +1,11 @@
 'use strict'
 
-module.exports = {
-  all: true,
-  allSettled: true,
-  any: true,
-  race: true,
-  reject: true,
-  resolve: true,
-  withResolvers: true,
-}
+module.exports = new Set([
+  'all',
+  'allSettled',
+  'any',
+  'race',
+  'reject',
+  'resolve',
+  'withResolvers',
+])
