@@ -68,9 +68,9 @@ module.exports = {
         const options = context.options[0] || {}
         const exceptions = options.exceptions || []
         if (!isCallback(node, exceptions)) {
+          const name = node.arguments?.[0]?.name
           if (hasPromiseCallback(node)) {
             const callingName = node.callee.name || node.callee.property?.name
-            const name = node.arguments?.[0]?.name
             if (
               !exceptions.includes(name) &&
               CB_BLACKLIST.includes(name) &&
@@ -87,7 +87,6 @@ module.exports = {
             return
           }
 
-          const name = node.arguments?.[0]?.name
           if (!name) {
             // Will be handled elsewhere
             return
