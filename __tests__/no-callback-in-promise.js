@@ -46,6 +46,13 @@ ruleTester.run('no-callback-in-promise', rule, {
       code: 'a.then(next).catch(next)',
       options: [{ exceptions: ['next'] }],
     },
+
+    // #572
+    `
+        while (!(step = call(next, iterator)).done) {
+          if (result !== undefined) break;
+        }
+      `,
   ],
 
   invalid: [

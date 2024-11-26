@@ -7,6 +7,7 @@
 
 const { getAncestors } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
+const hasPromiseCallback = require('./lib/has-promise-callback')
 const isInsidePromise = require('./lib/is-inside-promise')
 const isCallback = require('./lib/is-callback')
 
@@ -67,20 +68,30 @@ module.exports = {
         const options = context.options[0] || {}
         const exceptions = options.exceptions || []
         if (!isCallback(node, exceptions)) {
-          const callingName = node.callee.name || node.callee.property?.name
-          const name =
-            node.arguments && node.arguments[0] && node.arguments[0].name
-          if (
-            !exceptions.includes(name) &&
-            CB_BLACKLIST.includes(name) &&
-            (timeoutsErr || !TIMEOUT_WHITELIST.includes(callingName))
-          ) {
-            context.report({
-              node: node.arguments[0],
-              messageId: 'callback',
-            })
+          if (hasPromiseCallback(node)) {
+            const callingName = node.callee.name || node.callee.property?.name
+            const name = node.arguments?.[0]?.name
+            if (
+              !exceptions.includes(name) &&
+              CB_BLACKLIST.includes(name) &&
+              (timeoutsErr || !TIMEOUT_WHITELIST.includes(callingName))
+            ) {
+              context.report({
+                node: node.arguments[0],
+                messageId: 'callback',
+              })
+            }
+            return
           }
-          return
+          if (!timeoutsErr) {
+            return
+          }
+
+          const name = node.arguments?.[0]?.name
+          if (!name) {
+            // Will be handled elsewhere
+            return
+          }
         }
 
         const ancestors = getAncestors(context, node)
