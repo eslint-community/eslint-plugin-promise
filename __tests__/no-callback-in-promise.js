@@ -46,6 +46,15 @@ ruleTester.run('no-callback-in-promise', rule, {
       code: 'a.then(next).catch(next)',
       options: [{ exceptions: ['next'] }],
     },
+
+    // #572
+    `while (!(step = call(next, iterator)).done) {
+       if (result !== undefined) break;
+     }`,
+    // https://github.com/eslint-community/eslint-plugin-promise/issues/572#issuecomment-2501505747
+    `function hasCallbackArg(callback) {
+       console.log(callback);
+     }`,
   ],
 
   invalid: [
