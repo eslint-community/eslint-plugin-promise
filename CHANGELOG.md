@@ -1,5 +1,18 @@
 # Changelog
 
+## [7.2.1](https://github.com/eslint-community/eslint-plugin-promise/compare/v7.2.0...v7.2.1) (2024-11-26)
+
+
+### 🩹 Fixes
+
+* **`no-callback-in-promise`:** false triggering of callback ([#574](https://github.com/eslint-community/eslint-plugin-promise/issues/574)) ([8324564](https://github.com/eslint-community/eslint-plugin-promise/commit/83245645a1731b8720ba4b17951f0e98567f449c))
+
+
+### 🧹 Chores
+
+* **deps-dev:** update husky to v9.1.7 ([#573](https://github.com/eslint-community/eslint-plugin-promise/issues/573)) ([24fd90a](https://github.com/eslint-community/eslint-plugin-promise/commit/24fd90a0262e1521983095f0934e9bb0195b4d23))
+* **deps:** bump cross-spawn from 7.0.3 to 7.0.6 ([#568](https://github.com/eslint-community/eslint-plugin-promise/issues/568)) ([f33f82e](https://github.com/eslint-community/eslint-plugin-promise/commit/f33f82e03ee949d2864e266aedfe5da9762ad540))
+
 ## [7.2.0](https://github.com/eslint-community/eslint-plugin-promise/compare/v7.1.0...v7.2.0) (2024-11-25)
 
 
