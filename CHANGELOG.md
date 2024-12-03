@@ -1,5 +1,13 @@
 # Changelog
 
+## [7.2.2](https://github.com/eslint-community/eslint-plugin-promise/compare/v7.2.1...v7.2.2) (2024-12-03)
+
+
+### 🧹 Chores
+
+* **deps-dev:** update eslint-plugin-n to v17.14.0 ([#575](https://github.com/eslint-community/eslint-plugin-promise/issues/575)) ([fad9049](https://github.com/eslint-community/eslint-plugin-promise/commit/fad904995e2d99a064f40c32b43e35b6371b2e8a))
+* **deps-dev:** update prettier to v3.4.1 ([#578](https://github.com/eslint-community/eslint-plugin-promise/issues/578)) ([3fae241](https://github.com/eslint-community/eslint-plugin-promise/commit/3fae2417bb59ae82a56d3f82d8e28a09eba26421))
+
 ## [7.2.1](https://github.com/eslint-community/eslint-plugin-promise/compare/v7.2.0...v7.2.1) (2024-11-26)
 
 
