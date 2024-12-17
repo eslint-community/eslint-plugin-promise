@@ -2,11 +2,15 @@
 
 const isInsidePromise = require('./is-inside-promise')
 
-function isInsideCallback(node) {
+/**
+ * @param {import('eslint').Rule.Node} node
+ * @param {boolean} [exemptDeclarations]
+ */
+function isInsideCallback(node, exemptDeclarations) {
   const isFunction =
     node.type === 'FunctionExpression' ||
     node.type === 'ArrowFunctionExpression' ||
-    node.type === 'FunctionDeclaration' // this may be controversial
+    (!exemptDeclarations && node.type === 'FunctionDeclaration') // this may be controversial
 
   // it's totally fine to use promises inside promises
   if (isInsidePromise(node)) return

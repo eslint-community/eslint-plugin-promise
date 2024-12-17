@@ -17,12 +17,23 @@ module.exports = {
       description: 'Disallow using promises inside of callbacks.',
       url: getDocsUrl('no-promise-in-callback'),
     },
-    schema: [],
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          exemptDeclarations: {
+            type: 'boolean',
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
     messages: {
       avoidPromiseInCallback: 'Avoid using promises inside of callbacks.',
     },
   },
   create(context) {
+    const { exemptDeclarations = false } = context.options[0] || {}
     return {
       CallExpression(node) {
         if (!isPromise(node)) return
@@ -34,7 +45,11 @@ module.exports = {
         // what about if the parent is an ArrowFunctionExpression
         // would that imply an implicit return?
 
-        if (getAncestors(context, node).some(isInsideCallback)) {
+        if (
+          getAncestors(context, node).some((ancestor) => {
+            return isInsideCallback(ancestor, exemptDeclarations)
+          })
+        ) {
           context.report({
             node: node.callee,
             messageId: 'avoidPromiseInCallback',

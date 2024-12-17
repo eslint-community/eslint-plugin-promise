@@ -38,6 +38,19 @@ ruleTester.run('no-promise-in-callback', rule, {
 
     // weird case, we assume it's not a big deal if you return (even though you may be cheating)
     'a(function(err) { return doThing().then(a) })',
+
+    {
+      code: `
+        function fn(err) {
+          return { promise: Promise.resolve(err) };
+        }
+      `,
+      options: [
+        {
+          exemptDeclarations: true,
+        },
+      ],
+    },
   ],
 
   invalid: [
