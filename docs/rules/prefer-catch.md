@@ -14,7 +14,7 @@ errors will be handled.
 The second argument of a `then` call may be thought to handle any errors in the
 first argument, but it will only handle errors earlier in the Promise chain.
 
-Examples of **incorrect** code for this rule:
+Examples of **correct** code for this rule:
 
 ```js
 prom.then(fn1).then(fn2)
