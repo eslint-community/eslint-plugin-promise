@@ -1,3 +1,5 @@
+'use strict'
+
 /** @type {import('eslint-doc-generator').GenerateOptions} */
 module.exports = {
   configEmoji: [
