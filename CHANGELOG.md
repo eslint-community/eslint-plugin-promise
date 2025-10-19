@@ -1,5 +1,31 @@
 # Changelog
 
+## [7.3.0](https://github.com/eslint-community/eslint-plugin-promise/compare/v7.2.1...v7.3.0) (2025-10-19)
+
+
+### 🌟 Features
+
+* **`no-promise-in-callback`:** add `exemptDeclarations` option ([#513](https://github.com/eslint-community/eslint-plugin-promise/issues/513)) ([550524f](https://github.com/eslint-community/eslint-plugin-promise/commit/550524f2e07e392926b1e6330c7e21b5f91529ad))
+
+
+### 🧹 Chores
+
+* add missing `'use strict'` directive ([#593](https://github.com/eslint-community/eslint-plugin-promise/issues/593)) ([4cd7ea1](https://github.com/eslint-community/eslint-plugin-promise/commit/4cd7ea162c946604f953199393fa66ea47dce872))
+* **deps-dev:** update eslint-plugin-eslint-plugin to v6.4.0 ([#583](https://github.com/eslint-community/eslint-plugin-promise/issues/583)) ([45385a3](https://github.com/eslint-community/eslint-plugin-promise/commit/45385a3d8de361a82b6a5faada6113272791e56c))
+* **deps-dev:** update eslint-plugin-jest to v28.11.0 ([#585](https://github.com/eslint-community/eslint-plugin-promise/issues/585)) ([a33ffb6](https://github.com/eslint-community/eslint-plugin-promise/commit/a33ffb6ae735c1fc58c25edab667214f234e2936))
+* **deps-dev:** update eslint-plugin-n to v17.14.0 ([#575](https://github.com/eslint-community/eslint-plugin-promise/issues/575)) ([fad9049](https://github.com/eslint-community/eslint-plugin-promise/commit/fad904995e2d99a064f40c32b43e35b6371b2e8a))
+* **deps-dev:** update eslint-plugin-prettier to v5.2.3 ([#586](https://github.com/eslint-community/eslint-plugin-promise/issues/586)) ([b2095cb](https://github.com/eslint-community/eslint-plugin-promise/commit/b2095cbee2a7a10bf90aa5966751240d1cd302e8))
+* **deps-dev:** update eslint-plugin-prettier to v5.2.4 ([#600](https://github.com/eslint-community/eslint-plugin-promise/issues/600)) ([fad5029](https://github.com/eslint-community/eslint-plugin-promise/commit/fad50297fc9c368e8e8f7bfa494f0c1a07e5a4db))
+* **deps-dev:** update lint-staged to v15.4.3 ([#582](https://github.com/eslint-community/eslint-plugin-promise/issues/582)) ([d1e23e5](https://github.com/eslint-community/eslint-plugin-promise/commit/d1e23e53c162905ecd7e8399bbf6eb9a8aa45d83))
+* **deps-dev:** update prettier to v3.4.1 ([#578](https://github.com/eslint-community/eslint-plugin-promise/issues/578)) ([3fae241](https://github.com/eslint-community/eslint-plugin-promise/commit/3fae2417bb59ae82a56d3f82d8e28a09eba26421))
+* **deps-dev:** update prettier to v3.4.2 ([#580](https://github.com/eslint-community/eslint-plugin-promise/issues/580)) ([7219528](https://github.com/eslint-community/eslint-plugin-promise/commit/7219528cc595d408bac32a0912dab7e81f55eb3c))
+* **deps-dev:** update prettier to v3.5.0 ([#588](https://github.com/eslint-community/eslint-plugin-promise/issues/588)) ([5da83c4](https://github.com/eslint-community/eslint-plugin-promise/commit/5da83c4cd1e673b7687a466c58d9972bb433e71c))
+* **deps:** update globals to v15.13.0 ([#579](https://github.com/eslint-community/eslint-plugin-promise/issues/579)) ([75defcf](https://github.com/eslint-community/eslint-plugin-promise/commit/75defcf8c6262f42124a7dba7e4f862be0ea9d0f))
+* **deps:** update globals to v15.14.0 ([#584](https://github.com/eslint-community/eslint-plugin-promise/issues/584)) ([846ad48](https://github.com/eslint-community/eslint-plugin-promise/commit/846ad4861b5f24cd45093fffb2db48a37473553d))
+* **deps:** update typescript to v5.7.3 ([#589](https://github.com/eslint-community/eslint-plugin-promise/issues/589)) ([79b0eff](https://github.com/eslint-community/eslint-plugin-promise/commit/79b0eff3f660f9e7a6c30aa4a29fc1391df39059))
+* **package:** explicitly declare js module type ([#592](https://github.com/eslint-community/eslint-plugin-promise/issues/592)) ([b19e133](https://github.com/eslint-community/eslint-plugin-promise/commit/b19e133b438a8e3bf6ff99f0abd14b234f061ee2))
+* update typescript to ~5.7.0 ([#577](https://github.com/eslint-community/eslint-plugin-promise/issues/577)) ([04d0b2b](https://github.com/eslint-community/eslint-plugin-promise/commit/04d0b2bbed91c44baec0ed1bbe5bf3ac051f2f8f))
+
 ## [7.2.1](https://github.com/eslint-community/eslint-plugin-promise/compare/v7.2.0...v7.2.1) (2024-11-26)
 
 
