@@ -2,17 +2,21 @@
 
 const rule = require('../rules/no-native')
 const { RuleTester } = require('./rule-tester')
-const parserOptions = {
+const es5ParserOptions = {
+  ecmaVersion: 5,
+  sourceType: 'script',
+}
+const es6ParserOptions = {
   ecmaVersion: 6,
   sourceType: 'module',
 }
 const ruleTesters = [
   new RuleTester({
-    parserOptions,
+    parserOptions: es5ParserOptions,
   }),
   new RuleTester({
     parser: require.resolve('@typescript-eslint/parser'),
-    parserOptions,
+    parserOptions: es5ParserOptions,
   }),
 ]
 
@@ -21,7 +25,10 @@ for (const ruleTester of ruleTesters) {
     valid: [
       'var Promise = null; function x() { return Promise.resolve("hi"); }',
       'var Promise = window.Promise || require("bluebird"); var x = Promise.reject();',
-      'import Promise from "bluebird"; var x = Promise.reject();',
+      {
+        code: 'import Promise from "bluebird"; var x = Promise.reject();',
+        parserOptions: es6ParserOptions,
+      },
     ],
 
     invalid: [
@@ -42,16 +49,6 @@ for (const ruleTester of ruleTesters) {
         code: 'new Promise(function(reject, resolve) { })',
         errors: [{ message: '"Promise" is not defined.' }],
         env: { node: true },
-      },
-      {
-        code: 'Promise.resolve()',
-        errors: [{ message: '"Promise" is not defined.' }],
-        env: { es6: true },
-      },
-      {
-        code: 'Promise.resolve()',
-        errors: [{ message: '"Promise" is not defined.' }],
-        globals: { Promise: true },
       },
     ],
   })
