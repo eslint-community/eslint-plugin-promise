@@ -75,7 +75,7 @@ jobs:
         run: npm install eslint@${{ matrix.eslint }}
 
       - name: 📥 Install @typescript-eslint/parser v8
-        run: npm install @typescript-eslint/parser@8
+        run: npm install @typescript-eslint/parser@8 --force
         if: matrix.eslint == 10
 
       - name: ▶️ Run test script
