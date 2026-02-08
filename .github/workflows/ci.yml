@@ -35,9 +35,13 @@ jobs:
     strategy:
       matrix:
         eslint: [8]
-        node: [18.18.0, 20.9.0, 21.1.0, 22]
+        node: [18.18.0, 20.9.0, 21.1.0, 22, 24]
         os: [ubuntu-latest]
         include:
+          # ESLint v10
+          - eslint: 10
+            node: 24
+            os: ubuntu-latest
           # ESLint v9
           - eslint: 9
             node: 22
