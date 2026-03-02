@@ -3,7 +3,7 @@
 
 'use strict'
 
-const { getScope } = require('./lib/eslint-compat')
+const { getSourceCode } = require('./lib/eslint-compat')
 const getDocsUrl = require('./lib/get-docs-url')
 
 function isDeclared(scope, ref) {
@@ -46,22 +46,24 @@ module.exports = {
      * @private
      */
     return {
-      'Program:exit'(node) {
-        const scope = getScope(context, node)
-        const leftToBeResolved =
-          scope.implicit.left ||
-          /**
-           * Fixes https://github.com/eslint-community/eslint-plugin-promise/issues/205.
-           * The problem was that @typescript-eslint has a scope manager
-           * which has `leftToBeResolved` instead of the default `left`.
-           */
-          scope.implicit.leftToBeResolved
+      'Program:exit'() {
+        const sourceCode = getSourceCode(context)
+        /** @type {import('eslint').Scope.Scope} */
+        const scope = sourceCode.scopeManager.globalScope
 
-        leftToBeResolved.forEach((ref) => {
-          if (ref.identifier.name !== 'Promise') {
-            return
+        for (const variable of scope.variables) {
+          if (variable.name !== 'Promise') {
+            continue
           }
-
+          variable.references.forEach(validatePromiseReference)
+        }
+        for (const ref of scope.through) {
+          if (ref.identifier.name !== 'Promise') {
+            continue
+          }
+          validatePromiseReference(ref)
+        }
+        function validatePromiseReference(ref) {
           // istanbul ignore else
           if (!isDeclared(scope, ref)) {
             context.report({
@@ -70,7 +72,7 @@ module.exports = {
               data: { name: ref.identifier.name },
             })
           }
-        })
+        }
       },
     }
   },
