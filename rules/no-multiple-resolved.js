@@ -479,21 +479,22 @@ module.exports = {
       onUnreachableCodePathSegmentEnd(segment) {
         codePathInfoStack[0].onSegmentExit(segment)
       },
-      /** @type {Identifier} */
-      'CallExpression > Identifier.callee'(node) {
+      /** @param {CallExpression} node */
+      'CallExpression:exit'(node) {
+        const callee = node.callee
         const codePathInfo = codePathInfoStack[0]
         const resolverReferences = resolverReferencesStack[0]
-        if (!resolverReferences.has(node)) {
+        if (!resolverReferences.has(callee)) {
           return
         }
         for (const segmentInfo of codePathInfo.getCurrentSegmentInfos()) {
           // If a resolving path is found, report if the path is already resolved.
           // Store the information if it is not already resolved.
           if (segmentInfo.resolved) {
-            report(node, segmentInfo.resolved, 'certain')
+            report(callee, segmentInfo.resolved, 'certain')
             continue
           }
-          segmentInfo.resolved = node
+          segmentInfo.resolved = callee
         }
       },
     }

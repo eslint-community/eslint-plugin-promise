@@ -35,9 +35,13 @@ jobs:
     strategy:
       matrix:
         eslint: [8]
-        node: [18.18.0, 20.9.0, 21.1.0, 22]
+        node: [18.18.0, 20.9.0, 21.1.0, 22, 24]
         os: [ubuntu-latest]
         include:
+          # ESLint v10
+          - eslint: 10
+            node: 24
+            os: ubuntu-latest
           # ESLint v9
           - eslint: 9
             node: 22
@@ -69,6 +73,10 @@ jobs:
 
       - name: 📥 Install ESLint v${{ matrix.eslint }}
         run: npm install eslint@${{ matrix.eslint }}
+
+      - name: 📥 Install @typescript-eslint/parser v8
+        run: npm install @typescript-eslint/parser@8 --force
+        if: matrix.eslint == 10
 
       - name: ▶️ Run test script
         run: npm run test -- --runInBand
