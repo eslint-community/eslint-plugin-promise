@@ -53,6 +53,11 @@ for (const ruleTester of ruleTesters) {
         errors: [{ message: '"Promise" is not defined.' }],
         globals: { Promise: true },
       },
+      {
+        code: 'Promise.resolve()',
+        errors: [{ message: '"Promise" is not defined.' }],
+        globals: { Promise: 'off' },
+      },
     ],
   })
 }
