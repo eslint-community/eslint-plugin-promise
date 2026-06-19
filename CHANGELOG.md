@@ -1,5 +1,20 @@
 # Changelog
 
+## [7.3.1](https://github.com/eslint-community/eslint-plugin-promise/compare/v7.3.0...v7.3.1) (2026-06-19)
+
+
+### 🧹 Chores
+
+* **deps-dev:** bump fast-uri from 3.1.0 to 3.1.2 ([#628](https://github.com/eslint-community/eslint-plugin-promise/issues/628)) ([9d7d24b](https://github.com/eslint-community/eslint-plugin-promise/commit/9d7d24bc040bed17e51313fd2cb243de73dc05c7))
+* **deps-dev:** bump shell-quote from 1.8.1 to 1.8.4 ([#631](https://github.com/eslint-community/eslint-plugin-promise/issues/631)) ([7082f5d](https://github.com/eslint-community/eslint-plugin-promise/commit/7082f5df35fb233b7eb35faa0c3c3f6d6373b393))
+* **deps-dev:** update dependency eslint-plugin-prettier to v5.5.6 ([#601](https://github.com/eslint-community/eslint-plugin-promise/issues/601)) ([f1cf3a5](https://github.com/eslint-community/eslint-plugin-promise/commit/f1cf3a5825b145af6f7ee398c00b9fb0a6b0ad2b))
+* **deps-dev:** update prettier to v3.8.4 ([#633](https://github.com/eslint-community/eslint-plugin-promise/issues/633)) ([b966cef](https://github.com/eslint-community/eslint-plugin-promise/commit/b966cefc7959dd0ec9330c5232f6bd3b02c52cfa))
+* **deps:** bump ajv from 6.12.6 to 6.15.0 ([#625](https://github.com/eslint-community/eslint-plugin-promise/issues/625)) ([36c8efa](https://github.com/eslint-community/eslint-plugin-promise/commit/36c8efa34ec861ecbab3612b6899f832290f46a3))
+* **deps:** update eslint-plugin-n to v17.24.0 ([#581](https://github.com/eslint-community/eslint-plugin-promise/issues/581)) ([8a10903](https://github.com/eslint-community/eslint-plugin-promise/commit/8a10903e12532991f9d171701a93555bd0766637))
+* pin dependencies ([#614](https://github.com/eslint-community/eslint-plugin-promise/issues/614)) ([e5ebe70](https://github.com/eslint-community/eslint-plugin-promise/commit/e5ebe70ae3d97f5161204ba2545cc297a31e5595))
+* update dependency doctoc to v2.5.0 ([#632](https://github.com/eslint-community/eslint-plugin-promise/issues/632)) ([8ebec2a](https://github.com/eslint-community/eslint-plugin-promise/commit/8ebec2a72c7432c490c3afd5cd74073d5fcc4c30))
+* update dependency typescript to ~5.9.0 ([#596](https://github.com/eslint-community/eslint-plugin-promise/issues/596)) ([4a2ac53](https://github.com/eslint-community/eslint-plugin-promise/commit/4a2ac534c714862e4c06923cd2708a084e14ffd6))
+
 ## [7.3.0](https://github.com/eslint-community/eslint-plugin-promise/compare/v7.2.1...v7.3.0) (2026-04-27)
 
 
