@@ -33,6 +33,10 @@ Callback got called with: My error null
 
 ## Options
 
+### `exceptions`
+
+String list of callback function names to exempt.
+
 ### `timeoutsErr`
 
 Boolean as to whether callbacks in timeout functions like `setTimeout` will err.
@@ -80,12 +84,5 @@ callback code instead of combining the approaches.
   https://nodejs.org/docs/latest/api/process.html#process_process_nexttick_callback_args
 [settimeout()]:
   https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
-
-## Options
-
-### `exceptions`
-
-String list of callback function names to exempt.
-
 [util.callbackify]:
   https://nodejs.org/docs/latest/api/util.html#utilcallbackifyoriginal
