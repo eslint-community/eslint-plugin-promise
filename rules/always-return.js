@@ -299,6 +299,9 @@ module.exports = {
         }
 
         path.finalSegments.forEach((segment) => {
+          if (!segment.reachable) {
+            return
+          }
           const id = segment.id
           const branch = funcInfo.branchInfoMap[id]
           if (!branch.good) {
