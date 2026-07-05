@@ -42,14 +42,6 @@ module.exports = {
               ) {
                 yield removeArgument(fixer, then, sourceCode)
                 yield fixer.replaceText(node.property, 'catch')
-              } else {
-                const catcher = node.parent.arguments[1]
-                const catcherText = sourceCode.getText(catcher)
-                yield removeArgument(fixer, catcher, sourceCode)
-                yield fixer.insertTextBefore(
-                  node.property,
-                  `catch(${catcherText}).`,
-                )
               }
             },
           })

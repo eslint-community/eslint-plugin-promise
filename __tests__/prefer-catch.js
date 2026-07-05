@@ -26,12 +26,12 @@ ruleTester.run('prefer-catch', rule, {
     {
       code: 'hey.then(fn1, fn2)',
       errors: [{ message }],
-      output: 'hey.catch(fn2).then(fn1)',
+      output: null,
     },
     {
       code: 'hey.then(fn1, (fn2))',
       errors: [{ message }],
-      output: 'hey.catch(fn2).then(fn1)',
+      output: null,
     },
     {
       code: 'hey.then(null, fn2)',
@@ -46,7 +46,7 @@ ruleTester.run('prefer-catch', rule, {
     {
       code: 'function foo() { hey.then(x => {}, () => {}) }',
       errors: [{ message }],
-      output: 'function foo() { hey.catch(() => {}).then(x => {}) }',
+      output: null,
     },
     {
       code: `
@@ -55,11 +55,7 @@ ruleTester.run('prefer-catch', rule, {
         }
       `,
       errors: [{ message }, { message }],
-      output: `
-        function foo() {
-          hey.catch(function b() {}).then(function a() { }).catch(fn2).then(fn1)
-        }
-      `,
+      output: null,
     },
   ],
 })
