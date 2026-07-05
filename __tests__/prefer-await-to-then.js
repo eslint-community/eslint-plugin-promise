@@ -39,6 +39,11 @@ ruleTester.run('prefer-await-to-then', rule, {
         doSomething.then(abc);
       }
     }`,
+    `class Child extends Mother {
+      catch(exception, host) {
+        super.catch(exception, host)
+      }
+    }`,
   ],
 
   invalid: [

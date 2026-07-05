@@ -67,7 +67,8 @@ module.exports = {
           isTopLevelScoped(node) ||
           (!strict && isInsideYieldOrAwait(node)) ||
           (!strict && isInsideConstructor(node)) ||
-          isMemberCallWithObjectName('cy', node.parent)
+          isMemberCallWithObjectName('cy', node.parent) ||
+          node.object.type === 'Super'
         ) {
           return
         }

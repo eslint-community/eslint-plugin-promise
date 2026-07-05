@@ -54,6 +54,11 @@ ruleTester.run('valid-params', rule, {
     'somePromise().catch(err => {})',
     'promiseReference.catch(callback)',
     'promiseReference.catch(err => {})',
+    `class Child extends Mother {
+      catch(exception, host) {
+        super.catch(exception, host)
+      }
+    }`,
 
     // valid Promise.finally()
     'somePromise().finally(callback)',

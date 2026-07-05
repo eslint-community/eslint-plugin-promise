@@ -7,6 +7,14 @@
 const PROMISE_STATICS = require('./promise-statics')
 
 function isPromise(expression) {
+  if (
+    expression.type === 'CallExpression' &&
+    expression.callee.type === 'MemberExpression' &&
+    expression.callee.object.type === 'Super'
+  ) {
+    return false
+  }
+
   return (
     // hello.then()
     (expression.type === 'CallExpression' &&
