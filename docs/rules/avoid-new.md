@@ -44,7 +44,7 @@ Promise.reject(new Error('oops'))
 
 ## When Not To Use It
 
-If you are creating a utility library without [util.promisify]() or do not want
+If you are creating a utility library without [util.promisify] or do not want
 to be notified when using `new Promise`, you can safely disable this rule.
 
 [util.promisify]: https://nodejs.org/api/util.html#util_util_promisify_original
