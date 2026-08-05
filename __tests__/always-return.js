@@ -15,6 +15,7 @@ ruleTester.run('always-return', rule, {
     'hey.then(x => x)',
     'hey.then(x => ({}))',
     'hey.then(x => { return; })',
+    'hey.then(() => { try { return 1; } finally { return 2; } })',
     'hey.then(x => { return x ? x.id : null })',
     'hey.then(x => { return x * 10 })',
     'hey.then(x => { process.exit(0); })',
