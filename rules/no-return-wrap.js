@@ -32,7 +32,13 @@ function isInPromise(context, node) {
   ) {
     functionNode = functionNode.parent.parent
   }
-  return functionNode && functionNode.parent && isPromise(functionNode.parent)
+  return (
+    functionNode &&
+    functionNode.parent &&
+    isPromise(functionNode.parent) &&
+    // Static Promise methods receive function values, not chain callbacks.
+    functionNode.parent.callee.object.name !== 'Promise'
+  )
 }
 
 module.exports = {
