@@ -19,6 +19,24 @@ ruleTester.run('no-return-wrap', rule, {
     'Promise.resolve(4).then(function() {})',
     'Promise.reject(4).then(function() {})',
 
+    // functions passed to Promise.resolve/reject are values, not callbacks
+    'const foo = () => { return Promise.resolve(() => Promise.resolve()) }',
+    'Promise.resolve(function() { return Promise.resolve(4) })',
+    'Promise.resolve(() => Promise.reject(4))',
+    'Promise.reject(() => Promise.resolve(4))',
+    'Promise.reject(function() { return Promise.reject(4) })',
+    'Promise.resolve((function() { return Promise.resolve(4) }).bind(this))',
+    'Promise.reject((function() { return Promise.reject(4) }).bind(this).bind(this))',
+    {
+      code: `
+        type SetupWithTeardown = () => Promise<() => Promise<void>>;
+        const foo: SetupWithTeardown = () => {
+          return Promise.resolve(() => Promise.resolve());
+        };
+      `,
+      parser: require.resolve('@typescript-eslint/parser'),
+    },
+
     // throw and return are fine
     'doThing().then(function() { return 4 })',
     'doThing().then(function() { throw 4 })',
@@ -71,6 +89,24 @@ ruleTester.run('no-return-wrap', rule, {
   ],
 
   invalid: [
+    // callbacks in promise chains still wrap their return values
+    {
+      code: 'Promise.resolve(4).then(() => Promise.resolve(4))',
+      errors: [{ message: resolveMessage }],
+    },
+    {
+      code: 'Promise.reject(4).catch(() => Promise.reject(4))',
+      errors: [{ message: rejectMessage }],
+    },
+    {
+      code: 'Promise.resolve(4).finally(() => Promise.reject(4))',
+      errors: [{ message: rejectMessage }],
+    },
+    {
+      code: 'Promise.resolve(() => doThing().then(() => Promise.resolve(4)))',
+      errors: [{ message: resolveMessage }],
+    },
+
     // wrapped resolve is bad
     {
       code: 'doThing().then(function() { return Promise.resolve(4) })',
