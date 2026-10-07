@@ -6,7 +6,7 @@
 'use strict'
 
 const getDocsUrl = require('./lib/get-docs-url')
-const { getSourceCode } = require('./lib/eslint-compat')
+const { getSourceCode, getScope } = require('./lib/eslint-compat')
 const removeArgument = require('./fix/remove-argument')
 
 module.exports = {
@@ -36,20 +36,24 @@ module.exports = {
             messageId: 'preferCatchToThen',
             *fix(fixer) {
               const then = node.parent.arguments[0]
+              const reference =
+                then.type === 'Identifier' && then.name === 'undefined'
+                  ? getScope(context, then).references.find(
+                      (ref) => ref.identifier === then,
+                    )
+                  : null
+              const isGlobalUndefined =
+                reference &&
+                !reference.tainted &&
+                reference.resolved?.defs.length === 0
+
               if (
-                (then.type === 'Literal' && then.value === null) ||
-                (then.type === 'Identifier' && then.name === 'undefined')
+                !node.computed &&
+                ((then.type === 'Literal' && then.value === null) ||
+                  isGlobalUndefined)
               ) {
                 yield removeArgument(fixer, then, sourceCode)
                 yield fixer.replaceText(node.property, 'catch')
-              } else {
-                const catcher = node.parent.arguments[1]
-                const catcherText = sourceCode.getText(catcher)
-                yield removeArgument(fixer, catcher, sourceCode)
-                yield fixer.insertTextBefore(
-                  node.property,
-                  `catch(${catcherText}).`,
-                )
               }
             },
           })

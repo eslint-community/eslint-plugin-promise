@@ -27,3 +27,18 @@ Examples of **incorrect** code for this rule:
 hey.then(fn1, fn2)
 hey.then(null, fn2)
 ```
+
+## Automatic Fixes
+
+This rule can automatically replace `then(null, onRejected)` and
+`then(undefined, onRejected)` with `catch(onRejected)` when `undefined`
+statically resolves to the global value.
+
+Calls with a fulfillment handler are reported without an automatic fix because
+moving the rejection handler into a separate `catch` changes the behavior. For
+example, `prom.catch(onRejected).then(onFulfilled)` also calls `onFulfilled`
+when `onRejected` recovers from a rejection, whereas
+`prom.then(onFulfilled, onRejected)` does not. Using
+`prom.then(onFulfilled).catch(onRejected)` instead also catches errors thrown by
+`onFulfilled`, which the original call does not catch. Review these calls
+manually to choose the intended error-handling behavior.

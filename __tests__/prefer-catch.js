@@ -26,12 +26,12 @@ ruleTester.run('prefer-catch', rule, {
     {
       code: 'hey.then(fn1, fn2)',
       errors: [{ message }],
-      output: 'hey.catch(fn2).then(fn1)',
+      output: null,
     },
     {
       code: 'hey.then(fn1, (fn2))',
       errors: [{ message }],
-      output: 'hey.catch(fn2).then(fn1)',
+      output: null,
     },
     {
       code: 'hey.then(null, fn2)',
@@ -44,9 +44,71 @@ ruleTester.run('prefer-catch', rule, {
       output: 'hey.catch(fn2)',
     },
     {
+      code: 'hey.then((null), (fn2))',
+      errors: [{ message }],
+      output: 'hey.catch((fn2))',
+    },
+    {
+      code: 'function foo() { hey.then((undefined), fn2) }',
+      errors: [{ message }],
+      output: 'function foo() { hey.catch(fn2) }',
+    },
+    {
+      code: 'hey.then(null, fn2, extra())',
+      errors: [{ message }],
+      output: 'hey.catch(fn2, extra())',
+    },
+    {
+      code: 'hey.then(null, ...handlers)',
+      errors: [{ message }],
+      output: 'hey.catch(...handlers)',
+    },
+    {
+      code: 'function foo(undefined) { hey.then(undefined, fn2) }',
+      errors: [{ message }],
+      output: null,
+    },
+    {
+      code: 'function foo() { const undefined = fn1; hey.then(undefined, fn2) }',
+      errors: [{ message }],
+      output: null,
+    },
+    {
+      code: 'var undefined = fn1; hey.then(undefined, fn2)',
+      errors: [{ message }],
+      output: null,
+    },
+    {
+      code: 'hey.then(undefined, fn2)',
+      globals: { undefined: 'off' },
+      errors: [{ message }],
+      output: null,
+    },
+    {
+      code: 'with (handlers) { hey.then(undefined, fn2) }',
+      parserOptions: { sourceType: 'script' },
+      errors: [{ message }],
+      output: null,
+    },
+    {
+      code: 'hey[then](null, fn2)',
+      errors: [{ message }],
+      output: null,
+    },
+    {
+      code: 'hey.then(void sideEffect(), fn2)',
+      errors: [{ message }],
+      output: null,
+    },
+    {
+      code: 'hey.then(getHandler(), fn2)',
+      errors: [{ message }],
+      output: null,
+    },
+    {
       code: 'function foo() { hey.then(x => {}, () => {}) }',
       errors: [{ message }],
-      output: 'function foo() { hey.catch(() => {}).then(x => {}) }',
+      output: null,
     },
     {
       code: `
@@ -55,11 +117,7 @@ ruleTester.run('prefer-catch', rule, {
         }
       `,
       errors: [{ message }, { message }],
-      output: `
-        function foo() {
-          hey.catch(function b() {}).then(function a() { }).catch(fn2).then(fn1)
-        }
-      `,
+      output: null,
     },
   ],
 })
