@@ -10,6 +10,17 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('valid-params', rule, {
   valid: [
+    // Array literal spreads contribute their known argument counts.
+    'Promise.resolve(...[value])',
+    'Promise.resolve(...[,])',
+    'Promise.resolve(...[[one, two]])',
+    'Promise.all(...[iterable])',
+    'somePromise().then(...[success, ...[failure]])',
+    'Promise.resolve(...[...rest])',
+    'Promise.resolve(...[value, ...rest])',
+    'Promise.resolve(...[...rest, ...[]])',
+    'somePromise().then(...[...[], ...rest])',
+
     // Spread arguments have an unknown runtime argument count.
     'Promise.resolve(...[])',
     'Promise.resolve(value, ...rest)',
@@ -105,6 +116,75 @@ ruleTester.run('valid-params', rule, {
     `,
   ],
   invalid: [
+    {
+      code: 'Promise.resolve(value, ...[other])',
+      errors: [
+        {
+          message:
+            'Promise.resolve() requires 0 or 1 arguments, but received 2',
+        },
+      ],
+    },
+    {
+      code: 'Promise.all(...[])',
+      errors: [
+        { message: 'Promise.all() requires 1 argument, but received 0' },
+      ],
+    },
+    {
+      code: 'somePromise().then(...[])',
+      errors: [
+        { message: 'Promise.then() requires 1 or 2 arguments, but received 0' },
+      ],
+    },
+    {
+      code: 'somePromise().catch(...[...[]])',
+      errors: [
+        { message: 'Promise.catch() requires 1 argument, but received 0' },
+      ],
+    },
+    {
+      code: 'Promise.reject(...[one, two])',
+      errors: [
+        {
+          message: 'Promise.reject() requires 0 or 1 arguments, but received 2',
+        },
+      ],
+    },
+    {
+      code: 'Promise.resolve(...[,,])',
+      errors: [
+        {
+          message:
+            'Promise.resolve() requires 0 or 1 arguments, but received 2',
+        },
+      ],
+    },
+    {
+      code: 'somePromise().then(...[success, ...[failure, extra]])',
+      errors: [
+        { message: 'Promise.then() requires 1 or 2 arguments, but received 3' },
+      ],
+    },
+    {
+      code: 'Promise.resolve(...[value, ...rest, other])',
+      errors: [
+        {
+          message:
+            'Promise.resolve() requires 0 or 1 arguments, but received at least 2',
+        },
+      ],
+    },
+    {
+      code: 'Promise.resolve(...[...rest, ...[one, two]])',
+      errors: [
+        {
+          message:
+            'Promise.resolve() requires 0 or 1 arguments, but received at least 2',
+        },
+      ],
+    },
+
     // Known arguments can exceed the maximum even with a spread.
     {
       code: 'Promise.resolve(value, other, ...rest)',

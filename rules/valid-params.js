@@ -3,6 +3,26 @@
 const getDocsUrl = require('./lib/get-docs-url')
 const isPromise = require('./lib/is-promise')
 
+function countArguments(args) {
+  let numArgs = 0
+  let hasUnknownSpread = false
+
+  for (const argument of args) {
+    // Array holes yield undefined when spread, so they count as arguments too.
+    if (!argument || argument.type !== 'SpreadElement') {
+      numArgs++
+    } else if (argument.argument.type === 'ArrayExpression') {
+      const count = countArguments(argument.argument.elements)
+      numArgs += count.numArgs
+      hasUnknownSpread = hasUnknownSpread || count.hasUnknownSpread
+    } else {
+      hasUnknownSpread = true
+    }
+  }
+
+  return { numArgs, hasUnknownSpread }
+}
+
 module.exports = {
   meta: {
     type: 'problem',
@@ -43,13 +63,10 @@ module.exports = {
         }
 
         const name = node.callee.property.name
-        const numArgs = node.arguments.filter(
-          (argument) => argument.type !== 'SpreadElement',
-        ).length
-        const hasSpread = numArgs !== node.arguments.length
+        const { numArgs, hasUnknownSpread } = countArguments(node.arguments)
         const data = {
           name,
-          numArgs: hasSpread ? `at least ${numArgs}` : numArgs,
+          numArgs: hasUnknownSpread ? `at least ${numArgs}` : numArgs,
         }
 
         if (exclude.includes(name)) {
@@ -69,7 +86,7 @@ module.exports = {
             }
             break
           case 'then':
-            if ((!hasSpread && numArgs < 1) || numArgs > 2) {
+            if ((!hasUnknownSpread && numArgs < 1) || numArgs > 2) {
               context.report({
                 node,
                 messageId: 'requireTwoOptionalArguments',
@@ -83,7 +100,7 @@ module.exports = {
           case 'any':
           case 'catch':
           case 'finally':
-            if ((!hasSpread && numArgs < 1) || numArgs > 1) {
+            if ((!hasUnknownSpread && numArgs < 1) || numArgs > 1) {
               context.report({
                 node,
                 messageId: 'requireOneArgument',

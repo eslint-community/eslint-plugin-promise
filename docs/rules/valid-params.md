@@ -62,12 +62,16 @@ somePromise().finally(() => {
 somePromise().finally(console.log)
 ```
 
-When a call contains spread arguments, their length is unknown. The rule only
-reports the call if the non-spread arguments already exceed the maximum:
+Array literal spreads contribute their known elements to the argument count,
+including nested array spreads and holes. Other spread arguments have an unknown
+length, so the rule only reports these calls when the known arguments already
+exceed the maximum:
 
 ```js
 Promise.resolve(value, ...rest) // Not reported: rest might be empty.
 Promise.resolve(value, other, ...rest) // Reported: at least 2 arguments.
+Promise.resolve(value, ...[other]) // Reported: exactly 2 arguments.
+Promise.all(...[]) // Reported: exactly 0 arguments.
 ```
 
 ## Options
