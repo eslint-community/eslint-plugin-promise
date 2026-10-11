@@ -10,6 +10,21 @@ const ruleTester = new RuleTester({
 
 ruleTester.run('valid-params', rule, {
   valid: [
+    // Spread arguments have an unknown runtime argument count.
+    'Promise.resolve(...[])',
+    'Promise.resolve(value, ...rest)',
+    'Promise.reject(...args, reason)',
+    'Promise.all(iterable, ...rest)',
+    'Promise.race(...args, iterable)',
+    'Promise.allSettled(iterable, ...rest)',
+    'Promise.any(...args, iterable)',
+    'somePromise().then(success, failure, ...rest)',
+    'somePromise().catch(callback, ...rest)',
+    'somePromise().finally(...args, callback)',
+    'Promise.resolve(value, ...[])',
+    'somePromise().then(...[], success, failure)',
+    'somePromise().then(...first, ...second, ...third)',
+
     // valid Promise.resolve()
     'Promise.resolve()',
     'Promise.resolve(1)',
@@ -90,6 +105,35 @@ ruleTester.run('valid-params', rule, {
     `,
   ],
   invalid: [
+    // Known arguments can exceed the maximum even with a spread.
+    {
+      code: 'Promise.resolve(value, other, ...rest)',
+      errors: [
+        {
+          message:
+            'Promise.resolve() requires 0 or 1 arguments, but received at least 2',
+        },
+      ],
+    },
+    {
+      code: 'somePromise().then(success, ...rest, failure, extra)',
+      errors: [
+        {
+          message:
+            'Promise.then() requires 1 or 2 arguments, but received at least 3',
+        },
+      ],
+    },
+    {
+      code: 'somePromise().catch(...args, callback, extra)',
+      errors: [
+        {
+          message:
+            'Promise.catch() requires 1 argument, but received at least 2',
+        },
+      ],
+    },
+
     // invalid Promise.resolve()
     {
       code: 'Promise.resolve(1, 2)',
@@ -139,6 +183,14 @@ ruleTester.run('valid-params', rule, {
       code: 'Promise.race({}, function() {}, 1, 2, 3)',
       errors: [
         { message: 'Promise.race() requires 1 argument, but received 5' },
+      ],
+    },
+
+    // A spread inside an argument does not change the argument count.
+    {
+      code: 'Promise.all([...values], other)',
+      errors: [
+        { message: 'Promise.all() requires 1 argument, but received 2' },
       ],
     },
 

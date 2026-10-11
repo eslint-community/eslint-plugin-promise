@@ -43,7 +43,14 @@ module.exports = {
         }
 
         const name = node.callee.property.name
-        const numArgs = node.arguments.length
+        const numArgs = node.arguments.filter(
+          (argument) => argument.type !== 'SpreadElement',
+        ).length
+        const hasSpread = numArgs !== node.arguments.length
+        const data = {
+          name,
+          numArgs: hasSpread ? `at least ${numArgs}` : numArgs,
+        }
 
         if (exclude.includes(name)) {
           return
@@ -57,16 +64,16 @@ module.exports = {
               context.report({
                 node,
                 messageId: 'requireOneOptionalArgument',
-                data: { name, numArgs },
+                data,
               })
             }
             break
           case 'then':
-            if (numArgs < 1 || numArgs > 2) {
+            if ((!hasSpread && numArgs < 1) || numArgs > 2) {
               context.report({
                 node,
                 messageId: 'requireTwoOptionalArguments',
-                data: { name, numArgs },
+                data,
               })
             }
             break
@@ -76,11 +83,11 @@ module.exports = {
           case 'any':
           case 'catch':
           case 'finally':
-            if (numArgs !== 1) {
+            if ((!hasSpread && numArgs < 1) || numArgs > 1) {
               context.report({
                 node,
                 messageId: 'requireOneArgument',
-                data: { name, numArgs },
+                data,
               })
             }
             break
