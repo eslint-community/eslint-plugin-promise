@@ -3,6 +3,26 @@
 const getDocsUrl = require('./lib/get-docs-url')
 const isPromise = require('./lib/is-promise')
 
+function countArguments(args) {
+  let numArgs = 0
+  let hasUnknownSpread = false
+
+  for (const argument of args) {
+    // Array holes yield undefined when spread, so they count as arguments too.
+    if (!argument || argument.type !== 'SpreadElement') {
+      numArgs++
+    } else if (argument.argument.type === 'ArrayExpression') {
+      const count = countArguments(argument.argument.elements)
+      numArgs += count.numArgs
+      hasUnknownSpread = hasUnknownSpread || count.hasUnknownSpread
+    } else {
+      hasUnknownSpread = true
+    }
+  }
+
+  return { numArgs, hasUnknownSpread }
+}
+
 module.exports = {
   meta: {
     type: 'problem',
@@ -43,7 +63,11 @@ module.exports = {
         }
 
         const name = node.callee.property.name
-        const numArgs = node.arguments.length
+        const { numArgs, hasUnknownSpread } = countArguments(node.arguments)
+        const data = {
+          name,
+          numArgs: hasUnknownSpread ? `at least ${numArgs}` : numArgs,
+        }
 
         if (exclude.includes(name)) {
           return
@@ -57,16 +81,16 @@ module.exports = {
               context.report({
                 node,
                 messageId: 'requireOneOptionalArgument',
-                data: { name, numArgs },
+                data,
               })
             }
             break
           case 'then':
-            if (numArgs < 1 || numArgs > 2) {
+            if ((!hasUnknownSpread && numArgs < 1) || numArgs > 2) {
               context.report({
                 node,
                 messageId: 'requireTwoOptionalArguments',
-                data: { name, numArgs },
+                data,
               })
             }
             break
@@ -76,11 +100,11 @@ module.exports = {
           case 'any':
           case 'catch':
           case 'finally':
-            if (numArgs !== 1) {
+            if ((!hasUnknownSpread && numArgs < 1) || numArgs > 1) {
               context.report({
                 node,
                 messageId: 'requireOneArgument',
-                data: { name, numArgs },
+                data,
               })
             }
             break
