@@ -43,6 +43,10 @@ ruleTester.run('valid-params', rule, {
     'Promise.any(iterable)',
     'Promise.any([one, two, three])',
 
+    // valid Promise.try()
+    'Promise.try(fn)',
+    'Promise.try(fn, arg1, arg2)',
+
     // valid Promise.then()
     'somePromise().then(success)',
     'somePromise().then(success, failure)',

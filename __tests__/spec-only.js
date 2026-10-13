@@ -17,6 +17,7 @@ ruleTester.run('spec-only', rule, {
     'Promise.race()',
     'var ctch = Promise.prototype.catch',
     'Promise.withResolvers()',
+    'Promise.try(fn)',
     'new Promise(function (resolve, reject) {})',
     'SomeClass.resolve()',
     'doSomething(Promise.all)',

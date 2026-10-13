@@ -99,6 +99,16 @@ ruleTester.run('no-return-wrap', rule, {
       errors: [{ message: rejectMessage }],
     },
 
+    // wrapping inside Promise.try() is bad too
+    {
+      code: 'Promise.try(function() { return Promise.resolve(4) })',
+      errors: [{ message: resolveMessage }],
+    },
+    {
+      code: 'Promise.try(function() { return Promise.reject(4) })',
+      errors: [{ message: rejectMessage }],
+    },
+
     // needs to also look at weird paths
     {
       code: 'doThing().then(function(x) { if (x>1) { return Promise.resolve(4) } else { throw "bad" } })',

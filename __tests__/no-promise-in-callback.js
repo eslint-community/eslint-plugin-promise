@@ -99,6 +99,10 @@ ruleTester.run('no-promise-in-callback', rule, {
       errors: [{ message: errorMessage }],
     },
     {
+      code: 'function x(err) { Promise.try(fn) }',
+      errors: [{ message: errorMessage }],
+    },
+    {
       code: 'let x = (err) => doThingWith(err).then(a)',
       errors: [{ message: errorMessage }],
     },
