@@ -193,6 +193,10 @@ ruleTester.run('catch-or-return', rule, {
       errors: [{ message: catchMessage }],
     },
     {
+      code: 'Promise.try(fn)',
+      errors: [{ message: catchMessage }],
+    },
+    {
       code: 'frank().then(to).catch(fn).then(foo)',
       errors: [{ message: catchMessage }],
     },

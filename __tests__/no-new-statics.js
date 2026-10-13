@@ -11,6 +11,7 @@ ruleTester.run('no-new-statics', rule, {
     'Promise.all()',
     'Promise.race()',
     'Promise.withResolvers()',
+    'Promise.try(fn)',
     'new Promise(function (resolve, reject) {})',
     'new SomeClass()',
     'SomeClass.resolve()',
@@ -51,6 +52,11 @@ ruleTester.run('no-new-statics', rule, {
       code: 'new Promise.withResolvers()',
       output: 'Promise.withResolvers()',
       errors: [{ message: "Avoid calling 'new' on 'Promise.withResolvers()'" }],
+    },
+    {
+      code: 'new Promise.try(fn)',
+      output: 'Promise.try(fn)',
+      errors: [{ message: "Avoid calling 'new' on 'Promise.try()'" }],
     },
     {
       code: `

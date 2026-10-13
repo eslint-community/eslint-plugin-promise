@@ -7,5 +7,6 @@ module.exports = new Set([
   'race',
   'reject',
   'resolve',
+  'try',
   'withResolvers',
 ])
