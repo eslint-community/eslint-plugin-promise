@@ -301,7 +301,11 @@ module.exports = {
         path.finalSegments.forEach((segment) => {
           const id = segment.id
           const branch = funcInfo.branchInfoMap[id]
-          if (!branch.good) {
+          // Unreachable segments (e.g. the `return` in a `try` whose `finally`
+          // always returns) are created after the traversal position, so
+          // `onCodePathSegmentStart` never runs for them and they have no
+          // branch info. There is no reachable path to report for them.
+          if (branch && !branch.good) {
             context.report({
               messageId: 'thenShouldReturnOrThrow',
               node: branch.node,

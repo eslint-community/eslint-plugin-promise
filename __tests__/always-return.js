@@ -115,6 +115,11 @@ ruleTester.run('always-return', rule, {
       code: `hey.then(x => { window['x'] = x })`,
       options: [{ ignoreAssignmentVariable: ['globalThis', 'window'] }],
     },
+    // `return` in a `finally` block makes the earlier `return` unreachable,
+    // which used to crash the rule
+    `hey.then(x => { try { return x } finally { return 1 } })`,
+    `hey.then(function () { try { return 1 } finally { return 2 } })`,
+    `hey.then(x => { try { throw x } finally { return 1 } })`,
   ],
 
   invalid: [
